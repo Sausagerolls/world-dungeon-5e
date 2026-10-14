@@ -6,9 +6,15 @@ Output: site/  (upload the contents to your Apache web root; see DEPLOY.md)
 
 Player pages go in site/, GM-only pages in site/gm/ (protect that folder with
 .htaccess; an example is generated). PDFs from pdf/ are copied into downloads.
+
+Hosting it next to the Crawler Sheet (see tools/sync_sheet_to_ttf.sh):
+  WD_SHEET_URL=../crawler/  link every page to the sheet app
+  WD_NO_GM=1                leave the GM area out (and its link)
+  WD_SITE_OUT=path          build somewhere other than site/
 """
 import html
 import json
+import os
 import re
 import shutil
 import sys
@@ -18,7 +24,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_pdf as bp  # noqa: E402  (reuses the markdown converter)
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = ROOT / "site"
+SITE = Path(os.environ["WD_SITE_OUT"]) if os.environ.get("WD_SITE_OUT") else ROOT / "site"
+SHEET_URL = os.environ.get("WD_SHEET_URL", "")
+NO_GM = os.environ.get("WD_NO_GM") == "1"
 ASSETS = Path(__file__).resolve().parent / "site"
 
 # (slug, source file, nav group, converter css class)
@@ -129,7 +137,8 @@ def search_entries(body, page, url):
 
 def nav_html(active, is_gm):
     up = "../" if is_gm else ""
-    parts = [f'<a class="cta" href="{up}create.html">Create a crawler</a>',
+    parts = ([f'<a class="cta" href="{up}{SHEET_URL}">Open the Crawler Sheet</a>'] if SHEET_URL else []) + [
+             f'<a class="{"" if SHEET_URL else "cta"}" href="{up}create.html">{"Creation guide" if SHEET_URL else "Create a crawler"}</a>',
              f'<a href="{up}index.html"{" class=active" if active == "home" else ""}>Home</a>']
     groups = {}
     for slug, src, group, _ in PLAYER:
@@ -162,7 +171,9 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False):
         links = "".join(f'<a class="l{lv}" href="#{sid}">{html.escape(t)}</a>' for lv, t, sid in toc)
         toc_html = f'<aside class="toc"><h4>On this page</h4>{links}</aside>'
     gm_toggle = (f'<a class="gm-link" href="{up}index.html">PLAYER SIDE</a>' if is_gm
-                 else '<a class="gm-link" href="gm/index.html">GM AREA</a>')
+                 else "" if NO_GM else '<a class="gm-link" href="gm/index.html">GM AREA</a>')
+    if SHEET_URL and not is_gm:
+        gm_toggle = f'<a class="gm-link" href="{SHEET_URL}">CRAWLER SHEET</a>' + gm_toggle
     banner = ('<div class="gm-banner">GM ONLY · Players, look away. Spoilers, loot tables and boss secrets ahead.</div>'
               if is_gm else "")
     search_src = "search-gm.js" if is_gm else f"{up}assets/search.js"
@@ -237,7 +248,7 @@ def skills_data():
 
 
 def home_page():
-    cards = [
+    cards = ([(SHEET_URL, "Crawler Sheet app", "Build and play your crawler on your phone. It saves to your GM's Tabletop Forge and rolls for you.")] if SHEET_URL else []) + [
         ("create.html", "Create a crawler", "Step-by-step: ability scores, proficiencies, your first Crawler Skill, gear, and a printable summary."),
         ("crawler.html", "The Crawler", "The base class every survivor starts with."),
         ("crawler-skills.html", "Crawler Skills", "45 trained skills from Demolitionist to Pet Trainer."),
@@ -255,7 +266,7 @@ def home_page():
   <div class="k">WORLD DUNGEON · A D&amp;D 5E SETTING</div>
   <h1>Welcome,<br><span>Crawler.</span></h1>
   <p>Earth is gone. You're in the dungeon now, on camera, in whatever you were wearing. Here's how to survive it.</p>
-  <div class="btns"><a class="btn primary" href="create.html">Create your crawler</a><a class="btn ghost" href="crawler.html">Read the rules</a></div>
+  <div class="btns">{f'<a class="btn primary" href="{SHEET_URL}">Open the Crawler Sheet</a>' if SHEET_URL else '<a class="btn primary" href="create.html">Create your crawler</a>'}<a class="btn ghost" href="crawler.html">Read the rules</a></div>
 </section>
 <blockquote class="system"><em>"Welcome, Crawler. Your ordinary life has ended. Your new one will probably be shorter."</em></blockquote>
 <h2 id="start">Start here</h2>
@@ -289,7 +300,7 @@ def gm_home():
 
 def create_page():
     body = """<header class="chapter-head"><div class="kicker">Character creation</div><h1>Create a crawler</h1></header>
-<p class="hint">Six quick steps. Everything saves in your browser as you go, so you can come back later.</p>
+<p class="hint">Six quick steps. Everything saves in your browser as you go, so you can come back later.</p>""" + (f'<p class="hint"><b>Playing with a Tabletop Forge GM?</b> <a href="{SHEET_URL}">The Crawler Sheet</a> walks you through the same steps, keeps your crawler on the server and rolls your dice.</p>' if SHEET_URL else "") + """
 <ul class="steps"></ul>
 <div class="wiz"><section id="step-host" class="step on"></section><aside class="summary"></aside></div>"""
     return page("Create a crawler", body, "create", scripts=("assets/skills.js", "assets/create.js"))
@@ -311,32 +322,37 @@ def main():
     if SITE.exists():
         shutil.rmtree(SITE)
     (SITE / "assets").mkdir(parents=True)
-    (SITE / "gm" / "downloads").mkdir(parents=True)
+    if not NO_GM:
+        (SITE / "gm" / "downloads").mkdir(parents=True)
     (SITE / "downloads").mkdir()
     for f in ("style.css", "app.js", "create.js"):
         shutil.copy(ASSETS / f, SITE / "assets" / f)
     for f, *_ in PLAYER_PDFS:
         if (ROOT / "pdf" / f).exists():
             shutil.copy(ROOT / "pdf" / f, SITE / "downloads" / f)
-    for f, *_ in GM_PDFS:
+    for f, *_ in ([] if NO_GM else GM_PDFS):
         if (ROOT / "pdf" / f).exists():
             shutil.copy(ROOT / "pdf" / f, SITE / "gm" / "downloads" / f)
 
     player_index, gm_index = [], []
     build_rule_pages(PLAYER, False, player_index)
-    build_rule_pages(GM, True, gm_index)
+    if not NO_GM:
+        build_rule_pages(GM, True, gm_index)
 
     (SITE / "index.html").write_text(home_page())
     (SITE / "create.html").write_text(create_page())
     dl = ('<header class="chapter-head"><div class="kicker">Downloads</div><h1>Rulebooks and sheets</h1></header>'
           "<p>Every player rulebook as a printable PDF, and the Crawler Character Sheet.</p>" + downloads_page(PLAYER_PDFS, False))
     (SITE / "downloads.html").write_text(page("Downloads", dl, "downloads"))
-    (SITE / "gm" / "index.html").write_text(gm_home())
+    if not NO_GM:
+        (SITE / "gm" / "index.html").write_text(gm_home())
 
     (SITE / "assets" / "search.js").write_text("window.SEARCH_INDEX=" + json.dumps(player_index) + ";")
-    (SITE / "gm" / "search-gm.js").write_text("window.SEARCH_INDEX=" + json.dumps(player_index + gm_index) + ";")
+    if not NO_GM:
+        (SITE / "gm" / "search-gm.js").write_text("window.SEARCH_INDEX=" + json.dumps(player_index + gm_index) + ";")
     (SITE / "assets" / "skills.js").write_text("window.CRAWLER_SKILLS=" + json.dumps(skills_data()) + ";")
-    (SITE / "gm" / "htaccess-example.txt").write_text(HTACCESS)
+    if not NO_GM:
+        (SITE / "gm" / "htaccess-example.txt").write_text(HTACCESS)
     (SITE / "robots.txt").write_text("User-agent: *\nDisallow: /gm/\n")
     count = len(list(SITE.rglob("*.html")))
     print(f"Wrote {SITE} ({count} pages, {len(player_index)} player and {len(gm_index)} GM search entries)")

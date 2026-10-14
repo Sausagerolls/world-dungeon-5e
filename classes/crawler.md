@@ -211,7 +211,7 @@ A Crawler Skill cannot go above **Skill Level 15**. Only the *Limit Breaker* fea
 ### Tome Learning
 **Core · 1st level**
 
-You can learn spells from spell tomes found in the dungeon. You cast them with a **mana pool**, and you do not need a spellcasting class. See `tome-magic` and `mana`.
+Every spell you ever know is written into your **System Tome**: spells from tomes found in the dungeon, and later the spells your class, feats and species teach you. You cast them all with one **mana pool**, and you do not need a spellcasting class. See `tome-magic` and `mana`.
 
 **Heal Self.** Every crawler starts the crawl knowing the **Heal Self** tome spell at Rank I, a gift from the System (see `tome-magic`).
 

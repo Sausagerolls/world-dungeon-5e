@@ -11,7 +11,7 @@ related: [tome-magic, crawler, leveling, crawler-skills]
 
 > *"The System has standardized all magic into a single, convenient resource. Please spend it responsibly. Or don't. We're not your mother."*
 
-In the World Dungeon there are **no spell slots**. Every spell, whether it comes from a tome or from your class, is cast with **mana**. Your class still decides which spells you know or prepare, and how strong your magic gets. Mana just replaces the slots. This system is based on the *spell points* variant in the 5e Dungeon Master's Guide.
+In the World Dungeon there are **no spell slots**. Every spell you know is a **tome spell** (see `tome-magic`), and every one is cast with **mana**. Your class still decides which spells you can learn and how strong your magic gets. Mana just replaces the slots. This system is based on the *spell points* variant in the 5e Dungeon Master's Guide.
 
 ---
 
@@ -31,7 +31,7 @@ Warlocks also have a separate, smaller **Pact Mana** pool (see *Pact Mana*).
 
 - **Long rest:** regain all your mana.
 - **Short rest:** regain mana equal to **half your tome mana** (rounded down), up to your maximum. Class mana only comes back on a long rest, unless a class feature says otherwise.
-- **Potions and features:** Mana Potions, the Mana Well Crawler Skill, Mana Crystals and similar effects work for every spell you cast, not only tome spells.
+- **Potions and features:** Mana Potions, the Mana Well Crawler Skill, Mana Crystals and similar effects restore the same pool, whatever the spell's source.
 
 ---
 
@@ -44,9 +44,9 @@ To cast a spell of 1st level or higher, spend the mana for the level you cast it
 | **Mana cost** | 2 | 3 | 5 | 6 | 7 | 9 | 10 | 11 | 13 |
 
 - **Cantrips** cost nothing. **Rituals** cast as rituals cost nothing.
-- **Casting at a higher level** works as normal. Pay the cost of the level you cast it at, up to your **maximum spell level**.
+- **Casting at a higher level** works as normal. Pay the cost of the level you cast it at, up to your **maximum spell level** (see below).
 - **Big spells.** You can cast **one spell of each level from 6th to 9th** per long rest with mana. Tick them off on your sheet.
-- **Which spells.** Mana does not care where a spell comes from. Class spells use your class spellcasting ability; tome spells use Intelligence (see `tome-magic`).
+- **Which spells.** Every spell in your tome. The spell's source sets its spellcasting ability: Intelligence for a spell read from a tome, your class's ability for a spell your class taught you, and the feature's ability for a feat or species spell (see `tome-magic`).
 - Everything else (casting time, components, concentration) works as normal.
 
 ---
@@ -81,7 +81,7 @@ To cast a spell of 1st level or higher, spend the mana for the level you cast it
 
 Class mana is the total mana cost of the spell slots your caster level would give you, so it matches normal 5e exactly.
 
-**Maximum spell level.** You can cast class spells up to the level in the table, and no higher than your class would let you learn or prepare. Half casters stop at 5th level, and third casters at 4th.
+**Maximum spell level.** Your maximum spell level is the **higher** of the level in this table and your tome spell level limit (half your character level, rounded up). You can cast any spell in your tome at a level up to it. Your class teaches you spells only up to the level in this table, and no higher than your class would normally learn: half casters stop at 5th level, and third casters at 4th.
 
 **Beyond caster level 20.** Each caster level above 20 adds **+6 class mana**. Your maximum spell level stays at 9th.
 
@@ -101,8 +101,8 @@ Warlocks keep the feel of Pact Magic: a small pool that refills fast and always 
 
 - **Recovery.** Pact mana comes back in full on a **short or long rest**.
 - **Always at pact level.** When you spend pact mana on a spell, you pay the cost of your **pact level**, and the spell is cast at that level. You cannot pay a smaller amount for a lower level.
-- **Any spell.** Pact mana can pay for any spell you know of your pact level or lower, warlock or otherwise.
-- **Your main pool too.** A warlock can also cast warlock spells from their main mana pool (tome mana and any class mana from other classes), at any level up to their pact level, paying the normal cost.
+- **Any spell.** Pact mana can pay for any tome spell of your pact level or lower, whatever its source.
+- **Your main pool too.** A warlock can also cast any tome spell from their main mana pool (tome mana and any class mana from other classes), paying the normal cost.
 - **Mystic Arcanum** does not change: each arcanum spell is cast once per long rest for free.
 
 ---

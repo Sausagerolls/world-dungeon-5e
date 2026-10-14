@@ -49,3 +49,15 @@ Players browsing the site never load GM content: the player search only indexes 
 | `gm/` | GM-only pages, GM PDFs and the GM search index |
 | `assets/` | Stylesheet, scripts, search index and Crawler Skill data |
 | `robots.txt` | Asks search engines to skip `/gm/` (not a security measure: use the password) |
+
+## Hosting with Tabletop Forge (the sheet and the rules together)
+
+A Tabletop Forge server can serve both the Crawler Sheet (`/crawler/`) and the player rules site (`/rules/`), linked to each other. This is how the live server runs.
+
+1. Run `tools/sync_sheet_to_ttf.sh [path/to/ttf]`. It copies `app/` into the TTF checkout's `frontend/crawler-sheet/` and builds the player rules site (no GM area, linked to the sheet) into its `rules-site/`.
+2. Upload both to the server. A rules-only change needs nothing else: `rules-site/` is mounted into the frontend container.
+3. For sheet changes, rebuild the frontend image (`docker compose build frontend && docker compose up -d frontend`). Its Dockerfile builds the sheet after the main app.
+
+The site builder's hosting switches: `WD_SHEET_URL` (link every page to the sheet), `WD_NO_GM=1` (leave the GM area out) and `WD_SITE_OUT` (build somewhere other than `site/`).
+
+The GM area is not hosted this way. Use the Apache steps above for it, or ask for nginx password protection.

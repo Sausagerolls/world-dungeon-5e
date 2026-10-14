@@ -279,7 +279,7 @@ Any 5e magic item can be crafted with a recipe, using the rarity costs in `craft
 
 ### Spell Scrolls
 
-Tool: **calligrapher's supplies**. You must know the spell (from your class or as a tome spell) and have proficiency in Arcana. Scrolls are consumables, so the costs below are already halved.
+Tool: **calligrapher's supplies**. You must know the spell (it must be in your tome) and have proficiency in Arcana. Scrolls are consumables, so the costs below are already halved.
 
 | Spell level | Gold | Materials | Time | Character level |
 |-------------|------|-----------|------|-----------------|

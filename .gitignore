@@ -4,3 +4,7 @@
 *.zip
 __pycache__/
 .DS_Store
+/sheet-dist/
+app/node_modules/
+app/.env.local
+app/src/generated/

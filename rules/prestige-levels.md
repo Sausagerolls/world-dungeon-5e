@@ -173,10 +173,10 @@ Both are good. Prestige is better for crawlers who love what their class does an
 ### Wizard
 **Prestige · Hit die d6**
 
-*Scaling:* Add 1 spell to your spellbook for free each prestige level. Arcane Recovery restores 1 more spell level every 2 prestige levels.
+*Scaling:* Learn 1 extra wizard spell as a tome spell each prestige level. Arcane Recovery restores 1 more spell level every 2 prestige levels.
 
-- **I — Spell Mastery+.** Choose a 3rd-level wizard spell in your spellbook. You can cast it at its lowest level without spending mana.
-- **II — Arcane Library.** Copying a spell into your spellbook takes 1 minute and costs half as much.
+- **I — Spell Mastery+.** Choose a 3rd-level wizard spell in your tome. You can cast it at its lowest level without spending mana.
+- **II — Arcane Library.** When you read a tome holding a wizard spell, the spell gains 1 extra rank.
 - **III — Archmage.** Once per short rest, cast a wizard spell of 5th level or lower without spending mana.
 - **IV — Twin Thought.** Once per long rest, cast two spells with one action. Pay mana for both, and only one can need concentration.
 - **V — Rewrite Reality.** Once per long rest, cast *wish* without spending mana and without its stress.

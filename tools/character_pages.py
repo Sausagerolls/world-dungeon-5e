@@ -241,44 +241,37 @@ def features_page():
 
 def magic_page():
     ranks = "".join(f"<span>{r}</span>" for r in ("I", "II", "III", "IV", "V"))
-    first = (f"<tr><td style='font-weight:700'>Heal Self</td><td>1st</td><td><span class='ranks'>{ranks}</span></td><td>1</td>"
+    first = (f"<tr><td style='font-weight:700'>Heal Self</td><td>1st</td><td>Crawler</td><td>—</td><td><span class='ranks'>{ranks}</span></td><td>1</td>"
              "<td style='font-size:6.6pt'>Always 1st level, always 1 mana. Heal 1d8 per rank. Bonus action from Rank III.</td></tr>")
-    tome_rows = first + "".join(f"<tr><td></td><td></td><td><span class='ranks'>{ranks}</span></td><td></td><td></td></tr>" for _ in range(15))
+    tome_rows = first + "".join(f"<tr><td></td><td></td><td></td><td></td><td><span class='ranks'>{ranks}</span></td><td></td><td></td></tr>" for _ in range(31))
     costs = {1: 2, 2: 3, 3: 5, 4: 6, 5: 7, 6: 9, 7: 10, 8: 11, 9: 13}
     slots = "".join(f'<div><b>{n}{"st" if n == 1 else "nd" if n == 2 else "rd" if n == 3 else "th"}</b>'
                     f'<span style="font:800 11pt \'Avenir Next Condensed\',sans-serif;color:#d81b60">{c}</span>'
                     f'{"<span class=sqs><span></span></span>" if n >= 6 else ""}</div>' for n, c in costs.items())
-    spells = "".join("<tr><td><span class='sq' style='width:3mm;height:3mm'></span></td><td></td><td></td><td><span class='sq' style='width:3mm;height:3mm'></span></td><td></td><td></td></tr>" for _ in range(13))
     return f"""
 <section class="page">
   {char_header("Magic")}
   <div class="ministrip">
-    <span>TOME DC (8 + PB + INT)<span class="bx"></span></span>
-    <span>TOME ATTACK (PB + INT)<span class="bx"></span></span>
-    <span>SPELL LEVEL LIMIT (LEVEL ÷ 2, UP)<span class="bx"></span></span>
-  </div>
-  <table class="atk">
-    <colgroup><col style="width:34%"><col style="width:8%"><col style="width:18%"><col style="width:9%"><col></colgroup>
-    <thead><tr><th>Tome spell</th><th>Level</th><th>Rank</th><th>Mana</th><th>Notes (range, effect, concentration)</th></tr></thead>
-    <tbody>{tome_rows}</tbody>
-  </table>
-  <div class="legendline">Tome spells use the same mana as class spells. Each rank above I casts one level higher for free.</div>
-  <div class="ministrip" style="margin-top:3.4mm">
+    <span>INT DC (8 + PB + INT)<span class="bx"></span></span>
+    <span>INT ATTACK<span class="bx"></span></span>
     <span>CLASS ABILITY<span class="bx" style="width:12mm"></span></span>
-    <span>SPELL DC<span class="bx"></span></span>
-    <span>SPELL ATTACK<span class="bx"></span></span>
+    <span>CLASS DC<span class="bx"></span></span>
+    <span>CLASS ATTACK<span class="bx"></span></span>
+  </div>
+  <div class="ministrip">
+    <span>TOME LIMIT (LEVEL ÷ 2, UP)<span class="bx"></span></span>
     <span>CASTER LEVEL<span class="bx"></span></span>
     <span>MAX SPELL LEVEL<span class="bx"></span></span>
     <span>PACT LEVEL<span class="bx"></span></span>
   </div>
+  <table class="atk">
+    <colgroup><col style="width:27%"><col style="width:7%"><col style="width:13%"><col style="width:7%"><col style="width:16%"><col style="width:7%"><col></colgroup>
+    <thead><tr><th>Tome spell or cantrip</th><th>Level</th><th>Source</th><th>Abil.</th><th>Rank</th><th>Mana</th><th>Notes (range, effect, concentration)</th></tr></thead>
+    <tbody>{tome_rows}</tbody>
+  </table>
+  <div class="legendline">Every spell you know goes here. Source: Tome, your class, a feat or a species. Read from a tome = Intelligence; from a class = its ability; from a feat or species = the ability it names. Each rank above I casts one level higher for free. No preparing.</div>
   <div class="panel"><h3>Mana costs (no spell slots)</h3><div class="slots9">{slots}</div>
     <div class="legendline">One spell each of 6th, 7th, 8th and 9th level per long rest. Short rest: regain half your tome mana. Pact mana: full on any rest, always cast at pact level.</div></div>
-  <table class="atk">
-    <colgroup><col style="width:4%"><col style="width:36%"><col style="width:10%"><col style="width:4%"><col style="width:36%"><col style="width:10%"></colgroup>
-    <thead><tr><th>P</th><th>Class spell or cantrip</th><th>Level</th><th>P</th><th>Class spell or cantrip</th><th>Level</th></tr></thead>
-    <tbody>{spells}</tbody>
-  </table>
-  <div class="legendline">P = prepared. Tome spells on your class list can use your class ability instead of Intelligence.</div>
   {foot("Magic")}
 </section>"""
 
