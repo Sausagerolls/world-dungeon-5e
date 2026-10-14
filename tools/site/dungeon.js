@@ -372,8 +372,9 @@
   }
   // The map's frame: its bounds with a margin, widened to the A4 shape.
   function frame(map, nbOnly, tight) {
-    const b = bounds(map, nbOnly); const m = tight ? 0.5 : 1.5;
-    let x = b.x - m; let y = b.y - m; let w = b.w + 2 * m; let h = b.h + 2 * m;
+    // Just enough room for the neighbourhood names above the rooms.
+    const b = bounds(map, nbOnly); const m = tight ? 0.1 : 0.4; const top = tight ? 0.1 : 1.4;
+    let x = b.x - m; let y = b.y - top; let w = b.w + 2 * m; let h = b.h + m + top;
     if (nbOnly == null && !tight) {
       const r = map.settings?.orientation === 'portrait' ? 1 / Math.SQRT2 : Math.SQRT2;
       if (w / h < r) { const nw = h * r; x -= (nw - w) / 2; w = nw; } else { const nh = w / r; y -= (nh - h) / 2; h = nh; }
@@ -459,6 +460,7 @@
       out.push(`<text x="${cx * u}" y="${Math.max(view.y + 1, b.y - 0.6) * u}" font-size="${u * 0.95}" text-anchor="middle" font-family="Avenir Next Condensed,Arial Narrow,sans-serif" font-weight="800" letter-spacing="${u * 0.02}" fill="#d81b60" stroke="#fff" stroke-width="${u * 0.18}" paint-order="stroke" pointer-events="none">${esc(String(n.name).toUpperCase())}</text>`);
     });
     if (opts.overlay) out.push(opts.overlay(u));
+    if (opts.caption) out.push(`<text x="${(view.x + 0.3) * u}" y="${(view.y + view.h - 0.3) * u}" font-size="${u * 0.45}" font-family="Avenir Next Condensed,Arial Narrow,sans-serif" font-weight="800" fill="#1c1b24" stroke="#fff" stroke-width="${u * 0.1}" paint-order="stroke">${esc(opts.caption)}</text>`);
     const size = opts.size ? `width="${opts.size[0]}" height="${opts.size[1]}"` : '';
     return `<svg xmlns="http://www.w3.org/2000/svg" ${size} viewBox="${view.x * u} ${view.y * u} ${view.w * u} ${view.h * u}" preserveAspectRatio="xMidYMid meet">${out.join('')}</svg>`;
   }
@@ -498,9 +500,10 @@
   function printOverview(map, kit) {
     const portrait = map.settings?.orientation === 'portrait';
     const paper = portrait ? PAPERS.A4 : [PAPERS.A4[1], PAPERS.A4[0]];
-    const m = 10; const head = 9;
-    const svg = mapSVG(map, kit, { u: 10, size: [`${paper[0] - 2 * m}mm`, `${paper[1] - 2 * m - head}mm`], codes: S.showCodes, grid: S.showGrid, idp: 'o' });
-    const page1 = `<div class="wd-page"><div class="wd-inner" style="left:${m}mm;top:${m}mm;width:${paper[0] - 2 * m}mm"><div class="wd-ptitle">${esc(map.name)}</div>${svg}</div></div>`;
+    // The map fills the whole sheet, edge to edge; its name sits in a corner.
+    const m = 10;
+    const svg = mapSVG(map, kit, { u: 10, size: [`${paper[0]}mm`, `${paper[1]}mm`], codes: S.showCodes, grid: S.showGrid, idp: 'o', caption: map.name });
+    const page1 = `<div class="wd-page"><div class="wd-inner" style="left:0;top:0">${svg}</div></div>`;
     const page2 = `<div class="wd-page"><div class="wd-inner wd-keys" style="left:${m}mm;top:${m}mm;width:${paper[0] - 2 * m}mm"><div class="wd-ptitle">${esc(map.name)} · Key and build lists</div>${keyPageHTML(map, kit)}</div></div>`;
     printPages(page1 + page2, paper);
   }
@@ -560,9 +563,10 @@
         return s;
       };
       const svg = mapSVG(map, kit, { u: L.sq, view, size: [`${L.pw}mm`, `${L.ph}mm`], overlay, codes: S.showCodes, grid: S.showGrid, idp: `s${n}` });
-      pages.push(`<div class="wd-page"><div class="wd-cap" style="left:${L.m}mm;top:${Math.max(1, L.m - 6)}mm">${esc(map.name)} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)} · overlap ${L.ov} mm past the dashed line</div>
-        <div style="position:absolute;left:${L.m}mm;top:${L.m}mm;width:${L.pw}mm;height:${L.ph}mm;outline:0.2mm solid #999">${svg}</div>
-        <div class="wd-cap" style="left:${L.m}mm;top:${L.paper[1] - L.m + 2}mm"><span class="wd-bar" style="width:50mm"></span> 50 mm — measure this to check the print is at 100%</div></div>`);
+      // The map runs to the edge of the sheet; the labels sit on top of it.
+      pages.push(`<div class="wd-page"><div style="position:absolute;left:${L.m}mm;top:${L.m}mm;width:${L.pw}mm;height:${L.ph}mm${L.m ? ';outline:0.2mm solid #999' : ''}">${svg}</div>
+        <div class="wd-cap" style="left:${L.m + 6}mm;top:${L.m + 6}mm">${esc(map.name)} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)} · overlap ${L.ov} mm past the dashed line</div>
+        <div class="wd-cap" style="left:${L.m + 6}mm;top:${L.paper[1] - L.m - 11}mm"><span class="wd-bar" style="width:50mm"></span> 50 mm — measure this to check the print is at 100%</div></div>`);
     }
     printPages(pages.join(''), L.paper);
   }
@@ -739,7 +743,7 @@
   }
 
   // ----- one map
-  const scaleOpt = { paper: 'A4', landscape: false, margin: 10, overlap: 10, nb: 'all', squareMm: null, open: false };
+  const scaleOpt = { paper: 'A4', landscape: false, margin: 0, overlap: 10, nb: 'all', squareMm: null, open: false };
   function mapView() {
     const m = S.map; const kit = m.kitSnapshot || S.kit;
     const p = S.selected != null ? m.pieces[S.selected] : null;
@@ -765,7 +769,7 @@
           <div class="field"><label>Margin (mm)</label><input type="number" data-s="margin" value="${scaleOpt.margin}"></div>
           <div class="field"><label>Overlap (mm)</label><input type="number" data-s="overlap" value="${scaleOpt.overlap}"></div>
         </div>
-        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. Print at 100% / Actual size, then check the 50 mm bar.</p>
+        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. Print at 100% / Actual size with margins set to None, then check the 50 mm bar. Most printers can't print the last few mm of the sheet; the overlap covers that between sheets, or set a margin of about 5 mm.</p>
         <button class="btn primary" data-act="scale">Print ${L.printed} sheet${L.printed > 1 ? 's' : ''}</button>
       </div>` : ''}
       <div class="wd-split">

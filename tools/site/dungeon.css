@@ -39,7 +39,7 @@
   #wd-print .wd-inner { position: absolute; }
   #wd-print .wd-inner svg { display: block; }
   #wd-print .wd-ptitle { font: 800 13pt "Avenir Next Condensed", "Arial Narrow", sans-serif; text-transform: uppercase; height: 9mm; }
-  #wd-print .wd-cap { position: absolute; font: 7pt Menlo, monospace; color: #555; white-space: nowrap; }
+  #wd-print .wd-cap { position: absolute; font: 7pt Menlo, monospace; color: #333; white-space: nowrap; background: rgba(255,255,255,.85); padding: 0.5mm 1.5mm; border-radius: 1mm; }
   #wd-print .wd-bar { display: inline-block; height: 2mm; background: #000; vertical-align: middle; }
   #wd-print .wd-keys { font-size: 10pt; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
