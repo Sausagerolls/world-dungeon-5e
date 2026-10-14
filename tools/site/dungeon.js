@@ -472,18 +472,116 @@
   }
 
   // ---------------------------------------------------------------- printing
-  function printPages(pagesHTML, paper) {
-    let box = document.getElementById('wd-print');
-    if (!box) { box = document.createElement('div'); box.id = 'wd-print'; document.body.appendChild(box); }
-    box.innerHTML = pagesHTML;
-    let st = document.getElementById('wd-print-page');
-    if (!st) { st = document.createElement('style'); st.id = 'wd-print-page'; document.head.appendChild(st); }
-    st.textContent = `@page { size: ${paper[0]}mm ${paper[1]}mm; margin: 0; } #wd-print .wd-page { width: ${paper[0]}mm; height: ${paper[1]}mm; }`;
-    document.body.classList.add('wd-printing');
-    const done = () => { document.body.classList.remove('wd-printing'); window.removeEventListener('afterprint', done); };
-    window.addEventListener('afterprint', done);
-    setTimeout(() => window.print(), 50);
+  // ---- PDF output. Browsers lay out printed pages differently (Safari
+  // ignores the page size and margins a web page asks for), so the builder
+  // draws every sheet itself and writes a real PDF at the exact paper size.
+  const mmPt = (mm) => (mm * 72) / 25.4;
+  const dpiFor = (wMm, hMm) => clamp(Math.sqrt(14e6 / ((wMm / 25.4) * (hMm / 25.4))), 100, 200);
+  async function sheetCanvas(wMm, hMm, draw) {
+    const px = dpiFor(wMm, hMm) / 25.4; // pixels per mm
+    const c = document.createElement('canvas');
+    c.width = Math.round(wMm * px); c.height = Math.round(hMm * px);
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+    await draw(ctx, px);
+    return c;
   }
+  function drawSVG(ctx, svg, x, y, w, h) {
+    return new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => { ctx.drawImage(img, x, y, w, h); res(); };
+      img.onerror = () => rej(new Error('Could not draw the map'));
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    });
+  }
+  // A small white label box with text, at (x, y) in mm.
+  function label(ctx, px, text, xMm, yMm, sizeMm) {
+    ctx.font = `${sizeMm * px}px Menlo, monospace`;
+    const w = ctx.measureText(text).width; const pad = 1.2 * px;
+    ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillRect(xMm * px - pad, yMm * px - sizeMm * px - pad, w + 2 * pad, sizeMm * px * 1.35 + 2 * pad);
+    ctx.fillStyle = '#222'; ctx.fillText(text, xMm * px, yMm * px);
+  }
+  async function jpegOf(c) {
+    const blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', 0.92));
+    return new Uint8Array(await blob.arrayBuffer());
+  }
+  // Minimal PDF: one full-page JPEG per page, at the page's exact size.
+  function makePDF(pages) {
+    const enc = new TextEncoder(); const chunks = []; let len = 0; const offs = [];
+    const push = (x) => { const b = typeof x === 'string' ? enc.encode(x) : x; chunks.push(b); len += b.length; };
+    const obj = (n, body) => { offs[n] = len; push(`${n} 0 obj\n`); body(); push('\nendobj\n'); };
+    push('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
+    const n = pages.length; const total = 3 + 3 * n;
+    obj(1, () => push('<< /Type /Catalog /Pages 2 0 R >>'));
+    obj(2, () => push(`<< /Type /Pages /Count ${n} /Kids [${pages.map((_, i) => `${3 + 3 * i} 0 R`).join(' ')}] >>`));
+    pages.forEach((p, i) => {
+      const W = mmPt(p.wMm).toFixed(2); const H = mmPt(p.hMm).toFixed(2); const id = 3 + 3 * i;
+      obj(id, () => push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /XObject << /Im0 ${id + 2} 0 R >> >> /Contents ${id + 1} 0 R >>`));
+      const cs = `q ${W} 0 0 ${H} 0 0 cm /Im0 Do Q`;
+      obj(id + 1, () => push(`<< /Length ${cs.length} >>\nstream\n${cs}\nendstream`));
+      obj(id + 2, () => { push(`<< /Type /XObject /Subtype /Image /Width ${p.w} /Height ${p.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${p.jpg.length} >>\nstream\n`); push(p.jpg); push('\nendstream'); });
+    });
+    const xref = len;
+    push(`xref\n0 ${total}\n0000000000 65535 f \n`);
+    for (let i = 1; i < total; i++) push(`${String(offs[i]).padStart(10, '0')} 00000 n \n`);
+    push(`trailer\n<< /Size ${total} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`);
+    return new Blob(chunks, { type: 'application/pdf' });
+  }
+  async function pageOf(wMm, hMm, draw) {
+    const c = await sheetCanvas(wMm, hMm, draw);
+    return { wMm, hMm, w: c.width, h: c.height, jpg: await jpegOf(c) };
+  }
+  // The key: build lists and rooms, as text pages.
+  async function keyPages(map, kit, paper) {
+    const tName = (id) => { const t = kit.tiles.find((x) => x.id === id); return t ? `${kitCode(kit, id)} · ${t.name}` : id; };
+    const pName = (id) => (kit.props.find((x) => x.id === id) || {}).name || id;
+    const lines = [{ t: `${map.name} · key and build lists`, s: 6, b: true }];
+    (map.nb || []).forEach((n, k) => {
+      lines.push({ t: '', s: 2 }, { t: `${k + 1}. ${n.name}`, s: 5, b: true });
+      lines.push({ t: `Tiles: ${Object.entries(n.tilesUsed || {}).filter(([, c]) => c > 0).map(([id, c]) => `${c}× ${tName(id)}`).join(', ') || '—'}`, s: 3.4 });
+      lines.push({ t: `Props: ${Object.entries(n.propsUsed || {}).filter(([, c]) => c > 0).map(([id, c]) => `${c}× ${pName(id)}`).join(', ') || '—'}`, s: 3.4 });
+      map.pieces.filter((p) => p.nb === k && p.role === 'room').forEach((p) => {
+        const type = { boss: 'Boss room', safe: 'Safe room', stairs: 'Stairwell', room: 'Room' }[p.type];
+        lines.push({ t: `${p.label}  ${type}${p.name ? ` · ${p.name}` : ''} — tile ${tName(p.tileId)}${p.features.length ? ` — ${p.features.join(', ')}` : ''}${p.notes ? ` — ${p.notes}` : ''}`, s: 3.2 });
+      });
+    });
+    const m = 12; const out = []; let i = 0;
+    while (i < lines.length) {
+      const start = i;
+      out.push(await pageOf(paper[0], paper[1], (ctx, px) => {
+        let y = m;
+        const maxW = (paper[0] - 2 * m) * px;
+        while (i < lines.length) {
+          const l = lines[i];
+          ctx.font = `${l.b ? '700 ' : ''}${l.s * px}px "Avenir Next Condensed", "Arial Narrow", sans-serif`;
+          // Wrap long lines.
+          const words = l.t.split(' '); const rows = []; let cur = '';
+          for (const w of words) { const t = cur ? `${cur} ${w}` : w; if (ctx.measureText(t).width > maxW && cur) { rows.push(cur); cur = w; } else cur = t; }
+          rows.push(cur);
+          const need = rows.length * l.s * 1.35;
+          if (y + need > paper[1] - m && i > start) break;
+          ctx.fillStyle = l.b ? '#d81b60' : '#1c1b24';
+          rows.forEach((r) => { y += l.s * 1.35; ctx.fillText(r, m * px, y * px); });
+          i += 1;
+        }
+      }));
+    }
+    return out;
+  }
+  // Opens the finished PDF in the tab opened on the click (so it isn't blocked
+  // as a pop-up), and keeps a download link in the page.
+  async function showPDF(tab, build, fileName) {
+    try {
+      setStatus('Making the PDF…');
+      const blob = makePDF(await build());
+      const url = URL.createObjectURL(blob);
+      if (tab && !tab.closed) tab.location.href = url;
+      const a = root.querySelector('.wd-pdflink');
+      if (a) { a.href = url; a.download = fileName; a.textContent = `Download ${fileName} (${(blob.size / 1048576).toFixed(1)} MB)`; a.hidden = false; }
+      setStatus('PDF ready');
+    } catch (e) { if (tab && !tab.closed) tab.close(); setStatus(`PDF failed: ${e.message}`); }
+  }
+  const safeName = (s) => (String(s || 'map').replace(/[^\w\- ]+/g, '').trim() || 'map');
 
   function keyPageHTML(map, kit) {
     const tName = (id) => { const t = kit.tiles.find((x) => x.id === id); return t ? `${kitCode(kit, id)} · ${t.name}` : id; };
@@ -497,15 +595,14 @@
     }).join('');
   }
 
-  function printOverview(map, kit) {
+  // One A4 sheet, the map filling it edge to edge, then the key.
+  function printOverview(map, kit, tab) {
     const portrait = map.settings?.orientation === 'portrait';
     const paper = portrait ? PAPERS.A4 : [PAPERS.A4[1], PAPERS.A4[0]];
-    // The map fills the whole sheet, edge to edge; its name sits in a corner.
-    const m = 10;
-    const svg = mapSVG(map, kit, { u: 10, size: [`${paper[0]}mm`, `${paper[1]}mm`], codes: S.showCodes, grid: S.showGrid, idp: 'o', caption: map.name });
-    const page1 = `<div class="wd-page"><div class="wd-inner" style="left:0;top:0">${svg}</div></div>`;
-    const page2 = `<div class="wd-page"><div class="wd-inner wd-keys" style="left:${m}mm;top:${m}mm;width:${paper[0] - 2 * m}mm"><div class="wd-ptitle">${esc(map.name)} · Key and build lists</div>${keyPageHTML(map, kit)}</div></div>`;
-    printPages(page1 + page2, paper);
+    return showPDF(tab, async () => [
+      await pageOf(paper[0], paper[1], (ctx, px) => drawSVG(ctx, mapSVG(map, kit, { u: 10, size: [paper[0] * px, paper[1] * px], codes: S.showCodes, grid: S.showGrid, idp: 'o', caption: map.name }), 0, 0, paper[0] * px, paper[1] * px)),
+      ...(await keyPages(map, kit, PAPERS.A4)),
+    ], `${safeName(map.name)} A4.pdf`);
   }
 
   // At scale: one square = squareMm, split over as many sheets as it takes,
@@ -531,44 +628,53 @@
     const printed = sheets.filter((x) => x.used).length;
     return { paper, sq, m, ov, view, mapW, mapH, pw, ph, stepX, stepY, cols, rows, sheets, printed };
   }
-  function printScaled(map, kit, opt) {
+  function printScaled(map, kit, opt, tab) {
     const L = scaleLayout(map, opt);
-    const pages = [];
-    // Assembly guide on one sheet of the same paper.
-    const guideOverlay = (u) => {
-      let s = '';
+    return showPDF(tab, async () => {
+      const pages = [];
+      // Assembly guide on one sheet of the same paper.
+      const guideOverlay = (u) => {
+        let s = ''; let n = 0;
+        for (const sh of L.sheets) {
+          if (!sh.used) continue;
+          n += 1;
+          const x = sh.v.x * u; const y = sh.v.y * u;
+          s += `<rect x="${x}" y="${y}" width="${sh.v.w * u}" height="${sh.v.h * u}" fill="none" stroke="#00808a" stroke-width="${u * 0.08}" stroke-dasharray="${u * 0.3} ${u * 0.2}"/>`;
+          s += `<text x="${x + u * 0.4}" y="${y + u * 1.2}" font-size="${u * 1.1}" font-weight="800" fill="#00808a" font-family="Menlo,monospace">${n}</text>`;
+        }
+        return s;
+      };
+      const gview = { ...L.view, w: Math.max(L.view.w, (L.stepX * (L.cols - 1) + L.pw) / L.sq), h: Math.max(L.view.h, (L.stepY * (L.rows - 1) + L.ph) / L.sq) };
+      pages.push(await pageOf(L.paper[0], L.paper[1], async (ctx, px) => {
+        const g = 10; const head = 10;
+        await drawSVG(ctx, mapSVG(map, kit, { u: 10, view: gview, size: [(L.paper[0] - 2 * g) * px, (L.paper[1] - 2 * g - head) * px], overlay: guideOverlay, codes: S.showCodes, grid: S.showGrid, idp: 'g' }), g * px, (g + head) * px, (L.paper[0] - 2 * g) * px, (L.paper[1] - 2 * g - head) * px);
+        label(ctx, px, `${map.name} · assembly guide · ${L.printed} sheets on a ${L.cols} × ${L.rows} grid · 1 square = ${sqLabel(L.sq)}`, g, g + 5, 3.5);
+      }));
       let n = 0;
       for (const sh of L.sheets) {
         if (!sh.used) continue;
-        n += 1;
-        const x = sh.v.x * u; const y = sh.v.y * u;
-        s += `<rect x="${x}" y="${y}" width="${sh.v.w * u}" height="${sh.v.h * u}" fill="none" stroke="#00808a" stroke-width="${u * 0.08}" stroke-dasharray="${u * 0.3} ${u * 0.2}"/>`;
-        s += `<text x="${x + u * 0.4}" y="${y + u * 1.2}" font-size="${u * 1.1}" font-weight="800" fill="#00808a" font-family="Menlo,monospace">${n}</text>`;
+        n += 1; setStatus(`Making the PDF… sheet ${n} of ${L.printed}`);
+        const { r, c } = sh; const view = sh.v;
+        // Dashed lines where the next sheet starts (right and bottom).
+        const overlay = (u) => {
+          let s = '';
+          if (c < L.cols - 1) { const x = (view.x + L.stepX / L.sq) * u; s += `<line x1="${x}" y1="${view.y * u}" x2="${x}" y2="${(view.y + view.h) * u}" stroke="#00808a" stroke-width="${u * 0.02}" stroke-dasharray="${u * 0.1}"/>`; }
+          if (r < L.rows - 1) { const y = (view.y + L.stepY / L.sq) * u; s += `<line x1="${view.x * u}" y1="${y}" x2="${(view.x + view.w) * u}" y2="${y}" stroke="#00808a" stroke-width="${u * 0.02}" stroke-dasharray="${u * 0.1}"/>`; }
+          return s;
+        };
+        pages.push(await pageOf(L.paper[0], L.paper[1], async (ctx, px) => {
+          await drawSVG(ctx, mapSVG(map, kit, { u: L.sq, view, size: [L.pw * px, L.ph * px], overlay, codes: S.showCodes, grid: S.showGrid, idp: `s${n}` }), L.m * px, L.m * px, L.pw * px, L.ph * px);
+          if (L.m) { ctx.strokeStyle = '#999'; ctx.lineWidth = 0.2 * px; ctx.strokeRect(L.m * px, L.m * px, L.pw * px, L.ph * px); }
+          label(ctx, px, `${map.name} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)} · overlap ${L.ov} mm past the dashed line`, L.m + 5, L.m + 6, 2.6);
+          // The check bar is drawn at exactly 50 mm.
+          const bx = L.m + 5; const by = L.paper[1] - L.m - 8;
+          ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillRect((bx - 1.2) * px, (by - 4) * px, 112 * px, 7 * px);
+          ctx.fillStyle = '#000'; ctx.fillRect(bx * px, (by - 1) * px, 50 * px, 2 * px);
+          ctx.font = `${2.6 * px}px Menlo, monospace`; ctx.fillStyle = '#222'; ctx.fillText('50 mm: measure to check the print is at 100%', (bx + 52) * px, (by + 0.8) * px);
+        }));
       }
-      return s;
-    };
-    const gm = 10;
-    const gview = { ...L.view, w: Math.max(L.view.w, (L.stepX * (L.cols - 1) + L.pw) / L.sq), h: Math.max(L.view.h, (L.stepY * (L.rows - 1) + L.ph) / L.sq) };
-    pages.push(`<div class="wd-page"><div class="wd-inner" style="left:${gm}mm;top:${gm}mm;width:${L.paper[0] - 2 * gm}mm"><div class="wd-ptitle">${esc(map.name)} · assembly guide · ${L.printed} sheets on a ${L.cols} × ${L.rows} grid · 1 square = ${sqLabel(L.sq)}</div>${mapSVG(map, kit, { u: 10, view: gview, size: [`${L.paper[0] - 2 * gm}mm`, `${L.paper[1] - 2 * gm - 9}mm`], overlay: guideOverlay, codes: S.showCodes, grid: S.showGrid, idp: 'g' })}</div></div>`);
-    let n = 0;
-    for (const sh of L.sheets) {
-      if (!sh.used) continue;
-      n += 1;
-      const { r, c } = sh; const view = sh.v;
-      // Dashed lines where the next sheet starts (right and bottom).
-      const overlay = (u) => {
-        let s = '';
-        if (c < L.cols - 1) { const x = (view.x + L.stepX / L.sq) * u; s += `<line x1="${x}" y1="${view.y * u}" x2="${x}" y2="${(view.y + view.h) * u}" stroke="#00808a" stroke-width="${u * 0.02}" stroke-dasharray="${u * 0.1}"/>`; }
-        if (r < L.rows - 1) { const y = (view.y + L.stepY / L.sq) * u; s += `<line x1="${view.x * u}" y1="${y}" x2="${(view.x + view.w) * u}" y2="${y}" stroke="#00808a" stroke-width="${u * 0.02}" stroke-dasharray="${u * 0.1}"/>`; }
-        return s;
-      };
-      const svg = mapSVG(map, kit, { u: L.sq, view, size: [`${L.pw}mm`, `${L.ph}mm`], overlay, codes: S.showCodes, grid: S.showGrid, idp: `s${n}` });
-      // The map runs to the edge of the sheet; the labels sit on top of it.
-      pages.push(`<div class="wd-page"><div style="position:absolute;left:${L.m}mm;top:${L.m}mm;width:${L.pw}mm;height:${L.ph}mm${L.m ? ';outline:0.2mm solid #999' : ''}">${svg}</div>
-        <div class="wd-cap" style="left:${L.m + 6}mm;top:${L.m + 6}mm">${esc(map.name)} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)} · overlap ${L.ov} mm past the dashed line</div>
-        <div class="wd-cap" style="left:${L.m + 6}mm;top:${L.paper[1] - L.m - 11}mm"><span class="wd-bar" style="width:50mm"></span> 50 mm — measure this to check the print is at 100%</div></div>`);
-    }
-    printPages(pages.join(''), L.paper);
+      return pages;
+    }, `${safeName(map.name)} at scale ${opt.paper}.pdf`);
   }
 
   function downloadSVG(map, kit) {
@@ -753,7 +859,7 @@
       <div class="wd-toolbar no-print">
         <input type="text" class="wd-name" value="${esc(m.name)}" title="Map name">
         <button class="btn dark" data-act="regen">New layout</button>
-        <button class="btn light" data-act="print">Print on A4</button>
+        <button class="btn light" data-act="print">A4 PDF</button>
         <button class="btn${scaleOpt.open ? ' primary' : ' light'}" data-act="scale-open">Print at scale…</button>
         <button class="btn light" data-act="svg">Download SVG</button>
         <label class="wd-feat"><input type="checkbox" data-opt="codes"${S.showCodes ? ' checked' : ''}> Tile codes</label>
@@ -769,9 +875,10 @@
           <div class="field"><label>Margin (mm)</label><input type="number" data-s="margin" value="${scaleOpt.margin}"></div>
           <div class="field"><label>Overlap (mm)</label><input type="number" data-s="overlap" value="${scaleOpt.overlap}"></div>
         </div>
-        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. Print at 100% / Actual size with margins set to None, then check the 50 mm bar. Most printers can't print the last few mm of the sheet; the overlap covers that between sheets, or set a margin of about 5 mm.</p>
-        <button class="btn primary" data-act="scale">Print ${L.printed} sheet${L.printed > 1 ? 's' : ''}</button>
+        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. The PDF opens in a new tab. Print it at 100% / Actual size (not Scale to fit), then check the 50 mm bar. Most printers can't print the last few mm of a sheet; the overlap covers that between sheets, or set a margin of about 5 mm.</p>
+        <button class="btn primary" data-act="scale">Make PDF: ${L.printed} sheet${L.printed > 1 ? 's' : ''} + guide</button>
       </div>` : ''}
+      <p class="no-print" style="margin:0 0 10px"><a class="wd-pdflink" hidden></a></p>
       <div class="wd-split">
         <div class="wd-canvas">${mapSVG(m, kit, { u: 12, selected: S.selected, codes: S.showCodes, grid: S.showGrid })}</div>
         <aside class="wd-side">
@@ -819,11 +926,11 @@
       m.nb.forEach((n, k) => { n.name = m.settings.neighbourhoods[k]?.name || n.name; });
       S.selected = null; changed(); render();
     });
-    root.querySelector('[data-act="print"]').addEventListener('click', () => printOverview(m, kit));
+    root.querySelector('[data-act="print"]').addEventListener('click', () => printOverview(m, kit, window.open('', '_blank')));
     root.querySelector('[data-act="svg"]').addEventListener('click', () => downloadSVG(m, kit));
     root.querySelector('[data-act="scale-open"]').addEventListener('click', () => { scaleOpt.open = !scaleOpt.open; render(); });
     const sb = root.querySelector('[data-act="scale"]');
-    if (sb) sb.addEventListener('click', () => printScaled(m, kit, { ...scaleOpt, squareMm: scaleOpt.squareMm || sqMm(S.kit) }));
+    if (sb) sb.addEventListener('click', () => printScaled(m, kit, { ...scaleOpt, squareMm: scaleOpt.squareMm || sqMm(S.kit) }, window.open('', '_blank')));
   }
 
   // ---------------------------------------------------------------- start
