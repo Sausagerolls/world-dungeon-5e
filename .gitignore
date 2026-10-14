@@ -1,0 +1,6 @@
+# Build outputs (published as GitHub release assets instead)
+/site/
+/pdf/
+*.zip
+__pycache__/
+.DS_Store

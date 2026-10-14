@@ -1,0 +1,110 @@
+---
+type: index
+id: setting-readme
+name: The World Dungeon — Setting Design
+version: 0.1
+status: draft
+---
+
+# The World Dungeon — D&D 5e Setting Design
+
+A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Carl*. Earth's surface is gone. Survivors are pulled into an 18-floor alien dungeon run as an intergalactic game show. Every survivor is now a **Crawler**: ordinary people with a game interface, an inventory, and an audience.
+
+## Get It
+
+- **Ready to use:** download the latest [release](../../releases). It has the website (`World-Dungeon-Site.zip`) and every rulebook, sheet and tracker as a PDF.
+- **Host the website:** unzip it into an Apache (or any static) web root. See [`DEPLOY.md`](DEPLOY.md), including how to password-protect the GM area.
+- **Build it yourself:** needs Python 3 and Google Chrome (macOS for automatic contents page numbers).
+  ```
+  python3 tools/build_pdf.py     # rulebook PDFs -> pdf/
+  python3 tools/build_sheet.py   # character sheet and GM floor tracker -> pdf/
+  python3 tools/build_site.py    # static website -> site/
+  ```
+
+*Fan-made homebrew inspired by* Dungeon Crawler Carl *by Matt Dinniman. Not affiliated with or endorsed by the author or publisher. For home games only.*
+
+## Design Pillars
+
+1. **Start ordinary, grow strange.** Characters begin as normal people (in whatever they were wearing). Power comes from levels, loot, and choices made under pressure.
+2. **Build as you go.** No class at character creation. Players shape their crawler level by level, then commit to a class on Floor 3.
+3. **The System is watching.** Achievements, loot boxes, viewers and sponsors reward spectacle and punish caution.
+4. **The clock is always running.** Floors collapse on a timer. Stairwells and safe rooms matter.
+
+## Folder Layout
+
+| Path | Contents | Status |
+|------|----------|--------|
+| `classes/crawler.md` | The Crawler base class (Crawler Core + survivor features) | Draft 0.6 |
+| `classes/crawler-skills.md` | Crawler Skills (45 skills, levels 1–15, Limit Breaker feat) | Draft 0.3 |
+| `rules/class-selection.md` | Floor 3 race and class selection: any core PHB class, procedure | Draft 0.2 |
+| `rules/tome-magic.md` | Spell tomes and spell ranks | Draft 0.2 |
+| `rules/mana.md` | Mana replaces spell slots: class mana by caster level, Pact Mana, converting slot features | Draft 0.1 |
+| `rules/surviving-the-crawl.md` | Player's view of the Audience Meter, achievements and loot boxes | Draft 0.1 |
+| `rules/safe-rooms-and-timer.md` | Floor turns, resting, Ambush Checks, safe rooms, floor timer, stairwells | Draft 0.1 |
+| `rules/prestige-levels.md` | Prestige levels (21+ in one class): scaling, boons, 5 features per class | Draft 0.1 |
+| `rules/leveling.md` | Floor pacing (3–4 levels per floor), proficiency bonus, levels beyond 20 | Draft 0.1 |
+| `rules/loot-boxes.md` | Earning and opening boxes, rarity (Bronze to Celestial), box types, Player Killer mark | Draft 0.1 |
+| `rules/achievements.md` | Achievement tiers, the Audience Meter, 54 example achievements | Draft 0.1 |
+| `loot/box-tables.md` | d100 tables for all 19 box types | Draft 0.1 |
+| `loot/enemy-loot.md` | Coin and d100 drop tables for 12 creature types, by tier | Draft 0.1 |
+| `items/explosives.md` | Explosive rules, 23 explosives, explosive gear | Draft 0.1 |
+| `items/firearms.md` | Firearm rules, special rounds, guns, magic guns, attachments | Draft 0.1 |
+| `items/dungeon-items.md` | All other setting items from loot boxes | Draft 0.1 |
+| `rules/pets.md` | Pets: getting one, commands, growth, upgrades, tricks, evolutions, egg hatch tables, taming | Draft 0.1 |
+| `floors/floor-1/overview.md` | Floor 1 at a glance, running encounters, bosses, rewards | Draft 0.1 |
+| `floors/floor-1/neighbourhoods.md` | 7 neighbourhoods + Club Stairwell: encounter tables, boss rooms, mechanics, hints, stat blocks | Draft 0.1 |
+| `rules/crafting.md` | Crafting rules: tools, materials, field and workbench crafting, magic item costs | Draft 0.1 |
+| `items/crafting-recipes.md` | Recipes for explosives, firearms, dungeon items, 5e magic items, spell scrolls | Draft 0.1 |
+| `rules/safe-room-shops.md` | Shop types, stock by floor, prices, materials, recipes, services | Draft 0.1 |
+| `items/celestial-relics.md` | Unique game-breaking relics and the General Relics table | Draft 0.1 |
+
+## PDF Handbook
+
+`pdf/The-Crawler.pdf`, `pdf/Loot-and-Achievements.pdf`, `pdf/Crafting-and-Shops.pdf`, `pdf/Pets.pdf`, `pdf/Floor-1.pdf`, `pdf/Enemy-Loot.pdf`, `pdf/Explosives.pdf`, `pdf/Firearms.pdf` and `pdf/Dungeon-Items.pdf` are built from the markdown files. After editing any of them, rebuild it with:
+
+```
+python3 tools/build_pdf.py
+```
+
+It needs only Python 3 and Google Chrome.
+
+Printable sheets: `pdf/Crawler-Character-Sheet.pdf` (a 10-page drop-in replacement for the 5e character sheet: core stats, features and Crawler Skills, level log, magic, pet, inventory, floor timer, loot box grid, box log, crafting projects) and `pdf/GM-Floor-Tracker.pdf` (one page per floor). Rebuild them with `python3 tools/build_sheet.py`. They read the box types from `loot/box-tables.md`.
+
+## Website
+
+`site/` is a static website of the whole setting (player rules, crawler creation guide, and a separate GM area). Build it with `python3 tools/build_site.py`, then follow `DEPLOY.md` to put it on Apache.
+
+## File Conventions (for Tabletop Forge import)
+
+These files are written to be fed into **Tabletop Forge**, a custom VTT.
+
+Every file starts with YAML frontmatter:
+
+- `type` — `index`, `class`, `crawler-skill-list`, `rule`, `race`, `item`, `monster`, `floor`, etc.
+- `id` — stable kebab-case identifier. Cross-references use this id.
+- `name` — display name.
+- `version` / `status` — design version and `draft` / `playtest` / `final`.
+
+Inside a file, individual entries (Crawler Skills, features, items) use a level-3 heading plus a short bold metadata line, so a script can split them into separate VTT items.
+
+## Roadmap
+
+- [x] Crawler base class
+- [x] Crawler Skills (replaces Crawler Talents)
+- [x] Floor 3 class selection rules
+- [x] Tome magic and mana
+- [x] Leveling pacing and levels beyond 20
+- [ ] More Crawler Skills (target 40+ for high-level play)
+- [ ] Monster scaling for Floor 7+
+- [ ] Races available on Floor 3
+- [x] Classes: any core Player's Handbook class at Floor 3
+- [x] Loot boxes (tiers, tables)
+- [x] Achievements and the Audience Meter
+- [x] Explosives and firearms
+- [ ] Viewers, followers and sponsors
+- [x] Floor 1 guide (neighbourhoods, encounters, bosses, bestiary)
+- [ ] Floor guides for Floors 2–3
+- [x] Safe rooms, stairwells and the floor timer
+- [x] Printable floor timer track (player and GM)
+- [ ] Bestiary (mobs, neighborhood bosses, floor bosses)
+- [x] Crafting rules, recipes and safe room shops
