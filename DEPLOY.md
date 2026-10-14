@@ -60,4 +60,6 @@ A Tabletop Forge server can serve both the Crawler Sheet (`/crawler/`) and the p
 
 The site builder's hosting switches: `WD_SHEET_URL` (link every page to the sheet), `WD_NO_GM=1` (leave the GM area out) and `WD_SITE_OUT` (build somewhere other than `site/`).
 
+The GM area's **Dungeon Builder** (`gm/dungeon-builder.html`) saves the GM's tiles, props and maps on the Tabletop Forge server (`/api/world-dungeon`, in TTF since this release). Served from that server it connects by itself; opened from anywhere else it asks for the server address.
+
 The GM area is served openly at `/rules/gm/`, with no password. Players who want spoilers can find them; that is the table's call.

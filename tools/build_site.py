@@ -155,7 +155,8 @@ def nav_html(active, is_gm):
         gm_groups = {}
         for slug, src, group, _ in GM:
             gm_groups.setdefault(group, []).append((slug, src))
-        parts.append('<h4>GM only</h4><a href="index.html"' + (' class="active"' if active == "gm-home" else "") + ">GM home</a>")
+        parts.append('<h4>GM only</h4><a href="index.html"' + (' class="active"' if active == "gm-home" else "") + ">GM home</a>"
+                     + '<a href="dungeon-builder.html"' + (' class="active"' if active == "dungeon-builder" else "") + ">Dungeon Builder</a>")
         for group, items in gm_groups.items():
             parts.append(f"<h4>GM · {group}</h4>")
             for slug, src in items:
@@ -165,7 +166,7 @@ def nav_html(active, is_gm):
     return '<nav class="side">' + "".join(parts) + "</nav>"
 
 
-def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False):
+def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False, styles=()):
     up = "../" if is_gm else ""
     toc_html = ""
     if toc:
@@ -185,7 +186,7 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {robots}
 <title>{html.escape(title)} · World Dungeon</title>
-<link rel="stylesheet" href="{up}assets/style.css">
+<link rel="stylesheet" href="{up}assets/style.css">{"".join(f'<link rel="stylesheet" href="{x}">' for x in styles)}
 </head>
 <body class="{'gm' if is_gm else 'player'}" data-base="{up}">
 <header class="topbar">
@@ -284,6 +285,7 @@ def downloads_page(pdfs, is_gm):
 
 def gm_home():
     cards = [
+        ("dungeon-builder.html", "Dungeon Builder", "Turn your physical tiles and props into a floor map: neighbourhoods, boss rooms, safe rooms, stairwells. Prints on A4 or at scale."),
         ("floor-1-neighbourhoods.html", "Floor 1", "Neighbourhoods, encounter tables, boss rooms with hints, stat blocks."),
         ("box-tables.html", "Loot box tables", "d100 tables for all 19 box types. Click Roll."),
         ("enemy-loot.html", "Enemy loot", "Coin and drops for 12 creature types."),
@@ -297,6 +299,13 @@ def gm_home():
 <h2 id="sections">Sections</h2><div class="cards">{grid}</div>
 <h2 id="downloads">GM downloads</h2>{downloads_page(GM_PDFS, True)}"""
     return page("GM area", body, "gm-home", is_gm=True)
+
+
+def dungeon_builder_page():
+    body = """<header class="chapter-head"><div class="kicker">GM tool</div><h1>Dungeon Builder</h1></header>
+<p class="hint">Tell it which tiles and props you own, name your neighbourhoods, and it lays out a floor you can build on the table: each neighbourhood with a boss room, plus safe rooms and stairwells. Print it on one A4 page, or at scale across as many sheets as it needs.</p>
+<div id="wd-builder"></div>"""
+    return page("Dungeon Builder", body, "dungeon-builder", is_gm=True, scripts=("../assets/dungeon.js",), styles=("../assets/dungeon.css",))
 
 
 def create_page():
@@ -326,7 +335,7 @@ def main():
     if not NO_GM:
         (SITE / "gm" / "downloads").mkdir(parents=True)
     (SITE / "downloads").mkdir()
-    for f in ("style.css", "app.js", "create.js"):
+    for f in ("style.css", "app.js", "create.js", "dungeon.js", "dungeon.css"):
         shutil.copy(ASSETS / f, SITE / "assets" / f)
     for f, *_ in PLAYER_PDFS:
         if (ROOT / "pdf" / f).exists():
@@ -347,6 +356,7 @@ def main():
     (SITE / "downloads.html").write_text(page("Downloads", dl, "downloads"))
     if not NO_GM:
         (SITE / "gm" / "index.html").write_text(gm_home())
+        (SITE / "gm" / "dungeon-builder.html").write_text(dungeon_builder_page())
 
     (SITE / "assets" / "search.js").write_text("window.SEARCH_INDEX=" + json.dumps(player_index) + ";")
     if not NO_GM:

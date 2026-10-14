@@ -1,0 +1,46 @@
+/* Dungeon Builder (GM area) */
+.wd-tabs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 18px; }
+.wd-status { margin-left: auto; font: 12px var(--mono); color: var(--muted); }
+.wd-table input[type=text], .wd-table input[type=number], .wd-table select { padding: 6px 8px; border: 1px solid #cfc9bb; border-radius: 6px; font: 15px var(--body); background: #fff; }
+.wd-table input[type=number] { width: 70px; }
+.wd-table td { vertical-align: middle; }
+.wd-mini { font: 600 12px var(--mono); padding: 4px 8px; border-radius: 6px; border: 1px solid #cfc9bb; background: var(--soft); cursor: pointer; }
+.wd-feat { display: inline-flex; align-items: center; gap: 4px; margin: 0 10px 4px 0; font: 13px var(--display); white-space: nowrap; }
+.wd-painter { background: #fbfaf6; border: 1px solid var(--rule); border-radius: 10px; padding: 12px; }
+.wd-grid { display: grid; gap: 2px; margin: 8px 0 10px; }
+.wd-cell { width: 26px; height: 26px; border: 1px solid #cfc9bb; background: #fff; border-radius: 3px; cursor: pointer; padding: 0; }
+.wd-cell.on { background: #e0791f; border-color: #8a4a12; }
+.wd-form { max-width: 760px; }
+.wd-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.wd-row .field { flex: 1; min-width: 120px; }
+.field input[type=number] { width: 100%; padding: 10px 12px; border: 1px solid #cfc9bb; border-radius: 8px; font: 16px var(--body); background: #fff; }
+.wd-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+.wd-name { font: 800 20px var(--display); text-transform: uppercase; padding: 8px 10px; border: 1px solid #cfc9bb; border-radius: 8px; min-width: 240px; }
+.wd-split { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 18px; align-items: start; }
+.wd-canvas { border: 1px solid var(--rule); border-radius: 10px; overflow: auto; background: #fff; max-height: 80vh; }
+.wd-canvas svg { width: 100%; height: auto; display: block; }
+.wd-piece { cursor: pointer; }
+.wd-piece:hover { filter: brightness(0.95); }
+.wd-piece.sel { stroke: #d81b60 !important; stroke-width: 3px; }
+.wd-side { background: #fbfaf6; border: 1px solid var(--rule); border-radius: 10px; padding: 14px; font-size: 15px; max-height: 80vh; overflow: auto; }
+.wd-side h4 { margin-top: 14px; }
+.wd-side .field input[type=text], .wd-side .field select, .wd-side .field textarea { padding: 7px 9px; font-size: 15px; }
+.wd-room { border-left: 4px solid var(--accent); padding-left: 10px; }
+.wd-key h3 { font-size: 16px; margin: 14px 0 4px; }
+.wd-key p { font-size: 13px; }
+.wd-key table { font-size: 12px; }
+.wd-key td { padding: 3px 6px; }
+#wd-print { display: none; }
+@media (max-width: 1100px) { .wd-split { grid-template-columns: 1fr; } }
+@media print {
+  body.wd-printing > *:not(#wd-print) { display: none !important; }
+  body.wd-printing #wd-print { display: block; }
+  #wd-print .wd-page { position: relative; overflow: hidden; page-break-after: always; break-after: page; }
+  #wd-print .wd-inner { position: absolute; }
+  #wd-print .wd-inner svg { display: block; }
+  #wd-print .wd-ptitle { font: 800 13pt "Avenir Next Condensed", "Arial Narrow", sans-serif; text-transform: uppercase; height: 9mm; }
+  #wd-print .wd-cap { position: absolute; font: 7pt Menlo, monospace; color: #555; white-space: nowrap; }
+  #wd-print .wd-bar { display: inline-block; height: 2mm; background: #000; vertical-align: middle; }
+  #wd-print .wd-keys { font-size: 10pt; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
