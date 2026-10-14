@@ -173,8 +173,6 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False):
         toc_html = f'<aside class="toc"><h4>On this page</h4>{links}</aside>'
     gm_toggle = (f'<a class="gm-link" href="{up}index.html">PLAYER SIDE</a>' if is_gm
                  else "" if NO_GM else '<a class="gm-link" href="gm/index.html">GM AREA</a>')
-    if SHEET_URL and not is_gm:
-        gm_toggle = f'<a class="gm-link" href="{SHEET_URL}" target="_blank" rel="noopener">CRAWLER SHEET</a>' + gm_toggle
     banner = ('<div class="gm-banner">GM ONLY · Players, look away. Spoilers, loot tables and boss secrets ahead.</div>'
               if is_gm else "")
     search_src = "search-gm.js" if is_gm else f"{up}assets/search.js"
