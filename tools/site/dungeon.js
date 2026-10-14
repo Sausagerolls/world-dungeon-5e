@@ -373,7 +373,7 @@
   // The map's frame: its bounds with a margin, widened to the A4 shape.
   function frame(map, nbOnly, tight) {
     // Just enough room for the neighbourhood names above the rooms.
-    const b = bounds(map, nbOnly); const m = tight ? 0.1 : 0.4; const top = tight ? 0.1 : 1.4;
+    const b = bounds(map, nbOnly); const m = tight ? 0.2 : 0.4; const top = 1.4;
     let x = b.x - m; let y = b.y - top; let w = b.w + 2 * m; let h = b.h + m + top;
     if (nbOnly == null && !tight) {
       const r = map.settings?.orientation === 'portrait' ? 1 / Math.SQRT2 : Math.SQRT2;
@@ -455,9 +455,9 @@
     // Neighbourhood names.
     (map.nb || []).forEach((n, k) => {
       const cells = map.pieces.filter((p) => p.nb === k).flatMap((p) => p.cells);
-      if (!cells.length) return;
+      if (!cells.length || !n.name) return;
       const [cx, cy] = centroid(cells); const b = bounds(map, k);
-      out.push(`<text x="${cx * u}" y="${Math.max(view.y + 1, b.y - 0.6) * u}" font-size="${u * 0.95}" text-anchor="middle" font-family="Avenir Next Condensed,Arial Narrow,sans-serif" font-weight="800" letter-spacing="${u * 0.02}" fill="#d81b60" stroke="#fff" stroke-width="${u * 0.18}" paint-order="stroke" pointer-events="none">${esc(String(n.name).toUpperCase())}</text>`);
+      out.push(`<text x="${cx * u}" y="${(b.y - 0.6) * u}" font-size="${u * 0.95}" text-anchor="middle" font-family="Avenir Next Condensed,Arial Narrow,sans-serif" font-weight="800" letter-spacing="${u * 0.02}" fill="#d81b60" stroke="#fff" stroke-width="${u * 0.18}" paint-order="stroke" pointer-events="none">${esc(String(n.name).toUpperCase())}</text>`);
     });
     if (opts.overlay) out.push(opts.overlay(u));
     if (opts.caption) out.push(`<text x="${(view.x + 0.3) * u}" y="${(view.y + view.h - 0.3) * u}" font-size="${u * 0.45}" font-family="Avenir Next Condensed,Arial Narrow,sans-serif" font-weight="800" fill="#1c1b24" stroke="#fff" stroke-width="${u * 0.1}" paint-order="stroke">${esc(opts.caption)}</text>`);
@@ -605,30 +605,40 @@
     ], `${safeName(map.name)} A4.pdf`);
   }
 
-  // At scale: one square = squareMm, split over as many sheets as it takes,
-  // with an overlap strip so the sheets can be lined up and taped.
+  // At scale: sheets laid edge to edge with no margin or overlap, the dungeon
+  // centred in the grid so spare paper is shared out evenly on every side.
   function scaleLayout(map, opt) {
     const paperBase = PAPERS[opt.paper] || PAPERS.A4;
     const paper = opt.landscape ? [paperBase[1], paperBase[0]] : paperBase;
-    const sq = opt.squareMm; const m = opt.margin; const ov = opt.overlap;
-    // Tight to the dungeon: at scale, blank page-shaped margins only waste paper.
+    const sq = opt.squareMm;
     const view = opt.nb === 'all' ? frame(map, null, true) : frame(map, Number(opt.nb), true);
     const mapW = view.w * sq; const mapH = view.h * sq;
-    const pw = paper[0] - 2 * m; const ph = paper[1] - 2 * m;
-    const stepX = Math.max(10, pw - ov); const stepY = Math.max(10, ph - ov);
-    const cols = Math.max(1, Math.ceil((mapW - ov) / stepX)); const rows = Math.max(1, Math.ceil((mapH - ov) / stepY));
+    const pw = paper[0]; const ph = paper[1];
+    const cols = Math.max(1, Math.ceil(mapW / pw - 1e-6)); const rows = Math.max(1, Math.ceil(mapH / ph - 1e-6));
+    const x0 = view.x - (cols * pw - mapW) / 2 / sq; const y0 = view.y - (rows * ph - mapH) / 2 / sq;
     // Sheets with nothing on them are not printed.
     const cells = map.pieces.filter((p) => opt.nb === 'all' || p.nb === Number(opt.nb)).flatMap((p) => p.cells);
     const sheets = [];
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-      const v = { x: view.x + (c * stepX) / sq, y: view.y + (r * stepY) / sq, w: pw / sq, h: ph / sq };
+      const v = { x: x0 + (c * pw) / sq, y: y0 + (r * ph) / sq, w: pw / sq, h: ph / sq };
       const used = cells.some(([x, y]) => x + 1 > v.x && x < v.x + v.w && y + 1 > v.y && y < v.y + v.h);
       sheets.push({ r, c, v, used });
     }
     const printed = sheets.filter((x) => x.used).length;
-    return { paper, sq, m, ov, view, mapW, mapH, pw, ph, stepX, stepY, cols, rows, sheets, printed };
+    const grid = { x: x0, y: y0, w: (cols * pw) / sq, h: (rows * ph) / sq };
+    return { paper, sq, view, grid, mapW, mapH, pw, ph, cols, rows, sheets, printed };
   }
-  function printScaled(map, kit, opt, tab) {
+  // Just one neighbourhood's pieces, for printing it on its own.
+  function onlyNb(map, k) {
+    const keep = map.pieces.map((p, i) => (p.nb === k ? i : -1)).filter((i) => i >= 0);
+    const re = new Map(keep.map((old, n) => [old, n]));
+    return { ...map, pieces: keep.map((i) => map.pieces[i]),
+      links: map.links.filter((l) => re.has(l.pa) && re.has(l.pb)).map((l) => ({ ...l, pa: re.get(l.pa), pb: re.get(l.pb) })),
+      props: map.props.filter((p) => re.has(p.piece)).map((p) => ({ ...p, piece: re.get(p.piece) })),
+      nb: map.nb.map((n, j) => (j === k ? n : { ...n, name: '' })) };
+  }
+  function printScaled(full, kit, opt, tab) {
+    const map = opt.nb === 'all' ? full : onlyNb(full, Number(opt.nb));
     const L = scaleLayout(map, opt);
     return showPDF(tab, async () => {
       const pages = [];
@@ -644,7 +654,7 @@
         }
         return s;
       };
-      const gview = { ...L.view, w: Math.max(L.view.w, (L.stepX * (L.cols - 1) + L.pw) / L.sq), h: Math.max(L.view.h, (L.stepY * (L.rows - 1) + L.ph) / L.sq) };
+      const gview = L.grid;
       pages.push(await pageOf(L.paper[0], L.paper[1], async (ctx, px) => {
         const g = 10; const head = 10;
         await drawSVG(ctx, mapSVG(map, kit, { u: 10, view: gview, size: [(L.paper[0] - 2 * g) * px, (L.paper[1] - 2 * g - head) * px], overlay: guideOverlay, codes: S.showCodes, grid: S.showGrid, idp: 'g' }), g * px, (g + head) * px, (L.paper[0] - 2 * g) * px, (L.paper[1] - 2 * g - head) * px);
@@ -655,22 +665,16 @@
         if (!sh.used) continue;
         n += 1; setStatus(`Making the PDF… sheet ${n} of ${L.printed}`);
         const { r, c } = sh; const view = sh.v;
-        // Dashed lines where the next sheet starts (right and bottom).
-        const overlay = (u) => {
-          let s = '';
-          if (c < L.cols - 1) { const x = (view.x + L.stepX / L.sq) * u; s += `<line x1="${x}" y1="${view.y * u}" x2="${x}" y2="${(view.y + view.h) * u}" stroke="#00808a" stroke-width="${u * 0.02}" stroke-dasharray="${u * 0.1}"/>`; }
-          if (r < L.rows - 1) { const y = (view.y + L.stepY / L.sq) * u; s += `<line x1="${view.x * u}" y1="${y}" x2="${(view.x + view.w) * u}" y2="${y}" stroke="#00808a" stroke-width="${u * 0.02}" stroke-dasharray="${u * 0.1}"/>`; }
-          return s;
-        };
         pages.push(await pageOf(L.paper[0], L.paper[1], async (ctx, px) => {
-          await drawSVG(ctx, mapSVG(map, kit, { u: L.sq, view, size: [L.pw * px, L.ph * px], overlay, codes: S.showCodes, grid: S.showGrid, idp: `s${n}` }), L.m * px, L.m * px, L.pw * px, L.ph * px);
-          if (L.m) { ctx.strokeStyle = '#999'; ctx.lineWidth = 0.2 * px; ctx.strokeRect(L.m * px, L.m * px, L.pw * px, L.ph * px); }
-          label(ctx, px, `${map.name} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)} · overlap ${L.ov} mm past the dashed line`, L.m + 5, L.m + 6, 2.6);
-          // The check bar is drawn at exactly 50 mm.
-          const bx = L.m + 5; const by = L.paper[1] - L.m - 8;
-          ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillRect((bx - 1.2) * px, (by - 4) * px, 112 * px, 7 * px);
-          ctx.fillStyle = '#000'; ctx.fillRect(bx * px, (by - 1) * px, 50 * px, 2 * px);
-          ctx.font = `${2.6 * px}px Menlo, monospace`; ctx.fillStyle = '#222'; ctx.fillText('50 mm: measure to check the print is at 100%', (bx + 52) * px, (by + 0.8) * px);
+          await drawSVG(ctx, mapSVG(map, kit, { u: L.sq, view, size: [L.pw * px, L.ph * px], codes: S.showCodes, grid: S.showGrid, idp: `s${n}` }), 0, 0, L.pw * px, L.ph * px);
+          label(ctx, px, `${map.name} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)}`, 5, 6, 2.6);
+          // The check bar, exactly 50 mm, on the first sheet only.
+          if (n === 1) {
+            const bx = 5; const by = L.paper[1] - 8;
+            ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillRect((bx - 1.2) * px, (by - 4) * px, 112 * px, 7 * px);
+            ctx.fillStyle = '#000'; ctx.fillRect(bx * px, (by - 1) * px, 50 * px, 2 * px);
+            ctx.font = `${2.6 * px}px Menlo, monospace`; ctx.fillStyle = '#222'; ctx.fillText('50 mm: measure to check the print is at 100%', (bx + 52) * px, (by + 0.8) * px);
+          }
         }));
       }
       return pages;
@@ -849,7 +853,7 @@
   }
 
   // ----- one map
-  const scaleOpt = { paper: 'A4', landscape: false, margin: 0, overlap: 10, nb: 'all', squareMm: null, open: false };
+  const scaleOpt = { paper: 'A4', landscape: false, nb: 'all', squareMm: null, open: false };
   function mapView() {
     const m = S.map; const kit = m.kitSnapshot || S.kit;
     const p = S.selected != null ? m.pieces[S.selected] : null;
@@ -872,10 +876,8 @@
           <div class="field"><label>Paper</label><select data-s="paper">${Object.keys(PAPERS).map((x) => `<option${scaleOpt.paper === x ? ' selected' : ''}>${x}</option>`).join('')}</select></div>
           <div class="field"><label>Turn</label><select data-s="landscape"><option value="0"${!scaleOpt.landscape ? ' selected' : ''}>Portrait</option><option value="1"${scaleOpt.landscape ? ' selected' : ''}>Landscape</option></select></div>
           <div class="field"><label>One square (inches)</label><input type="number" step="0.05" min="0.1" data-s="squareIn" value="${+(sq / 25.4).toFixed(3)}"></div>
-          <div class="field"><label>Margin (mm)</label><input type="number" data-s="margin" value="${scaleOpt.margin}"></div>
-          <div class="field"><label>Overlap (mm)</label><input type="number" data-s="overlap" value="${scaleOpt.overlap}"></div>
         </div>
-        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. The PDF opens in a new tab. Print it at 100% / Actual size (not Scale to fit), then check the 50 mm bar. Most printers can't print the last few mm of a sheet; the overlap covers that between sheets, or set a margin of about 5 mm.</p>
+        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. The PDF opens in a new tab. Print it at 100% / Actual size (not Scale to fit), then check the 50 mm bar on sheet 1.</p>
         <button class="btn primary" data-act="scale">Make PDF: ${L.printed} sheet${L.printed > 1 ? 's' : ''} + guide</button>
       </div>` : ''}
       <p class="no-print" style="margin:0 0 10px"><a class="wd-pdflink" hidden></a></p>
