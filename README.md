@@ -36,7 +36,8 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 |------|----------|--------|
 | `classes/crawler.md` | The Crawler base class (Crawler Core + survivor features) | Draft 0.6 |
 | `classes/crawler-skills.md` | Crawler Skills (45 skills, levels 1–15, Limit Breaker feat) | Draft 0.3 |
-| `rules/class-selection.md` | Floor 3 race and class selection: any core PHB class, procedure | Draft 0.2 |
+| `rules/class-selection.md` | Floor 3 class selection: any core PHB class, procedure | Draft 0.2 |
+| `rules/race-selection.md` | Floor 3 race selection: no race before Floor 3, 2024 species, choices, race spells | Draft 0.1 |
 | `rules/tome-magic.md` | Spell tomes and spell ranks | Draft 0.2 |
 | `rules/mana.md` | Mana replaces spell slots: class mana by caster level, Pact Mana, converting slot features | Draft 0.1 |
 | `rules/surviving-the-crawl.md` | Player's view of the Audience Meter, achievements and loot boxes | Draft 0.1 |
@@ -96,7 +97,7 @@ Inside a file, individual entries (Crawler Skills, features, items) use a level-
 - [x] Leveling pacing and levels beyond 20
 - [ ] More Crawler Skills (target 40+ for high-level play)
 - [ ] Monster scaling for Floor 7+
-- [ ] Races available on Floor 3
+- [x] Races available on Floor 3
 - [x] Classes: any core Player's Handbook class at Floor 3
 - [x] Loot boxes (tiers, tables)
 - [x] Achievements and the Audience Meter

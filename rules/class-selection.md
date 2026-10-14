@@ -4,7 +4,7 @@ id: class-selection
 name: Floor 3 Class Selection
 version: 0.2
 status: draft
-related: [crawler, crawler-skills, mana, leveling]
+related: [crawler, crawler-skills, mana, leveling, race-selection]
 ---
 
 # Floor 3 Class Selection
@@ -42,7 +42,7 @@ On arrival at Floor 3, the System opens the **Race and Class selection** menu. E
 
 ### Race
 
-You also choose a race (or species) on Floor 3. Each crawler sees the full list of races the table allows. Some extra races appear only to crawlers with specific achievements. *(Forthcoming `races` file.)*
+You also choose a race (or species) on Floor 3, from the 2024 Player's Handbook species and any others your GM allows. Until then a crawler has no race, even one who was human before the collapse. The rules, the System's pitches and the choices each race asks for are in `race-selection`.
 
 ---
 
@@ -58,7 +58,7 @@ Let **N** be the crawler's character level. Expect N to be about 7–9 (see `lev
 6. **Add class proficiencies.** The crawler gains the class's 1st-level armor, weapon, tool and skill proficiencies.
 7. **Keep your hit points.** Do not recalculate. Your levels so far keep their d8 Hit Dice and hit points. From your next level on, each level gives the hit die of the class you take it in (see *Hit Points and Hit Dice* in `crawler`).
 8. **Work out mana and learn spells.** A spellcasting class adds class mana (or Pact Mana) to the crawler's mana pool (see `mana`). Learn as many cantrips and spells from the class's list as its table gives at class level N, and write them into your tome as tome spells (see `tome-magic`).
-9. **Apply race.** Gain the chosen race's traits. Ability bonuses from the race apply in full.
+9. **Apply race.** Gain the chosen race's traits and make its choices (see `race-selection`).
 10. **Class starter box.** The System gives one Bronze **Class Box** with gear for the new class. Roll on the Class Box table in `box-tables`.
 
 ---

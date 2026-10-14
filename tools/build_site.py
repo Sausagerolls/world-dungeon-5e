@@ -34,6 +34,7 @@ PLAYER = [
     ("crawler", "classes/crawler.md", "Your Crawler", "class"),
     ("crawler-skills", "classes/crawler-skills.md", "Your Crawler", "skills"),
     ("class-selection", "rules/class-selection.md", "Your Crawler", "rules"),
+    ("race-selection", "rules/race-selection.md", "Your Crawler", "rules"),
     ("leveling", "rules/leveling.md", "Your Crawler", "rules"),
     ("prestige-levels", "rules/prestige-levels.md", "Your Crawler", "items"),
     ("tome-magic", "rules/tome-magic.md", "Magic", "rules"),
@@ -137,7 +138,7 @@ def search_entries(body, page, url):
 
 def nav_html(active, is_gm):
     up = "../" if is_gm else ""
-    parts = ([f'<a class="cta" href="{up}{SHEET_URL}">Open the Crawler Sheet</a>'] if SHEET_URL else []) + [
+    parts = ([f'<a class="cta" href="{up}{SHEET_URL}" target="_blank" rel="noopener">Open the Crawler Sheet</a>'] if SHEET_URL else []) + [
              f'<a class="{"" if SHEET_URL else "cta"}" href="{up}create.html">{"Creation guide" if SHEET_URL else "Create a crawler"}</a>',
              f'<a href="{up}index.html"{" class=active" if active == "home" else ""}>Home</a>']
     groups = {}
@@ -173,7 +174,7 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False):
     gm_toggle = (f'<a class="gm-link" href="{up}index.html">PLAYER SIDE</a>' if is_gm
                  else "" if NO_GM else '<a class="gm-link" href="gm/index.html">GM AREA</a>')
     if SHEET_URL and not is_gm:
-        gm_toggle = f'<a class="gm-link" href="{SHEET_URL}">CRAWLER SHEET</a>' + gm_toggle
+        gm_toggle = f'<a class="gm-link" href="{SHEET_URL}" target="_blank" rel="noopener">CRAWLER SHEET</a>' + gm_toggle
     banner = ('<div class="gm-banner">GM ONLY · Players, look away. Spoilers, loot tables and boss secrets ahead.</div>'
               if is_gm else "")
     search_src = "search-gm.js" if is_gm else f"{up}assets/search.js"
@@ -253,6 +254,7 @@ def home_page():
         ("crawler.html", "The Crawler", "The base class every survivor starts with."),
         ("crawler-skills.html", "Crawler Skills", "45 trained skills from Demolitionist to Pet Trainer."),
         ("class-selection.html", "Floor 3 class selection", "Pick any Player's Handbook class, and keep everything Crawler."),
+        ("race-selection.html", "Floor 3 race selection", "No race until Floor 3, then any species, with all its choices."),
         ("mana.html", "Mana", "One mana pool for every spell. No spell slots."),
         ("safe-rooms-and-timer.html", "Safe rooms and the timer", "Resting, Ambush Checks, the floor collapse, stairwells."),
         ("surviving-the-crawl.html", "The Show Must Go On", "The audience, achievements and loot boxes from your side."),
@@ -260,13 +262,14 @@ def home_page():
         ("crafting.html", "Crafting", "Turn monster parts and scrap into bombs, guns and magic."),
         ("downloads.html", "Downloads", "Every rulebook as a PDF, and the character sheet."),
     ]
-    grid = "".join(f'<a class="card" href="{u}"><b>{t}</b><span>{d}</span></a>' for u, t, d in cards)
+    newtab = ' target="_blank" rel="noopener"'
+    grid = "".join(f'<a class="card" href="{u}"{newtab if SHEET_URL and u == SHEET_URL else ""}><b>{t}</b><span>{d}</span></a>' for u, t, d in cards)
     body = f"""
 <section class="hero">
   <div class="k">WORLD DUNGEON · A D&amp;D 5E SETTING</div>
   <h1>Welcome,<br><span>Crawler.</span></h1>
   <p>Earth is gone. You're in the dungeon now, on camera, in whatever you were wearing. Here's how to survive it.</p>
-  <div class="btns">{f'<a class="btn primary" href="{SHEET_URL}">Open the Crawler Sheet</a>' if SHEET_URL else '<a class="btn primary" href="create.html">Create your crawler</a>'}<a class="btn ghost" href="crawler.html">Read the rules</a></div>
+  <div class="btns">{f'<a class="btn primary" href="{SHEET_URL}" target="_blank" rel="noopener">Open the Crawler Sheet</a>' if SHEET_URL else '<a class="btn primary" href="create.html">Create your crawler</a>'}<a class="btn ghost" href="crawler.html">Read the rules</a></div>
 </section>
 <blockquote class="system"><em>"Welcome, Crawler. Your ordinary life has ended. Your new one will probably be shorter."</em></blockquote>
 <h2 id="start">Start here</h2>
@@ -300,7 +303,7 @@ def gm_home():
 
 def create_page():
     body = """<header class="chapter-head"><div class="kicker">Character creation</div><h1>Create a crawler</h1></header>
-<p class="hint">Six quick steps. Everything saves in your browser as you go, so you can come back later.</p>""" + (f'<p class="hint"><b>Playing with a Tabletop Forge GM?</b> <a href="{SHEET_URL}">The Crawler Sheet</a> walks you through the same steps, keeps your crawler on the server and rolls your dice.</p>' if SHEET_URL else "") + """
+<p class="hint">Six quick steps. Everything saves in your browser as you go, so you can come back later.</p>""" + (f'<p class="hint"><b>Playing with a Tabletop Forge GM?</b> <a href="{SHEET_URL}" target="_blank" rel="noopener">The Crawler Sheet</a> walks you through the same steps, keeps your crawler on the server and rolls your dice.</p>' if SHEET_URL else "") + """
 <ul class="steps"></ul>
 <div class="wiz"><section id="step-host" class="step on"></section><aside class="summary"></aside></div>"""
     return page("Create a crawler", body, "create", scripts=("assets/skills.js", "assets/create.js"))

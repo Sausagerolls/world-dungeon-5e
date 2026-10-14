@@ -33,7 +33,8 @@ BOOKS = [
         "chapters": [
             ("classes/crawler.md", "class", "Character creation, Crawler Core, survivor features (levels 1–9, kept for good), Inclinations."),
             ("classes/crawler-skills.md", "skills", "Skill rules, the Limit Breaker feat, and 45 Crawler Skills in five categories."),
-            ("rules/class-selection.md", "rules", "How a crawler picks a race and class, and what they keep."),
+            ("rules/class-selection.md", "rules", "How a crawler picks a class, and what they keep."),
+            ("rules/race-selection.md", "rules", "No race before Floor 3, then any 2024 species, with all its choices."),
             ("rules/tome-magic.md", "rules", "Learning spells from tomes, and spell ranks."),
             ("rules/mana.md", "rules", "One mana pool for all magic: class mana by caster level, Pact Mana for warlocks, converting slot features."),
             ("rules/leveling.md", "rules", "Floor pacing, proficiency bonus, and levels beyond 20."),
@@ -162,6 +163,7 @@ XREF = {
     "crawler": "The Crawler",
     "crawler-skills": "Crawler Skills",
     "class-selection": "Floor 3 Class Selection",
+    "race-selection": "Floor 3 Race Selection",
     "tome-magic": "Tome Magic",
     "mana": "Mana",
     "leveling": "Leveling",

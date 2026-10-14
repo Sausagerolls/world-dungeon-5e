@@ -57,7 +57,7 @@ You customize your crawler in three ways:
 - *Option:* lower one score to 8 to gain 2 more points.
 - Then spend your 1st-level Stat Point.
 
-**Step 2 — "Ordinary person" traits.** You have no race until Floor 3. Until then you are what you were before the collapse (normally human). You gain:
+**Step 2 — "Ordinary person" traits.** You have no race until Floor 3 (see `race-selection`). Until then you are what you were before the collapse (normally human), without any species traits, even the Human ones. You gain:
 - One extra proficiency skill of your choice.
 - One extra language, or one tool proficiency, from your old life.
 
