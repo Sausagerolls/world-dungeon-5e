@@ -8,8 +8,8 @@
 #   frontend/crawler-sheet/  sheet source; the frontend Docker image builds it.
 #                            Its own vite.config.js is never overwritten.
 #   rules-site/              the built rules site, linked to the sheet, with
-#                            the GM area at /rules/gm/ (password protected by
-#                            nginx; see DEPLOY.md). Mounted into the frontend
+#                            the GM area at /rules/gm/ (open, no password).
+#                            Mounted into the frontend
 #                            container, so a rules change needs no rebuild.
 set -e
 HERE="$(cd "$(dirname "$0")/.." && pwd)"

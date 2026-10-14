@@ -54,10 +54,10 @@ Players browsing the site never load GM content: the player search only indexes 
 
 A Tabletop Forge server can serve both the Crawler Sheet (`/crawler/`) and the player rules site (`/rules/`), linked to each other. This is how the live server runs.
 
-1. Run `tools/sync_sheet_to_ttf.sh [path/to/ttf]`. It copies `app/` into the TTF checkout's `frontend/crawler-sheet/` and builds the rules site (linked to the sheet, GM area included) into its `rules-site/`.
+1. Run `tools/sync_sheet_to_ttf.sh [path/to/ttf]`. It copies `app/` into the TTF checkout's `frontend/crawler-sheet/` and builds the rules site (linked to the sheet, GM area included, no password) into its `rules-site/`.
 2. Upload both to the server. A rules-only change needs nothing else: `rules-site/` is mounted into the frontend container.
 3. For sheet changes, rebuild the frontend image (`docker compose build frontend && docker compose up -d frontend`). Its Dockerfile builds the sheet after the main app.
 
 The site builder's hosting switches: `WD_SHEET_URL` (link every page to the sheet), `WD_NO_GM=1` (leave the GM area out) and `WD_SITE_OUT` (build somewhere other than `site/`).
 
-**GM area password.** nginx asks for a password at `/rules/gm/`, read from `rules-gm.htpasswd` next to `docker-compose.yml` on the server (never in git). Create or change it with `htpasswd -c rules-gm.htpasswd gm` (or `printf 'gm:%s\n' "$(openssl passwd -apr1)" > rules-gm.htpasswd`). No file means the GM pages stay closed.
+The GM area is served openly at `/rules/gm/`, with no password. Players who want spoilers can find them; that is the table's call.
