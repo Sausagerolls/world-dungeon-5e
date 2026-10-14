@@ -44,3 +44,5 @@
   #wd-print .wd-keys { font-size: 10pt; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+.wd-scale { background: #fff3e6; border: 1px solid #f3c79c; border-radius: 10px; padding: 14px 16px 6px; margin-bottom: 12px; }
+.wd-scale .field select, .wd-scale .field input { padding: 8px 10px; font-size: 15px; }

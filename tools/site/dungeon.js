@@ -36,7 +36,7 @@
   const TYPE_FILL = { boss: '#f2b8b5', safe: '#b9e4c4', stairs: '#b9d3f2' };
 
   const DEFAULT_KIT = () => ({
-    squareMm: 25.4,
+    squareSize: 1, squareUnit: 'in',
     tiles: [
       { id: uid('t'), name: 'Room 4×4', use: 'room', w: 4, h: 4, count: 4, cells: null, features: [] },
       { id: uid('t'), name: 'Room 6×6', use: 'room', w: 6, h: 6, count: 2, cells: null, features: [] },
@@ -93,6 +93,9 @@
     }
     return out;
   }
+  // One square on the GM's tiles, in mm. Entered in inches (default 1) or mm.
+  const sqMm = (kit) => (kit.squareSize != null ? num(kit.squareSize, 1) * (kit.squareUnit === 'mm' ? 1 : 25.4) : num(kit.squareMm, 25.4));
+  const sqLabel = (mm) => (Math.abs(mm / 25.4 - Math.round(mm / 25.4 * 100) / 100) < 0.001 ? `${+(mm / 25.4).toFixed(2)} inch` : `${+mm.toFixed(1)} mm`);
   const kitCode = (kit, tileId) => code(Math.max(0, kit.tiles.findIndex((t) => t.id === tileId)));
   const canRoom = (t) => t.use === 'room' || t.use === 'either';
   const canCorr = (t) => t.use === 'corridor' || t.use === 'either';
@@ -543,7 +546,7 @@
     };
     const gm = 10;
     const gview = { ...L.view, w: Math.max(L.view.w, (L.stepX * (L.cols - 1) + L.pw) / L.sq), h: Math.max(L.view.h, (L.stepY * (L.rows - 1) + L.ph) / L.sq) };
-    pages.push(`<div class="wd-page"><div class="wd-inner" style="left:${gm}mm;top:${gm}mm;width:${L.paper[0] - 2 * gm}mm"><div class="wd-ptitle">${esc(map.name)} · assembly guide · ${L.printed} sheets on a ${L.cols} × ${L.rows} grid · 1 square = ${L.sq} mm</div>${mapSVG(map, kit, { u: 10, view: gview, size: [`${L.paper[0] - 2 * gm}mm`, `${L.paper[1] - 2 * gm - 9}mm`], overlay: guideOverlay, codes: S.showCodes, grid: S.showGrid, idp: 'g' })}</div></div>`);
+    pages.push(`<div class="wd-page"><div class="wd-inner" style="left:${gm}mm;top:${gm}mm;width:${L.paper[0] - 2 * gm}mm"><div class="wd-ptitle">${esc(map.name)} · assembly guide · ${L.printed} sheets on a ${L.cols} × ${L.rows} grid · 1 square = ${sqLabel(L.sq)}</div>${mapSVG(map, kit, { u: 10, view: gview, size: [`${L.paper[0] - 2 * gm}mm`, `${L.paper[1] - 2 * gm - 9}mm`], overlay: guideOverlay, codes: S.showCodes, grid: S.showGrid, idp: 'g' })}</div></div>`);
     let n = 0;
     for (const sh of L.sheets) {
       if (!sh.used) continue;
@@ -557,7 +560,7 @@
         return s;
       };
       const svg = mapSVG(map, kit, { u: L.sq, view, size: [`${L.pw}mm`, `${L.ph}mm`], overlay, codes: S.showCodes, grid: S.showGrid, idp: `s${n}` });
-      pages.push(`<div class="wd-page"><div class="wd-cap" style="left:${L.m}mm;top:${Math.max(1, L.m - 6)}mm">${esc(map.name)} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${L.sq} mm · overlap ${L.ov} mm past the dashed line</div>
+      pages.push(`<div class="wd-page"><div class="wd-cap" style="left:${L.m}mm;top:${Math.max(1, L.m - 6)}mm">${esc(map.name)} · sheet ${n} of ${L.printed} (row ${r + 1}, column ${c + 1}) · 1 square = ${sqLabel(L.sq)} · overlap ${L.ov} mm past the dashed line</div>
         <div style="position:absolute;left:${L.m}mm;top:${L.m}mm;width:${L.pw}mm;height:${L.ph}mm;outline:0.2mm solid #999">${svg}</div>
         <div class="wd-cap" style="left:${L.m}mm;top:${L.paper[1] - L.m + 2}mm"><span class="wd-bar" style="width:50mm"></span> 50 mm — measure this to check the print is at 100%</div></div>`);
     }
@@ -590,7 +593,8 @@
     const k = S.kit;
     return `
       <p class="hint">Enter the tiles and props you own. Sizes are in grid squares. A neighbourhood is built only from what you have, and pieces are reused for the next neighbourhood. Everything saves to your Tabletop Forge server as you type.</p>
-      <div class="field" style="max-width:280px"><label>One square on your tiles (mm)</label><input type="text" data-k="squareMm" value="${esc(k.squareMm)}"></div>
+      <div class="wd-row" style="max-width:420px"><div class="field"><label>One square on your tiles</label><input type="number" step="0.05" min="0.1" data-k="squareSize" value="${esc(k.squareSize)}"></div>
+        <div class="field"><label>Unit</label><select data-k="squareUnit"><option value="in"${k.squareUnit !== 'mm' ? ' selected' : ''}>inches</option><option value="mm"${k.squareUnit === 'mm' ? ' selected' : ''}>mm</option></select></div></div>
       <h3>Tiles</h3>
       <div class="tablewrap"><table class="wd-table"><thead><tr><th>Code</th><th>Shape</th><th>Name</th><th>Use as</th><th>Width</th><th>Height</th><th>How many</th><th>Printed features</th><th></th></tr></thead><tbody>
       ${k.tiles.map((t, i) => `<tr data-t="${i}">
@@ -629,7 +633,8 @@
   function bindKit() {
     const k = S.kit;
     const changed = () => { saveKit(); setStatus('Saving…'); };
-    root.querySelector('[data-k="squareMm"]').addEventListener('input', (e) => { k.squareMm = num(e.target.value, 25.4); changed(); });
+    root.querySelector('[data-k="squareSize"]').addEventListener('input', (e) => { k.squareSize = Math.max(0.1, num(e.target.value, 1)); changed(); });
+    root.querySelector('[data-k="squareUnit"]').addEventListener('change', (e) => { k.squareUnit = e.target.value; changed(); });
     root.querySelectorAll('tr[data-t]').forEach((tr) => {
       const t = k.tiles[Number(tr.dataset.t)];
       tr.querySelectorAll('[data-f]').forEach((el) => el.addEventListener('change', () => {
@@ -734,40 +739,41 @@
   }
 
   // ----- one map
-  const scaleOpt = { paper: 'A4', landscape: false, margin: 10, overlap: 10, nb: 'all', squareMm: null };
+  const scaleOpt = { paper: 'A4', landscape: false, margin: 10, overlap: 10, nb: 'all', squareMm: null, open: false };
   function mapView() {
     const m = S.map; const kit = m.kitSnapshot || S.kit;
     const p = S.selected != null ? m.pieces[S.selected] : null;
-    const sq = scaleOpt.squareMm || num(kit.squareMm, 25.4);
+    const sq = scaleOpt.squareMm || sqMm(S.kit);
     const L = scaleLayout(m, { ...scaleOpt, squareMm: sq });
     return `
       <div class="wd-toolbar no-print">
         <input type="text" class="wd-name" value="${esc(m.name)}" title="Map name">
         <button class="btn dark" data-act="regen">New layout</button>
         <button class="btn light" data-act="print">Print on A4</button>
+        <button class="btn${scaleOpt.open ? ' primary' : ' light'}" data-act="scale-open">Print at scale…</button>
         <button class="btn light" data-act="svg">Download SVG</button>
         <label class="wd-feat"><input type="checkbox" data-opt="codes"${S.showCodes ? ' checked' : ''}> Tile codes</label>
         <label class="wd-feat"><input type="checkbox" data-opt="grid"${S.showGrid ? ' checked' : ''}> Grid</label>
       </div>
+      ${scaleOpt.open ? `<div class="wd-scale no-print">
+        <h4 style="margin-top:0">Print at scale</h4>
+        <div class="wd-row">
+          <div class="field"><label>What to print</label><select data-s="nb"><option value="all">Whole map</option>${(m.nb || []).map((n, k) => `<option value="${k}"${String(scaleOpt.nb) === String(k) ? ' selected' : ''}>${esc(n.name)} only</option>`).join('')}</select></div>
+          <div class="field"><label>Paper</label><select data-s="paper">${Object.keys(PAPERS).map((x) => `<option${scaleOpt.paper === x ? ' selected' : ''}>${x}</option>`).join('')}</select></div>
+          <div class="field"><label>Turn</label><select data-s="landscape"><option value="0"${!scaleOpt.landscape ? ' selected' : ''}>Portrait</option><option value="1"${scaleOpt.landscape ? ' selected' : ''}>Landscape</option></select></div>
+          <div class="field"><label>One square (inches)</label><input type="number" step="0.05" min="0.1" data-s="squareIn" value="${+(sq / 25.4).toFixed(3)}"></div>
+          <div class="field"><label>Margin (mm)</label><input type="number" data-s="margin" value="${scaleOpt.margin}"></div>
+          <div class="field"><label>Overlap (mm)</label><input type="number" data-s="overlap" value="${scaleOpt.overlap}"></div>
+        </div>
+        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. Print at 100% / Actual size, then check the 50 mm bar.</p>
+        <button class="btn primary" data-act="scale">Print ${L.printed} sheet${L.printed > 1 ? 's' : ''}</button>
+      </div>` : ''}
       <div class="wd-split">
         <div class="wd-canvas">${mapSVG(m, kit, { u: 12, selected: S.selected, codes: S.showCodes, grid: S.showGrid })}</div>
         <aside class="wd-side">
           ${p ? roomPanel(p, kit) : '<p class="hint">Click a room or corridor to edit it: its type, name, notes and features such as a chasm or pit.</p>'}
           <h4>Neighbourhoods</h4>
           ${(m.nb || []).map((n, k) => `<div class="field"><label>${k + 1}. ${n.rooms} rooms</label><input type="text" data-nb="${k}" value="${esc(n.name)}"></div>`).join('')}
-          <h4>Print at scale</h4>
-          <div class="wd-row">
-            <div class="field"><label>Paper</label><select data-s="paper">${Object.keys(PAPERS).map((x) => `<option${scaleOpt.paper === x ? ' selected' : ''}>${x}</option>`).join('')}</select></div>
-            <div class="field"><label>Turn</label><select data-s="landscape"><option value="0"${!scaleOpt.landscape ? ' selected' : ''}>Portrait</option><option value="1"${scaleOpt.landscape ? ' selected' : ''}>Landscape</option></select></div>
-          </div>
-          <div class="wd-row">
-            <div class="field"><label>Square (mm)</label><input type="number" step="0.1" data-s="squareMm" value="${sq}"></div>
-            <div class="field"><label>Margin (mm)</label><input type="number" data-s="margin" value="${scaleOpt.margin}"></div>
-            <div class="field"><label>Overlap (mm)</label><input type="number" data-s="overlap" value="${scaleOpt.overlap}"></div>
-          </div>
-          <div class="field"><label>What to print</label><select data-s="nb"><option value="all">Whole map</option>${(m.nb || []).map((n, k) => `<option value="${k}"${String(scaleOpt.nb) === String(k) ? ' selected' : ''}>${esc(n.name)} only</option>`).join('')}</select></div>
-          <p class="hint">${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm · <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> (blank ones skipped, from a ${L.cols} × ${L.rows} grid), plus an assembly guide. Print at 100% / Actual size.</p>
-          <button class="btn primary" data-act="scale">Print at scale</button>
           <h4>Build lists</h4>
           ${keyPageHTML(m, kit)}
         </aside>
@@ -799,7 +805,8 @@
     }
     root.querySelectorAll('[data-s]').forEach((el) => el.addEventListener('change', () => {
       const f = el.dataset.s;
-      scaleOpt[f] = f === 'landscape' ? el.value === '1' : f === 'paper' || f === 'nb' ? el.value : Math.max(0, num(el.value, scaleOpt[f] || 0));
+      if (f === 'squareIn') scaleOpt.squareMm = Math.max(0.1, num(el.value, 1)) * 25.4;
+      else scaleOpt[f] = f === 'landscape' ? el.value === '1' : f === 'paper' || f === 'nb' ? el.value : Math.max(0, num(el.value, scaleOpt[f] || 0));
       render();
     }));
     root.querySelector('[data-act="regen"]').addEventListener('click', () => {
@@ -810,7 +817,9 @@
     });
     root.querySelector('[data-act="print"]').addEventListener('click', () => printOverview(m, kit));
     root.querySelector('[data-act="svg"]').addEventListener('click', () => downloadSVG(m, kit));
-    root.querySelector('[data-act="scale"]').addEventListener('click', () => printScaled(m, kit, { ...scaleOpt, squareMm: scaleOpt.squareMm || num(kit.squareMm, 25.4) }));
+    root.querySelector('[data-act="scale-open"]').addEventListener('click', () => { scaleOpt.open = !scaleOpt.open; render(); });
+    const sb = root.querySelector('[data-act="scale"]');
+    if (sb) sb.addEventListener('click', () => printScaled(m, kit, { ...scaleOpt, squareMm: scaleOpt.squareMm || sqMm(S.kit) }));
   }
 
   // ---------------------------------------------------------------- start
@@ -829,6 +838,7 @@
     try {
       const kit = await api('/kit');
       S.kit = kit.data && kit.data.tiles ? kit.data : DEFAULT_KIT();
+      if (S.kit.squareSize == null) { const mm = num(S.kit.squareMm, 25.4); S.kit.squareSize = +(mm / 25.4).toFixed(3); S.kit.squareUnit = 'in'; delete S.kit.squareMm; }
       S.maps = await api('/maps');
       if (!(kit.data && kit.data.tiles)) { S.status = 'Starter kit: change it to match your own tiles'; saveKit(); }
       render();
