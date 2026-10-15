@@ -85,8 +85,13 @@ CHAR_CSS = """
 .atk .sq{display:inline-block; width:3mm; height:3mm; border:1.1px solid #1c1b24; border-radius:.5mm; vertical-align:middle}
 .faithpg .atk td{height:6.2mm}
 .faithpg .atk.lapse td{height:7mm; font-size:6.8pt}
-.faithpg .atk.met th{font-size:5.4pt}
-.faithpg .atk.boons td{height:11.5mm}
+.faithpg .atk.met th{font-size:5.8pt}
+.faithpg .atk.met td{font:600 5.2pt "Menlo",monospace; color:#5d5a66; white-space:nowrap; padding:0 .6mm}
+.lbx{display:inline-flex; align-items:center; gap:.5mm; margin-right:1.2mm}
+.lbx .sq{width:2.6mm !important; height:2.6mm !important}
+.faithpg .atk.boons td{height:9mm}
+.faithpg .atk.met td{height:auto; padding:.6mm .6mm}
+.faithpg .atk.met td div{line-height:1; margin:.4mm 0}
 """
 
 
@@ -407,9 +412,10 @@ def faith_page():
     floors = "".join(f'<span class="fl">{n}</span>' for n in range(1, 19))
     boons = "".join(f'<tr><td class="k">{r}<br><small>{f}</small></td><td><span class="sq"></span></td><td></td></tr>'
                     for r, f in (("Initiate", "0 Favor"), ("Devotee", "5 Favor"), ("Zealot", "15 Favor"), ("Chosen", "30 Favor")))
-    met = "".join('<tr><td></td><td class="c"><span class="sq"></span> <span class="sq"></span> <span class="sq"></span> <span class="sq"></span></td>'
-                  '<td class="c"><span class="sq"></span> / <span class="sq"></span></td><td class="c"><span class="sq"></span> <span class="sq"></span> <span class="sq"></span></td><td></td></tr>'
-                  for _ in range(9))
+    box = lambda label: f'<span class="lbx"><span class="sq"></span>{label}</span>'
+    met = "".join(f'<tr><td></td><td><div>{box("Person")}{box("Herald")}</div><div>{box("Calling")}{box("Prayer")}</div></td>'
+                  f'<td><div>{box("Took")}</div><div>{box("Said no")}</div></td><td><div>{box("Apostate")}</div><div>{box("Rival")}{box("Slain")}</div></td></tr>'
+                  for _ in range(8))
     return f"""
 <section class="page faithpg">
   {char_header("Faith")}
@@ -438,6 +444,7 @@ def faith_page():
           <thead><tr><th>Rank</th><th>✓</th><th>Boon</th></tr></thead><tbody>{boons}</tbody></table>
         <div class="legendline">Spell boons go in your tome (Magic page) as granted spells: once per long rest without mana.</div>
       </div>
+      <div class="panel"><h3>Faith log (Great Crimes, Great Deeds, slain gods)</h3><div class="lines2">{"<div></div>" * 3}</div></div>
     </div>
     <div>
       <div class="panel"><h3>Lapses</h3>
@@ -451,11 +458,13 @@ def faith_page():
         <div class="lab" style="margin-top:1mm">LASTING EFFECTS ON YOU</div><div class="lines2"><div></div><div></div></div>
       </div>
       <div class="panel"><h3>Gods met</h3>
-        <table class="atk met"><colgroup><col style="width:30%"><col style="width:24%"><col style="width:14%"><col style="width:19%"><col></colgroup>
-          <thead><tr><th>God</th><th>Met: person · herald · calling · prayer</th><th>Offer: yes / no</th><th>Apostate · rival · slain</th><th>Notes</th></tr></thead>
+        <table class="atk met"><colgroup><col style="width:26%"><col style="width:32%"><col style="width:16%"><col></colgroup>
+          <thead><tr><th>God</th><th>How you met</th><th>Offer</th><th>Status now</th></tr></thead>
           <tbody>{met}</tbody></table>
+        <div class="legendline"><b>How you met:</b> in person · its herald (a minor deity) · its Calling (a vision) · an answered prayer at its shrine.
+          <b>Offer:</b> took it (joined at 2 Favor) or said no (join later at a shrine). <b>Status:</b> Apostate = you left it or committed a Great Crime (its followers hate you).
+          Rival = you worship its rival (hostile while you do). Slain = the god is dead; its religion is over.</div>
       </div>
-      <div class="panel"><h3>Faith log (Great Crimes, Great Deeds, slain gods)</h3><div class="lines2">{"<div></div>" * 6}</div></div>
     </div>
   </div>
   {foot("Faith")}
