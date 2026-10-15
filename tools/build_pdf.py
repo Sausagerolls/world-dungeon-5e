@@ -64,6 +64,34 @@ BOOKS = [
                 "the mana of its own level. Duplicate tomes and class <strong>Rank Ups</strong> raise ranks; your character level gates them."),
     },
     {
+        "out": "Gods.pdf",
+        "title": "Gods",
+        "footer": "GODS  ·  WORLD DUNGEON",
+        "version_from": "rules/gods.md",
+        "kicker": "WORLD DUNGEON · OPTIONAL MODULE",
+        "cover_title": "Thou Shalt<br><span>Subscribe</span>",
+        "sub": "Worship, Favor and Lapses, eight major gods with their Rites, Boons and Smites, and divine gear.",
+        "hud": "gods",
+        "chapters": [
+            ("rules/gods.md", "rules", "Joining a religion, Favor and ranks, Devotions, Lapses and Atonement, leaving a religion, shrines and temples."),
+            ("gods/pantheon.md", "rules", "The eight major gods: vows, Devotions, Taboos, Boons, Lapse punishments and Apostate's Smites."),
+            ("items/divine-gear.md", "items", "Holy symbols, Indulgence Coupons, the Gauntlet of the Grudging Peace, and gear for each god."),
+        ],
+        "how": ("Pick a god in <strong>The Pantheon</strong>, take its vow at a shrine, and keep its <strong>Rites</strong>. "
+                "Every missed Rite is a <strong>Lapse</strong>, and Lapses get worse. Leaving is allowed. The god will smite you on the way out."),
+    },
+    {
+        "out": "Gods-Stat-Blocks.pdf",
+        "title": "Gods and Minor Deities",
+        "footer": "GODS AND MINOR DEITIES  ·  WORLD DUNGEON",
+        "version_from": "gods/stat-blocks.md",
+        "kicker": "WORLD DUNGEON · GM HANDBOOK",
+        "cover_title": "Divine<br><span>Intervention</span>",
+        "sub": "Stat blocks for the avatars of the eight major gods, and eleven minor deities.",
+        "hud": "gods",
+        "chapters": [("gods/stat-blocks.md", "floor", "")],
+    },
+    {
         "out": "Loot-and-Achievements.pdf",
         "title": "Loot and Achievements",
         "footer": "LOOT AND ACHIEVEMENTS  ·  WORLD DUNGEON",
@@ -201,6 +229,10 @@ XREF = {
     "firearms": "Firearms",
     "dungeon-items": "Dungeon Items",
     "celestial-relics": "Celestial Relics",
+    "gods": "Gods and Worship",
+    "pantheon": "The Pantheon",
+    "divine-gear": "Divine Gear",
+    "god-stat-blocks": "Gods and Minor Deities",
     "spell-lists": "Spell Lists",
     "spells-replacements": "Granted Spells and Replacements",
     "spells-a-z": "Spells A to Z",
@@ -587,6 +619,13 @@ HUDS = {
     <div class="line">Stat Potion ×2 · Pocket Expander · Pet Treats ×3 · Fan Mail</div>
     <div class="line">A Single Sock <span style="color:#ff8ad1">(troll prize)</span> · Golden Toilet <span style="color:#ff8ad1">(10 slots)</span></div>
     <div class="stats"><span>SLOTS <b>27 / 29</b></span><span>WEIGHT <b>0 LB</b></span><span>STATUS <b>CLUTTERED</b></span></div>
+  </div>""",
+    "gods": """
+  <div class="hud">
+    <div class="note">DIVINE NOTIFICATION</div>
+    <div class="big">Embrix has noticed you</div>
+    <div class="line">You put out a fire. On camera. Lapses: 1. Please do not do that again.</div>
+    <div class="stats"><span>GOD <b>EMBRIX</b></span><span>FAVOR <b>12</b></span><span>RANK <b>DEVOTEE</b></span><span>LAPSES <b>1 / 5</b></span></div>
   </div>""",
     "spells": """
   <div class="hud">

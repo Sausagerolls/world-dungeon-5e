@@ -55,6 +55,10 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `items/explosives.md` | Explosive rules, 23 explosives, explosive gear | Draft 0.1 |
 | `items/firearms.md` | Firearm rules, special rounds, guns, magic guns, attachments | Draft 0.1 |
 | `items/dungeon-items.md` | All other setting items from loot boxes | Draft 0.1 |
+| `rules/gods.md` | Optional Gods module: worship, Favor ranks, Devotions, the Lapse ladder, Atonement, Apostate's Smites | Draft 0.1 |
+| `gods/pantheon.md` | Eight major gods: vows, Rites, Offerings, Great Deeds, Taboos, Boons, Lapse punishments, smites | Draft 0.1 |
+| `gods/stat-blocks.md` | GM: avatar stat blocks for the eight gods, eleven minor deities | Draft 0.1 |
+| `items/divine-gear.md` | Divine gear: holy symbols, Indulgence Coupons, the Gauntlet of the Grudging Peace, gear for each god | Draft 0.1 |
 | `rules/pets.md` | Pets: getting one, commands, growth, upgrades, tricks, evolutions, egg hatch tables, taming | Draft 0.1 |
 | `floors/floor-1/overview.md` | Floor 1 at a glance, running encounters, bosses, rewards | Draft 0.1 |
 | `floors/floor-1/neighbourhoods.md` | 7 neighbourhoods + Club Stairwell: encounter tables, boss rooms, mechanics, hints, stat blocks | Draft 0.1 |
@@ -65,7 +69,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 
 ## PDF Handbook
 
-`pdf/The-Crawler.pdf`, `pdf/Spells.pdf`, the printable class spellbooks `pdf/Spellbook-<Class>.pdf` (one per caster class, built by `tools/build_spellbooks.py`), the private Class Codex PDFs `pdf/Codex-<Class>.pdf` (Tabletop Forge server only, see DEPLOY.md), `pdf/Loot-and-Achievements.pdf`, `pdf/Crafting-and-Shops.pdf`, `pdf/Pets.pdf`, `pdf/Floor-1.pdf`, `pdf/Enemy-Loot.pdf`, `pdf/Explosives.pdf`, `pdf/Firearms.pdf` and `pdf/Dungeon-Items.pdf` are built from the markdown files. After editing any of them, rebuild it with:
+`pdf/The-Crawler.pdf`, `pdf/Spells.pdf`, the printable class spellbooks `pdf/Spellbook-<Class>.pdf` (one per caster class, built by `tools/build_spellbooks.py`), the private Class Codex PDFs `pdf/Codex-<Class>.pdf` (Tabletop Forge server only, see DEPLOY.md), `pdf/Loot-and-Achievements.pdf`, `pdf/Crafting-and-Shops.pdf`, `pdf/Pets.pdf`, `pdf/Gods.pdf`, `pdf/Gods-Stat-Blocks.pdf`, `pdf/Floor-1.pdf`, `pdf/Enemy-Loot.pdf`, `pdf/Explosives.pdf`, `pdf/Firearms.pdf` and `pdf/Dungeon-Items.pdf` are built from the markdown files. After editing any of them, rebuild it with:
 
 ```
 python3 tools/build_pdf.py

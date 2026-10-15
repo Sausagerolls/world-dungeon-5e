@@ -39,6 +39,9 @@ PLAYER = [
     ("prestige-levels", "rules/prestige-levels.md", "Your Crawler", "items"),
     ("tome-magic", "rules/tome-magic.md", "Magic", "rules"),
     ("mana", "rules/mana.md", "Magic", "rules"),
+    ("gods", "rules/gods.md", "Gods (optional)", "rules"),
+    ("pantheon", "gods/pantheon.md", "Gods (optional)", "rules"),
+    ("divine-gear", "items/divine-gear.md", "Gods (optional)", "items"),
     ("spell-lists", "spells/spell-lists.md", "Spells", "tables"),
     ("spells-replacements", "spells/replacements.md", "Spells", "rules"),
     ("spells-a-z", "spells/spells-a-z.md", "Spells", "items"),
@@ -60,6 +63,7 @@ GM = [
     ("enemy-loot", "loot/enemy-loot.md", "Rewards", "tables"),
     ("floor-1-overview", "floors/floor-1/overview.md", "Floor 1", "rules"),
     ("floor-1-neighbourhoods", "floors/floor-1/neighbourhoods.md", "Floor 1", "floor"),
+    ("god-stat-blocks", "gods/stat-blocks.md", "Gods", "floor"),
 ]
 PLAYER_PDFS = [
     ("The-Crawler.pdf", "The Crawler", "Class, Crawler Skills, class selection, magic, mana, leveling, prestige, the crawl"),
@@ -73,6 +77,7 @@ PLAYER_PDFS = [
     ("Spellbook-Sorcerer.pdf", "Sorcerer Spellbook", "Printable: every sorcerer spell with its ranks, and a spells-known page"),
     ("Spellbook-Warlock.pdf", "Warlock Spellbook", "Printable: every warlock spell with its ranks, and a spells-known page"),
     ("Spellbook-Wizard.pdf", "Wizard Spellbook", "Printable: every wizard spell with its ranks, and a spells-known page"),
+    ("Gods.pdf", "Gods (optional module)", "Worship, Favor and Lapses, the eight major gods, divine gear"),
     ("Crafting-and-Shops.pdf", "Crafting and Shops", "Crafting rules, every recipe, safe room shops"),
     ("Pets.pdf", "Pets", "Getting, raising and evolving pets"),
     ("Explosives.pdf", "Explosives", "Explosive rules and items"),
@@ -85,6 +90,7 @@ if os.environ.get("WD_CODEX"):
     PLAYER_PDFS += [(f"Codex-{c}.pdf", f"{c} Codex", f"The whole {c.lower()}: World Dungeon rules, class features, subclasses and spells")
                     for c in ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]]
 GM_PDFS = [
+    ("Gods-Stat-Blocks.pdf", "Gods and Minor Deities", "Avatar stat blocks for the eight gods, and eleven minor deities"),
     ("Floor-1.pdf", "Floor 1", "Neighbourhoods, encounters, boss rooms, stat blocks"),
     ("Loot-and-Achievements.pdf", "Loot and Achievements", "Loot boxes, achievements, box tables, relics"),
     ("Enemy-Loot.pdf", "Enemy Loot", "Coin and drop tables by creature type"),
