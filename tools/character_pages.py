@@ -217,7 +217,18 @@ def features_page():
     <div>
       <div class="panel pre"><h3>Crawler Core (always)</h3>{core_html}</div>
       <div class="panel pre"><h3>Survivor features (kept after Floor 3)</h3>{pre_html}</div>
-      <div class="panel"><h3>Class and race features (from Floor 3)</h3><div class="lines2">{"<div></div>" * 7}</div></div>
+      <div class="panel"><h3>Class and race features (from Floor 3)</h3><div class="lines2">{"<div></div>" * 4}</div></div>
+      <div class="panel faith"><h3>Faith (optional Gods module)</h3>
+        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">GOD</span><div class="lines2" style="flex:1"><div></div></div>
+          <span class="lab">FAVOR</span><span style="display:inline-block;width:10mm;height:5mm;border:1.2px solid #1c1b24;border-radius:1mm"></span></div>
+        <div style="display:flex;gap:2.2mm;align-items:center;margin:1.4mm 0 1mm"><span class="lab">RANK</span>
+          {"".join(f'<span class="ms"><span class="sq"></span>{r}</span>' for r in ("Initiate", "Devotee 5", "Zealot 15", "Chosen 30"))}</div>
+        <div style="display:flex;gap:1.6mm;align-items:center;margin-bottom:1mm"><span class="lab">LAPSES</span>
+          {"".join(f'<span class="ms"><span class="sq"></span>{n}</span>' for n in range(1, 6))}<span class="legendline" style="margin:0">Warning · Cold · Displeasure · Wrath · Forsaken</span></div>
+        <div class="legendline" style="margin:0 0 .6mm">Rite each day +1 · Offering each floor +3 · Great Deed +5. Missed Rite or Offering, or a broken Taboo = 1 Lapse. Clean floor = −1.</div>
+        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">BOONS</span><div class="lines2" style="flex:1"><div></div></div></div>
+        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">APOSTATE OF</span><div class="lines2" style="flex:1"><div></div></div></div>
+      </div>
     </div>
     <div>
       <div class="panel"><h3>Proficiencies and languages</h3>
@@ -227,11 +238,11 @@ def features_page():
         <div class="lab" style="margin-top:1.6mm">TOOLS</div><div class="lines2"><div></div><div></div></div>
         <div class="lab" style="margin-top:1.6mm">LANGUAGES</div><div class="lines2"><div></div><div></div></div>
       </div>
-      <div class="panel"><h3>Achievements and titles</h3><div class="lines2">{"<div></div>" * 6}</div></div>
+      <div class="panel"><h3>Achievements and titles</h3><div class="lines2">{"<div></div>" * 5}</div></div>
       <div class="panel"><h3>Before the dungeon</h3>
         <div class="lab">WHERE WERE YOU WHEN THE WORLD ENDED?</div><div class="lines2"><div></div><div></div></div>
         <div class="lab" style="margin-top:1.4mm">WHAT WERE YOU WEARING? POCKET ITEM?</div><div class="lines2"><div></div><div></div></div>
-        <div class="lab" style="margin-top:1.4mm">ALLIES, SPONSORS, GRUDGES</div><div class="lines2"><div></div><div></div><div></div></div>
+        <div class="lab" style="margin-top:1.4mm">ALLIES, SPONSORS, GRUDGES</div><div class="lines2"><div></div><div></div></div>
       </div>
     </div>
   </div>
@@ -269,9 +280,9 @@ def magic_page():
     <thead><tr><th>Tome spell or cantrip</th><th>Level</th><th>Source</th><th>Abil.</th><th>Rank</th><th>Mana</th><th>Notes (range, effect, concentration)</th></tr></thead>
     <tbody>{tome_rows}</tbody>
   </table>
-  <div class="legendline">Every spell you know goes here. Source: Tome, your class, a feat or a species. Read from a tome = Intelligence; from a class = its ability; from a feat or species = the ability it names. Each rank above I casts one level higher for free. No preparing.</div>
+  <div class="legendline">Every spell you know goes here. Source: Tome, your class, a feat or a species. Read from a tome = Intelligence; from a class = its ability; from a feat, species or god = the ability it names. A spell always costs its own level; ranks (II at level 3, III at 5, IV at 9, V at 13) make it stronger. No preparing.</div>
   <div class="panel"><h3>Mana costs (no spell slots)</h3><div class="slots9">{slots}</div>
-    <div class="legendline">One spell each of 6th, 7th, 8th and 9th level per long rest. Short rest: regain half your tome mana. Pact mana: full on any rest, always cast at pact level.</div></div>
+    <div class="legendline">One spell each of 6th, 7th, 8th and 9th level per long rest. Short rest: regain half your tome mana. Pact mana: full on any rest, cast at pact level (+1 rank per level above the spell).</div></div>
   {foot("Magic")}
 </section>"""
 

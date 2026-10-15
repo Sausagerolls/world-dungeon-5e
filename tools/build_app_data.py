@@ -35,6 +35,39 @@ def prestige():
     return out
 
 
+def gods():
+    """The major gods of the optional Gods module (gods/pantheon.md), for the sheet's Faith card."""
+    md = (ROOT / "gods/pantheon.md").read_text()
+    out = []
+    for block in re.split(r"\n## ", md)[1:]:
+        lines = block.strip().split("\n")
+        g = {"name": lines[0].strip(), "devotions": {}, "boons": [], "taboos": ""}
+        meta = re.match(r"\*\*Major god · (.+?) · Rival: (.+?) · Holy symbol: (.+?)\*\*", lines[1].strip())
+        if not meta:
+            continue
+        g["domains"], g["rival"], g["symbol"] = meta.groups()
+        q = re.search(r'^> \*"?(.+?)"?\*$', block, re.M)
+        g["pitch"] = sd.plain(q.group(1)) if q else ""
+        v = re.search(r"^\*\*Vow\.\*\* (.+)$", block, re.M)
+        g["vow"] = sd.plain(v.group(1)).strip('"') if v else ""
+        for m in re.finditer(r"^\| \*\*(Rite|Offering|Great Deed)\*\* \| (.+?) \|$", block, re.M):
+            g["devotions"][m.group(1)] = sd.plain(m.group(2))
+        t = re.search(r"^\*\*Taboos\.\*\* (.+)$", block, re.M)
+        g["taboos"] = sd.plain(t.group(1)) if t else ""
+        for m in re.finditer(r"^\| (Initiate|Devotee|Zealot|Chosen) \| \*\*(.+?)\.\*\* (.+?) \|$", block, re.M):
+            g["boons"].append({"rank": m.group(1), "name": m.group(2), "text": sd.plain(m.group(3))})
+        for key in ("Displeasure", "Wrath", "Atonement"):
+            m = re.search(rf"^- \*\*{key}\.\*\* (.+)$", block, re.M)
+            g[key.lower()] = sd.plain(m.group(1)) if m else ""
+        m = re.search(r"^\*\*Apostate's Smite: (.+?)\.\*\* (.+)$", block, re.M)
+        g["smite"] = {"name": m.group(1), "text": sd.plain(m.group(2))} if m else None
+        gt = re.search(r"^\| d6 \| Gag \|\n\|[-|]+\|\n((?:\|.+\|\n?)+)", block, re.M)
+        if gt:
+            g["gags"] = [sd.plain(r.split("|")[2].strip()) for r in gt.group(1).strip().split("\n")]
+        out.append(g)
+    return out
+
+
 def box_types():
     md = (ROOT / "loot/box-tables.md").read_text()
     return [m.group(1) for m in re.finditer(r"^## (.+) Box$", md, re.M)]
@@ -48,6 +81,7 @@ def main():
         # World Dungeon spells with their rank tables, and original name -> replacement.
         "spells": spells,
         "spellMap": sd.replacement_map(spells),
+        "gods": gods(),
         "prestige": prestige(),
         "boxTypes": box_types(),
         "rarities": ["Bronze", "Silver", "Gold", "Legendary", "Celestial"],
