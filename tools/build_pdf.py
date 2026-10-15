@@ -697,6 +697,8 @@ def main():
         build(book)
     import build_spellbooks  # one printable spellbook per class
     build_spellbooks.main()
+    import build_codex  # private Class Codex PDFs (Tabletop Forge server only)
+    build_codex.main()
 
 
 if __name__ == "__main__":

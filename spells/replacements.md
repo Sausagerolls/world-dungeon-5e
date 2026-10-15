@@ -131,6 +131,7 @@ Spells from other books that a subclass or species in Tabletop Forge grants by n
 | Speak with Plants | Pet Translator (Rank III) |
 | Silent Image | Cardboard Cutout (Rank III) |
 | Levitate | Soft Landing (Rank V) |
+| Power Word Heal | Medic! (Rank V) |
 | Animal Shapes | Creature Feature (Rank V) |
 
 ## GM Notes

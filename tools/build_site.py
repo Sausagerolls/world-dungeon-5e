@@ -79,6 +79,11 @@ PLAYER_PDFS = [
     ("Firearms.pdf", "Firearms", "Firearm rules, guns and gear"),
     ("Dungeon-Items.pdf", "Dungeon Items", "Every other setting item"),
 ]
+# Class Codex PDFs hold Player's Handbook text: only on the Tabletop Forge server
+# (tools/sync_sheet_to_ttf.sh sets WD_CODEX=1), never in the public site zip.
+if os.environ.get("WD_CODEX"):
+    PLAYER_PDFS += [(f"Codex-{c}.pdf", f"{c} Codex", f"The whole {c.lower()}: World Dungeon rules, class features, subclasses and spells")
+                    for c in ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]]
 GM_PDFS = [
     ("Floor-1.pdf", "Floor 1", "Neighbourhoods, encounters, boss rooms, stat blocks"),
     ("Loot-and-Achievements.pdf", "Loot and Achievements", "Loot boxes, achievements, box tables, relics"),

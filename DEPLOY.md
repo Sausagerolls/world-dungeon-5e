@@ -62,4 +62,6 @@ The site builder's hosting switches: `WD_SHEET_URL` (link every page to the shee
 
 The GM area's **Dungeon Builder** (`gm/dungeon-builder.html`) saves the GM's tiles, props and maps on the Tabletop Forge server (`/api/world-dungeon`, in TTF since this release). Served from that server it connects by itself; opened from anywhere else it asks for the server address.
 
+**Class Codex PDFs** (`pdf/Codex-<Class>.pdf`, built by `tools/build_codex.py` from the Tabletop Forge checkout) contain Player's Handbook class text. They are only listed and copied when the site is built with `WD_CODEX=1`, which `tools/sync_sheet_to_ttf.sh` sets. Never attach them to a GitHub release, and never set `WD_CODEX` when building the public `World-Dungeon-Site.zip`.
+
 The GM area is served openly at `/rules/gm/`, with no password. Players who want spoilers can find them; that is the table's call.

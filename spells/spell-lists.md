@@ -361,6 +361,7 @@ Every Player's Handbook spell that a class, subclass, species or feat grants by 
 | Plant Growth | Overgrowth | 3rd |
 | Poison Spray | Stank Cloud | Cantrip |
 | Polymorph | Creature Feature | 4th |
+| Power Word Heal | Medic! (Rank V) | 6th |
 | Power Word Kill | Unalive | 9th |
 | Power Word Stun | Blue Screen | 8th |
 | Prayer of Healing | Group Hug | 2nd |
