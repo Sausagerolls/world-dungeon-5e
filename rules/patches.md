@@ -62,7 +62,6 @@ The System is petty, but it plays fair. Every patch keeps these promises.
 - **No rollbacks.** A patch never undoes what already happened. Kills stay killed. Loot stays looted. XP stays earned.
 - **No punishment.** A crawler who found an exploit is never punished for it. Using something the System built is not cheating. The System calls it "unauthorized creativity", and pays for it (see *Bug Bounty*).
 - **Compensation.** If a patch weakens something a crawler chose or paid for (a feat, a Crawler Skill, a weapon trait, an item), that crawler gets a **Respec**: they can swap that choice for another legal one, free, at the next safe room. Gold and materials spent on it are refunded in full.
-- **Legacy items.** Instead of a Respec, a crawler can keep an item that was nerfed exactly as it was. It is now marked **Legacy**. It works the old way for its owner only, and can't be copied, crafted or sold for more than its new value.
 - **Buffs are free.** If a patch makes something stronger, everyone who has it gets the buff at once.
 - **Everyone, everywhere.** A patch applies to every crawler, monster and NPC in the dungeon, not just the party. If the System fixes an exploit for you, it fixes it for the boss too.
 - **It tells you.** A patch is always announced. The System never changes a rule in secret.
