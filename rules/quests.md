@@ -147,7 +147,7 @@ Some quests lead to other quests. A **questline** is a chain of quests (usually 
 - **Links can cross floors.** A questline can start on one floor and finish three floors down. Its links are not floor-bound unless they say so.
 - **Failing a link** doesn't always end the chain. Sometimes the story goes on, just worse. Sometimes it ends there. Either way, the world remembers.
 
-Write each questline on your sheet, with a box for each link.
+Note each link of a questline on your sheet as its own quest.
 
 ---
 
@@ -202,12 +202,7 @@ A divine quest doesn't count as your Great Deed for the floor. You can do both.
 
 ## Quests on Your Character Sheet
 
-The **Quests** page of the Crawler Character Sheet (and the Quests tab of the Crawler Sheet app) has:
-
-- **Active quests:** name, giver, stars, length, deadline, objective, reward, and any penalty.
-- **Questlines:** each chain with a box for every link.
-- **Divine quest:** your god's current demand, its reward and the smite if you fail.
-- **Quest log:** what you finished and what you failed, and what happened because of it.
+The **Quests** page of the Crawler Character Sheet (and the Quests tab of the Crawler Sheet app) is a simple list. For each quest, write what it is, who it's from, the reward promised, and any notes (deadlines, steps, questline links, what your god will do if you fail). Tick the box when it's done.
 
 ## Designer Notes
 
