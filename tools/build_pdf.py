@@ -42,6 +42,7 @@ BOOKS = [
             ("rules/prestige-levels.md", "items", "Levels past 20 in one class: scaling, Epic Boons and five prestige features for each class."),
             ("rules/surviving-the-crawl.md", "rules", "The player's view of the Audience Meter, achievements, loot boxes and looting."),
             ("rules/safe-rooms-and-timer.md", "rules", "Floor turns, resting and Ambush Checks, safe rooms, the floor timer, stairwells, and going down early."),
+            ("rules/patches.md", "rules", "The System patches the game mid-crawl: hotfixes, patch notes, its promises, and Bug Bounties."),
         ],
         "how": ("Every crawler builds up three things as they level: <strong>Stat Points</strong> (+1 to an ability every level), "
                 "<strong>Skill Picks</strong> (learn or train a Crawler Skill at every odd level), and <strong>Crawler Skills</strong> "

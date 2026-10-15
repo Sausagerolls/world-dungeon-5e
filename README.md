@@ -46,6 +46,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `rules/mana.md` | Mana replaces spell slots: class mana by caster level, Pact Mana, converting slot features | Draft 0.1 |
 | `rules/surviving-the-crawl.md` | Player's view of the Audience Meter, achievements and loot boxes | Draft 0.1 |
 | `rules/safe-rooms-and-timer.md` | Floor turns, resting, Ambush Checks, safe rooms, floor timer, stairwells | Draft 0.1 |
+| `rules/patches.md` | Patch Notes: the System AI patches the game mid-crawl (the GM's fix-it tool), its promises, Bug Bounty | Draft 0.1 |
 | `rules/prestige-levels.md` | Prestige levels (21+ in one class): scaling, boons, 5 features per class | Draft 0.1 |
 | `rules/leveling.md` | Floor pacing (3–4 levels per floor), proficiency bonus, levels beyond 20 | Draft 0.1 |
 | `rules/loot-boxes.md` | Earning and opening boxes, rarity (Bronze to Celestial), box types, Player Killer mark | Draft 0.1 |

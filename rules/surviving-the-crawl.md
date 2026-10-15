@@ -96,6 +96,12 @@ Every box has a **type** and a **rarity**.
 
 ---
 
+## Patches
+
+The System is an AI, and it fixes its own game while you play it. When crawlers find an exploit, a bug or a badly tuned fight, it freezes the world for a **hotfix** or posts **Patch Notes** at the stairs. It never undoes what already happened, never punishes the crawler who found the problem, and pays a **Bug Bounty** for it. See `patches`.
+
+---
+
 ## Loot on Bodies
 
 You can also search the things you kill. Searching one body takes an action, or 1 minute for everything after a fight. Bodies give coins, gear, monster parts, scrap and the occasional surprise. Monster parts, scrap and essence sell in shops, and Crawler Skills like Tinkerer, Alchemy and Cooking use them as materials.

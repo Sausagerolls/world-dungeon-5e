@@ -48,6 +48,7 @@ PLAYER = [
     ("spells-a-z", "spells/spells-a-z.md", "Spells", "items"),
     ("surviving-the-crawl", "rules/surviving-the-crawl.md", "The Crawl", "rules"),
     ("safe-rooms-and-timer", "rules/safe-rooms-and-timer.md", "The Crawl", "rules"),
+    ("patches", "rules/patches.md", "The Crawl", "rules"),
     ("pets", "rules/pets.md", "The Crawl", "rules"),
     ("crafting", "rules/crafting.md", "Crafting and Shops", "rules"),
     ("crafting-recipes", "items/crafting-recipes.md", "Crafting and Shops", "tables flow"),
@@ -67,7 +68,7 @@ GM = [
     ("god-stat-blocks", "gods/stat-blocks.md", "Gods", "floor"),
 ]
 PLAYER_PDFS = [
-    ("The-Crawler.pdf", "The Crawler", "Class, Crawler Skills, class selection, magic, mana, leveling, prestige, the crawl"),
+    ("The-Crawler.pdf", "The Crawler", "Class, Crawler Skills, class selection, magic, mana, leveling, prestige, the crawl, patches"),
     ("Crawler-Character-Sheet.pdf", "Crawler Character Sheet", "11-page sheet: stats, features, levels, magic, faith, pet, inventory, timer, boxes, crafting"),
     ("Spells.pdf", "Spells", "Every World Dungeon spell with its ranks, class lists, replacements"),
     ("Spellbook-Bard.pdf", "Bard Spellbook", "Printable: every bard spell with its ranks, and a spells-known page"),
