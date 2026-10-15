@@ -3,9 +3,10 @@
 
 Usage: python3 tools/build_app_data.py   (the app's `npm run build` runs it first)
 
-Only World Dungeon content goes in here. Class, race, feat and background data
-comes from Tabletop Forge at build time, and spells and items come from the
-Tabletop Forge server at runtime.
+Only World Dungeon content goes in here, including the World Dungeon spells
+(spells/*.md). Class, race, feat and background data comes from Tabletop Forge
+at build time, and items (and other-book spells) from the Tabletop Forge server
+at runtime. Nothing is written to Tabletop Forge.
 """
 import json
 import re
@@ -15,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_pdf as bp  # noqa: E402
 import build_site as bs  # noqa: E402
+import spells_data as sd  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "app" / "src" / "generated" / "setting.json"
@@ -39,15 +41,20 @@ def box_types():
 
 
 def main():
+    spells = sd.load_spells()
+    sd.write_lists(spells)
     data = {
         "skills": bs.skills_data(),
+        # World Dungeon spells with their rank tables, and original name -> replacement.
+        "spells": spells,
+        "spellMap": sd.replacement_map(spells),
         "prestige": prestige(),
         "boxTypes": box_types(),
         "rarities": ["Bronze", "Silver", "Gold", "Legendary", "Celestial"],
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, indent=1))
-    print(f"Wrote {OUT} ({len(data['skills'])} skills, {len(data['prestige'])} prestige classes, {len(data['boxTypes'])} box types)")
+    print(f"Wrote {OUT} ({len(data['skills'])} skills, {len(spells)} spells, {len(data['prestige'])} prestige classes, {len(data['boxTypes'])} box types)")
 
 
 if __name__ == "__main__":

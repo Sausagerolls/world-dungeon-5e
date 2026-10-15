@@ -47,6 +47,29 @@ BOOKS = [
                 "(which the GM also levels up when you use them well). On Floor 3 they bolt a real class on top."),
     },
     {
+        "out": "Spells.pdf",
+        "title": "Spells",
+        "footer": "SPELLS  ·  WORLD DUNGEON",
+        "version_from": "spells/spell-lists.md",
+        "kicker": "WORLD DUNGEON · PLAYER HANDBOOK",
+        "cover_title": "Magic<br><span>Missile!</span>",
+        "sub": "Over two hundred World Dungeon spells with fixed Rank I to V effects, the class spell lists, and the replacement for every spell a class, species or feat grants.",
+        "hud": "spells",
+        "chapters": [
+            ("spells/spell-lists.md", "tables", "The World Dungeon spell list for each class, and the Replacement Index."),
+            ("spells/replacements.md", "rules", "How granted spells work: species, class features, subclasses and feats."),
+            ("spells/cantrips.md", "items", "Cantrips, with minimum ranks by character level."),
+            ("spells/1st-level.md", "items", "2 mana at every rank."),
+            ("spells/2nd-level.md", "items", "3 mana at every rank."),
+            ("spells/3rd-level.md", "items", "5 mana at every rank."),
+            ("spells/4th-level.md", "items", "6 mana at every rank."),
+            ("spells/5th-level.md", "items", "7 mana at every rank."),
+            ("spells/high-level.md", "items", "9 to 13 mana: the big ones."),
+        ],
+        "how": ("Every World Dungeon spell has five <strong>ranks</strong>. Its table says exactly what each rank does, and it always costs "
+                "the mana of its own level. Duplicate tomes and class <strong>Rank Ups</strong> raise ranks; your character level gates them."),
+    },
+    {
         "out": "Loot-and-Achievements.pdf",
         "title": "Loot and Achievements",
         "footer": "LOOT AND ACHIEVEMENTS  ·  WORLD DUNGEON",
@@ -184,6 +207,15 @@ XREF = {
     "firearms": "Firearms",
     "dungeon-items": "Dungeon Items",
     "celestial-relics": "Celestial Relics",
+    "spell-lists": "Spell Lists",
+    "spells-replacements": "Granted Spells and Replacements",
+    "spells-cantrips": "Cantrips",
+    "spells-1st-level": "1st-Level Spells",
+    "spells-2nd-level": "2nd-Level Spells",
+    "spells-3rd-level": "3rd-Level Spells",
+    "spells-4th-level": "4th-Level Spells",
+    "spells-5th-level": "5th-Level Spells",
+    "spells-high-level": "6th- to 9th-Level Spells",
 }
 
 # H2 sections laid out in two columns of cards.
@@ -567,6 +599,13 @@ HUDS = {
     <div class="line">A Single Sock <span style="color:#ff8ad1">(troll prize)</span> · Golden Toilet <span style="color:#ff8ad1">(10 slots)</span></div>
     <div class="stats"><span>SLOTS <b>27 / 29</b></span><span>WEIGHT <b>0 LB</b></span><span>STATUS <b>CLUTTERED</b></span></div>
   </div>""",
+    "spells": """
+  <div class="hud">
+    <div class="note">NEW SPELL RANK</div>
+    <div class="big">Magic Missile · Rank III</div>
+    <div class="line">Five darts. They bend around corners now. The audience is thrilled. The goblins are not.</div>
+    <div class="stats"><span>LEVEL <b>1ST</b></span><span>COST <b>2 MANA</b></span><span>RANK <b>III / V</b></span><span>SOURCE <b>TOME</b></span></div>
+  </div>""",
     "crawler": """
   <div class="hud">
     <div class="row"><span class="lbl">HP</span><span class="bar hp"><i></i></span><span class="val">8 / 8</span></div>
@@ -641,7 +680,8 @@ def chapter_pages(pdf, count):
 def build(book):
     chapters, titles = [], []
     for n, (path, css, _) in enumerate(book["chapters"], 1):
-        md = (ROOT / path).read_text()
+        # A book can carry generated chapters as text (see build_spellbooks.py).
+        md = book["texts"][path] if path in book.get("texts", {}) else (ROOT / path).read_text()
         m = re.search(r"^# (.+)$", md, re.M)
         titles.append(m.group(1) if m else path)
         chapters.append(convert(md, f"Chapter {n}", css))
@@ -666,6 +706,8 @@ def main():
     OUT_DIR.mkdir(exist_ok=True)
     for book in BOOKS:
         build(book)
+    import build_spellbooks  # one printable spellbook per class
+    build_spellbooks.main()
 
 
 if __name__ == "__main__":

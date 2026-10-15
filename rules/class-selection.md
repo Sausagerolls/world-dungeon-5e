@@ -38,7 +38,7 @@ On arrival at Floor 3, the System opens the **Race and Class selection** menu. E
 | **Warlock** | Pact Mana | Dabbler, Trash Talk | "Make a deal with something powerful. What could go wrong?" |
 | **Wizard** | Full caster | Dabbler, Tome Scholar | "You've been reading tomes anyway. Make it a career." |
 
-**Spellcasting uses mana.** Every spellcasting class casts with mana instead of spell slots. Work out your class mana from your caster level, and warlocks their Pact Mana (see `mana`). Your class does not keep its own spell list. Whenever it would let you learn or prepare a spell, you learn a **tome spell** from its spell list instead, and you never prepare spells (see `tome-magic`).
+**Spellcasting uses mana.** Every spellcasting class casts with mana instead of spell slots. Work out your class mana from your caster level, and warlocks their Pact Mana (see `mana`). Your class does not keep its own spell list. Whenever it would let you learn or prepare a spell, you learn a **tome spell** from its World Dungeon spell list instead (see `spell-lists`), and you never prepare spells (see `tome-magic`). Spells your class or subclass grants by name become their World Dungeon replacements (see `spells-replacements`).
 
 ### Race
 
@@ -57,7 +57,7 @@ Let **N** be the crawler's character level. Expect N to be about 7–9 (see `lev
 5. **Replace saving throws.** The crawler's saving throw proficiencies become the class's saving throws.
 6. **Add class proficiencies.** The crawler gains the class's 1st-level armor, weapon, tool and skill proficiencies.
 7. **Keep your hit points.** Do not recalculate. Your levels so far keep their d8 Hit Dice and hit points. From your next level on, each level gives the hit die of the class you take it in (see *Hit Points and Hit Dice* in `crawler`).
-8. **Work out mana and learn spells.** A spellcasting class adds class mana (or Pact Mana) to the crawler's mana pool (see `mana`). Learn as many cantrips and spells from the class's list as its table gives at class level N, and write them into your tome as tome spells (see `tome-magic`).
+8. **Work out mana and learn spells.** A spellcasting class adds class mana (or Pact Mana) to the crawler's mana pool (see `mana`). Learn as many cantrips and spells from the class's World Dungeon list as its table gives at class level N, add the replacements of any spells the class or subclass grants, and write them into your tome as tome spells (see `tome-magic`). Then spend one **Rank Up** for each class level that teaches spells (see *Spell Ranks* in `tome-magic`).
 9. **Apply race.** Gain the chosen race's traits and make its choices (see `race-selection`).
 10. **Class starter box.** The System gives one Bronze **Class Box** with gear for the new class. Roll on the Class Box table in `box-tables`.
 

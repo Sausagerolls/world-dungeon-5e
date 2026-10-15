@@ -50,7 +50,7 @@ Until Floor 3 you have **no race**. You are what you were before the collapse, n
    - **Feats:** Human *Versatile* gives an Origin feat of your choice. Make that feat's own choices too.
    - **Spellcasting ability** for the race's spells: Intelligence, Wisdom or Charisma, where the race lets you choose.
    - **Resistances** where the race offers a choice.
-3. **Spells go in your tome.** Spells a race teaches are tome spells (see `tome-magic`). You learn them straight away, ignoring the tome spell level limit and the Intelligence requirement. A race spell you can cast "once without a spell slot" can be cast once per long rest without spending mana.
+3. **Spells go in your tome.** Spells a race teaches are tome spells (see `tome-magic`), as their World Dungeon replacements: a High Elf's *misty step* becomes *Puddle Jumper*, a Tiefling's *thaumaturgy* becomes *Party Trick* (see `spells-replacements`). You learn them straight away, ignoring the tome spell level limit and the Intelligence requirement. A race spell you can cast "once without a spell slot" can be cast once per long rest without spending mana.
 4. **Replace the defaults.** The race's size, speed, darkvision and other senses replace the ordinary-person defaults.
 5. **Ability scores.** 2024 species do not raise ability scores, and crawlers already have their Stat Points, so nothing changes. If your table uses older races that do give ability bonuses, they apply in full, with no cap.
 6. **Keep the old you.** You keep the ordinary-person skill and language or tool. If the race gives a proficiency you already have, choose another skill of the same kind instead.

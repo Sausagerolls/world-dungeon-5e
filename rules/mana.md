@@ -44,7 +44,7 @@ To cast a spell of 1st level or higher, spend the mana for the level you cast it
 | **Mana cost** | 2 | 3 | 5 | 6 | 7 | 9 | 10 | 11 | 13 |
 
 - **Cantrips** cost nothing. **Rituals** cast as rituals cost nothing.
-- **Casting at a higher level** works as normal. Pay the cost of the level you cast it at, up to your **maximum spell level** (see below).
+- **World Dungeon spells cost their own level at every rank.** They are never cast at a higher level: they get stronger through ranks instead (see *Spell Ranks* in `tome-magic`). Only a spell from another book that your GM allows can be cast at a higher level, by paying that level's cost, up to your **maximum spell level** (see below).
 - **Big spells.** You can cast **one spell of each level from 6th to 9th** per long rest with mana. Tick them off on your sheet.
 - **Which spells.** Every spell in your tome. The spell's source sets its spellcasting ability: Intelligence for a spell read from a tome, your class's ability for a spell your class taught you, and the feature's ability for a feat or species spell (see `tome-magic`).
 - Everything else (casting time, components, concentration) works as normal.
@@ -100,7 +100,7 @@ Warlocks keep the feel of Pact Magic: a small pool that refills fast and always 
 | 7–8 | 12 | 4th | | | |
 
 - **Recovery.** Pact mana comes back in full on a **short or long rest**.
-- **Always at pact level.** When you spend pact mana on a spell, you pay the cost of your **pact level**, and the spell is cast at that level. You cannot pay a smaller amount for a lower level.
+- **Always at pact level.** When you spend pact mana on a spell, you pay the cost of your **pact level**, and the spell is cast at that level. You cannot pay a smaller amount for a lower level. A World Dungeon spell cast this way gains **one rank for each level your pact level is above the spell's level** (up to Rank V, ignoring rank gates).
 - **Any spell.** Pact mana can pay for any tome spell of your pact level or lower, whatever its source.
 - **Your main pool too.** A warlock can also cast any tome spell from their main mana pool (tome mana and any class mana from other classes), paying the normal cost.
 - **Mystic Arcanum** does not change: each arcanum spell is cast once per long rest for free.
