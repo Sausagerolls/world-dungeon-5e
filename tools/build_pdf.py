@@ -94,6 +94,35 @@ BOOKS = [
         "chapters": [("gods/stat-blocks.md", "floor", "")],
     },
     {
+        "out": "Quests.pdf",
+        "title": "Quests",
+        "footer": "QUESTS  ·  WORLD DUNGEON",
+        "version_from": "rules/quests.md",
+        "kicker": "WORLD DUNGEON · PLAYER HANDBOOK",
+        "cover_title": "Quest<br><span>Accepted</span>",
+        "sub": "The quest log, difficulty and length, rewards, failing quests, questlines, and divine quests from your god.",
+        "hud": "quests",
+        "chapters": [("rules/quests.md", "rules", "")],
+    },
+    {
+        "out": "Quest-Builder.pdf",
+        "title": "Quest Builder",
+        "footer": "QUEST BUILDER  ·  WORLD DUNGEON",
+        "version_from": "quests/quest-builder.md",
+        "kicker": "WORLD DUNGEON · GM HANDBOOK",
+        "cover_title": "Side<br><span>Quests</span>",
+        "sub": "Build quests in eight steps: givers, objectives, stars, deadlines, rewards and fallout, questlines, divine quests for every god, and Floor 1 quests.",
+        "hud": "quests",
+        "chapters": [
+            ("quests/quest-builder.md", "rules", "Eight steps, random tables, setting the stars, deadlines, rewards, fallout, questlines, divine quests, the Quest Card."),
+            ("quests/divine-quests.md", "rules", "Divine quests for each of the eight gods, ★ to ★★★★★, Atonement quests and divine questlines."),
+            ("quests/floor-1-quests.md", "rules", "Quests for every Floor 1 neighbourhood, System Quests, a dare, and a four-link questline."),
+        ],
+        "how": ("Build a quest with the <strong>eight steps</strong>, rate it in <strong>stars</strong>, pay it from the "
+                "<strong>Rewards</strong> tables, and decide its <strong>fallout</strong> before you hand it out. "
+                "Divine quests are ready to use for each god."),
+    },
+    {
         "out": "Loot-and-Achievements.pdf",
         "title": "Loot and Achievements",
         "footer": "LOOT AND ACHIEVEMENTS  ·  WORLD DUNGEON",
@@ -154,6 +183,7 @@ BOOKS = [
         "chapters": [
             ("floors/floor-1/overview.md", "rules", "The floor at a glance, how to run encounters, bosses, hints and rewards."),
             ("floors/floor-1/neighbourhoods.md", "floor", "The seven neighbourhoods and Club Stairwell: encounters, boss rooms, mechanics, hints and stat blocks."),
+            ("quests/floor-1-quests.md", "rules", "Quests for every neighbourhood, System Quests, a dare, and the questline The Clown Who Wasn't There."),
         ],
         "how": ("Each neighbourhood has a <strong>d12 encounter table</strong> for its corridors and rooms, a <strong>boss room</strong> "
                 "with its mechanics, and <strong>hints</strong> to plant on the way in. Monster Manual creatures use the "
@@ -236,6 +266,10 @@ XREF = {
     "pantheon": "The Pantheon",
     "divine-gear": "Divine Gear",
     "god-stat-blocks": "Gods and Minor Deities",
+    "quests": "Quests",
+    "quest-builder": "Quest Builder",
+    "divine-quests": "Divine Quests",
+    "floor-1-quests": "Floor 1 Quests",
     "spell-lists": "Spell Lists",
     "spells-replacements": "Granted Spells and Replacements",
     "spells-a-z": "Spells A to Z",
@@ -622,6 +656,13 @@ HUDS = {
     <div class="line">Stat Potion ×2 · Pocket Expander · Pet Treats ×3 · Fan Mail</div>
     <div class="line">A Single Sock <span style="color:#ff8ad1">(troll prize)</span> · Golden Toilet <span style="color:#ff8ad1">(10 slots)</span></div>
     <div class="stats"><span>SLOTS <b>27 / 29</b></span><span>WEIGHT <b>0 LB</b></span><span>STATUS <b>CLUTTERED</b></span></div>
+  </div>""",
+    "quests": """
+  <div class="hud">
+    <div class="note">NEW QUEST</div>
+    <div class="big">Party Pooper ★★</div>
+    <div class="line">It is Pippa's birthday. Please find her cake. It is in the ball pit. The ball pit is not empty.</div>
+    <div class="stats"><span>LENGTH <b>SHORT</b></span><span>DEADLINE <b>8 TURNS</b></span><span>REWARD <b>80 GP</b></span><span>PENALTY <b>NONE</b></span></div>
   </div>""",
     "gods": """
   <div class="hud">

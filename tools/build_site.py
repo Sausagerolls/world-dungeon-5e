@@ -43,6 +43,7 @@ PLAYER = [
     ("gods", "rules/gods.md", "Gods (optional)", "rules"),
     ("pantheon", "gods/pantheon.md", "Gods (optional)", "rules"),
     ("divine-gear", "items/divine-gear.md", "Gods (optional)", "items"),
+    ("quests", "rules/quests.md", "The Crawl", "rules"),
     ("spell-lists", "spells/spell-lists.md", "Spells", "tables"),
     ("spells-replacements", "spells/replacements.md", "Spells", "rules"),
     ("spells-a-z", "spells/spells-a-z.md", "Spells", "items"),
@@ -66,10 +67,13 @@ GM = [
     ("floor-1-overview", "floors/floor-1/overview.md", "Floor 1", "rules"),
     ("floor-1-neighbourhoods", "floors/floor-1/neighbourhoods.md", "Floor 1", "floor"),
     ("god-stat-blocks", "gods/stat-blocks.md", "Gods", "floor"),
+    ("quest-builder", "quests/quest-builder.md", "Quests", "rules"),
+    ("divine-quests", "quests/divine-quests.md", "Quests", "rules"),
+    ("floor-1-quests", "quests/floor-1-quests.md", "Floor 1", "rules"),
 ]
 PLAYER_PDFS = [
     ("The-Crawler.pdf", "The Crawler", "Class, Crawler Skills, class selection, magic, mana, leveling, prestige, the crawl, patches"),
-    ("Crawler-Character-Sheet.pdf", "Crawler Character Sheet", "11-page sheet: stats, features, levels, magic, faith, pet, inventory, timer, boxes, crafting"),
+    ("Crawler-Character-Sheet.pdf", "Crawler Character Sheet", "12-page sheet: stats, features, levels, magic, faith, quests, pet, inventory, timer, boxes, crafting"),
     ("Spells.pdf", "Spells", "Every World Dungeon spell with its ranks, class lists, replacements"),
     ("Spellbook-Bard.pdf", "Bard Spellbook", "Printable: every bard spell with its ranks, and a spells-known page"),
     ("Spellbook-Cleric.pdf", "Cleric Spellbook", "Printable: every cleric spell with its ranks, and a spells-known page"),
@@ -80,6 +84,7 @@ PLAYER_PDFS = [
     ("Spellbook-Warlock.pdf", "Warlock Spellbook", "Printable: every warlock spell with its ranks, and a spells-known page"),
     ("Spellbook-Wizard.pdf", "Wizard Spellbook", "Printable: every wizard spell with its ranks, and a spells-known page"),
     ("Gods.pdf", "Gods (optional module)", "Worship, Favor and Lapses, the eight major gods, divine gear"),
+    ("Quests.pdf", "Quests", "The quest log, rewards, failing quests, questlines, divine quests"),
     ("Crafting-and-Shops.pdf", "Crafting and Shops", "Crafting rules, every recipe, safe room shops"),
     ("Pets.pdf", "Pets", "Getting, raising and evolving pets"),
     ("Explosives.pdf", "Explosives", "Explosive rules and items"),
@@ -93,6 +98,7 @@ if os.environ.get("WD_CODEX"):
                     for c in ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]]
 GM_PDFS = [
     ("Gods-Stat-Blocks.pdf", "Gods and Minor Deities", "Avatar stat blocks for the eight gods, and eleven minor deities"),
+    ("Quest-Builder.pdf", "Quest Builder", "Build quests: tables, rewards, fallout, questlines, divine quests, Floor 1 quests"),
     ("Floor-1.pdf", "Floor 1", "Neighbourhoods, encounters, boss rooms, stat blocks"),
     ("Loot-and-Achievements.pdf", "Loot and Achievements", "Loot boxes, achievements, box tables, relics"),
     ("Enemy-Loot.pdf", "Enemy Loot", "Coin and drop tables by creature type"),

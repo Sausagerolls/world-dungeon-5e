@@ -92,6 +92,18 @@ CHAR_CSS = """
 .faithpg .atk.boons td{height:9mm}
 .faithpg .atk.met td{height:auto; padding:.6mm .6mm}
 .faithpg .atk.met td div{line-height:1; margin:.4mm 0}
+.stars{font-size:8.6pt; letter-spacing:.2mm; color:#1c1b24; white-space:nowrap; line-height:1}
+.questpg .atk.act td{height:11.6mm; vertical-align:top; padding:.8mm 1mm}
+.questpg .atk.act td.c{vertical-align:middle}
+.questpg .atk.act .ln1{height:4.8mm; border-bottom:1px solid #eee9de}
+.questpg .atk.act .sub{font:600 5.2pt "Menlo",monospace; color:#9a96a3; margin-top:.8mm; white-space:nowrap}
+.questpg .atk.act td:last-child div{margin:.8mm 0; font:600 5.6pt "Menlo",monospace; color:#5d5a66}
+.questpg .atk.qline td{height:8mm}
+.questpg .atk.qlog td{height:6.6mm}
+.questpg .atk.smite td{height:4.4mm; font-size:6.2pt; white-space:nowrap}
+.links{display:inline-flex; gap:1mm}
+.links .lk{width:5.4mm; height:5mm; border:1.1px solid #1c1b24; border-radius:.6mm; font:700 4.6pt "Menlo",monospace; color:#9a96a3; display:flex; align-items:flex-start; justify-content:flex-end; padding:.3mm .5mm}
+.questpg .frow .lbx{font:600 5.8pt "Menlo",monospace; color:#5d5a66}
 """
 
 
@@ -468,4 +480,68 @@ def faith_page():
     </div>
   </div>
   {foot("Faith")}
+</section>"""
+
+
+def quests_page():
+    """Quests (rules/quests.md): active quests, questlines, the divine quest, and the quest log."""
+    stars = '<span class="stars">☆☆☆☆☆</span>'
+    box = lambda label: f'<span class="lbx"><span class="sq"></span>{label}</span>'
+    active = "".join(
+        f'<tr><td><div class="ln1"></div><div class="sub">GIVER</div></td><td class="c">{stars}</td>'
+        f'<td><div class="ln1"></div><div class="sub">{box("Q")}{box("S")}{box("F")}{box("L")}</div></td>'
+        f'<td><div class="ln1"></div><div class="sub">{box("")}{box("")}{box("")}{box("")} STEPS</div></td>'
+        f'<td><div class="ln1"></div><div class="sub">PENALTY</div></td>'
+        f'<td><div>{box("Done")}</div><div>{box("Failed")}</div></td></tr>'
+        for _ in range(8))
+    links = "".join(f'<span class="lk">{n}</span>' for n in range(1, 7))
+    lines = "".join(
+        f'<tr><td></td><td><span class="links">{links}</span></td><td></td></tr>' for _ in range(4))
+    smite = "".join(f'<tr><td class="c">{"★" * n}</td><td class="c">{fv}</td><td class="c">{d}</td><td>{lasts}</td></tr>'
+                    for n, fv, d, lasts in ((1, "+2", "2d10", "1 hour, −2 Favor"),
+                                            (2, "+3", "4d10", "next long rest, −3 Favor, +1 Lapse"),
+                                            (3, "+5", "8d10", "end of floor, −5 Favor, +1 Lapse"),
+                                            (4, "+8", "12d10", "end of floor, −8 Favor, +1 Lapse"),
+                                            (5, "+12", "16d10", "next floor, −12 Favor, +2 Lapses")))
+    log = "".join("<tr><td></td><td></td><td class='c'></td><td></td></tr>" for _ in range(8))
+    return f"""
+<section class="page questpg">
+  {char_header("Quests")}
+  <div class="legendline" style="margin:1.6mm 0 2mm">See Quests. Stars: ★ Errand · ★★ Job · ★★★ Venture · ★★★★ Ordeal · ★★★★★ Legend. Length: Q Quick (one scene) · S Short (6–12 turns) · F Floor (before the stairs) · L Long (two floors or more). A quest from someone on this floor fails when you take the stairs, unless it says otherwise. A penalty is always shown before you accept: if you didn't see one, there isn't one.</div>
+  <table class="atk act">
+    <colgroup><col style="width:21%"><col style="width:11%"><col style="width:15%"><col style="width:24%"><col style="width:18%"><col></colgroup>
+    <thead><tr><th>Quest · giver</th><th>Stars</th><th>Deadline · length</th><th>Objective · steps</th><th>Reward · penalty</th><th>Result</th></tr></thead>
+    <tbody>{active}</tbody>
+  </table>
+  <div class="cols2" style="grid-template-columns:1.1fr 1fr; gap:4mm; margin-top:2.4mm">
+    <div>
+      <div class="panel"><h3>Questlines</h3>
+        <table class="atk qline"><colgroup><col style="width:34%"><col style="width:40%"><col></colgroup>
+          <thead><tr><th>Questline · giver</th><th>Links (✓ done, ✗ failed)</th><th>Chain reward</th></tr></thead>
+          <tbody>{lines}</tbody></table>
+        <div class="legendline">Each link pays its own reward; the whole chain pays the chain reward on top. A failed link can end the chain, or the story goes on, worse. Links can cross floors.</div>
+      </div>
+      <div class="panel"><h3>Quest log (finished and failed)</h3>
+        <table class="atk qlog"><colgroup><col style="width:34%"><col style="width:12%"><col style="width:12%"><col></colgroup>
+          <thead><tr><th>Quest</th><th>Floor</th><th>✓ / ✗</th><th>What happened (reward, or the fallout)</th></tr></thead>
+          <tbody>{log}</tbody></table>
+      </div>
+    </div>
+    <div>
+      <div class="panel"><h3>Divine quest (Gods module)</h3>
+        <div class="frow"><span class="lab">GOD</span><div class="ln"></div><span class="lab">STARS</span>{stars}</div>
+        <div class="frow"><span class="lab">QUEST</span><div class="ln"></div></div>
+        <div class="lines2"><div></div></div>
+        <div class="frow"><span class="lab">DEADLINE</span><div class="ln"></div><span class="lab">FAVOR</span><div class="ln" style="flex:.35"></div></div>
+        <div class="frow"><span class="lab">SMITE</span><div class="ln"></div><span class="lab">DICE</span><div class="ln" style="flex:.35"></div></div>
+        <div class="frow">{box("Accepted")}{box("Declined (+1 Lapse)")}{box("Done")}{box("Failed (smitten)")}</div>
+        <table class="atk smite" style="margin-top:1.6mm"><colgroup><col style="width:19%"><col style="width:12%"><col style="width:14%"><col></colgroup>
+          <thead><tr><th>Stars</th><th>Favor</th><th>Smite</th><th>If failed: effect lasts, and</th></tr></thead>
+          <tbody>{smite}</tbody></table>
+        <div class="legendline">One divine quest at a time. ★★★ and up also remove 1 Lapse (★★★★★: all). No save against the smite; it can't drop you below 1 HP unless you are at Wrath. Abandoning = failing. Leaving your god with one open: both smites. God slain: the quest just ends.</div>
+      </div>
+      <div class="panel"><h3>Owed favors, grudges, fallout to watch for</h3><div class="lines2">{"<div></div>" * 6}</div></div>
+    </div>
+  </div>
+  {foot("Quests")}
 </section>"""

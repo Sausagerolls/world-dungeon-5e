@@ -8,6 +8,8 @@ import GearTab from './tabs/GearTab.jsx';
 import FeaturesTab from './tabs/FeaturesTab.jsx';
 import LevelTab from './tabs/LevelTab.jsx';
 import FaithCard from './FaithCard.jsx';
+import QuestsTab from './tabs/QuestsTab.jsx';
+import { openDivine, syncDivine } from './quests.js';
 import { faithOf, isSlain, shortName } from './faith.js';
 import { featChoices, featDone } from './featRules.js';
 import { classSpellAllowance, grantedSpells, grantDone } from './spells.js';
@@ -15,10 +17,12 @@ import { rulesHref } from './rulesLinks.jsx';
 
 const TABS = [
   ['main', 'Main', '♥'], ['combat', 'Combat', '⚔'], ['skills', 'Skills', '★'], ['spells', 'Spells', '✦'],
-  ['gear', 'Gear', '⛁'], ['features', 'Features', '❖'], ['faith', 'Faith', '☥'], ['level', 'Level', '▲'],
+  ['gear', 'Gear', '⛁'], ['features', 'Features', '❖'], ['faith', 'Faith', '☥'], ['quests', 'Quests', '⚑'], ['level', 'Level', '▲'],
 ];
 
-export default function Sheet({ st, update, conn, status, error, onBack, charId }) {
+export default function Sheet({ st, update: rawUpdate, conn, status, error, onBack, charId }) {
+  // Every change re-checks divine quests: leaving your god fails its open quest (a smite); a slain god's just ends.
+  const update = (fn) => rawUpdate((s) => syncDivine((typeof fn === 'function' ? fn(s) : Object.assign(s, fn)) || s));
   const [tab, setTab] = useState('main');
   const d = useMemo(() => derive(st), [st]);
   const props = { st, d, update, conn, charId };
@@ -30,6 +34,7 @@ export default function Sheet({ st, update, conn, status, error, onBack, charId 
   const rankTodo = allowance.reduce((t, a) => t + Math.max(0, a.rankUps - a.rankUpsSpent), 0);
   const fth = faithOf(st);
   const riteTodo = fth.god && !isSlain(fth, fth.god) && !fth.riteDone ? shortName(fth.god) : '';
+  const divineQ = openDivine(st);
   const go = (t) => { setTab(t); window.scrollTo(0, 0); };
   return (
     <div>
@@ -46,7 +51,7 @@ export default function Sheet({ st, update, conn, status, error, onBack, charId 
       </div>
       {status === 'error' && <div className="err" style={{ margin: 10 }}>Not saved to Tabletop Forge: {error}</div>}
       <div className="page">
-        {tab === 'main' && (st.statPointsUnspent > 0 || st.skillPicksUnspent > 0 || featTodo.length > 0 || spellTodo.length > 0 || grantTodo > 0 || rankTodo > 0 || riteTodo) && (
+        {tab === 'main' && (st.statPointsUnspent > 0 || st.skillPicksUnspent > 0 || featTodo.length > 0 || spellTodo.length > 0 || grantTodo > 0 || rankTodo > 0 || riteTodo || divineQ) && (
           <div className="warn">
             {st.statPointsUnspent > 0 && <div onClick={() => go('skills')}>You have {st.statPointsUnspent} unspent Stat Point{st.statPointsUnspent > 1 ? 's' : ''} (Skills tab, tap +1 on an ability).</div>}
             {st.skillPicksUnspent > 0 && <div onClick={() => go('skills')}>You have {st.skillPicksUnspent} unspent Skill Pick{st.skillPicksUnspent > 1 ? 's' : ''} (Skills tab).</div>}
@@ -54,6 +59,7 @@ export default function Sheet({ st, update, conn, status, error, onBack, charId 
             {spellTodo.length > 0 && <div onClick={() => go('spells')}>{spellTodo.join(', ')} spells to learn (Spells tab).</div>}
             {grantTodo > 0 && <div onClick={() => go('spells')}>{grantTodo} granted spell{grantTodo > 1 ? 's' : ''} to add (Spells tab).</div>}
             {riteTodo && <div onClick={() => go('faith')}>{riteTodo}'s Rite not done today: a long rest without it is a Lapse (Faith tab).</div>}
+            {divineQ && <div onClick={() => go('quests')}>Divine quest from {shortName(divineQ.god)}: {divineQ.name}{divineQ.deadline ? ` (${divineQ.deadline})` : ''}. Fail it and you are smitten (Quests tab).</div>}
             {rankTodo > 0 && <div onClick={() => go('spells')}>{rankTodo} spell Rank Up{rankTodo > 1 ? 's' : ''} to spend (Spells tab).</div>}
           </div>
         )}
@@ -64,6 +70,7 @@ export default function Sheet({ st, update, conn, status, error, onBack, charId 
         {tab === 'gear' && <GearTab {...props} />}
         {tab === 'features' && <FeaturesTab {...props} />}
         {tab === 'faith' && <FaithCard st={st} update={update} />}
+        {tab === 'quests' && <QuestsTab st={st} update={update} />}
         {tab === 'level' && <LevelTab {...props} />}
       </div>
       <nav className="tabs">{TABS.map(([k, l, ic]) => (

@@ -2,9 +2,9 @@
 type: rule
 id: gods
 name: Gods and Worship
-version: 0.3
+version: 0.4
 status: draft
-related: [pantheon, divine-gear, god-stat-blocks, class-selection, surviving-the-crawl]
+related: [pantheon, divine-gear, god-stat-blocks, class-selection, surviving-the-crawl, quests]
 ---
 
 # Gods and Worship
@@ -78,6 +78,7 @@ Each god has three kinds of **Devotion**:
 
 - **On camera.** A Great Deed done in front of a big audience (a boss fight, a crowded neighbourhood, a stream with many viewers) also counts as a Showmanship moment for Audience (see `surviving-the-crawl`).
 - **The GM can award Favor** (+1 to +3) for anything the god would love that isn't on the list.
+- **Divine quests.** Now and then your god gives you a quest. Finishing it pays +2 to +12 Favor; failing it gets you smitten (see *Divine Quests* in `quests`).
 
 ## Taboos and Lapses
 
@@ -85,7 +86,8 @@ Each god has **Rites** you must keep and **Taboos** you must never break. You ga
 
 - a day passes (you finish a long rest) without the god's Rite,
 - you go down the stairs without making the floor's Offering, or
-- you break one of the god's Taboos (each time).
+- you break one of the god's Taboos (each time), or
+- you turn down a divine quest (see `quests`).
 
 Lapses add up, and every Lapse makes things worse. Each god's entry in `pantheon` says what its **Displeasure** and **Wrath** look like.
 
@@ -119,6 +121,7 @@ You can leave a religion at any time. Renounce the god out loud, or take the vow
 
 - **No saving throw** for the damage, which can't be reduced except by the god's own rules. The smite can't take you below 1 hit point unless you were Forsaken (5 Lapses): then it can kill you.
 - **Apostate.** Afterwards, Inspect shows *"Apostate of [god]"*. That god's worshippers and minor deities are hostile to you, and you can never worship that god again (short of a Great Deed the GM invents just for you).
+- **An open divine quest fails** when you leave, and the god smites you for that too (see `quests`).
 - **Your Boons, Favor and Lapses** for that god are gone. Divine gear tied to that god stops working for you (see `divine-gear`).
 
 ## Becoming an Apostate Without Leaving
