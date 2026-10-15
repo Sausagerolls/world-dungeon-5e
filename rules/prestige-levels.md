@@ -167,7 +167,7 @@ Both are good. Prestige is better for crawlers who love what their class does an
 - **I — Patron's Favor.** Gain one more Mystic Arcanum, of any level from 6th to 9th that you do not already have.
 - **II — Invocation Master.** Learn two more Eldritch Invocations.
 - **III — Pact Surge.** Your pact level becomes 6th. Spells cast with Pact Mana are cast at 6th level and cost 9 Pact Mana.
-- **IV — Patron's Avatar.** Once per long rest, summon an avatar of your patron for 1 minute. It uses a stat block of CR up to half your Warlock level, chosen with the GM, and obeys you.
+- **IV — Patron's Herald.** Once per long rest, summon a herald of your patron for 1 minute. It uses a stat block of CR up to half your Warlock level, chosen with the GM, and obeys you.
 - **V — Dark Bargain.** Once per long rest, ask your patron for anything (as the *wish* spell). Your patron will name a price.
 
 ### Wizard

@@ -2,7 +2,7 @@
 type: rule
 id: gods
 name: Gods and Worship
-version: 0.2
+version: 0.3
 status: draft
 related: [pantheon, divine-gear, god-stat-blocks, class-selection, surviving-the-crawl]
 ---
@@ -13,7 +13,9 @@ related: [pantheon, divine-gear, god-stat-blocks, class-selection, surviving-the
 
 **Optional module.** The GM decides whether gods are in the game. Without this module, clerics and paladins work as normal and the gods stay in the background.
 
-The gods of the World Dungeon are real, petty and very busy. They are bound by the System's **Divine Accord**: they can't walk into the dungeon and fight, but they can bless, curse and smite anyone who prays to them. Every prayer is a little bit of power, and a crawler who prays on camera is free advertising. The gods want you. They also want you to keep your promises.
+The gods of the World Dungeon are real, petty and very busy. They bless, curse and smite anyone who prays to them, and now and then they walk into the dungeon in person. Every prayer is a little bit of power, and a crawler who prays on camera is free advertising. The gods want you. They also want you to keep your promises.
+
+And they can die. A god who comes down into the dungeon has hit points like anything else, and a crawler who brings it to 0 has slain a god (see *Slaying a God*).
 
 ## Meeting a God
 
@@ -23,7 +25,7 @@ You meet a god when one of these happens:
 
 | Meeting | How it happens |
 |---------|----------------|
-| **Avatar** | You see the god's avatar (see `god-stat-blocks`): at a smite, a floor event, a temple, or a boss fight the System approves. |
+| **In person** | You see the god itself (see `god-stat-blocks`): at a smite, a floor event, a temple, or a boss fight the System approves. |
 | **Herald** | You speak with one of the god's minor deities (Prince Fen for Moldra, Cinder for Embrix, and so on). |
 | **Calling** | You do the thing the god loves, in front of an audience (each god's **Calling** in `pantheon`). The GM decides when it is enough: the world freezes, and the god appears to you in a vision for a few seconds. |
 | **Answered prayer** | You pray at the god's shrine for 10 minutes. Make a Wisdom (Religion) or Charisma (Performance) check, DC 15. On a success, the god appears to you. You can try once per shrine per floor. |
@@ -36,7 +38,7 @@ Whenever you meet a god, it makes you an offer. The System puts it on your Inter
 
 - **Accept on the spot.** Say the god's vow (each god's entry in `pantheon` has one). You join at once, with no shrine needed, and you start with **2 Favor** instead of 0 (*"First impression"*). Accepting on camera in the middle of a fight is a Showmanship moment.
 - **Decline**, or let it pass. Nothing happens, except that the god remembers. You can still join later at any of that god's shrines (see *Joining at a Shrine*), at 0 Favor.
-- **Already worshipping someone?** Accepting means leaving your current god, and that god smites you (see *Leaving a Religion*). Accepting a rival god's offer while you worship its rival is a Taboo for every god: you leave with 2 extra Lapses first.
+- **Already worshipping someone?** Accepting means leaving your current god, and that god smites you (see *Leaving a Religion*). Your god's rival never makes you an offer while you worship your god (see *Joining Its Rival*).
 - **Apostates** never get an offer from a god they left.
 
 ### Joining at a Shrine
@@ -119,6 +121,44 @@ You can leave a religion at any time. Renounce the god out loud, or take the vow
 - **Apostate.** Afterwards, Inspect shows *"Apostate of [god]"*. That god's worshippers and minor deities are hostile to you, and you can never worship that god again (short of a Great Deed the GM invents just for you).
 - **Your Boons, Favor and Lapses** for that god are gone. Divine gear tied to that god stops working for you (see `divine-gear`).
 
+## Becoming an Apostate Without Leaving
+
+You don't have to worship a god to be its apostate. A god brands you an **Apostate** in two other ways.
+
+### A Great Crime
+
+Some acts are so bad that a god marks the crawler who did them, worshipper or not:
+
+| Great Crime against a god | Smite |
+|---------------------------|-------|
+| Desecrating or destroying one of its temples or shrines (on purpose) | As Devotee (8d10) |
+| Stealing from its temple, or destroying one of its holy relics or divine gear | As Devotee (8d10) |
+| Killing one of its worshippers who is at its shrine, or who had surrendered | As Devotee (8d10) |
+| Killing one of its minor deities, or its Chosen | As Zealot (12d10) |
+| Breaking one of its Taboos on purpose, in its temple, to make a point | As Initiate (4d10) |
+
+The god smites you with its Apostate's Smite at the rank shown, and you become its Apostate: its worshippers and minor deities are hostile, and you can never worship it. If you were its worshipper, you leave the religion as well (it is the same smite: you take it once). The GM decides what else counts. Some gods consider some crimes Great Deeds (Embrix loves a burning temple, as long as it isn't his).
+
+### Joining Its Rival
+
+Every god has a rival (see `pantheon`). When you take the vow of a god, its **rival brands you as its Apostate**, with no smite: its worshippers and minor deities are hostile to you, and it won't make you a Divine Offer. The brand lasts while you worship the rival. If you leave, the rival forgives you (it loves a convert).
+
+## Slaying a God
+
+Gods are mortal in the World Dungeon. A god in person has a stat block (see `god-stat-blocks`), and a god brought to 0 hit points is **slain**, for good. The System announces it to every crawler on every floor. The audience loses its mind.
+
+When a god is slain:
+
+- **The religion ends.** Every worshipper loses the god's Mark. Their Boons stop working, and so do their Displeasure, Wrath and every other Lapse effect. Favor and Lapses no longer count for anything, and there are no more Rites, Offerings or Taboos to keep.
+- **Smites end.** Every lasting effect of the slain god's Apostate's Smites ends, even a Chosen's permanent one.
+- **Apostates stay apostates.** Inspect still shows *"Apostate of [god] (slain)"*. The god's surviving followers and minor deities are still hostile to its apostates. Some of them now blame the apostates for what happened.
+- **Former worshippers** are free. They can accept another god's Divine Offer or take a vow at a shrine with no smite, because there is no one left to smite them.
+- **Divine gear.** Gear marked *Faithful only* for the slain god stops working. Other gear of that god keeps its magic, but its god-specific parts (Favor costs, rank bonuses) end. A *Gauntlet of the Grudging Peace* sworn to the slain god loses its Peace, and anyone can take it off.
+- **Minor deities** of the slain god live on, grieving and furious. The GM decides whether one of them steps up to become a new major god (with a new religion), the way Vorkath would like to.
+- **The slayer** earns a Celestial-tier achievement, the slain god's rival as a very interested new friend, and every surviving follower as an enemy.
+
+Slain gods stay dead, unless the System decides the ratings need a comeback.
+
 ## Shrines and Temples
 
 | Place | What you can do |
@@ -129,8 +169,8 @@ You can leave a religion at any time. Renounce the god out loud, or take the vow
 
 ## Gods in Play (GM)
 
-- **The Divine Accord.** Gods only act through worshippers, boons, smites, minor deities and avatars. An avatar (see `god-stat-blocks`) appears only for a smite, a floor event, a Great Deed gone wrong, or a boss fight the System approves.
-- **Introductions.** Plan when the party meets each god: a Calling the first time someone does something on-theme, a herald in a neighbourhood, a shrine in a safe room, an avatar at the end of a floor. One or two gods per floor is plenty. The Divine Offer is a great cliffhanger: freeze the fight, show the god, ask the player.
+- **Gods in person.** A god comes into the dungeon itself only for a smite, a floor event, a Great Deed gone wrong, a temple under attack, or a boss fight the System approves. Plan each appearance: a god that turns up can be slain, and that changes the campaign.
+- **Introductions.** Plan when the party meets each god: a Calling the first time someone does something on-theme, a herald in a neighbourhood, a shrine in a safe room, the god in person at the end of a floor. One or two gods per floor is plenty. The Divine Offer is a great cliffhanger: freeze the fight, show the god, ask the player.
 - **Rivals.** Every god has a rival. Worshippers of rival gods start every meeting unfriendly. A crawler who works with a rival's worshipper for a whole floor counts as a Taboo for most gods (each god's list says).
 - **Favor pacing.** A crawler who keeps every Rite and Offering gains about 7 Favor per floor (more with Great Deeds), so Devotee arrives around the end of a first floor of worship, Zealot about two floors later, and Chosen after five or six floors. That is on purpose: Chosen boons are strong.
 - **Party religions.** Crawlers in one party can worship different gods. Rival gods in one party make great television.

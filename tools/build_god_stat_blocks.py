@@ -1,4 +1,4 @@
-# Writes gods/stat-blocks.md (avatars and minor deities) from the data below. Run: python3 tools/build_god_stat_blocks.py
+# Writes gods/stat-blocks.md (the major gods and minor deities) from the data below. Run: python3 tools/build_god_stat_blocks.py
 import re, math
 PB = {9:4,10:4,11:4,12:4,13:5,14:5,15:5,16:5,17:6,18:6,19:6,20:6,21:7,22:7,23:7,24:7,25:8,26:8,27:8,28:8,29:9,30:9}
 XP = {9:5000,10:5900,11:7200,12:8400,13:10000,14:11500,15:13000,16:15000,17:18000,18:20000,19:22000,20:25000,21:33000,22:41000,23:50000,24:62000,25:75000,26:90000,27:105000,28:120000,29:135000,30:155000}
@@ -21,6 +21,17 @@ def fill(text, c):
     text = re.sub(r"\{dc:(\w+)\}", dc, text)
     text = re.sub(r"\{(\d+)d(\d+)(?:\+(\w+))?\}", dmg, text)
     return text
+
+def ungod(text, c):
+    """The gods' stat blocks say the god's name, not 'the avatar'."""
+    if not c.get("short"):
+        return text
+    sh = c["short"]
+    cap = sh[0].upper() + sh[1:]
+    text = re.sub(r"(^|\. |\*\* )The avatar", lambda m: m.group(1) + cap, text)
+    text = text.replace("the avatar's", f"{sh}'s").replace("The avatar's", f"{cap}'s").replace("the avatar", sh).replace("The avatar", cap)
+    return text.replace("its worshippers", f"{sh}'s worshippers")
+
 
 def block(c):
     pb = PB[c["cr"]]; sc = dict(zip(AB, c["scores"])); con = m(sc["CON"])
@@ -49,19 +60,19 @@ def block(c):
         if c.get(key):
             out += ["", f"#### {title}", ""]
             if key == "legendary":
-                out += [fill(c["legend_intro"], c), ""]
-            out += [f"- **{nm}.** {fill(tx, c)}" for nm, tx in c[key]]
+                out += [ungod(fill(c["legend_intro"], c), c), ""]
+            out += [f"- **{nm}.** {ungod(fill(tx, c), c)}" for nm, tx in c[key]]
     return "\n".join(out) + "\n"
 
 AVATAR_TRAITS = lambda god: [
-    ("Divine Avatar", f"If the avatar drops to 0 hit points, it bursts into light and is gone; {god} can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished."),
-    ("Legendary Resistance (4/Day, or 5/Day in Lair)", "If the avatar fails a saving throw, it can choose to succeed instead."),
-    ("Magic Resistance", "The avatar has advantage on saving throws against spells and other magical effects."),
-    ("Knows Its Own", f"The avatar knows the name, Favor and Lapses of every worshipper of {god} within 1 mile, and can't be surprised by them."),
+    ("Godhood", f"This is {god} in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, {god} is slain, for good (see *Slaying a God* in `gods`)."),
+    ("Legendary Resistance (4/Day, or 5/Day in Lair)", f"If {god} fails a saving throw, it can choose to succeed instead."),
+    ("Magic Resistance", f"{god[0].upper() + god[1:]} has advantage on saving throws against spells and other magical effects."),
+    ("Knows Its Own", f"{god[0].upper() + god[1:]} knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them."),
 ]
 
 GODS = [
- dict(name="Avatar of Mother Moldra", size="Gargantuan", type="Celestial (Plant)", align="Neutral", cr=26, hd=24, ac=21, speed="30 ft., burrow 30 ft.",
+ dict(name="Mother Moldra, the Rot Queen", short="Moldra", size="Gargantuan", type="Celestial (Plant)", align="Neutral", cr=26, hd=24, ac=21, speed="30 ft., burrow 30 ft.",
   scores=[26,10,30,18,26,22], saves=["CON","WIS","CHA"], skills=["Perception*","Nature","Medicine"],
   Resistances="Bludgeoning, Piercing, Slashing", Immunities="Necrotic, Poison; Charmed, Frightened, Poisoned", senses="Blindsight 120 ft., Tremorsense 120 ft.", langs="All, telepathy 1 mile", lair=True,
   intro="A walking hill of rot: a mother-shape of soft fungus and old bones, crowned with glowing mushrooms. Wherever she steps, things grow, and things die.",
@@ -75,7 +86,7 @@ GODS = [
   legendary=[("Grasping Rot", "One creature within 60 feet makes a DC {dc:WIS} Strength saving throw or is pulled 30 feet toward the avatar and Restrained until the end of its next turn."),
    ("Bloom", "The avatar regains 20 hit points, and a 20-foot radius around it becomes Difficult Terrain."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Necrotic damage, no save.")]),
- dict(name="Avatar of Embrix the Unquenched", size="Huge", type="Celestial", align="Chaotic Good", cr=27, hd=26, ac=22, speed="50 ft., fly 80 ft. (hover)",
+ dict(name="Embrix the Unquenched", short="Embrix", size="Huge", type="Celestial", align="Chaotic Good", cr=27, hd=26, ac=22, speed="50 ft., fly 80 ft. (hover)",
   scores=[28,20,26,16,18,28], saves=["DEX","CON","CHA"], skills=["Perception","Intimidation*","Performance*"],
   Immunities="Fire, Radiant; Blinded, Exhaustion", Resistances="Bludgeoning, Piercing, Slashing", senses="Truesight 120 ft.", langs="All, telepathy 1 mile", lair=True,
   intro="A golden giant made of fire, posing. Always posing. His hair is a bonfire and his smile is a stage light.",
@@ -89,7 +100,7 @@ GODS = [
   legendary=[("Pose", "The avatar moves up to half its fly speed and flexes. Each creature within 30 feet that can see it makes a DC {dc:CHA} Wisdom saving throw or has the Frightened condition until the end of its next turn."),
    ("Flare", "The avatar makes one Sunlance attack."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Fire damage, no save, and catches fire (1d10 Fire damage at the start of each of its turns until it uses an action to put itself out).")]),
- dict(name="Avatar of Saint Payola", size="Large", type="Celestial", align="Lawful Neutral", cr=25, hd=30, ac=22, speed="40 ft., fly 60 ft.",
+ dict(name="Saint Payola, Patron of Sponsors", short="Saint Payola", size="Large", type="Celestial", align="Lawful Neutral", cr=25, hd=30, ac=22, speed="40 ft., fly 60 ft.",
   scores=[18,22,24,26,22,30], saves=["DEX","WIS","CHA"], skills=["Deception*","Insight*","Persuasion*","Perception"],
   Resistances="Force, Psychic; Bludgeoning, Piercing, Slashing", Immunities="Charmed, Frightened", senses="Truesight 120 ft.", langs="All, telepathy 1 mile", lair=True,
   intro="A smiling saint in a suit of gold leaf, trailing a halo of floating price tags. She never raises her voice. She doesn't have to.",
@@ -97,13 +108,13 @@ GODS = [
    ("Retainer", "The avatar can't be attacked by a creature that owes it money, unless that creature first succeeds on a DC {dc:CHA} Charisma saving throw (a new save each turn).")],
   actions=[("Multiattack", "The avatar makes three Gilded Touch attacks, or uses Collect twice."),
    ("Gilded Touch", "*Melee Attack Roll:* {hit:CHA}, reach 10 ft. *Hit:* {5d10+CHA} Force damage, and the target loses gold equal to the damage."),
-   ("Collect", "One creature within 120 feet makes a DC {dc:CHA} Charisma saving throw. *Failure:* {10d10} Force damage, and one magic item it carries (avatar's choice) teleports into the avatar's hand. *Success:* Half damage only."),
+   ("Collect", "One creature within 120 feet makes a DC {dc:CHA} Charisma saving throw. *Failure:* {10d10} Force damage, and one magic item it carries (her choice) teleports into the avatar's hand. *Success:* Half damage only."),
    ("Hostile Takeover (Recharge 5–6)", "Each creature of the avatar's choice within 60 feet makes a DC {dc:CHA} Wisdom saving throw or has the Charmed condition for 1 minute. A charmed creature fights for the avatar. It repeats the save at the end of each of its turns.")],
   legend_intro="The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.",
   legendary=[("Fine Print", "One creature within 60 feet has disadvantage on its next saving throw."),
    ("Buyback", "The avatar regains 25 hit points, or ends one condition on itself."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Force damage, no save, and loses 10% of its gold.")]),
- dict(name="Avatar of Thrumm", size="Gargantuan", type="Celestial", align="Chaotic Neutral", cr=27, hd=24, ac=22, speed="60 ft., fly 120 ft. (hover)",
+ dict(name="Thrumm, the Thunder That Remembers", short="Thrumm", size="Gargantuan", type="Celestial", align="Chaotic Neutral", cr=27, hd=24, ac=22, speed="60 ft., fly 120 ft. (hover)",
   scores=[30,16,28,14,22,20], saves=["STR","CON","WIS"], skills=["Perception*","Survival*","Intimidation"],
   Immunities="Lightning, Thunder; Deafened, Frightened", Resistances="Bludgeoning, Piercing, Slashing", senses="Truesight 120 ft.", langs="All, telepathy 1 mile", lair=True,
   intro="A storm with antlers and a hunter's spear, its voice a rolling thunderclap. A list of names circles it in burning letters, and the list is long.",
@@ -116,7 +127,7 @@ GODS = [
   legendary=[("Hunt", "The avatar moves up to its speed without provoking opportunity attacks."),
    ("Spear", "The avatar makes one Stormspear attack."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Lightning damage, no save.")]),
- dict(name="Avatar of Nyx-Ra", size="Huge", type="Celestial", align="Neutral", cr=26, hd=26, ac=21, speed="40 ft., fly 60 ft. (hover)",
+ dict(name="Nyx-Ra, the Quiet Dark", short="Nyx-Ra", size="Huge", type="Celestial", align="Neutral", cr=26, hd=26, ac=21, speed="40 ft., fly 60 ft. (hover)",
   scores=[20,26,24,24,30,22], saves=["DEX","INT","WIS"], skills=["Stealth*","Insight*","Perception*"],
   Immunities="Necrotic, Psychic; Charmed, Frightened, Unconscious", Resistances="Bludgeoning, Piercing, Slashing", senses="Truesight 120 ft.", langs="All (only whispers), telepathy 1 mile", lair=True,
   intro="A tall figure of folded darkness with one closed eye. The room goes quiet when she arrives. Nobody decides to stop talking. They just do.",
@@ -130,11 +141,11 @@ GODS = [
   legendary=[("Fade", "The avatar teleports up to 60 feet to a space in dim light or darkness."),
    ("Shh", "One creature within 60 feet makes a DC {dc:WIS} Constitution saving throw or can't speak or cast spells with verbal components until the end of its next turn."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Psychic damage, no save.")]),
- dict(name="Avatar of the Brass Warden", size="Gargantuan", type="Construct (Celestial)", align="Lawful Neutral", cr=27, hd=26, ac=25, speed="40 ft.",
+ dict(name="The Brass Warden", short="the Warden", size="Gargantuan", type="Construct (Celestial)", align="Lawful Neutral", cr=27, hd=26, ac=25, speed="40 ft.",
   scores=[30,8,30,18,24,20], saves=["STR","CON","WIS"], skills=["Insight*","Perception","Athletics*"],
   Immunities="Poison, Psychic; Charmed, Frightened, Paralyzed, Petrified, Poisoned, Prone", Resistances="Bludgeoning, Piercing, Slashing, Force", senses="Truesight 120 ft.", langs="All, telepathy 1 mile", lair=True,
   intro="A brass titan with a door where its face should be, and a key the size of a bridge. It walks slowly. It doesn't need to walk fast. Nothing gets past it.",
-  traits=AVATAR_TRAITS("the Brass Warden") + [("The Wall", "The avatar can't be moved against its will. Creatures can't move through its space or within 5 feet of it without its permission."),
+  traits=AVATAR_TRAITS("the Warden") + [("The Wall", "The avatar can't be moved against its will. Creatures can't move through its space or within 5 feet of it without its permission."),
    ("Oathkeeper", "The avatar knows when a creature within 120 feet breaks a promise. That creature has disadvantage on attack rolls against it.")],
   actions=[("Multiattack", "The avatar makes three Key attacks, or two Key attacks and one Sentence."),
    ("Key", "*Melee Attack Roll:* {hit:STR}, reach 20 ft. *Hit:* {5d10+STR} Bludgeoning damage, and the target has the Prone condition."),
@@ -145,7 +156,7 @@ GODS = [
   legendary=[("Step", "The avatar moves up to half its speed."),
    ("Key", "The avatar makes one Key attack."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Radiant damage, no save.")]),
- dict(name="Avatar of Wobblegob", size="Huge", type="Fey (Celestial)", align="Chaotic Neutral", cr=25, hd=26, ac=20, speed="50 ft., fly 50 ft., climb 50 ft.",
+ dict(name="Wobblegob, the Laughing God", short="Wobblegob", size="Huge", type="Fey (Celestial)", align="Chaotic Neutral", cr=25, hd=26, ac=20, speed="50 ft., fly 50 ft., climb 50 ft.",
   scores=[24,26,24,18,16,30], saves=["DEX","CON","CHA"], skills=["Acrobatics*","Performance*","Deception*","Sleight of Hand*"],
   Immunities="Psychic; Charmed, Frightened, Grappled, Restrained", Resistances="Bludgeoning, Piercing, Slashing, Thunder", senses="Truesight 120 ft.", langs="All, honking, telepathy 1 mile", lair=True,
   intro="Something huge in a polka-dot suit, with too many arms and a smile that keeps changing shape. It honks when it is happy. It is always happy.",
@@ -160,7 +171,7 @@ GODS = [
   legendary=[("Pratfall", "The avatar teleports up to 60 feet."),
    ("Honk", "Each creature within 30 feet makes a DC {dc:CHA} Constitution saving throw or has the Deafened condition and drops what it is holding."),
    ("Smite the Faithless (Costs 2 Actions)", "One apostate or non-worshipper within 120 feet takes {6d10} Bludgeoning damage, no save, from a falling anvil.")]),
- dict(name="Avatar of Hearthmother Tuul", size="Huge", type="Celestial", align="Neutral Good", cr=25, hd=28, ac=20, speed="40 ft.",
+ dict(name="Hearthmother Tuul", short="Tuul", size="Huge", type="Celestial", align="Neutral Good", cr=25, hd=28, ac=20, speed="40 ft.",
   scores=[24,14,28,20,30,24], saves=["CON","WIS","CHA"], skills=["Insight*","Medicine*","Perception"],
   Immunities="Cold, Radiant; Charmed, Frightened", Resistances="Bludgeoning, Piercing, Slashing", senses="Truesight 120 ft.", langs="All, telepathy 1 mile", lair=True,
   intro="A broad, warm grandmother made of hearth-glow and flour, with an apron of woven light and a ladle like a scepter. She smells like bread. She hits like a truck.",
@@ -295,21 +306,21 @@ related: [gods, pantheon, divine-gear]
 
 # Gods and Minor Deities
 
-> *"Gods do not enter the World Dungeon. Gods do not fight crawlers. Gods are, however, allowed to send a representative. The representative is very large."*
+> *"Ladies, gentlemen and things: tonight, for one night only, a god walks the World Dungeon. Place your bets."*
 
-GM only. The gods themselves never come into the dungeon (the Divine Accord in `gods`). They send **avatars**: the god's power poured into a body the System allows. Avatars appear for a smite, a floor event, a Great Deed gone wrong, or a boss fight the System approves, and they are among the most dangerous things on any floor. A party should meet one rarely, and should usually run.
+GM only. These are the gods themselves. They rarely come into the dungeon in person: to smite an apostate, to answer a Great Deed, to defend a temple, to settle a grudge with a rival, or for a ratings event the System has been advertising for weeks. When they do, they can bleed, and they can die (see *Slaying a God* in `gods`).
 
 **Minor deities** are lesser gods, divine children, servants and leftovers. They have no religion to join (see `gods`), but they can be bargained with, hired, fought or befriended, and each can do a crawler one small divine favor.
 
 ## Running a God Fight
 
-- **Avatars are CR 25 to 27.** Before the deep floors, an avatar fight is a set piece to survive, not to win: the avatar has a goal (smite one apostate, guard a shrine, test a Chosen), and it leaves when the goal is done.
-- **Smite the Faithless.** Every avatar can smite apostates and non-worshippers as a legendary action. Worshippers of the god are never its target unless they have 4 or more Lapses.
-- **Lairs.** A god's temple is its lair. In its lair an avatar has 5 uses of Legendary Resistance, and the CR shows the lair XP.
-- **Meeting.** Seeing an avatar, or talking with a minor deity, counts as **meeting** its god, and the god makes the crawler a **Divine Offer** (see *Meeting a God* in `gods`). A god sends its herald to a crawler it is curious about.
-- **Killing an avatar** doesn't kill the god. It does make the god very, very interested in you, and is worth a Legendary achievement.
+- **Gods are CR 25 to 27.** Before the deep floors, a god in person is a set piece to survive, not to win: it has a goal (smite one apostate, guard a shrine, test a Chosen), and it leaves when the goal is done, unless the crawlers make it stay.
+- **Smite the Faithless.** Every god can smite apostates and non-worshippers as a legendary action. Its own worshippers are never the target unless they have 4 or more Lapses.
+- **Lairs.** A god's temple is its lair. In its lair a god has 5 uses of Legendary Resistance, and the CR shows the lair XP.
+- **Meeting.** Seeing a god in person, or talking with a minor deity, counts as **meeting** that god, and the god makes the crawler a **Divine Offer** (see *Meeting a God* in `gods`).
+- **Slaying a god** ends its religion (see `gods`). It is the biggest thing a crawler can do in the World Dungeon: a Celestial-tier achievement, every rival god's attention, and every surviving follower's hatred.
 
-## Avatars of the Major Gods
+## The Major Gods
 
 """
 out = head + "\n".join(block(c) for c in GODS) + "\n## Minor Deities\n\nOne stat block each, CR 9 to 20. Each has a **Minor Deity** trait: what happens when it is beaten, and the one favor it can do for a crawler.\n\n" + "\n".join(block(c) for c in MINOR)

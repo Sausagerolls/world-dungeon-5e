@@ -58,7 +58,7 @@ A heavy iron gauntlet engraved with one god's symbol, made for keeping the peace
 
 Two strings of beads knotted together, each with a different god's symbol. While attuned, you can secretly worship two major gods at once (keep two Favor and Lapse tracks). Each god's Rite and Offering must be done separately.
 
-- **Found out.** If either god's avatar, minor deity or Chosen worshipper Inspects you, both gods know. You gain 2 Lapses with each.
+- **Found out.** If either god, one of its minor deities or its Chosen worshipper Inspects you, both gods know. You gain 2 Lapses with each.
 - The beads snap if the two gods are rivals.
 
 ### Apostate's Salve

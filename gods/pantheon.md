@@ -11,7 +11,7 @@ related: [gods, divine-gear, god-stat-blocks]
 
 > *"Eight major gods hold contracts in the World Dungeon this season. Pick one. Or don't. They'll remember either way."*
 
-Eight major gods take worshippers in the World Dungeon, but only crawlers they have met (see *Meeting a God* in `gods`). Each one has a Calling (what gets its attention), a vow, three Devotions, Taboos, four Boons, its own way of punishing Lapses, and its own way of smiting apostates. The rules are in `gods`. Their avatars and lesser kin are in `god-stat-blocks` (GM only).
+Eight major gods take worshippers in the World Dungeon, but only crawlers they have met (see *Meeting a God* in `gods`). Each one has a Calling (what gets its attention), a vow, three Devotions, Taboos, four Boons, its own way of punishing Lapses, and its own way of smiting apostates. The rules are in `gods`. Their stat blocks (the gods in person, who can be slain) and their lesser kin are in `god-stat-blocks` (GM only).
 
 **Spell boons.** A boon that gives you a spell writes it into your tome as a granted spell (see `spells-replacements`). Its source is the god. Choose Wisdom or Charisma as its spellcasting ability when you gain it. You can cast it once per long rest without mana, and with mana as normal.
 

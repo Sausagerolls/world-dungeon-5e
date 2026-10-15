@@ -9,23 +9,23 @@ related: [gods, pantheon, divine-gear]
 
 # Gods and Minor Deities
 
-> *"Gods do not enter the World Dungeon. Gods do not fight crawlers. Gods are, however, allowed to send a representative. The representative is very large."*
+> *"Ladies, gentlemen and things: tonight, for one night only, a god walks the World Dungeon. Place your bets."*
 
-GM only. The gods themselves never come into the dungeon (the Divine Accord in `gods`). They send **avatars**: the god's power poured into a body the System allows. Avatars appear for a smite, a floor event, a Great Deed gone wrong, or a boss fight the System approves, and they are among the most dangerous things on any floor. A party should meet one rarely, and should usually run.
+GM only. These are the gods themselves. They rarely come into the dungeon in person: to smite an apostate, to answer a Great Deed, to defend a temple, to settle a grudge with a rival, or for a ratings event the System has been advertising for weeks. When they do, they can bleed, and they can die (see *Slaying a God* in `gods`).
 
 **Minor deities** are lesser gods, divine children, servants and leftovers. They have no religion to join (see `gods`), but they can be bargained with, hired, fought or befriended, and each can do a crawler one small divine favor.
 
 ## Running a God Fight
 
-- **Avatars are CR 25 to 27.** Before the deep floors, an avatar fight is a set piece to survive, not to win: the avatar has a goal (smite one apostate, guard a shrine, test a Chosen), and it leaves when the goal is done.
-- **Smite the Faithless.** Every avatar can smite apostates and non-worshippers as a legendary action. Worshippers of the god are never its target unless they have 4 or more Lapses.
-- **Lairs.** A god's temple is its lair. In its lair an avatar has 5 uses of Legendary Resistance, and the CR shows the lair XP.
-- **Meeting.** Seeing an avatar, or talking with a minor deity, counts as **meeting** its god, and the god makes the crawler a **Divine Offer** (see *Meeting a God* in `gods`). A god sends its herald to a crawler it is curious about.
-- **Killing an avatar** doesn't kill the god. It does make the god very, very interested in you, and is worth a Legendary achievement.
+- **Gods are CR 25 to 27.** Before the deep floors, a god in person is a set piece to survive, not to win: it has a goal (smite one apostate, guard a shrine, test a Chosen), and it leaves when the goal is done, unless the crawlers make it stay.
+- **Smite the Faithless.** Every god can smite apostates and non-worshippers as a legendary action. Its own worshippers are never the target unless they have 4 or more Lapses.
+- **Lairs.** A god's temple is its lair. In its lair a god has 5 uses of Legendary Resistance, and the CR shows the lair XP.
+- **Meeting.** Seeing a god in person, or talking with a minor deity, counts as **meeting** that god, and the god makes the crawler a **Divine Offer** (see *Meeting a God* in `gods`).
+- **Slaying a god** ends its religion (see `gods`). It is the biggest thing a crawler can do in the World Dungeon: a Celestial-tier achievement, every rival god's attention, and every surviving follower's hatred.
 
-## Avatars of the Major Gods
+## The Major Gods
 
-### Stat Block: Avatar of Mother Moldra
+### Stat Block: Mother Moldra, the Rot Queen
 **Gargantuan Celestial (Plant) · Neutral · CR 26**
 
 A walking hill of rot: a mother-shape of soft fungus and old bones, crowned with glowing mushrooms. Wherever she steps, things grow, and things die.
@@ -53,32 +53,32 @@ A walking hill of rot: a mother-shape of soft fungus and old bones, crowned with
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Moldra can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Moldra within 1 mile, and can't be surprised by them.
-- **Spore Cloud.** Each creature that starts its turn within 20 feet of the avatar makes a DC 26 Constitution saving throw or has the Poisoned condition until the start of its next turn. Moldra's worshippers are immune.
+- **Godhood.** This is Moldra in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Moldra is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Moldra fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Moldra has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Moldra knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **Spore Cloud.** Each creature that starts its turn within 20 feet of Moldra makes a DC 26 Constitution saving throw or has the Poisoned condition until the start of its next turn. Moldra's worshippers are immune.
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Rotting Slam attacks. It can replace one of them with Feed the Mother.
+- **Multiattack.** Moldra makes three Rotting Slam attacks. It can replace one of them with Feed the Mother.
 - **Rotting Slam.** *Melee Attack Roll:* +16, reach 15 ft. *Hit:* 30 (4d10 + 8) Bludgeoning damage plus 16 (3d10) Necrotic damage, and the target's hit point maximum drops by the Necrotic damage until it finishes a long rest.
-- **Feed the Mother.** Each creature in a 30-foot cone makes a DC 26 Constitution saving throw. *Failure:* 66 (12d10) Necrotic damage, and a creature that dies is overgrown and rises as a Fungal Thrall under the avatar's control. *Success:* Half damage.
-- **Compost (Recharge 5–6).** The ground in a 60-foot radius turns to rot. Each creature of the avatar's choice there makes a DC 24 Strength saving throw. *Failure:* 55 (10d10) Necrotic damage and the Restrained condition (escape DC 24). *Success:* Half damage only.
+- **Feed the Mother.** Each creature in a 30-foot cone makes a DC 26 Constitution saving throw. *Failure:* 66 (12d10) Necrotic damage, and a creature that dies is overgrown and rises as a Fungal Thrall under Moldra's control. *Success:* Half damage.
+- **Compost (Recharge 5–6).** The ground in a 60-foot radius turns to rot. Each creature of Moldra's choice there makes a DC 24 Strength saving throw. *Failure:* 55 (10d10) Necrotic damage and the Restrained condition (escape DC 24). *Success:* Half damage only.
 
 #### Bonus Actions
 
-- **Regrow.** The avatar regains 30 hit points if it is touching soil, rot or a corpse.
+- **Regrow.** Moldra regains 30 hit points if it is touching soil, rot or a corpse.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Moldra can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Grasping Rot.** One creature within 60 feet makes a DC 24 Strength saving throw or is pulled 30 feet toward the avatar and Restrained until the end of its next turn.
-- **Bloom.** The avatar regains 20 hit points, and a 20-foot radius around it becomes Difficult Terrain.
+- **Grasping Rot.** One creature within 60 feet makes a DC 24 Strength saving throw or is pulled 30 feet toward Moldra and Restrained until the end of its next turn.
+- **Bloom.** Moldra regains 20 hit points, and a 20-foot radius around it becomes Difficult Terrain.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Necrotic damage, no save.
 
-### Stat Block: Avatar of Embrix the Unquenched
+### Stat Block: Embrix the Unquenched
 **Huge Celestial · Chaotic Good · CR 27**
 
 A golden giant made of fire, posing. Always posing. His hair is a bonfire and his smile is a stage light.
@@ -106,29 +106,29 @@ A golden giant made of fire, posing. Always posing. His hair is a bonfire and hi
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Embrix can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Embrix within 1 mile, and can't be surprised by them.
-- **Burning Glory.** The avatar sheds bright light in a 60-foot radius and dim light for 60 more feet. A creature that touches it or hits it with a melee attack takes 16 (3d10) Fire damage.
-- **Showstopper.** Creatures have disadvantage on saving throws against the avatar's fire while it is being watched by an audience of 10 or more (the System counts viewers).
+- **Godhood.** This is Embrix in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Embrix is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Embrix fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Embrix has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Embrix knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **Burning Glory.** Embrix sheds bright light in a 60-foot radius and dim light for 60 more feet. A creature that touches it or hits it with a melee attack takes 16 (3d10) Fire damage.
+- **Showstopper.** Creatures have disadvantage on saving throws against Embrix's fire while it is being watched by an audience of 10 or more (the System counts viewers).
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Blazing Blade attacks, or two and one Sunlance.
+- **Multiattack.** Embrix makes three Blazing Blade attacks, or two and one Sunlance.
 - **Blazing Blade.** *Melee Attack Roll:* +17, reach 15 ft. *Hit:* 31 (4d10 + 9) Slashing damage plus 14 (4d6) Fire damage.
-- **Sunlance.** *Ranged Attack Roll:* +17, range 300 ft. *Hit:* 53 (8d10 + 9) Radiant damage, and the target has the Blinded condition until the start of the avatar's next turn.
-- **Grand Finale (Recharge 5–6).** Fire explodes from the avatar in a 60-foot radius. Each creature in it makes a DC 25 Dexterity saving throw. *Failure:* 99 (18d10) Fire damage. *Success:* Half damage. Fire resistance doesn't apply.
+- **Sunlance.** *Ranged Attack Roll:* +17, range 300 ft. *Hit:* 53 (8d10 + 9) Radiant damage, and the target has the Blinded condition until the start of Embrix's next turn.
+- **Grand Finale (Recharge 5–6).** Fire explodes from Embrix in a 60-foot radius. Each creature in it makes a DC 25 Dexterity saving throw. *Failure:* 99 (18d10) Fire damage. *Success:* Half damage. Fire resistance doesn't apply.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Embrix can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Pose.** The avatar moves up to half its fly speed and flexes. Each creature within 30 feet that can see it makes a DC 25 Wisdom saving throw or has the Frightened condition until the end of its next turn.
-- **Flare.** The avatar makes one Sunlance attack.
+- **Pose.** Embrix moves up to half its fly speed and flexes. Each creature within 30 feet that can see it makes a DC 25 Wisdom saving throw or has the Frightened condition until the end of its next turn.
+- **Flare.** Embrix makes one Sunlance attack.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Fire damage, no save, and catches fire (1d10 Fire damage at the start of each of its turns until it uses an action to put itself out).
 
-### Stat Block: Avatar of Saint Payola
+### Stat Block: Saint Payola, Patron of Sponsors
 **Large Celestial · Lawful Neutral · CR 25**
 
 A smiling saint in a suit of gold leaf, trailing a halo of floating price tags. She never raises her voice. She doesn't have to.
@@ -156,29 +156,29 @@ A smiling saint in a suit of gold leaf, trailing a halo of floating price tags. 
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Saint Payola can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Saint Payola within 1 mile, and can't be surprised by them.
-- **Everything Has a Price.** Any creature that makes a deal with the avatar is bound by it as if by *Terms of Service* (DC 26, no save while the deal is honored).
-- **Retainer.** The avatar can't be attacked by a creature that owes it money, unless that creature first succeeds on a DC 26 Charisma saving throw (a new save each turn).
+- **Godhood.** This is Saint Payola in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Saint Payola is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Saint Payola fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Saint Payola has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Saint Payola knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **Everything Has a Price.** Any creature that makes a deal with Saint Payola is bound by it as if by *Terms of Service* (DC 26, no save while the deal is honored).
+- **Retainer.** Saint Payola can't be attacked by a creature that owes it money, unless that creature first succeeds on a DC 26 Charisma saving throw (a new save each turn).
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Gilded Touch attacks, or uses Collect twice.
+- **Multiattack.** Saint Payola makes three Gilded Touch attacks, or uses Collect twice.
 - **Gilded Touch.** *Melee Attack Roll:* +18, reach 10 ft. *Hit:* 37 (5d10 + 10) Force damage, and the target loses gold equal to the damage.
-- **Collect.** One creature within 120 feet makes a DC 26 Charisma saving throw. *Failure:* 55 (10d10) Force damage, and one magic item it carries (avatar's choice) teleports into the avatar's hand. *Success:* Half damage only.
-- **Hostile Takeover (Recharge 5–6).** Each creature of the avatar's choice within 60 feet makes a DC 26 Wisdom saving throw or has the Charmed condition for 1 minute. A charmed creature fights for the avatar. It repeats the save at the end of each of its turns.
+- **Collect.** One creature within 120 feet makes a DC 26 Charisma saving throw. *Failure:* 55 (10d10) Force damage, and one magic item it carries (her choice) teleports into Saint Payola's hand. *Success:* Half damage only.
+- **Hostile Takeover (Recharge 5–6).** Each creature of Saint Payola's choice within 60 feet makes a DC 26 Wisdom saving throw or has the Charmed condition for 1 minute. A charmed creature fights for Saint Payola. It repeats the save at the end of each of its turns.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Saint Payola can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
 - **Fine Print.** One creature within 60 feet has disadvantage on its next saving throw.
-- **Buyback.** The avatar regains 25 hit points, or ends one condition on itself.
+- **Buyback.** Saint Payola regains 25 hit points, or ends one condition on itself.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Force damage, no save, and loses 10% of its gold.
 
-### Stat Block: Avatar of Thrumm
+### Stat Block: Thrumm, the Thunder That Remembers
 **Gargantuan Celestial · Chaotic Neutral · CR 27**
 
 A storm with antlers and a hunter's spear, its voice a rolling thunderclap. A list of names circles it in burning letters, and the list is long.
@@ -206,28 +206,28 @@ A storm with antlers and a hunter's spear, its voice a rolling thunderclap. A li
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Thrumm can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Thrumm within 1 mile, and can't be surprised by them.
-- **The List.** The avatar always knows the location of every creature on its worshippers' Grudge Lists within 1 mile. It has advantage on attack rolls against them.
+- **Godhood.** This is Thrumm in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Thrumm is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Thrumm fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Thrumm has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Thrumm knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **The List.** Thrumm always knows the location of every creature on Thrumm's worshippers' Grudge Lists within 1 mile. It has advantage on attack rolls against them.
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Stormspear attacks.
+- **Multiattack.** Thrumm makes three Stormspear attacks.
 - **Stormspear.** *Melee or Ranged Attack Roll:* +18, reach 20 ft. or range 120/480 ft. *Hit:* 32 (4d10 + 10) Piercing damage plus 22 (4d10) Lightning damage. The spear returns to its hand.
 - **Thunderclap.** Each creature within 60 feet makes a DC 25 Constitution saving throw. *Failure:* 55 (10d10) Thunder damage, and the Deafened and Prone conditions. *Success:* Half damage only.
-- **Storm of Grudges (Recharge 5–6).** Up to six creatures the avatar can see within 300 feet are struck by lightning. Each makes a DC 25 Dexterity saving throw. *Failure:* 66 (12d10) Lightning damage. *Success:* Half damage.
+- **Storm of Grudges (Recharge 5–6).** Up to six creatures Thrumm can see within 300 feet are struck by lightning. Each makes a DC 25 Dexterity saving throw. *Failure:* 66 (12d10) Lightning damage. *Success:* Half damage.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Thrumm can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Hunt.** The avatar moves up to its speed without provoking opportunity attacks.
-- **Spear.** The avatar makes one Stormspear attack.
+- **Hunt.** Thrumm moves up to its speed without provoking opportunity attacks.
+- **Spear.** Thrumm makes one Stormspear attack.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Lightning damage, no save.
 
-### Stat Block: Avatar of Nyx-Ra
+### Stat Block: Nyx-Ra, the Quiet Dark
 **Huge Celestial · Neutral · CR 26**
 
 A tall figure of folded darkness with one closed eye. The room goes quiet when she arrives. Nobody decides to stop talking. They just do.
@@ -255,29 +255,29 @@ A tall figure of folded darkness with one closed eye. The room goes quiet when s
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Nyx-Ra can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Nyx-Ra within 1 mile, and can't be surprised by them.
-- **Silence.** No sound can be made within 30 feet of the avatar, except by the avatar. Creatures there can't cast spells with verbal components.
-- **Unseen.** The avatar is Invisible while it is in dim light or darkness.
+- **Godhood.** This is Nyx-Ra in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Nyx-Ra is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Nyx-Ra fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Nyx-Ra has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Nyx-Ra knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **Silence.** No sound can be made within 30 feet of Nyx-Ra, except by Nyx-Ra. Creatures there can't cast spells with verbal components.
+- **Unseen.** Nyx-Ra is Invisible while it is in dim light or darkness.
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Endnote attacks. It can replace one with Lull.
-- **Endnote.** *Melee Attack Roll:* +16, reach 10 ft. *Hit:* 30 (4d10 + 8) Necrotic damage plus 16 (3d10) Psychic damage, and the target can't regain hit points until the start of the avatar's next turn.
+- **Multiattack.** Nyx-Ra makes three Endnote attacks. It can replace one with Lull.
+- **Endnote.** *Melee Attack Roll:* +16, reach 10 ft. *Hit:* 30 (4d10 + 8) Necrotic damage plus 16 (3d10) Psychic damage, and the target can't regain hit points until the start of Nyx-Ra's next turn.
 - **Lull.** One creature within 60 feet makes a DC 26 Wisdom saving throw or has the Unconscious condition for 1 minute (it wakes if it takes damage).
 - **Lights Out Forever (Recharge 5–6).** Magical darkness fills a 60-foot radius for 1 minute. Each creature in it makes a DC 26 Wisdom saving throw. *Failure:* 77 (14d10) Psychic damage, and it forgets the last minute. *Success:* Half damage.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Nyx-Ra can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Fade.** The avatar teleports up to 60 feet to a space in dim light or darkness.
+- **Fade.** Nyx-Ra teleports up to 60 feet to a space in dim light or darkness.
 - **Shh.** One creature within 60 feet makes a DC 26 Constitution saving throw or can't speak or cast spells with verbal components until the end of its next turn.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Psychic damage, no save.
 
-### Stat Block: Avatar of the Brass Warden
+### Stat Block: The Brass Warden
 **Gargantuan Construct (Celestial) · Lawful Neutral · CR 27**
 
 A brass titan with a door where its face should be, and a key the size of a bridge. It walks slowly. It doesn't need to walk fast. Nothing gets past it.
@@ -305,33 +305,33 @@ A brass titan with a door where its face should be, and a key the size of a brid
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; the Brass Warden can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of the Brass Warden within 1 mile, and can't be surprised by them.
-- **The Wall.** The avatar can't be moved against its will. Creatures can't move through its space or within 5 feet of it without its permission.
-- **Oathkeeper.** The avatar knows when a creature within 120 feet breaks a promise. That creature has disadvantage on attack rolls against it.
+- **Godhood.** This is the Warden in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, the Warden is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the Warden fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** The Warden has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** The Warden knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **The Wall.** The Warden can't be moved against its will. Creatures can't move through its space or within 5 feet of it without its permission.
+- **Oathkeeper.** The Warden knows when a creature within 120 feet breaks a promise. That creature has disadvantage on attack rolls against it.
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Key attacks, or two Key attacks and one Sentence.
+- **Multiattack.** The Warden makes three Key attacks, or two Key attacks and one Sentence.
 - **Key.** *Melee Attack Roll:* +18, reach 20 ft. *Hit:* 37 (5d10 + 10) Bludgeoning damage, and the target has the Prone condition.
 - **Sentence.** One creature within 120 feet makes a DC 23 Charisma saving throw. *Failure:* 44 (8d10) Radiant damage, and the creature is Restrained by brass shackles for 1 minute (it repeats the save at the end of each of its turns). *Success:* Half damage only.
-- **Lockdown (Recharge 5–6).** Every door, gate and wall within 1 mile locks. Each creature of the avatar's choice within 60 feet makes a DC 23 Strength saving throw. *Failure:* 66 (12d10) Force damage, and its speed is 0 until the end of its next turn. *Success:* Half damage.
+- **Lockdown (Recharge 5–6).** Every door, gate and wall within 1 mile locks. Each creature of the Warden's choice within 60 feet makes a DC 23 Strength saving throw. *Failure:* 66 (12d10) Force damage, and its speed is 0 until the end of its next turn. *Success:* Half damage.
 
 #### Reactions
 
-- **Shield Wall.** When a creature within 30 feet of the avatar is hit by an attack, the avatar takes the hit instead.
+- **Shield Wall.** When a creature within 30 feet of the Warden is hit by an attack, the Warden takes the hit instead.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+The Warden can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Step.** The avatar moves up to half its speed.
-- **Key.** The avatar makes one Key attack.
+- **Step.** The Warden moves up to half its speed.
+- **Key.** The Warden makes one Key attack.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Radiant damage, no save.
 
-### Stat Block: Avatar of Wobblegob
+### Stat Block: Wobblegob, the Laughing God
 **Huge Fey (Celestial) · Chaotic Neutral · CR 25**
 
 Something huge in a polka-dot suit, with too many arms and a smile that keeps changing shape. It honks when it is happy. It is always happy.
@@ -359,33 +359,33 @@ Something huge in a polka-dot suit, with too many arms and a smile that keeps ch
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Wobblegob can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Wobblegob within 1 mile, and can't be surprised by them.
-- **Comedic Timing.** When a creature within 120 feet rolls a 1 on a d20, the avatar can roll on Wobblegob's Gag table (see `pantheon`) and choose where it happens.
-- **Slippery.** The avatar ignores Difficult Terrain and can move through other creatures' spaces.
+- **Godhood.** This is Wobblegob in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Wobblegob is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Wobblegob fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Wobblegob has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Wobblegob knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **Comedic Timing.** When a creature within 120 feet rolls a 1 on a d20, Wobblegob can roll on Wobblegob's Gag table (see `pantheon`) and choose where it happens.
+- **Slippery.** Wobblegob ignores Difficult Terrain and can move through other creatures' spaces.
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Mallet attacks, or two Mallet attacks and one Gag.
+- **Multiattack.** Wobblegob makes three Mallet attacks, or two Mallet attacks and one Gag.
 - **Mallet.** *Melee Attack Roll:* +15, reach 15 ft. *Hit:* 29 (4d10 + 7) Bludgeoning damage plus 16 (3d10) Thunder damage, and the target is pushed 20 feet.
-- **Gag.** The avatar rolls on the Gag table twice and chooses where each happens, within 120 feet.
-- **The Big Joke (Recharge 5–6).** Each creature of the avatar's choice within 60 feet makes a DC 26 Wisdom saving throw. *Failure:* 77 (14d10) Psychic damage, and the creature is Incapacitated with laughter until the end of its next turn. *Success:* Half damage.
+- **Gag.** Wobblegob rolls on the Gag table twice and chooses where each happens, within 120 feet.
+- **The Big Joke (Recharge 5–6).** Each creature of Wobblegob's choice within 60 feet makes a DC 26 Wisdom saving throw. *Failure:* 77 (14d10) Psychic damage, and the creature is Incapacitated with laughter until the end of its next turn. *Success:* Half damage.
 
 #### Reactions
 
-- **Banana Peel.** When a creature within 60 feet moves, the avatar makes it make a DC 24 Dexterity saving throw or fall Prone and end its move.
+- **Banana Peel.** When a creature within 60 feet moves, Wobblegob makes it make a DC 24 Dexterity saving throw or fall Prone and end its move.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Wobblegob can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Pratfall.** The avatar teleports up to 60 feet.
+- **Pratfall.** Wobblegob teleports up to 60 feet.
 - **Honk.** Each creature within 30 feet makes a DC 26 Constitution saving throw or has the Deafened condition and drops what it is holding.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Bludgeoning damage, no save, from a falling anvil.
 
-### Stat Block: Avatar of Hearthmother Tuul
+### Stat Block: Hearthmother Tuul
 **Huge Celestial · Neutral Good · CR 25**
 
 A broad, warm grandmother made of hearth-glow and flour, with an apron of woven light and a ladle like a scepter. She smells like bread. She hits like a truck.
@@ -413,26 +413,26 @@ A broad, warm grandmother made of hearth-glow and flour, with an apron of woven 
 
 #### Traits
 
-- **Divine Avatar.** If the avatar drops to 0 hit points, it bursts into light and is gone; Hearthmother Tuul can't send it again until the next floor. It can't be charmed, frightened, polymorphed or banished.
-- **Legendary Resistance (4/Day, or 5/Day in Lair).** If the avatar fails a saving throw, it can choose to succeed instead.
-- **Magic Resistance.** The avatar has advantage on saving throws against spells and other magical effects.
-- **Knows Its Own.** The avatar knows the name, Favor and Lapses of every worshipper of Hearthmother Tuul within 1 mile, and can't be surprised by them.
-- **Hearth Glow.** The avatar's allies within 30 feet regain 10 hit points at the start of each of their turns.
-- **Mother's Wrath.** The avatar has advantage on attack rolls against a creature that has reduced any creature to 0 hit points in the last minute.
+- **Godhood.** This is Hearthmother Tuul in person. It can't be charmed, frightened, polymorphed or banished. If it drops to 0 hit points, Hearthmother Tuul is slain, for good (see *Slaying a God* in `gods`).
+- **Legendary Resistance (4/Day, or 5/Day in Lair).** If Hearthmother Tuul fails a saving throw, it can choose to succeed instead.
+- **Magic Resistance.** Hearthmother Tuul has advantage on saving throws against spells and other magical effects.
+- **Knows Its Own.** Hearthmother Tuul knows the name, Favor and Lapses of every worshipper within 1 mile, and can't be surprised by them.
+- **Hearth Glow.** Tuul's allies within 30 feet regain 10 hit points at the start of each of their turns.
+- **Mother's Wrath.** Tuul has advantage on attack rolls against a creature that has reduced any creature to 0 hit points in the last minute.
 
 #### Actions
 
-- **Multiattack.** The avatar makes three Ladle attacks. It can replace one with Feed.
+- **Multiattack.** Tuul makes three Ladle attacks. It can replace one with Feed.
 - **Ladle.** *Melee Attack Roll:* +15, reach 15 ft. *Hit:* 29 (4d10 + 7) Bludgeoning damage plus 16 (3d10) Radiant damage.
 - **Feed.** One creature within 30 feet regains 54 (8d10 + 10) hit points and ends one condition on itself.
-- **Cold Shoulder (Recharge 5–6).** All warmth leaves a 60-foot radius. Each creature of the avatar's choice in it makes a DC 26 Constitution saving throw. *Failure:* 77 (14d10) Cold damage, and it can't regain hit points until the end of its next turn. *Success:* Half damage.
+- **Cold Shoulder (Recharge 5–6).** All warmth leaves a 60-foot radius. Each creature of Tuul's choice in it makes a DC 26 Constitution saving throw. *Failure:* 77 (14d10) Cold damage, and it can't regain hit points until the end of its next turn. *Success:* Half damage.
 
 #### Legendary Actions
 
-The avatar can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
+Tuul can take 3 legendary actions, choosing from the options below. Only one can be used at a time, and only at the end of another creature's turn. It regains spent legendary actions at the start of its turn.
 
-- **Come Here, Dear.** One willing creature within 120 feet teleports to a space next to the avatar and regains 20 hit points.
-- **Ladle.** The avatar makes one Ladle attack.
+- **Come Here, Dear.** One willing creature within 120 feet teleports to a space next to Tuul and regains 20 hit points.
+- **Ladle.** Tuul makes one Ladle attack.
 - **Smite the Faithless (Costs 2 Actions).** One apostate or non-worshipper within 120 feet takes 33 (6d10) Cold damage, no save.
 
 ## Minor Deities
