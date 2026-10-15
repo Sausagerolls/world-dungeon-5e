@@ -34,14 +34,10 @@
 @media (max-width: 1100px) { .wd-split { grid-template-columns: 1fr; } }
 @media print {
   body.wd-printing > *:not(#wd-print) { display: none !important; }
+  html, body.wd-printing { margin: 0 !important; padding: 0 !important; background: #fff; }
   body.wd-printing #wd-print { display: block; }
-  #wd-print .wd-page { position: relative; overflow: hidden; page-break-after: always; break-after: page; }
-  #wd-print .wd-inner { position: absolute; }
-  #wd-print .wd-inner svg { display: block; }
-  #wd-print .wd-ptitle { font: 800 13pt "Avenir Next Condensed", "Arial Narrow", sans-serif; text-transform: uppercase; height: 9mm; }
-  #wd-print .wd-cap { position: absolute; font: 7pt Menlo, monospace; color: #333; white-space: nowrap; background: rgba(255,255,255,.85); padding: 0.5mm 1.5mm; border-radius: 1mm; }
-  #wd-print .wd-bar { display: inline-block; height: 2mm; background: #000; vertical-align: middle; }
-  #wd-print .wd-keys { font-size: 10pt; }
+  #wd-print img { display: block; margin: 0; padding: 0; border: 0; page-break-after: always; break-after: page; }
+  #wd-print img:last-child { page-break-after: auto; break-after: auto; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 .wd-scale { background: #fff3e6; border: 1px solid #f3c79c; border-radius: 10px; padding: 14px 16px 6px; margin-bottom: 12px; }

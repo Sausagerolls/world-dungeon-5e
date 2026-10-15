@@ -570,6 +570,38 @@
   }
   // Opens the finished PDF in the tab opened on the click (so it isn't blocked
   // as a pop-up), and keeps a download link in the page.
+  // Prints the finished sheets straight from this page: one full-page image
+  // per sheet, with the paper size and zero margin set for the print.
+  let printURLs = [];
+  function printSheets(pages) {
+    printURLs.forEach((u) => URL.revokeObjectURL(u));
+    printURLs = pages.map((p) => URL.createObjectURL(new Blob([p.jpg], { type: 'image/jpeg' })));
+    const paper = [pages[0].wMm, pages[0].hMm];
+    let box = document.getElementById('wd-print');
+    if (!box) { box = document.createElement('div'); box.id = 'wd-print'; document.body.appendChild(box); }
+    box.innerHTML = printURLs.map((u) => `<img src="${u}" alt="">`).join('');
+    let st = document.getElementById('wd-print-page');
+    if (!st) { st = document.createElement('style'); st.id = 'wd-print-page'; document.head.appendChild(st); }
+    st.textContent = `@page { size: ${paper[0]}mm ${paper[1]}mm; margin: 0; }
+      @media print { #wd-print img { width: ${paper[0]}mm; height: ${paper[1]}mm; } }`;
+    document.body.classList.add('wd-printing');
+    const done = () => { document.body.classList.remove('wd-printing'); window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    const imgs = [...box.querySelectorAll('img')];
+    Promise.all(imgs.map((i) => (i.complete ? null : new Promise((r) => { i.onload = r; i.onerror = r; })))).then(() => {
+      setStatus('Ready to print');
+      const again = root.querySelector('.wd-printnow');
+      if (again) { again.hidden = false; again.onclick = () => { document.body.classList.add('wd-printing'); window.print(); }; }
+      window.print();
+    });
+  }
+  async function output(target, tab, build, fileName) {
+    if (target === 'print') {
+      try { setStatus('Drawing the sheets…'); printSheets(await build()); } catch (e) { setStatus(`Print failed: ${e.message}`); }
+      return;
+    }
+    return showPDF(tab, build, fileName);
+  }
   async function showPDF(tab, build, fileName) {
     try {
       setStatus('Making the PDF…');
@@ -596,13 +628,12 @@
   }
 
   // One A4 sheet, the map filling it edge to edge, then the key.
-  function printOverview(map, kit, tab) {
+  function printOverview(map, kit, target, tab) {
     const portrait = map.settings?.orientation === 'portrait';
     const paper = portrait ? PAPERS.A4 : [PAPERS.A4[1], PAPERS.A4[0]];
-    return showPDF(tab, async () => [
-      await pageOf(paper[0], paper[1], (ctx, px) => drawSVG(ctx, mapSVG(map, kit, { u: 10, size: [paper[0] * px, paper[1] * px], codes: S.showCodes, grid: S.showGrid, idp: 'o', caption: map.name }), 0, 0, paper[0] * px, paper[1] * px)),
-      ...(await keyPages(map, kit, PAPERS.A4)),
-    ], `${safeName(map.name)} A4.pdf`);
+    const mapPage = () => pageOf(paper[0], paper[1], (ctx, px) => drawSVG(ctx, mapSVG(map, kit, { u: 10, size: [paper[0] * px, paper[1] * px], codes: S.showCodes, grid: S.showGrid, idp: 'o', caption: map.name }), 0, 0, paper[0] * px, paper[1] * px));
+    // Printing gives the map sheet; the PDF adds the key pages after it.
+    return output(target, tab, async () => (target === 'print' ? [await mapPage()] : [await mapPage(), ...(await keyPages(map, kit, PAPERS.A4))]), `${safeName(map.name)} A4.pdf`);
   }
 
   // At scale: sheets laid edge to edge with no margin or overlap, the dungeon
@@ -637,10 +668,10 @@
       props: map.props.filter((p) => re.has(p.piece)).map((p) => ({ ...p, piece: re.get(p.piece) })),
       nb: map.nb.map((n, j) => (j === k ? n : { ...n, name: '' })) };
   }
-  function printScaled(full, kit, opt, tab) {
+  function printScaled(full, kit, opt, target, tab) {
     const map = opt.nb === 'all' ? full : onlyNb(full, Number(opt.nb));
     const L = scaleLayout(map, opt);
-    return showPDF(tab, async () => {
+    return output(target, tab, async () => {
       const pages = [];
       // Assembly guide on one sheet of the same paper.
       const guideOverlay = (u) => {
@@ -663,7 +694,7 @@
       let n = 0;
       for (const sh of L.sheets) {
         if (!sh.used) continue;
-        n += 1; setStatus(`Making the PDF… sheet ${n} of ${L.printed}`);
+        n += 1; setStatus(`Drawing sheet ${n} of ${L.printed}…`);
         const { r, c } = sh; const view = sh.v;
         pages.push(await pageOf(L.paper[0], L.paper[1], async (ctx, px) => {
           await drawSVG(ctx, mapSVG(map, kit, { u: L.sq, view, size: [L.pw * px, L.ph * px], codes: S.showCodes, grid: S.showGrid, idp: `s${n}` }), 0, 0, L.pw * px, L.ph * px);
@@ -863,7 +894,8 @@
       <div class="wd-toolbar no-print">
         <input type="text" class="wd-name" value="${esc(m.name)}" title="Map name">
         <button class="btn dark" data-act="regen">New layout</button>
-        <button class="btn light" data-act="print">A4 PDF</button>
+        <button class="btn light" data-act="print">Print on A4</button>
+        <button class="btn light" data-act="a4pdf">A4 PDF</button>
         <button class="btn${scaleOpt.open ? ' primary' : ' light'}" data-act="scale-open">Print at scale…</button>
         <button class="btn light" data-act="svg">Download SVG</button>
         <label class="wd-feat"><input type="checkbox" data-opt="codes"${S.showCodes ? ' checked' : ''}> Tile codes</label>
@@ -877,10 +909,11 @@
           <div class="field"><label>Turn</label><select data-s="landscape"><option value="0"${!scaleOpt.landscape ? ' selected' : ''}>Portrait</option><option value="1"${scaleOpt.landscape ? ' selected' : ''}>Landscape</option></select></div>
           <div class="field"><label>One square (inches)</label><input type="number" step="0.05" min="0.1" data-s="squareIn" value="${+(sq / 25.4).toFixed(3)}"></div>
         </div>
-        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. The PDF opens in a new tab. Print it at 100% / Actual size (not Scale to fit), then check the 50 mm bar on sheet 1.</p>
-        <button class="btn primary" data-act="scale">Make PDF: ${L.printed} sheet${L.printed > 1 ? 's' : ''} + guide</button>
+        <p class="hint">At ${sqLabel(sq)} a square the map is ${(L.mapW / 10).toFixed(1)} × ${(L.mapH / 10).toFixed(1)} cm: <b>${L.printed} sheet${L.printed > 1 ? 's' : ''}</b> of ${esc(scaleOpt.paper)} (blank ones skipped), plus an assembly guide. Print at 100%, then check the 50 mm bar on sheet 1.</p>
+        <button class="btn primary" data-act="scale">Print ${L.printed} sheet${L.printed > 1 ? 's' : ''} + guide</button>
+        <button class="btn light" data-act="scalepdf">Download as PDF</button>
       </div>` : ''}
-      <p class="no-print" style="margin:0 0 10px"><a class="wd-pdflink" hidden></a></p>
+      <p class="no-print" style="margin:0 0 10px"><button class="btn dark wd-printnow" hidden>Print now</button> <a class="wd-pdflink" hidden></a></p>
       <div class="wd-split">
         <div class="wd-canvas">${mapSVG(m, kit, { u: 12, selected: S.selected, codes: S.showCodes, grid: S.showGrid })}</div>
         <aside class="wd-side">
@@ -928,11 +961,15 @@
       m.nb.forEach((n, k) => { n.name = m.settings.neighbourhoods[k]?.name || n.name; });
       S.selected = null; changed(); render();
     });
-    root.querySelector('[data-act="print"]').addEventListener('click', () => printOverview(m, kit, window.open('', '_blank')));
+    root.querySelector('[data-act="print"]').addEventListener('click', () => printOverview(m, kit, 'print'));
+    root.querySelector('[data-act="a4pdf"]').addEventListener('click', () => printOverview(m, kit, 'pdf', window.open('', '_blank')));
     root.querySelector('[data-act="svg"]').addEventListener('click', () => downloadSVG(m, kit));
     root.querySelector('[data-act="scale-open"]').addEventListener('click', () => { scaleOpt.open = !scaleOpt.open; render(); });
     const sb = root.querySelector('[data-act="scale"]');
-    if (sb) sb.addEventListener('click', () => printScaled(m, kit, { ...scaleOpt, squareMm: scaleOpt.squareMm || sqMm(S.kit) }, window.open('', '_blank')));
+    const scaleArgs = () => ({ ...scaleOpt, squareMm: scaleOpt.squareMm || sqMm(S.kit) });
+    if (sb) sb.addEventListener('click', () => printScaled(m, kit, scaleArgs(), 'print'));
+    const sp = root.querySelector('[data-act="scalepdf"]');
+    if (sp) sp.addEventListener('click', () => printScaled(m, kit, scaleArgs(), 'pdf', window.open('', '_blank')));
   }
 
   // ---------------------------------------------------------------- start
