@@ -31,7 +31,7 @@ for (const c of CLASSES) {
     desc: ch.desc || '',
   }));
   const options = opt.CLASS_OPTION_GROUPS.filter((g) => g.class === c && (g.editions.srd2024 || []).length)
-    .map((g) => ({ label: g.label, items: g.editions.srd2024.map((x) => ({ name: x.name, desc: x.desc, prereq: x.prereq?.note || '' })) }));
+    .map((g) => ({ label: g.label, items: g.editions.srd2024.map((x) => ({ name: x.name, desc: x.desc, prereq: x.prereq || null })) }));
   const levels = [];
   for (let l = 1; l <= 20; l += 1) {
     let cap = null;

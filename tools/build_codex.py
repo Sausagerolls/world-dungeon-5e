@@ -79,8 +79,15 @@ AMBIGUOUS = {"Light", "Shield", "Resistance", "Fly", "Jump", "Slow", "Haste", "H
              "Maze", "Wish", "Teleport", "Regenerate", "Resurrection", "Foresight", "Simulacrum"}
 SLOT_WORDS = [
     (r"without (?:expending |using )?(?:a |any )?(?:spell |Pact Magic |pact )?slots?", "without spending mana"),
-    (r"(?:by )?expending a Pact Magic slot", "by spending Pact Mana (your pact level's cost)"),
-    (r"Pact Magic slots?", "Pact Mana"),
+    (r"(?:by )?expend(?:ing)? a Pact Magic (?:spell )?slot", "spend Pact Mana (your pact level's cost)"),
+    (r"\bknown level=0\b", "known cantrips"),
+    (r"\bknown level=\d\b", "known spells"),
+    (r"\b(three|two|one) level=0\b", r"\1 cantrips"),
+    (r"\b(three|two|one) level=(\d)\b", lambda m: f"{m.group(1)} level {m.group(2)} spells"),
+    (r"\blevel=0\b", "cantrips"),
+    (r"\blevel=(\d)\b", r"level \1 spells"),
+    (r"Pact Magic (?:spell )?slots?", "Pact Mana"),
+    (r"per level of the spell slot", "per pact level"),
 ]
 WD_SLOT_NOTE = ("> *World Dungeon: spell slots are mana here. Spend or regain the mana cost of the slot's level "
                 "(see Converting Class Features in `mana`).*")
@@ -301,6 +308,22 @@ def subclasses_chapter(cls, data, rename, rmap):
     return "\n".join(out)
 
 
+def prereq_text(cls, it):
+    """A readable prerequisite from Tabletop Forge's prereq fields (its 'note' can be malformed)."""
+    p = it.get("prereq") or {}
+    parts = []
+    if p.get("level"):
+        lv = int(p["level"])
+        parts.append(f"{lv}{'st' if lv == 1 else 'nd' if lv == 2 else 'rd' if lv == 3 else 'th'}-level {cls}")
+    for f in p.get("feature") or []:
+        parts.append(re.sub(r"\b(Of|The)\b", lambda m: m.group(1).lower(), str(f).title()))
+    if p.get("spell"):
+        # 2024 blast invocations: any damaging warlock cantrip (Pact Beam counts as eldritch blast).
+        attack = re.search(r"\bon a hit|attack roll", it.get("desc", ""), re.I) and "Repelling" in it["name"] or it["name"] in ("Grasp of Hadar", "Lance of Lethargy")
+        parts.append(f"a {cls} cantrip that deals damage{' with an attack roll' if attack else ''} (such as Pact Beam)")
+    return ", ".join(parts)
+
+
 def options_chapter(cls, data, rename):
     if not data["options"]:
         return None
@@ -308,7 +331,7 @@ def options_chapter(cls, data, rename):
     for g in data["options"]:
         out += [f"## {g['label']}", ""]
         for it in sorted(g["items"], key=lambda x: x["name"]):
-            pre = re.sub(r"^\w+:\s*", "", it["prereq"]).replace("#c", "") if it["prereq"] else ""
+            pre = prereq_text(cls, it)
             out += [f"### {it['name']}", f"*Prerequisite: {rename(pre)}*" if pre else "", "", md_text(it["desc"], rename), ""]
     return "\n".join(out)
 
