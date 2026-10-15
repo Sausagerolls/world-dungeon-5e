@@ -177,6 +177,7 @@ The dungeon does not care what you trained for. You can pick up any weapon, armo
 
 - **No penalties.** Armor and shields you are not proficient with give **no disadvantage** and do not stop you casting spells. Heavy armor's Strength requirement still applies.
 - **Half bonus.** With a weapon you are not proficient with, you add **half your proficiency bonus** (rounded down) to the attack roll, instead of your full bonus.
+- **Weapons grow with you.** Every weapon has a rank from I to V, and very high ability scores add damage dice (*Heavy Hands*). See `weapon-ranks`.
 
 **Gaining proficiency.** You become proficient with a weapon type (longsword, revolver, frying pan) or an armor category in any of these ways:
 

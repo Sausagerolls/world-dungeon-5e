@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_pdf as bp  # noqa: E402
 import build_site as bs  # noqa: E402
 import spells_data as sd  # noqa: E402
+import items_data  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "app" / "src" / "generated" / "setting.json"
@@ -82,6 +83,8 @@ def main():
         "spells": spells,
         "spellMap": sd.replacement_map(spells),
         "gods": gods(),
+        # Setting items for the sheet's item library (World Dungeon tab).
+        "items": items_data.load_items(),
         "prestige": prestige(),
         "boxTypes": box_types(),
         "rarities": ["Bronze", "Silver", "Gold", "Legendary", "Celestial"],

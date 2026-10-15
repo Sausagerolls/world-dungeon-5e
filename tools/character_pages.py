@@ -103,7 +103,8 @@ def core_page():
     skills = "".join(f'<div class="prow"><span class="dot"></span><span class="dia"></span><span class="val"></span>{n}<small>{ab}</small></div>'
                      for n, ab in SKILLS)
     passives = "".join(f'<div class="prow"><span class="val"></span>Passive {n}</div>' for n in ("Perception", "Insight", "Investigation"))
-    attacks = "".join("<tr><td></td><td></td><td></td><td></td></tr>" for _ in range(10))
+    rank = "<span class='ranks'>" + "".join(f"<span>{r}</span>" for r in ("I", "II", "III", "IV", "V")) + "</span>"
+    attacks = "".join(f"<tr><td></td><td></td><td>{rank}</td><td></td><td></td></tr>" for _ in range(10))
     circles10 = "".join("<span></span>" for _ in range(10))
     return f"""
 <section class="page">
@@ -163,8 +164,8 @@ def core_page():
           &nbsp; WILL TO LIVE <span class="sqs" style="margin:0"><span></span><span></span></span></div>
       </div>
       <table class="atk">
-        <colgroup><col style="width:36%"><col style="width:14%"><col style="width:26%"><col></colgroup>
-        <thead><tr><th>Attacks and explosives</th><th>Atk / DC</th><th>Damage / type</th><th>Notes</th></tr></thead>
+        <colgroup><col style="width:31%"><col style="width:12%"><col style="width:13%"><col style="width:24%"><col></colgroup>
+        <thead><tr><th>Attacks and explosives</th><th>Atk / DC</th><th>Rank</th><th>Damage / type</th><th>Traits, notes</th></tr></thead>
         <tbody>{attacks}</tbody>
       </table>
       <div class="panel" style="margin-top:2.4mm"><h3>Coin purse (gold pieces only)</h3>

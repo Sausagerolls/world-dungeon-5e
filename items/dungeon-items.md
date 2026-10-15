@@ -30,6 +30,11 @@ Reading it takes 1 minute, then it crumbles. You learn the named Crawler Skill a
 - **Random:** roll a d6 for the category (1–2 Combat, 3 Survival, 4 Utility, 5 Showmanship, 6 Magic). The GM picks or rolls a Crawler Skill from it.
 - **Your choice:** you pick any Crawler Skill.
 
+### Weapon Upgrade Kit
+**Kit · Uncommon (Rank II–III) or Rare (Rank IV–V) · Any box**
+
+A box of System-branded whetstones, rivets and glowing grease. Spend 10 minutes working on one weapon, wraps or firearm: it gains one rank, up to the kit's rank and your rank gate (see `weapon-ranks`). A kit from a box says the highest rank it can give, for example *Weapon Upgrade Kit (Rank III)*. If the weapon gains a trait, choose it then.
+
 ### Training Manual
 **Book · Rare · Gold box**
 

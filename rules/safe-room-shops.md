@@ -146,6 +146,8 @@ Recipes for magic items are sold mostly by Arcane Shops and Parts Dealers.
 | Identify a magic item (properties, curses, charges) | 25 gp | None |
 | Fit an attachment to a firearm | 10 gp | None |
 | Weapon or armor training (Armory or Gun Shop) | 250 gp | 8 floor turns |
+| Raise a weapon's rank (Armory, or Gun Shop for firearms; see `weapon-ranks`) | Workbench gold +50%, plus the materials | As the workbench |
+| Weapon Upgrade Kit (Armory, Floor 3+) | 400 gp × the rank it gives | None |
 | Workbench use | Free | — |
 
 ## Discounts

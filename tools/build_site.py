@@ -39,6 +39,7 @@ PLAYER = [
     ("prestige-levels", "rules/prestige-levels.md", "Your Crawler", "items"),
     ("tome-magic", "rules/tome-magic.md", "Magic", "rules"),
     ("mana", "rules/mana.md", "Magic", "rules"),
+    ("weapon-ranks", "rules/weapon-ranks.md", "Your Crawler", "rules"),
     ("gods", "rules/gods.md", "Gods (optional)", "rules"),
     ("pantheon", "gods/pantheon.md", "Gods (optional)", "rules"),
     ("divine-gear", "items/divine-gear.md", "Gods (optional)", "items"),

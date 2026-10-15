@@ -55,6 +55,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `items/explosives.md` | Explosive rules, 23 explosives, explosive gear | Draft 0.1 |
 | `items/firearms.md` | Firearm rules, special rounds, guns, magic guns, attachments | Draft 0.1 |
 | `items/dungeon-items.md` | All other setting items from loot boxes | Draft 0.1 |
+| `rules/weapon-ranks.md` | Weapon ranks I–V with traits, upgrading, reforging, and Heavy Hands (damage dice from high stats) | Draft 0.1 |
 | `rules/gods.md` | Optional Gods module: worship, Favor ranks, Devotions, the Lapse ladder, Atonement, Apostate's Smites | Draft 0.1 |
 | `gods/pantheon.md` | Eight major gods: vows, Rites, Offerings, Great Deeds, Taboos, Boons, Lapse punishments, smites | Draft 0.1 |
 | `gods/stat-blocks.md` | GM: avatar stat blocks for the eight gods, eleven minor deities | Draft 0.1 |
