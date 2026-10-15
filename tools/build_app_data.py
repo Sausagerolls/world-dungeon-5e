@@ -49,6 +49,8 @@ def gods():
         g["domains"], g["rival"], g["symbol"] = meta.groups()
         q = re.search(r'^> \*"?(.+?)"?\*$', block, re.M)
         g["pitch"] = sd.plain(q.group(1)) if q else ""
+        c = re.search(r"^\*\*Calling\.\*\* (.+?)(?: \(see .*\))?$", block, re.M)
+        g["calling"] = sd.plain(c.group(1)) if c else ""
         v = re.search(r"^\*\*Vow\.\*\* (.+)$", block, re.M)
         g["vow"] = sd.plain(v.group(1)).strip('"') if v else ""
         for m in re.finditer(r"^\| \*\*(Rite|Offering|Great Deed)\*\* \| (.+?) \|$", block, re.M):

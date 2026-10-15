@@ -11,7 +11,7 @@ related: [gods, divine-gear, god-stat-blocks]
 
 > *"Eight major gods hold contracts in the World Dungeon this season. Pick one. Or don't. They'll remember either way."*
 
-Eight major gods take worshippers in the World Dungeon. Each one has a vow, three Devotions, Taboos, four Boons, its own way of punishing Lapses, and its own way of smiting apostates. The rules are in `gods`. Their avatars and lesser kin are in `god-stat-blocks` (GM only).
+Eight major gods take worshippers in the World Dungeon, but only crawlers they have met (see *Meeting a God* in `gods`). Each one has a Calling (what gets its attention), a vow, three Devotions, Taboos, four Boons, its own way of punishing Lapses, and its own way of smiting apostates. The rules are in `gods`. Their avatars and lesser kin are in `god-stat-blocks` (GM only).
 
 **Spell boons.** A boon that gives you a spell writes it into your tome as a granted spell (see `spells-replacements`). Its source is the god. Choose Wisdom or Charisma as its spellcasting ability when you gain it. You can cast it once per long rest without mana, and with mana as normal.
 
@@ -36,6 +36,8 @@ Eight major gods take worshippers in the World Dungeon. Each one has a vow, thre
 > *"Everything rots. Everything grows back. Mother is very patient. Mother is also very hungry."*
 
 Moldra is the god of rot, fungus and rebirth. Her temples are damp, warm and smell like a forest floor after rain, or a fridge after a power cut. She loves the dungeon: it is the biggest compost heap she has ever seen.
+
+**Calling.** Let something rot that everyone else would burn, or eat something truly disgusting, on camera. (see *Meeting a God* in `gods`)
 
 **Vow.** *"Everything rots. Everything grows back. I will feed the Mother."*
 
@@ -69,6 +71,8 @@ Moldra is the god of rot, fungus and rebirth. Her temples are damp, warm and sme
 
 Embrix is the god of fire, glory and spectacle. He is loud, handsome and permanently on fire, and he treats every fight as a pyrotechnics show. His worshippers are easy to find: follow the smoke.
 
+**Calling.** Set something big on fire in front of a crowd, or kill a monster with fire and pose about it. (see *Meeting a God* in `gods`)
+
 **Vow.** *"I will burn bright. I will never let the fire die."*
 
 | Devotion | What you do |
@@ -100,6 +104,8 @@ Embrix is the god of fire, glory and spectacle. He is loud, handsome and permane
 > *"Everything has a price. Prayer is just a subscription. Have you considered the premium tier?"*
 
 Saint Payola is the god of deals, luck and advertising. She owns a stake in most of the dungeon's sponsors and some of its shops. She is always smiling, and her contracts are always longer than they look.
+
+**Calling.** Plug a sponsor at the worst possible moment, or close a deal nobody thought you could. (see *Meeting a God* in `gods`)
 
 **Vow.** *"Everything has a price. I will always pay mine."*
 
@@ -133,6 +139,8 @@ Saint Payola is the god of deals, luck and advertising. She owns a stake in most
 
 Thrumm is the god of storms, hunting and grudges. Every one of his worshippers keeps a **Grudge List**: a list of creatures that wronged them or their friends. His temples are built where lightning has struck, which in the World Dungeon is surprisingly often.
 
+**Calling.** Swear revenge out loud on a creature that hurt your party, then go after it. (see *Meeting a God* in `gods`)
+
 **Vow.** *"I forget nothing. I forgive nothing. I will be the thunder."*
 
 | Devotion | What you do |
@@ -164,6 +172,8 @@ Thrumm is the god of storms, hunting and grudges. Every one of his worshippers k
 > *"Shh."*
 
 Nyx-Ra is the god of secrets, sleep and endings. She keeps every secret anyone has ever whispered into the dark, and she is the reason the dead in the World Dungeon usually stay dead. Her temples are silent. Talking in them is rude. Talking about them is ruder.
+
+**Calling.** Keep a secret that would have helped you, or stop someone raising the dead. (see *Meeting a God* in `gods`)
 
 **Vow.** *(whispered)* *"What I know, I keep. What ends, stays ended."*
 
@@ -197,6 +207,8 @@ Nyx-Ra is the god of secrets, sleep and endings. She keeps every secret anyone h
 
 The Brass Warden is the god of walls, oaths and protection: a towering figure in brass armor with a face nobody has ever seen. The Warden doesn't care whether you are good. The Warden cares whether you keep your word.
 
+**Calling.** Keep a promise that costs you dearly, or hold a doorway alone against a crowd. (see *Meeting a God* in `gods`)
+
 **Vow.** *"I will hold the line. I will keep my word. The law is the wall."*
 
 | Devotion | What you do |
@@ -228,6 +240,8 @@ The Brass Warden is the god of walls, oaths and protection: a towering figure in
 > *"Honk honk."*
 
 Wobblegob is the god of jokes, chaos and pranks. Nobody knows what Wobblegob looks like, because it looks different every time, and it is usually laughing too hard to hold still. The audience adores it. The other gods do not.
+
+**Calling.** Do something so stupid it works, or make a boss laugh. (see *Meeting a God* in `gods`)
 
 **Vow.** *"Honk honk."* (That's the whole vow. Wobblegob made the System accept it.)
 
@@ -269,6 +283,8 @@ Wobblegob is the god of jokes, chaos and pranks. Nobody knows what Wobblegob loo
 > *"Sit down. Eat something. You look terrible, dear."*
 
 Hearthmother Tuul is the god of home, food, healing and hospitality. Safe rooms are her favorite places in the whole dungeon, and some say she is the reason they exist. She is kind, she is warm, and she has a long memory for people who leave others to die alone.
+
+**Calling.** Share your last food with a stranger, or stay with a dying crawler you don't know. (see *Meeting a God* in `gods`)
 
 **Vow.** *"Nobody eats alone. Nobody dies alone. Come home."*
 

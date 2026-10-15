@@ -20,6 +20,7 @@ GM only. The gods themselves never come into the dungeon (the Divine Accord in `
 - **Avatars are CR 25 to 27.** Before the deep floors, an avatar fight is a set piece to survive, not to win: the avatar has a goal (smite one apostate, guard a shrine, test a Chosen), and it leaves when the goal is done.
 - **Smite the Faithless.** Every avatar can smite apostates and non-worshippers as a legendary action. Worshippers of the god are never its target unless they have 4 or more Lapses.
 - **Lairs.** A god's temple is its lair. In its lair an avatar has 5 uses of Legendary Resistance, and the CR shows the lair XP.
+- **Meeting.** Seeing an avatar, or talking with a minor deity, counts as **meeting** its god, and the god makes the crawler a **Divine Offer** (see *Meeting a God* in `gods`). A god sends its herald to a crawler it is curious about.
 - **Killing an avatar** doesn't kill the god. It does make the god very, very interested in you, and is worth a Legendary achievement.
 
 ## Avatars of the Major Gods

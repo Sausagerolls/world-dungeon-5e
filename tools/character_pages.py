@@ -226,9 +226,10 @@ def features_page():
           {"".join(f'<span class="ms"><span class="sq"></span>{r}</span>' for r in ("Initiate", "Devotee 5", "Zealot 15", "Chosen 30"))}</div>
         <div style="display:flex;gap:1.6mm;align-items:center;margin-bottom:1mm"><span class="lab">LAPSES</span>
           {"".join(f'<span class="ms"><span class="sq"></span>{n}</span>' for n in range(1, 6))}<span class="legendline" style="margin:0">Warning · Cold · Displeasure · Wrath · Forsaken</span></div>
-        <div class="legendline" style="margin:0 0 .6mm">Rite each day +1 · Offering each floor +3 · Great Deed +5. Missed Rite or Offering, or a broken Taboo = 1 Lapse. Clean floor = −1.</div>
+        <div class="legendline" style="margin:0 0 .6mm">Rite each day +1 · Offering each floor +3 · Great Deed +5. Missed Rite or Offering, or a broken Taboo = 1 Lapse. Clean floor = −1. Only gods you have met: accepting a Divine Offer starts you at 2 Favor.</div>
         <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">BOONS</span><div class="lines2" style="flex:1"><div></div></div></div>
-        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">APOSTATE OF</span><div class="lines2" style="flex:1"><div></div></div></div>
+        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">GODS MET</span><div class="lines2" style="flex:1"><div></div></div>
+          <span class="lab">APOSTATE OF</span><div class="lines2" style="flex:.7"><div></div></div></div>
       </div>
     </div>
     <div>

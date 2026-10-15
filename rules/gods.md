@@ -2,7 +2,7 @@
 type: rule
 id: gods
 name: Gods and Worship
-version: 0.1
+version: 0.2
 status: draft
 related: [pantheon, divine-gear, god-stat-blocks, class-selection, surviving-the-crawl]
 ---
@@ -15,15 +15,41 @@ related: [pantheon, divine-gear, god-stat-blocks, class-selection, surviving-the
 
 The gods of the World Dungeon are real, petty and very busy. They are bound by the System's **Divine Accord**: they can't walk into the dungeon and fight, but they can bless, curse and smite anyone who prays to them. Every prayer is a little bit of power, and a crawler who prays on camera is free advertising. The gods want you. They also want you to keep your promises.
 
-## Joining a Religion
+## Meeting a God
 
-1. **Find a shrine.** Shrines appear on most floors (the GM places them: usually one or two per floor, sometimes inside a safe room). A few gods also send a priest NPC, an avatar or a very insistent pamphlet.
-2. **Take the vow.** Spend 10 minutes at the shrine. Say the god's vow out loud (each god's entry in `pantheon` has one).
+You can only worship a god you have **met**. Gods don't take worshippers sight unseen: they want to look you over first, preferably on camera.
+
+You meet a god when one of these happens:
+
+| Meeting | How it happens |
+|---------|----------------|
+| **Avatar** | You see the god's avatar (see `god-stat-blocks`): at a smite, a floor event, a temple, or a boss fight the System approves. |
+| **Herald** | You speak with one of the god's minor deities (Prince Fen for Moldra, Cinder for Embrix, and so on). |
+| **Calling** | You do the thing the god loves, in front of an audience (each god's **Calling** in `pantheon`). The GM decides when it is enough: the world freezes, and the god appears to you in a vision for a few seconds. |
+| **Answered prayer** | You pray at the god's shrine for 10 minutes. Make a Wisdom (Religion) or Charisma (Performance) check, DC 15. On a success, the god appears to you. You can try once per shrine per floor. |
+
+Write every god you have met on your sheet (*Gods met*). Meeting a god doesn't oblige you to anything. It only opens the door.
+
+### The Divine Offer
+
+Whenever you meet a god, it makes you an offer. The System puts it on your Interface: *"[God] would like to add you to their followers. ACCEPT / DECLINE."*
+
+- **Accept on the spot.** Say the god's vow (each god's entry in `pantheon` has one). You join at once, with no shrine needed, and you start with **2 Favor** instead of 0 (*"First impression"*). Accepting on camera in the middle of a fight is a Showmanship moment.
+- **Decline**, or let it pass. Nothing happens, except that the god remembers. You can still join later at any of that god's shrines (see *Joining at a Shrine*), at 0 Favor.
+- **Already worshipping someone?** Accepting means leaving your current god, and that god smites you (see *Leaving a Religion*). Accepting a rival god's offer while you worship its rival is a Taboo for every god: you leave with 2 extra Lapses first.
+- **Apostates** never get an offer from a god they left.
+
+### Joining at a Shrine
+
+1. **Find a shrine** of a god you have met. Shrines appear on most floors (usually one or two per floor, sometimes inside a safe room).
+2. **Take the vow.** Spend 10 minutes at the shrine and say the god's vow out loud.
 3. **Get the Mark.** The god's Mark appears on your body, and Inspect shows *"Worshipper of [god]"* to anyone who looks. You start at **0 Favor** as an **Initiate**.
 
-- **One god at a time.** A crawler can worship only one major god. Minor deities (see `god-stat-blocks`) don't have religions to join.
-- **Clerics and paladins.** If the table uses this module, a cleric or paladin must worship a god whose domains include their subclass's theme (the GM decides close calls). A cleric or paladin who leaves their god loses Channel Divinity until they join another one.
-- **Warlocks.** A Celestial or Fiend Patron can be one of these gods. A warlock can't worship a god who is the rival of their patron.
+### Who Can Worship
+
+- **One god at a time.** A crawler can worship only one major god. Minor deities (see `god-stat-blocks`) don't have religions to join, except Vorkath, who will take anyone.
+- **Clerics and paladins.** If the table uses this module, a cleric or paladin must worship a god whose domains include their subclass's theme (the GM decides close calls). They meet that god when they take the class on Floor 3. A cleric or paladin who leaves their god loses Channel Divinity until they join another one.
+- **Warlocks.** A Celestial or Fiend Patron can be one of these gods (you met it when you made the pact). A warlock can't worship a god who is the rival of their patron.
 
 ## Favor
 
@@ -97,13 +123,14 @@ You can leave a religion at any time. Renounce the god out loud, or take the vow
 
 | Place | What you can do |
 |-------|-----------------|
-| **Shrine** (most floors) | Take a vow. Make an Offering. Perform most Rites. Ask the god a yes-or-no question once per floor (the GM answers, cryptically). |
+| **Shrine** (most floors) | Pray for an answered prayer (meet the god). Take a vow, if you have met the god. Make an Offering. Perform most Rites. Ask the god a yes-or-no question once per floor (the GM answers, cryptically). |
 | **Temple** (rare: a safe room annex, or a neighbourhood landmark) | Everything a shrine does. Buy divine gear for gold or Favor (see `divine-gear`). Atone for 1 Lapse with a tithe of 100 gp × your level (once per floor). |
 | **Rival shrine** | Desecrating a rival's shrine is a Great Deed for some gods, and a Taboo for others. Read the fine print. |
 
 ## Gods in Play (GM)
 
 - **The Divine Accord.** Gods only act through worshippers, boons, smites, minor deities and avatars. An avatar (see `god-stat-blocks`) appears only for a smite, a floor event, a Great Deed gone wrong, or a boss fight the System approves.
+- **Introductions.** Plan when the party meets each god: a Calling the first time someone does something on-theme, a herald in a neighbourhood, a shrine in a safe room, an avatar at the end of a floor. One or two gods per floor is plenty. The Divine Offer is a great cliffhanger: freeze the fight, show the god, ask the player.
 - **Rivals.** Every god has a rival. Worshippers of rival gods start every meeting unfriendly. A crawler who works with a rival's worshipper for a whole floor counts as a Taboo for most gods (each god's list says).
 - **Favor pacing.** A crawler who keeps every Rite and Offering gains about 7 Favor per floor (more with Great Deeds), so Devotee arrives around the end of a first floor of worship, Zealot about two floors later, and Chosen after five or six floors. That is on purpose: Chosen boons are strong.
 - **Party religions.** Crawlers in one party can worship different gods. Rival gods in one party make great television.
