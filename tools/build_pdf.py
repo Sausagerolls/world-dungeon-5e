@@ -70,7 +70,7 @@ BOOKS = [
         "footer": "GODS  ·  WORLD DUNGEON",
         "version_from": "rules/gods.md",
         "kicker": "WORLD DUNGEON · OPTIONAL MODULE",
-        "cover_title": "Thou Shalt<br><span>Subscribe</span>",
+        "cover_title": "Gods and<br><span>Worship</span>",
         "sub": "Worship, Favor and Lapses, eight major gods with their Rites, Boons and Smites, and divine gear.",
         "hud": "gods",
         "chapters": [
