@@ -50,9 +50,51 @@ The levels in brackets are the character levels at which the species grants the 
 | Paladin: Faithful Steed (5th) | Find Steed | Mount Up |
 | Ranger: Favored Enemy (1st) | Hunter's Mark | Quest Marker |
 | Monk: Warrior of Shadow (3rd) | Darkness · Minor Illusion | Lights Out · Cardboard Cutout |
-| Warlock: Eldritch Invocations | Any named spell (Armor of Shadows, Mask of Many Faces...) | Its replacement in the index |
+| Warlock: Eldritch Invocations | See *Eldritch Invocations* below | |
 
 Subclass spell lists (Cleric domains, Druid circles, Paladin oaths, Ranger and Sorcerer subclasses, Warlock patrons and the rest) use the Replacement Index, spell by spell.
+
+## Eldritch Invocations
+
+Warlocks keep their Eldritch Invocations. The ones that name a spell use its World Dungeon replacement.
+
+### Pact Beam and the Blast Invocations
+
+*Pact Beam* replaces *eldritch blast*, and **counts as *eldritch blast*** for every invocation and feature that names it. Its beams work like eldritch blast's: each beam is a separate attack roll and a separate damage roll, so an invocation that triggers "on a hit" works once for each beam that hits.
+
+| Invocation | With Pact Beam |
+|------------|----------------|
+| **Agonizing Blast** | Add your Charisma modifier to the damage of **each beam** that hits. |
+| **Eldritch Spear** | Pact Beam's range increases by 30 feet × your warlock level. |
+| **Repelling Blast** | Each beam that hits a Large or smaller creature can push it 10 feet straight away from you. |
+| **Grasp of Hadar** | Once per turn, when a beam hits, you can pull the creature 10 feet straight toward you. |
+| **Lance of Lethargy** | Once per turn, when a beam hits, the creature's speed drops by 10 feet until the end of your next turn. |
+
+- **Beams and ranks.** Pact Beam's beams come from its rank, not your warlock level. The cantrip minimum ranks (Rank II at 5th level, III at 11th, IV at 17th) give the same number of beams at the same levels as *eldritch blast*. A warlock who spends Rank Ups or tomes on it gets extra beams sooner, within the rank gates (a second beam from 3rd level, a third from 5th).
+- **Other cantrips.** The 2024 blast invocations work on any damaging warlock cantrip you know, so they also work with *Grave Chill*, *Stank Cloud*, *Fire Flick* or *Heckle* (only the ones that make an attack roll for Repelling Blast, Grasp of Hadar and Lance of Lethargy). Choose which cantrip each one applies to, as normal.
+- **No Pact Mana boost.** Cantrips cost no mana, so Pact Mana never raises a cantrip's rank.
+
+### Invocations That Cast Spells
+
+An invocation that lets you cast a spell **without a spell slot** lets you cast its replacement **without mana**, as often as the invocation allows, at the spell's current rank. The spell goes into your tome as a granted warlock spell (it can take your warlock Rank Ups).
+
+| Invocation | Original spell | World Dungeon spell |
+|------------|----------------|---------------------|
+| Armor of Shadows | Mage Armor | Wisp Armor, on yourself |
+| Ascendant Step | Levitate | Soft Landing (starts at Rank V), on yourself |
+| Fiendish Vigor | False Life | Wisp Armor (starts at Rank II), on yourself; you gain the maximum temporary hit points |
+| Gift of the Depths | Water Breathing | Snorkel, once per long rest |
+| Mask of Many Faces | Disguise Self | Skin Suit |
+| Master of Myriad Forms | Alter Self | Glow Up, on yourself (the self-change option) |
+| Misty Visions | Silent Image | Cardboard Cutout (starts at Rank III) |
+| One with Shadows | Invisibility | Now You Don't, on yourself, while in dim light or darkness |
+| Otherworldly Leap | Jump | Zoomies, on yourself |
+| Visions of Distant Realms | Arcane Eye | Security Cam (starts at Rank II) |
+| Whispers of the Grave | Speak with Dead | Exit Interview |
+| Pact of the Chain | Find Familiar | Hench-Critter, cast as a Magic action without mana; it can also take the pact's special forms |
+| Pact of the Tome | Three cantrips and two 1st-level rituals, any list | Choose from the World Dungeon lists |
+
+Armor of Shadows and Fiendish Vigor both give Wisp Armor: a warlock with both learns it once, at Rank II. Eldritch Smite and other invocations that spend a pact slot spend Pact Mana instead (see `mana`).
 
 ## Feats
 
@@ -86,10 +128,9 @@ Spells from other books that a subclass or species in Tabletop Forge grants by n
 | Infernal Calling | Phone a Friend (Rank III) |
 | Virtuous Guardians | Bouncer (Rank II) |
 | Wall of Fire Destructive Wave | Body Slam |
-| Armor of Shadows | Wisp Armor |
-| Mask of Many Faces | Skin Suit |
-| Silent Image | Deepfake |
 | Speak with Plants | Pet Translator (Rank III) |
+| Silent Image | Cardboard Cutout (Rank III) |
+| Levitate | Soft Landing (Rank V) |
 | Animal Shapes | Creature Feature (Rank V) |
 
 ## GM Notes

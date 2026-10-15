@@ -146,7 +146,6 @@ Every Player's Handbook spell that a class, subclass, species or feat grants by 
 | Arcane Lock | Deadbolt | 2nd |
 | Arcanist's Magic Aura | Treasure Sense | 2nd |
 | Armor of Agathys | Wisp Armor | 1st |
-| Armor of Shadows | Wisp Armor | 1st |
 | Arms of Hadar | Tentacle Hug | 1st |
 | Augury | Ask the System | 4th |
 | Aura of Life | Good Vibes Only | 4th |
@@ -319,6 +318,7 @@ Every Player's Handbook spell that a class, subclass, species or feat grants by 
 | Leomund's Secret Chest | Storage Unit | 4th |
 | Leomund's Tiny Hut | Pop-Up Tent | 3rd |
 | Lesser Restoration | Walk It Off | 2nd |
+| Levitate | Soft Landing (Rank V) | 1st |
 | Light | Torch | Cantrip |
 | Lightning Bolt | Power Surge | 3rd |
 | Lightning Lure | Joy Buzzer | Cantrip |
@@ -330,7 +330,6 @@ Every Player's Handbook spell that a class, subclass, species or feat grants by 
 | Mage Hand | Grabby Hand | Cantrip |
 | Magic Missile | Magic Missile | 1st |
 | Magic Weapon | Weapon Upgrade | 2nd |
-| Mask of Many Faces | Skin Suit | 1st |
 | Mass Cure Wounds | Sprinkler System | 5th |
 | Mass Heal | Full Party Heal | 9th |
 | Mass Healing Word | Pep Rally | 3rd |
@@ -404,7 +403,7 @@ Every Player's Handbook spell that a class, subclass, species or feat grants by 
 | Shocking Grasp | Joy Buzzer | Cantrip |
 | Sickening Radiance | Gas Station Bathroom (Rank II) | 3rd |
 | Silence | Mute Button | 2nd |
-| Silent Image | Deepfake | 2nd |
+| Silent Image | Cardboard Cutout (Rank III) | Cantrip |
 | Simulacrum | Body Double | 7th |
 | Sleep | Nap Time | 1st |
 | Sleet Storm | Slushie Storm | 3rd |

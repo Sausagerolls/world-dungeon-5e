@@ -2507,13 +2507,17 @@ Plants burst through the floor in a 100-foot radius. Each 5 feet of movement the
 
 Your patron lends you a beam of raw, crackling contract energy. Make a ranged spell attack. On a hit, the target takes 1d10 force damage.
 
+Pact Beam **counts as *eldritch blast*** for Eldritch Invocations and for any other feature that names *eldritch blast*. Each beam is its own attack: invocations such as Agonizing Blast and Repelling Blast work on every beam that hits (see *Eldritch Invocations* in `spells-replacements`).
+
 | Rank | Effect |
 |------|--------|
 | I | One beam, 1d10 force damage. |
 | II | Two beams. Make a separate attack for each. They can hit the same target or different ones. |
 | III | Three beams. |
 | IV | Four beams. |
-| V | Four beams. The first beam that hits on each turn pushes the target 10 feet away from you. |
+| V | Four beams, 1d12 force damage each. |
+
+> *"Terms of your pact have been updated. Please read them. Nobody ever reads them."*
 
 ### Party Trick
 **Cantrip · Transmutation · Bard, Cleric, Druid, Sorcerer, Warlock, Wizard**
