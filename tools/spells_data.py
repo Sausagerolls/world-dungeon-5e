@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read the World Dungeon spells from spells/*.md, and write spells/spell-lists.md.
+"""Read the World Dungeon spells from spells/spells-a-z.md, and write spells/spell-lists.md.
 
 Usage: python3 tools/spells_data.py   (writes spells/spell-lists.md)
 
@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SPELL_FILES = ["cantrips", "1st-level", "2nd-level", "3rd-level", "4th-level", "5th-level", "high-level"]
+SPELL_FILES = ["spells-a-z"]
 CLASSES = ["Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Warlock", "Wizard"]
 ROMAN = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5}
 ORD = ["Cantrips", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"]

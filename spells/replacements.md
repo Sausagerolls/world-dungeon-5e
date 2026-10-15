@@ -85,6 +85,7 @@ Spells from other books that a subclass or species in Tabletop Forge grants by n
 | Sickening Radiance | Gas Station Bathroom (Rank II) |
 | Infernal Calling | Phone a Friend (Rank III) |
 | Virtuous Guardians | Bouncer (Rank II) |
+| Wall of Fire Destructive Wave | Body Slam |
 | Armor of Shadows | Wisp Armor |
 | Mask of Many Faces | Skin Suit |
 | Silent Image | Deepfake |

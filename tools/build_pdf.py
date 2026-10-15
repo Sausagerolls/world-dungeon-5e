@@ -58,13 +58,7 @@ BOOKS = [
         "chapters": [
             ("spells/spell-lists.md", "tables", "The World Dungeon spell list for each class, and the Replacement Index."),
             ("spells/replacements.md", "rules", "How granted spells work: species, class features, subclasses and feats."),
-            ("spells/cantrips.md", "items", "Cantrips, with minimum ranks by character level."),
-            ("spells/1st-level.md", "items", "2 mana at every rank."),
-            ("spells/2nd-level.md", "items", "3 mana at every rank."),
-            ("spells/3rd-level.md", "items", "5 mana at every rank."),
-            ("spells/4th-level.md", "items", "6 mana at every rank."),
-            ("spells/5th-level.md", "items", "7 mana at every rank."),
-            ("spells/high-level.md", "items", "9 to 13 mana: the big ones."),
+            ("spells/spells-a-z.md", "items", "All 235 spells in alphabetical order, each with its Rank I to V table."),
         ],
         "how": ("Every World Dungeon spell has five <strong>ranks</strong>. Its table says exactly what each rank does, and it always costs "
                 "the mana of its own level. Duplicate tomes and class <strong>Rank Ups</strong> raise ranks; your character level gates them."),
@@ -209,13 +203,7 @@ XREF = {
     "celestial-relics": "Celestial Relics",
     "spell-lists": "Spell Lists",
     "spells-replacements": "Granted Spells and Replacements",
-    "spells-cantrips": "Cantrips",
-    "spells-1st-level": "1st-Level Spells",
-    "spells-2nd-level": "2nd-Level Spells",
-    "spells-3rd-level": "3rd-Level Spells",
-    "spells-4th-level": "4th-Level Spells",
-    "spells-5th-level": "5th-Level Spells",
-    "spells-high-level": "6th- to 9th-Level Spells",
+    "spells-a-z": "Spells A to Z",
 }
 
 # H2 sections laid out in two columns of cards.
@@ -227,7 +215,8 @@ ITEM_NO_COLUMNS = {"Explosive Rules", "Quick Reference", "Firearm Rules", "Firea
 def use_columns(text, css):
     if css == "skills":
         return text in SKILL_COLUMNS
-    return css == "items" and text not in ITEM_NO_COLUMNS
+    # Letter headings in the A to Z spell list stay one column: spell tables need the width.
+    return css == "items" and text not in ITEM_NO_COLUMNS and not re.fullmatch(r"[A-Z]|0–9", text)
 
 
 def xref(match):

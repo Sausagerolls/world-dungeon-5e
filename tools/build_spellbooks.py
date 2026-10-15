@@ -35,8 +35,6 @@ NOTES = {
     "Ranger": "Rangers learn spells up to 5th level.",
     "Warlock": "Mystic Arcanum spells (6th to 9th level) come from this list too.",
 }
-GROUPS = [("Cantrips", [0]), ("1st-Level Spells", [1]), ("2nd-Level Spells", [2]), ("3rd-Level Spells", [3]),
-          ("4th-Level Spells", [4]), ("5th-Level Spells", [5]), ("6th- to 9th-Level Spells", [6, 7, 8, 9])]
 
 
 def spell_blocks():
@@ -97,24 +95,18 @@ def book_for(cls, blocks):
     texts, chapters = {}, []
     texts["quick"] = quick_reference(cls, blocks)
     chapters.append(("quick", "tables", "Costs, ranks, the full list, and a page to note the spells you know."))
-    for title, levels in GROUPS:
-        mine = [b for b in blocks if cls in b[1] and b[0] in levels]
-        if not mine:
-            continue
-        body = []
-        for lv in levels:
-            these = [b[3] for b in mine if b[0] == lv]
-            if not these:
-                continue
-            if len(levels) > 1:
-                body.append(f"## {ORD[lv]} Level\n\nEvery {ORD[lv]}-level spell costs **{COST[lv]} mana** at every rank.")
-            body.extend(these)
-        cost = "Free." if levels == [0] else f"{COST[levels[0]]} mana at every rank." if len(levels) == 1 else "9 to 13 mana."
-        intro = "" if len(levels) > 1 else (f"Every {ORD[levels[0]]}-level spell costs **{COST[levels[0]]} mana** at every rank." if levels[0] else
-                                            "Cantrips cost no mana. Your character level sets a minimum rank: II at 5th, III at 11th, IV at 17th.")
-        key = f"lv{levels[0]}"
-        texts[key] = f"# {title}\n\n{intro}\n\n" + "\n\n".join(body) + "\n"
-        chapters.append((key, "items", f"{len(mine)} spells. {cost}"))
+    mine = sorted((b for b in blocks if cls in b[1]), key=lambda b: re.sub(r"[^a-z0-9]", "", b[2].lower()))
+    body, letter = [], None
+    for b in mine:
+        first = b[2][0].upper() if b[2][0].isalpha() else "0–9"
+        if first != letter:
+            body.append(f"## {first}")
+            letter = first
+        body.append(b[3])
+    texts["az"] = (f"# {cls} Spells A to Z\n\nEvery spell on the {cls.lower()} list, in alphabetical order. The tag under each name gives its "
+                   "level. A spell always costs the mana of its own level, at every rank. Cantrips are free, and your character level "
+                   "sets their minimum rank: II at 5th, III at 11th, IV at 17th.\n\n" + "\n\n".join(body) + "\n")
+    chapters.append(("az", "items", f"All {len(mine)} {cls.lower()} spells in alphabetical order, each with its Rank I to V table."))
     bp.HUDS[f"spellbook-{cls}"] = f"""
   <div class="hud">
     <div class="note">CLASS SPELLBOOK</div>
@@ -133,7 +125,7 @@ def book_for(cls, blocks):
         "hud": f"spellbook-{cls}",
         "chapters": chapters,
         "texts": texts,
-        "how": ("Find a spell in the <strong>Quick Reference</strong> list, then turn to its level. Each spell's table shows what every "
+        "how": ("Find a spell in the <strong>Quick Reference</strong> list, then look it up in the A to Z chapter. Each spell's table shows what every "
                 "<strong>rank</strong> does. It always costs the mana of its own level."),
     }
 
