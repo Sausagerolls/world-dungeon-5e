@@ -11,7 +11,7 @@ Box types are read from loot/box-tables.md, so the sheet stays in sync with the 
 """
 import re
 
-from character_pages import CHAR_CSS, core_page, features_page, levels_page, magic_page, pet_page
+from character_pages import CHAR_CSS, core_page, features_page, levels_page, magic_page, faith_page, pet_page
 import subprocess
 import tempfile
 from pathlib import Path
@@ -384,7 +384,7 @@ def page(title, body):
 
 
 def main():
-    pages = [core_page(), features_page(), levels_page(), magic_page(), pet_page(), inventory_page(), player_timer_page(),
+    pages = [core_page(), features_page(), levels_page(), magic_page(), faith_page(), pet_page(), inventory_page(), player_timer_page(),
              grid_page(box_types()), log_page(), crafting_page()]
     pages = [re.sub(r"Page \d+ of \d+", f"Page {i} of {len(pages)}", p) for i, p in enumerate(pages, 1)]
     print_pdf(page("Crawler Character Sheet", "".join(pages)), OUT)

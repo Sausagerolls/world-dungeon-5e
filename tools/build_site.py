@@ -68,7 +68,7 @@ GM = [
 ]
 PLAYER_PDFS = [
     ("The-Crawler.pdf", "The Crawler", "Class, Crawler Skills, class selection, magic, mana, leveling, prestige, the crawl"),
-    ("Crawler-Character-Sheet.pdf", "Crawler Character Sheet", "10-page sheet: stats, features, levels, magic, pet, inventory, timer, boxes, crafting"),
+    ("Crawler-Character-Sheet.pdf", "Crawler Character Sheet", "11-page sheet: stats, features, levels, magic, faith, pet, inventory, timer, boxes, crafting"),
     ("Spells.pdf", "Spells", "Every World Dungeon spell with its ranks, class lists, replacements"),
     ("Spellbook-Bard.pdf", "Bard Spellbook", "Printable: every bard spell with its ranks, and a spells-known page"),
     ("Spellbook-Cleric.pdf", "Cleric Spellbook", "Printable: every cleric spell with its ranks, and a spells-known page"),

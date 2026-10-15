@@ -73,6 +73,20 @@ CHAR_CSS = """
 .slots9 b{font:700 7pt "Avenir Next Condensed",sans-serif; display:block}
 .slots9 .sqs{justify-content:center; gap:.6mm}
 .slots9 .sqs span{width:2.6mm; height:2.6mm}
+.frow{display:flex; gap:2mm; align-items:flex-end; margin:1.2mm 0}
+.frow .ln{flex:1; border-bottom:1px solid #d9d4c7; height:4.6mm}
+.favor{display:grid; grid-template-columns:repeat(20,1fr); gap:.8mm}
+.favor .fv{border:1px solid #1c1b24; border-radius:.6mm; height:5mm; font:700 4.6pt "Menlo",monospace; color:#9a96a3; display:flex; align-items:flex-start; justify-content:flex-end; padding:.3mm .5mm}
+.favor .fv.mk{border:1.6px solid #d81b60; color:#d81b60}
+.sqs.days span{width:4.2mm; height:4.2mm}
+.sqs.floors{gap:1.2mm}
+.sqs.floors .fl{width:5.4mm; height:5mm; border:1.1px solid #1c1b24; border-radius:.6mm; font:700 4.6pt "Menlo",monospace; color:#9a96a3; display:flex; align-items:flex-start; justify-content:flex-end; padding:.3mm .5mm}
+.atk td.c{text-align:center; white-space:nowrap}
+.atk .sq{display:inline-block; width:3mm; height:3mm; border:1.1px solid #1c1b24; border-radius:.5mm; vertical-align:middle}
+.faithpg .atk td{height:6.2mm}
+.faithpg .atk.lapse td{height:7mm; font-size:6.8pt}
+.faithpg .atk.met th{font-size:5.4pt}
+.faithpg .atk.boons td{height:11.5mm}
 """
 
 
@@ -218,19 +232,7 @@ def features_page():
     <div>
       <div class="panel pre"><h3>Crawler Core (always)</h3>{core_html}</div>
       <div class="panel pre"><h3>Survivor features (kept after Floor 3)</h3>{pre_html}</div>
-      <div class="panel"><h3>Class and race features (from Floor 3)</h3><div class="lines2">{"<div></div>" * 4}</div></div>
-      <div class="panel faith"><h3>Faith (optional Gods module)</h3>
-        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">GOD</span><div class="lines2" style="flex:1"><div></div></div>
-          <span class="lab">FAVOR</span><span style="display:inline-block;width:10mm;height:5mm;border:1.2px solid #1c1b24;border-radius:1mm"></span></div>
-        <div style="display:flex;gap:2.2mm;align-items:center;margin:1.4mm 0 1mm"><span class="lab">RANK</span>
-          {"".join(f'<span class="ms"><span class="sq"></span>{r}</span>' for r in ("Initiate", "Devotee 5", "Zealot 15", "Chosen 30"))}</div>
-        <div style="display:flex;gap:1.6mm;align-items:center;margin-bottom:1mm"><span class="lab">LAPSES</span>
-          {"".join(f'<span class="ms"><span class="sq"></span>{n}</span>' for n in range(1, 6))}<span class="legendline" style="margin:0">Warning · Cold · Displeasure · Wrath · Forsaken</span></div>
-        <div class="legendline" style="margin:0 0 .6mm">Rite each day +1 · Offering each floor +3 · Great Deed +5. Missed Rite or Offering, or a broken Taboo = 1 Lapse. Clean floor = −1. Only gods you have met: accepting a Divine Offer starts you at 2 Favor.</div>
-        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">BOONS</span><div class="lines2" style="flex:1"><div></div></div></div>
-        <div style="display:flex;gap:2mm;align-items:flex-end"><span class="lab">GODS MET</span><div class="lines2" style="flex:1"><div></div></div>
-          <span class="lab">APOSTATE OF</span><div class="lines2" style="flex:.7"><div></div></div></div>
-      </div>
+      <div class="panel"><h3>Class and race features (from Floor 3)</h3><div class="lines2">{"<div></div>" * 14}</div></div>
     </div>
     <div>
       <div class="panel"><h3>Proficiencies and languages</h3>
@@ -389,4 +391,72 @@ def levels_page():
   </div>
   <div class="legendline">Each level: one class level, its hit die, its HP (roll or fixed + Con), 1 Stat Point. Odd levels also give a Skill Pick. Write prestige levels as, e.g., Fighter P3. Past level 64: use a second sheet.</div>
   {foot("Levels")}
+</section>"""
+
+
+def faith_page():
+    """The optional Gods module (rules/gods.md): one god, Favor, Lapses, Devotions, Boons, gods met."""
+    favor = "".join(f'<span class="fv{" mk" if n in (5, 15, 30) else ""}">{n}</span>' for n in range(1, 41))
+    lapses = [("1", "Warning", "Lose 1 Favor. The god has noticed."),
+              ("2", "Cold Shoulder", "Lose 3 Favor. Highest-rank Boon off."),
+              ("3", "Displeasure", "Lose 5 Favor. All Boons off. Displeasure: ________________________________"),
+              ("4", "Wrath", "Wrath too. Favor only by Atonement: ____________________________________"),
+              ("5", "Forsaken", "Smitten (it can kill). No longer a worshipper.")]
+    lapse_rows = "".join(f'<tr><td class="c"><span class="sq"></span> {n}</td><td class="k">{nm}</td><td>{t}</td></tr>' for n, nm, t in lapses)
+    days = "".join("<span></span>" for _ in range(24))
+    floors = "".join(f'<span class="fl">{n}</span>' for n in range(1, 19))
+    boons = "".join(f'<tr><td class="k">{r}<br><small>{f}</small></td><td><span class="sq"></span></td><td></td></tr>'
+                    for r, f in (("Initiate", "0 Favor"), ("Devotee", "5 Favor"), ("Zealot", "15 Favor"), ("Chosen", "30 Favor")))
+    met = "".join('<tr><td></td><td class="c"><span class="sq"></span> <span class="sq"></span> <span class="sq"></span> <span class="sq"></span></td>'
+                  '<td class="c"><span class="sq"></span> / <span class="sq"></span></td><td class="c"><span class="sq"></span> <span class="sq"></span> <span class="sq"></span></td><td></td></tr>'
+                  for _ in range(9))
+    return f"""
+<section class="page faithpg">
+  {char_header("Faith")}
+  <div class="legendline" style="margin:1.6mm 0 2mm">Optional Gods module (see Gods and Worship). Worship only a god you have met. Accept its Divine Offer when you meet it (start at 2 Favor), or take its vow at a shrine (0 Favor). One god at a time.</div>
+  <div class="cols2" style="grid-template-columns:1.25fr 1fr; gap:4mm">
+    <div>
+      <div class="panel"><h3>Your god</h3>
+        <div class="frow"><span class="lab">GOD</span><div class="ln"></div><span class="lab">RIVAL</span><div class="ln" style="flex:.6"></div></div>
+        <div class="frow"><span class="lab">DOMAINS</span><div class="ln"></div><span class="lab">HOLY SYMBOL</span><div class="ln" style="flex:.8"></div></div>
+        <div class="frow"><span class="lab">VOW</span><div class="ln"></div></div>
+        <div class="frow"><span class="lab">JOINED</span><span class="ms"><span class="sq"></span>Divine Offer</span><span class="ms"><span class="sq"></span>Shrine</span><span class="lab" style="margin-left:2mm">ON FLOOR</span><div class="ln" style="flex:.4"></div></div>
+      </div>
+      <div class="panel"><h3>Favor</h3>
+        <div class="favor">{favor}</div>
+        <div class="legendline">Rite (each day) +1 · Offering (each floor) +3 · Great Deed (once per floor) +5 · GM awards +1 to +3. Ranks at 5, 15 and 30. Past 40: keep count here ____</div>
+      </div>
+      <div class="panel"><h3>Devotions</h3>
+        <table class="atk"><colgroup><col style="width:18%"><col></colgroup><tbody>
+          <tr><td class="k">Rite</td><td></td></tr><tr><td class="k">Offering</td><td></td></tr><tr><td class="k">Great Deed</td><td></td></tr>
+          <tr><td class="k">Taboos</td><td></td></tr><tr><td class="k"></td><td></td></tr></tbody></table>
+        <div class="lab" style="margin-top:1.6mm">RITE DONE TODAY (TICK A BOX EACH DAY; A LONG REST WITHOUT ONE = 1 LAPSE)</div><div class="sqs days">{days}</div>
+        <div class="lab" style="margin-top:1.4mm">OFFERING MADE ON FLOOR (BEFORE THE STAIRS; MISSING ONE = 1 LAPSE)</div><div class="sqs floors">{floors}</div>
+      </div>
+      <div class="panel"><h3>Boons</h3>
+        <table class="atk boons"><colgroup><col style="width:17%"><col style="width:6%"><col></colgroup>
+          <thead><tr><th>Rank</th><th>✓</th><th>Boon</th></tr></thead><tbody>{boons}</tbody></table>
+        <div class="legendline">Spell boons go in your tome (Magic page) as granted spells: once per long rest without mana.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel"><h3>Lapses</h3>
+        <table class="atk lapse"><colgroup><col style="width:13%"><col style="width:24%"><col></colgroup><tbody>{lapse_rows}</tbody></table>
+        <div class="legendline">Clean floor (no new Lapse) = −1 Lapse at the stairs. Atonement or an Indulgence Coupon = −1.</div>
+        <div class="frow"><span class="lab">ATONEMENT</span><div class="ln"></div></div><div class="lines2"><div></div></div>
+      </div>
+      <div class="panel"><h3>Leaving and smites</h3>
+        <div class="frow"><span class="lab">APOSTATE'S SMITE</span><div class="ln"></div></div>
+        <div class="legendline">Smite by rank when you leave: Initiate 4d10 (to end of floor) · Devotee 8d10 (to end of next floor) · Zealot 12d10 (three floors) · Chosen 16d10 (permanent). Great Crime: smite at the crime's rank. A slain god's smites end.</div>
+        <div class="lab" style="margin-top:1mm">LASTING EFFECTS ON YOU</div><div class="lines2"><div></div><div></div></div>
+      </div>
+      <div class="panel"><h3>Gods met</h3>
+        <table class="atk met"><colgroup><col style="width:30%"><col style="width:24%"><col style="width:14%"><col style="width:19%"><col></colgroup>
+          <thead><tr><th>God</th><th>Met: person · herald · calling · prayer</th><th>Offer: yes / no</th><th>Apostate · rival · slain</th><th>Notes</th></tr></thead>
+          <tbody>{met}</tbody></table>
+      </div>
+      <div class="panel"><h3>Faith log (Great Crimes, Great Deeds, slain gods)</h3><div class="lines2">{"<div></div>" * 6}</div></div>
+    </div>
+  </div>
+  {foot("Faith")}
 </section>"""

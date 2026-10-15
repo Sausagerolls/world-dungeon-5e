@@ -78,7 +78,7 @@ python3 tools/build_pdf.py
 
 It needs only Python 3 and Google Chrome.
 
-Printable sheets: `pdf/Crawler-Character-Sheet.pdf` (a 10-page drop-in replacement for the 5e character sheet: core stats, features and Crawler Skills, level log, magic, pet, inventory, floor timer, loot box grid, box log, crafting projects) and `pdf/GM-Floor-Tracker.pdf` (one page per floor). Rebuild them with `python3 tools/build_sheet.py`. They read the box types from `loot/box-tables.md`.
+Printable sheets: `pdf/Crawler-Character-Sheet.pdf` (an 11-page drop-in replacement for the 5e character sheet: core stats, features and Crawler Skills, level log, magic, faith, pet, inventory, floor timer, loot box grid, box log, crafting projects) and `pdf/GM-Floor-Tracker.pdf` (one page per floor). Rebuild them with `python3 tools/build_sheet.py`. They read the box types from `loot/box-tables.md`.
 
 ## Website
 
