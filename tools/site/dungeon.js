@@ -131,16 +131,28 @@
     const estimate = targets.reduce((s, n) => s + n * (avg(roomTiles) + 0.8 * avg(corrTiles)), 0) || 100;
 
     let best = null;
-    for (let attempt = 0; attempt < 6; attempt++) {
-      const canvasArea = (estimate / 0.32) * Math.pow(1.3, attempt);
+    for (let attempt = 0; attempt < 12; attempt++) {
+      const canvasArea = (estimate / 0.32) * Math.pow(1.3, Math.min(attempt, 5));
       const W = Math.max(12, Math.round(Math.sqrt(canvasArea * ratio)));
       const H = Math.max(12, Math.round(W / ratio));
       const result = build(W, H);
-      const short = result.nb.reduce((s, nb, k) => s + Math.max(0, Math.min(rmin + 1, targets[k]) - nb.rooms), 0);
+      let short = result.nb.reduce((s, nb, k) => s + Math.max(0, Math.min(rmin + 1, targets[k]) - nb.rooms), 0);
+      // Every room must be reachable from every other: a split layout is rejected.
+      if (!connected(result)) short += 1000;
       if (!best || short < best.short) best = { ...result, short };
       if (short === 0) break;
     }
     return best;
+
+    function connected(r) {
+      if (!r.pieces.length) return false;
+      if (new Set(r.pieces.map((p) => p.nb)).size < N) return false;
+      const adj = r.pieces.map(() => []);
+      r.links.forEach((l) => { adj[l.pa].push(l.pb); adj[l.pb].push(l.pa); });
+      const seen = new Set([0]); const q = [0];
+      while (q.length) { const x = q.shift(); for (const y of adj[x]) if (!seen.has(y)) { seen.add(y); q.push(y); } }
+      return seen.size === r.pieces.length;
+    }
 
     function build(W, H) {
       const occ = new Map(); // "x,y" -> piece index
@@ -234,7 +246,8 @@
           const cells = rot.cells.map(([x, y]) => [x + ox, y + oy]);
           mine.push(place({ cells, rot: rot.r }, t, 0, canRoom(t) ? 'room' : 'corridor', null, left));
         } else {
-          const near = pieces.map((p, i) => ({ i, d: dist(centre(p.cells), nb[k].seed) })).sort((a, b) => a.d - b.d).slice(0, 8);
+          // Only pieces still on the map: removed dead ends would leave it hanging.
+          const near = pieces.map((p, i) => ({ i, p, d: dist(centre(p.cells), nb[k].seed) })).filter((x) => !x.p.dead).sort((a, b) => a.d - b.d).slice(0, 8);
           let got = null;
           for (const { i } of near) {
             const useCorr = tilePool(left, canCorr).length && rnd() < 0.7;
