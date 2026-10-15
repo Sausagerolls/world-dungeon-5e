@@ -199,3 +199,13 @@ blockquote.note { background: #f8efd9; border-left: 4px solid var(--gold); paddi
   .step { display: none !important; } .step.print { display: block !important; border: 0; padding: 0; }
   .wiz { display: block; } .summary { display: none; }
 }
+
+/* Collapsible download groups (class spellbooks, Class Codex) */
+.downloads details.dl-group { border: 1px solid var(--rule); border-radius: 10px; margin-bottom: 10px; background: #fbfaf6; }
+.downloads details.dl-group summary { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; list-style: none; }
+.downloads details.dl-group summary::-webkit-details-marker { display: none; }
+.downloads details.dl-group summary b { font: 700 16px var(--display); text-transform: uppercase; }
+.downloads details.dl-group summary b::before { content: "▸ "; color: var(--muted); }
+.downloads details.dl-group[open] summary b::before { content: "▾ "; }
+.downloads details.dl-group summary small { color: var(--muted); font: 12px var(--mono); }
+.downloads details.dl-group > a { margin: 0 10px 10px; background: #fff; }

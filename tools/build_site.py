@@ -294,9 +294,23 @@ def home_page():
     return page("Home", body, "home")
 
 
+# Per-class downloads fold into collapsible lists, by file name prefix.
+DOWNLOAD_GROUPS = [
+    ("Spellbook-", "Class spellbooks", "A printable spellbook for each caster class: its spells A to Z with their ranks."),
+    ("Codex-", "Class Codex", "The whole class for the World Dungeon: rules changes, features, subclasses and spells."),
+]
+
+
 def downloads_page(pdfs, is_gm):
-    rows = "".join(f'<a href="downloads/{f}"><span><b>{t}</b><br><small>{d}</small></span><small>PDF</small></a>'
-                   for f, t, d in pdfs if (SITE / ("gm" if is_gm else "") / "downloads" / f).exists())
+    here = [(f, t, d) for f, t, d in pdfs if (SITE / ("gm" if is_gm else "") / "downloads" / f).exists()]
+    link = lambda f, t, d: f'<a href="downloads/{f}"><span><b>{t}</b><br><small>{d}</small></span><small>PDF</small></a>'
+    grouped = {prefix: [x for x in here if x[0].startswith(prefix)] for prefix, *_ in DOWNLOAD_GROUPS}
+    rows = "".join(link(*x) for x in here if not any(x[0].startswith(p) for p in grouped))
+    for prefix, title, blurb in DOWNLOAD_GROUPS:
+        items = grouped[prefix]
+        if items:
+            rows += (f'<details class="dl-group"><summary><span><b>{title}</b><br><small>{blurb}</small></span>'
+                     f'<small>{len(items)} PDFs</small></summary>{"".join(link(*x) for x in items)}</details>')
     return f'<div class="downloads">{rows}</div>'
 
 
