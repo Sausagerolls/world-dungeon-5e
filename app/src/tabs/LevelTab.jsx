@@ -55,7 +55,7 @@ export default function LevelTab({ st, d, update }) {
 
 // XP (rules/leveling.md): every defeated mob is worth XP by its Mob Tier; every 100 XP is a level. Stored as st.xp.
 const XP_PER_LEVEL = 100;
-const MOB_TIERS = [['Trash', 1], ['Standard', 2], ['Elite', 5], ['Boss', 25], ['Floor Boss', 50]];
+const MOB_TIERS = [['Trash', 5], ['Standard', 10], ['Elite', 25], ['Boss', 100], ['Floor Boss', 200]];
 
 function XpCard({ st, update, onLevel }) {
   const [custom, setCustom] = useState('');
@@ -70,7 +70,7 @@ function XpCard({ st, update, onLevel }) {
         <div style={{ width: `${Math.min(100, (xp % XP_PER_LEVEL || (ready ? XP_PER_LEVEL : 0)))}%`, height: '100%', background: '#c2185b' }} /></div>
       <div className="chips">{MOB_TIERS.map(([name, n]) => <button key={name} className="btn sm" onClick={() => add(n)}>{name} +{n}</button>)}</div>
       <div className="row" style={{ gap: 6, marginTop: 6 }}>
-        <input className="f" type="number" inputMode="numeric" placeholder="Other XP (e.g. 30 for grinding)" value={custom} onChange={(e) => setCustom(e.target.value)} />
+        <input className="f" type="number" inputMode="numeric" placeholder="Other XP (e.g. 150 for grinding)" value={custom} onChange={(e) => setCustom(e.target.value)} />
         <button className="btn sm" disabled={!Number(custom)} onClick={() => { add(Math.trunc(Number(custom))); setCustom(''); }}>Add</button>
       </div>
       <p className="small muted">Tap a mob's tier for each one your fight defeats. Everyone in the fight gets the full XP. At 100, level up and keep the rest. Use a minus number to fix a mistake. <RulesLink page="leveling">XP rules</RulesLink></p>

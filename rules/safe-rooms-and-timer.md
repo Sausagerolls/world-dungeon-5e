@@ -171,7 +171,7 @@ The clock only adds pressure if it stays light to run. These habits keep it from
 When the party wants to grind mobs for levels and loot, they can spend a **block of 6 floor turns** instead of playing out each fight.
 
 - The GM makes one Ambush Check for the area, to see whether something serious turns up. On a hit, play out one real fight.
-- Otherwise, each crawler rolls once on the Enemy Loot table for the area's usual creatures, and gains **30 XP** on Floors 1–6, or **25 XP** from Floor 7 (see `leveling`).
+- Otherwise, each crawler rolls once on the Enemy Loot table for the area's usual creatures, and gains **150 XP** on Floors 1–6, or **125 XP** from Floor 7 (see `leveling`).
 - Each crawler loses hit points equal to 2 × their level (they can spend Hit Dice afterwards as normal).
 - Grinding is boring television: no Audience points are gained during a grinding block.
 

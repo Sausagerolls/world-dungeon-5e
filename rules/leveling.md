@@ -2,7 +2,7 @@
 type: rule
 id: leveling
 name: Leveling and Levels Beyond 20
-version: 0.2
+version: 0.3
 status: draft
 related: [crawler, class-selection, crawler-skills, enemy-loot, safe-rooms-and-timer, quest-builder]
 ---
@@ -19,29 +19,31 @@ Crawlers level up by killing things. Every mob you defeat is worth **experience 
 
 | Mob Tier | What it is | XP |
 |----------|------------|----|
-| **1. Trash** | Fodder that comes in packs: rats, crias, sweeper bots, minions, a boss's adds. Dies in a hit or two. | 1 |
-| **2. Standard** | An ordinary monster in an ordinary fight. | 2 |
-| **3. Elite** | Elite and named mobs, mini-bosses, a boss's lieutenant, hostile crawlers. | 5 |
-| **4. Boss** | A neighbourhood boss, or any boss that drops a Boss Box. | 25 |
-| **5. Floor Boss** | The boss guarding the floor's main stairwell. | 50 |
+| **1. Trash** | Fodder that comes in packs: rats, crias, sweeper bots, minions, a boss's adds. Dies in a hit or two. | 5 |
+| **2. Standard** | An ordinary monster in an ordinary fight. | 10 |
+| **3. Elite** | Elite and named mobs, mini-bosses, a boss's lieutenant, hostile crawlers. | 25 |
+| **4. Boss** | A neighbourhood boss, or any boss that drops a Boss Box. | 100 |
+| **5. Floor Boss** | The boss guarding the floor's main stairwell. | 200 |
 
 - **Tier is the mob's role, not its CR.** A goblin is Trash in a horde of thirty and Standard in a fight with three. The GM decides, and the System shows it when you Inspect the mob. The values don't change with the floor, so 100 XP is always one level.
 - **Everyone in the fight gets it.** Each crawler who took part in the fight gets the full XP for every mob defeated in it, whoever landed the blow. Crawlers who were down but alive still get it. Dead crawlers don't.
 - **Defeated counts.** Killed, captured, or surrendered for good all count. A mob that runs away and comes back later is worth XP once, when it's finally beaten.
 - **No XP** for creatures that were summoned, conjured or created by magic, for your own party's pets and allies, or for anything the GM says was never a threat (a caged rat, a sleeping kitten).
 - **Swarms.** A swarm is one Standard mob, not a hundred Trash ones.
-- **Level up when the fight ends.** When your XP reaches 100, you gain a level as soon as the fight is over. Take away 100 and keep the rest. A big fight (a boss and its adds) can give two levels at once.
+- **Level up when the fight ends.** When your XP reaches 100, you gain a level as soon as the fight is over. Take away 100 and keep the rest. Every boss is worth at least a level, and a big fight (a floor boss and its adds) can give three.
 - **XP goes on your sheet.** Track it on the **Levels** page of your character sheet, or the Level tab of the Crawler Sheet app.
 
 ### Other Ways to Earn XP
 
-- **Grinding.** A grinding block gives every crawler **30 XP** on Floors 1–6, and **25 XP** from Floor 7 (see *Grinding Blocks* in `safe-rooms-and-timer`).
-- **Quests** don't give XP by themselves. The fights on the way do. The GM may give **25 XP** for a ★★★★ quest and **50 XP** for a ★★★★★ quest (see `quest-builder`).
-- **Crawlers.** Killing another crawler is worth 5 XP (Elite), and a Murder Box. The audience will have opinions.
+- **Grinding.** A grinding block gives every crawler **150 XP** on Floors 1–6, and **125 XP** from Floor 7 (see *Grinding Blocks* in `safe-rooms-and-timer`).
+- **Quests** don't give XP by themselves. The fights on the way do. The GM may give **100 XP** for a ★★★★ quest and **200 XP** for a ★★★★★ quest (see `quest-builder`).
+- **Crawlers.** Killing another crawler is worth 25 XP (Elite), and a Murder Box. The audience will have opinions.
 
 ## Floor Pacing
 
-The XP values are built to give **3–4 levels per floor**. A typical floor is about 15 ordinary fights (60–100 XP), a few elites (20–30 XP), three or four neighbourhood bosses (75–100 XP) and the floor boss (50 XP). Parties that clear every neighbourhood leave a level ahead. Cautious parties fall behind, and the dungeon punishes that.
+A typical floor is about 15 ordinary fights (300–500 XP), a few elites (100–150 XP), three or four neighbourhood bosses (300–400 XP) and the floor boss (200 XP): about **10–12 levels per floor**. Parties that clear every neighbourhood leave further ahead. Cautious parties fall behind, and the dungeon punishes that.
+
+*Draft note: the XP values were raised in v0.3. The table below, the floors, and the proficiency and class rules still assume 3–4 levels per floor, and need rebalancing to match.*
 
 | Floor | Levels on that floor |
 |-------|----------------------|

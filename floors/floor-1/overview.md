@@ -62,7 +62,7 @@ Every neighbourhood boss has a **boss room** with its own mechanics. On the way 
 
 ### Rewards
 
-**XP** (see `leveling`). Most Floor 1 fights are Trash (1 XP: crias, sweeper bots, rats, goblin rabble) and Standard mobs (2 XP). Named mobs and a boss's lieutenants (like Kaboomba's goblin hexer) are Elite (5 XP). Each neighbourhood boss is worth 25 XP, and the Bouncer 50 XP.
+**XP** (see `leveling`). Most Floor 1 fights are Trash (5 XP: crias, sweeper bots, rats, goblin rabble) and Standard mobs (10 XP). Named mobs and a boss's lieutenants (like Kaboomba's goblin hexer) are Elite (25 XP). Each neighbourhood boss is worth 100 XP, and the Bouncer 200 XP.
 
 Every neighbourhood boss gives:
 
