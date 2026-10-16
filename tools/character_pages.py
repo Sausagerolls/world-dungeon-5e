@@ -392,11 +392,12 @@ def levels_page():
     </table>
     <div class="legendline">Hit dice: Crawler levels d8 · Sorcerer, Wizard d6 · Bard, Cleric, Druid, Monk, Rogue, Warlock d8 · Fighter, Paladin, Ranger d10 · Barbarian d12. Floor 3 class levels keep d8.</div>
   </div>
+  <div class="strip" style="white-space:nowrap"><span>XP ________ / 100</span><span>TRASH 1 · STANDARD 2 · ELITE 5 · BOSS 25 · FLOOR BOSS 50</span></div>
   <div class="cols2" style="grid-template-columns:1fr 1fr; gap:4mm">
     {log_table(1)}
     {log_table(33)}
   </div>
-  <div class="legendline">Each level: one class level, its hit die, its HP (roll or fixed + Con), 1 Stat Point. Odd levels also give a Skill Pick. Write prestige levels as, e.g., Fighter P3. Past level 64: use a second sheet.</div>
+  <div class="legendline">Each level: one class level, its hit die, its HP (roll or fixed + Con), 1 Stat Point. Odd levels also give a Skill Pick. At 100 XP gain a level and keep the rest. Write prestige levels as, e.g., Fighter P3. Past level 64: use a second sheet.</div>
   {foot("Levels")}
 </section>"""
 

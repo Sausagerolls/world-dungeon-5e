@@ -48,7 +48,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `rules/safe-rooms-and-timer.md` | Floor turns, resting, Ambush Checks, safe rooms, floor timer, stairwells | Draft 0.1 |
 | `rules/patches.md` | Patch Notes: the System AI patches the game mid-crawl (the GM's fix-it tool), its promises, Bug Bounty | Draft 0.1 |
 | `rules/prestige-levels.md` | Prestige levels (21+ in one class): scaling, boons, 5 features per class | Draft 0.1 |
-| `rules/leveling.md` | Floor pacing (3–4 levels per floor), proficiency bonus, levels beyond 20 | Draft 0.1 |
+| `rules/leveling.md` | XP by Mob Tier (100 XP per level), floor pacing (3–4 levels per floor), proficiency bonus, levels beyond 20 | Draft 0.2 |
 | `rules/loot-boxes.md` | Earning and opening boxes, rarity (Bronze to Celestial), box types, Player Killer mark | Draft 0.1 |
 | `rules/achievements.md` | Achievement tiers, the Audience Meter, 54 example achievements | Draft 0.1 |
 | `loot/box-tables.md` | d100 tables for all 19 box types | Draft 0.1 |
@@ -108,7 +108,7 @@ Inside a file, individual entries (Crawler Skills, features, items) use a level-
 - [x] Crawler Skills (replaces Crawler Talents)
 - [x] Floor 3 class selection rules
 - [x] Tome magic and mana
-- [x] Leveling pacing and levels beyond 20
+- [x] Leveling: XP by Mob Tier, pacing and levels beyond 20
 - [ ] More Crawler Skills (target 40+ for high-level play)
 - [ ] Monster scaling for Floor 7+
 - [x] Races available on Floor 3

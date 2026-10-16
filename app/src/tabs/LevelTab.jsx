@@ -30,6 +30,8 @@ export default function LevelTab({ st, d, update }) {
           <button className="btn primary block" onClick={() => setSelect(true)}>Open the selection menu</button>
         </div>)}
 
+      <XpCard st={st} update={update} onLevel={() => setLevelUp(true)} />
+
       <div className="card">
         <div className="row between"><h2 className="sec" style={{ margin: 0 }}>Level {d.level}</h2>
           <button className="btn primary" onClick={() => setLevelUp(true)}>Level up</button></div>
@@ -48,6 +50,31 @@ export default function LevelTab({ st, d, update }) {
       {levelUp && <LevelUp st={st} d={d} update={update} onClose={() => setLevelUp(false)} />}
       {select && <ClassSelect st={st} d={d} update={update} onClose={() => setSelect(false)} />}
     </>
+  );
+}
+
+// XP (rules/leveling.md): every defeated mob is worth XP by its Mob Tier; every 100 XP is a level. Stored as st.xp.
+const XP_PER_LEVEL = 100;
+const MOB_TIERS = [['Trash', 1], ['Standard', 2], ['Elite', 5], ['Boss', 25], ['Floor Boss', 50]];
+
+function XpCard({ st, update, onLevel }) {
+  const [custom, setCustom] = useState('');
+  const xp = st.xp || 0;
+  const add = (n) => update((s) => { s.xp = Math.max(0, (s.xp || 0) + n); return s; });
+  const ready = Math.floor(xp / XP_PER_LEVEL);
+  return (
+    <div className="card">
+      <div className="row between"><h2 className="sec" style={{ margin: 0 }}>XP {xp} / {XP_PER_LEVEL}</h2>
+        {ready > 0 && <button className="btn primary" onClick={onLevel}>Level up{ready > 1 ? ` (${ready})` : ''}</button>}</div>
+      <div style={{ height: 8, background: '#e6e1d6', borderRadius: 4, margin: '8px 0', overflow: 'hidden' }}>
+        <div style={{ width: `${Math.min(100, (xp % XP_PER_LEVEL || (ready ? XP_PER_LEVEL : 0)))}%`, height: '100%', background: '#c2185b' }} /></div>
+      <div className="chips">{MOB_TIERS.map(([name, n]) => <button key={name} className="btn sm" onClick={() => add(n)}>{name} +{n}</button>)}</div>
+      <div className="row" style={{ gap: 6, marginTop: 6 }}>
+        <input className="f" type="number" inputMode="numeric" placeholder="Other XP (e.g. 30 for grinding)" value={custom} onChange={(e) => setCustom(e.target.value)} />
+        <button className="btn sm" disabled={!Number(custom)} onClick={() => { add(Math.trunc(Number(custom))); setCustom(''); }}>Add</button>
+      </div>
+      <p className="small muted">Tap a mob's tier for each one your fight defeats. Everyone in the fight gets the full XP. At 100, level up and keep the rest. Use a minus number to fix a mistake. <RulesLink page="leveling">XP rules</RulesLink></p>
+    </div>
   );
 }
 
@@ -73,6 +100,7 @@ function LevelUp({ st, d, update, onClose }) {
   const confirmLevel = () => {
     update((s) => {
       s.levels.push({ n, cls: classed ? cls : 'Crawler', hd: die, hp, ...(prestige ? { prestige } : {}) });
+      if ((s.xp || 0) >= XP_PER_LEVEL) s.xp -= XP_PER_LEVEL;
       s.statPointsUnspent += 1;
       if (n % 2 === 1) s.skillPicksUnspent += 1;
       if (needsSub && sub) s.subclasses = { ...s.subclasses, [cls]: sub };

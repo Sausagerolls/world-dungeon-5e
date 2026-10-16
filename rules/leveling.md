@@ -2,18 +2,46 @@
 type: rule
 id: leveling
 name: Leveling and Levels Beyond 20
-version: 0.1
+version: 0.2
 status: draft
-related: [crawler, class-selection, crawler-skills]
+related: [crawler, class-selection, crawler-skills, enemy-loot, safe-rooms-and-timer, quest-builder]
 ---
 
 # Leveling and Levels Beyond 20
 
 In the World Dungeon, crawlers gain **3–4 levels per floor**, and character level has **no cap**. A crawler who survives all 18 floors ends at about level 60–70.
 
+## Experience Points
+
+> *"Level up! You killed a lot of things. The System is proud of you. Please continue."*
+
+Crawlers level up by killing things. Every mob you defeat is worth **experience points (XP)**, based on its **Mob Tier**. **Every 100 XP is one level.**
+
+| Mob Tier | What it is | XP |
+|----------|------------|----|
+| **1. Trash** | Fodder that comes in packs: rats, crias, sweeper bots, minions, a boss's adds. Dies in a hit or two. | 1 |
+| **2. Standard** | An ordinary monster in an ordinary fight. | 2 |
+| **3. Elite** | Elite and named mobs, mini-bosses, a boss's lieutenant, hostile crawlers. | 5 |
+| **4. Boss** | A neighbourhood boss, or any boss that drops a Boss Box. | 25 |
+| **5. Floor Boss** | The boss guarding the floor's main stairwell. | 50 |
+
+- **Tier is the mob's role, not its CR.** A goblin is Trash in a horde of thirty and Standard in a fight with three. The GM decides, and the System shows it when you Inspect the mob. The values don't change with the floor, so 100 XP is always one level.
+- **Everyone in the fight gets it.** Each crawler who took part in the fight gets the full XP for every mob defeated in it, whoever landed the blow. Crawlers who were down but alive still get it. Dead crawlers don't.
+- **Defeated counts.** Killed, captured, or surrendered for good all count. A mob that runs away and comes back later is worth XP once, when it's finally beaten.
+- **No XP** for creatures that were summoned, conjured or created by magic, for your own party's pets and allies, or for anything the GM says was never a threat (a caged rat, a sleeping kitten).
+- **Swarms.** A swarm is one Standard mob, not a hundred Trash ones.
+- **Level up when the fight ends.** When your XP reaches 100, you gain a level as soon as the fight is over. Take away 100 and keep the rest. A big fight (a boss and its adds) can give two levels at once.
+- **XP goes on your sheet.** Track it on the **Levels** page of your character sheet, or the Level tab of the Crawler Sheet app.
+
+### Other Ways to Earn XP
+
+- **Grinding.** A grinding block gives every crawler **30 XP** on Floors 1–6, and **25 XP** from Floor 7 (see *Grinding Blocks* in `safe-rooms-and-timer`).
+- **Quests** don't give XP by themselves. The fights on the way do. The GM may give **25 XP** for a ★★★★ quest and **50 XP** for a ★★★★★ quest (see `quest-builder`).
+- **Crawlers.** Killing another crawler is worth 5 XP (Elite), and a Murder Box. The audience will have opinions.
+
 ## Floor Pacing
 
-Use milestone leveling. Give levels at major beats on each floor, for example: the first big fight, a neighborhood boss, the floor boss, and finding the stairwell.
+The XP values are built to give **3–4 levels per floor**. A typical floor is about 15 ordinary fights (60–100 XP), a few elites (20–30 XP), three or four neighbourhood bosses (75–100 XP) and the floor boss (50 XP). Parties that clear every neighbourhood leave a level ahead. Cautious parties fall behind, and the dungeon punishes that.
 
 | Floor | Levels on that floor |
 |-------|----------------------|
@@ -36,9 +64,9 @@ Use milestone leveling. Give levels at major beats on each floor, for example: t
 | 17 | 57 → 60 |
 | 18 | 60 → 64+ |
 
-The levels are a guide. Crawlers who take risks, earn achievements or kill bosses can be a level ahead. Cautious crawlers fall behind, and the dungeon punishes that.
+**Farming.** There is no cap on XP from trash mobs. The floor timer is the cap: every fight costs a floor turn, and the stairs don't wait.
 
-**Optional XP rule.** If you prefer XP, use the standard 5e table to 20th level. After 20th, each level costs 50,000 XP more than the level before it.
+**Optional: milestone leveling.** If you'd rather not count XP, give levels at major beats on each floor instead: the first big fight, a neighbourhood boss, the floor boss, and finding the stairwell. Use the table above as the target.
 
 ## Proficiency Bonus
 

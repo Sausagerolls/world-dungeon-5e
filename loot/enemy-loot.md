@@ -25,7 +25,7 @@ Loot boxes reward achievements. **Enemy loot** is what crawlers find on the bodi
 
 ### Tier
 
-Tier depends on the creature's CR, not the floor.
+Tier depends on the creature's CR, not the floor. (Loot tier is not the same as **Mob Tier**, which sets XP by the creature's role; see `leveling`.)
 
 | Tier | CR |
 |------|----|

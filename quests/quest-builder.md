@@ -205,7 +205,7 @@ Swap some gold for something more interesting. These are worth about as much as 
 
 **Big rewards.** A ★★★★ quest can give one Crawler Skill level in a skill the crawler used to finish it. A ★★★★★ quest can give a Stat Point or a Crawler Skill level, and a **title** that shows on Inspect. These come from the System only.
 
-**Levels.** With milestone leveling (see `leveling`), a ★★★★ or ★★★★★ quest is a good beat for a level. With the optional XP rule, give the XP of an encounter of the quest's hardest difficulty.
+**XP.** Quests don't give XP by themselves; the fights on the way do (see `leveling`). For a big quest you may add **25 XP** (★★★★) or **50 XP** (★★★★★). With optional milestone leveling, a ★★★★ or ★★★★★ quest is a good beat for a level.
 
 **No Audience.** Never give Audience points for finishing a quest. Give them for how the crawlers finish it, as normal (see `achievements`).
 

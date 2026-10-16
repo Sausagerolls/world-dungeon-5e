@@ -47,8 +47,9 @@ export default function Sheet({ st, update, conn, status, error, onBack, charId 
       </div>
       {status === 'error' && <div className="err" style={{ margin: 10 }}>Not saved to Tabletop Forge: {error}</div>}
       <div className="page">
-        {tab === 'main' && (st.statPointsUnspent > 0 || st.skillPicksUnspent > 0 || featTodo.length > 0 || spellTodo.length > 0 || grantTodo > 0 || rankTodo > 0 || riteTodo) && (
+        {tab === 'main' && ((st.xp || 0) >= 100 || st.statPointsUnspent > 0 || st.skillPicksUnspent > 0 || featTodo.length > 0 || spellTodo.length > 0 || grantTodo > 0 || rankTodo > 0 || riteTodo) && (
           <div className="warn">
+            {(st.xp || 0) >= 100 && <div onClick={() => go('level')}>You have {st.xp} XP: time to level up (Level tab).</div>}
             {st.statPointsUnspent > 0 && <div onClick={() => go('skills')}>You have {st.statPointsUnspent} unspent Stat Point{st.statPointsUnspent > 1 ? 's' : ''} (Skills tab, tap +1 on an ability).</div>}
             {st.skillPicksUnspent > 0 && <div onClick={() => go('skills')}>You have {st.skillPicksUnspent} unspent Skill Pick{st.skillPicksUnspent > 1 ? 's' : ''} (Skills tab).</div>}
             {featTodo.length > 0 && <div onClick={() => go('features')}>Feat choices to make: {featTodo.join(', ')} (Features tab).</div>}
