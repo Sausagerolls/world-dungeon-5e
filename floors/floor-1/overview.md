@@ -21,7 +21,7 @@ This book is for the GM. Monster Manual creatures use their **2025 Monster Manua
 
 | | |
 |---|---|
-| **Party levels** | 1 → 4 |
+| **Party levels** | 1 → 12 (the content is built for levels 1–4, so it gets easier as the party grows; see `leveling`) |
 | **Floor timer** | 48 floor turns (2 dungeon days) |
 | **Neighbourhoods** | 7, plus Club Stairwell (the floor boss) |
 | **Safe rooms** | 5 |
@@ -34,12 +34,12 @@ This book is for the GM. Monster Manual creatures use their **2025 Monster Manua
 |---|---------------|--------|------|----------------|-----------|
 | 1 | The Llama Pens | 1 | Mama Drama (CR 2) | General Store and Armory (the starting hub) | — |
 | 2 | The Birthday Party Wing | 1–2 | Chuckles the Cheese Mouse (CR 3) | Pet Shop | — |
-| 3 | The Mushroom Rave | 2 | DJ Spore-Lord (myconid sovereign, MM p. 223) | Apothecary | — |
+| 3 | The Mushroom Rave | 2 | DJ Spore-Lord (CR 3) | Apothecary | — |
 | 4 | The Maintenance Tunnels | 2–3 | Mega-Sweeper 9000 (CR 3) | Parts Dealer and Gun Shop | — |
 | 5 | The Gobtown Warrens | 2–3 | Chief Kaboomba (CR 3) | Bomb Shop | Guarded by goblins |
-| 6 | Catacomb Tours™ | 3 | The Tour Guide (mummy, MM p. 219) | — | Behind the boss |
+| 6 | Catacomb Tours™ | 3 | The Tour Guide (CR 3) | — | Behind the boss |
 | 7 | The Hoarder's Garage Sale | 3–4 | The Hoarder (CR 4) | — | Hidden in the junk |
-| — | Club Stairwell | 4 | The Bouncer (troll, MM p. 310) | — | The main stairwell |
+| — | Club Stairwell | 4 | The Bouncer (CR 5) | — | The main stairwell |
 
 The levels show which neighbourhoods suit the party as it grows. Crawlers can go anywhere; the danger steers them.
 

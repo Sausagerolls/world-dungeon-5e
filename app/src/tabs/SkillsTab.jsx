@@ -55,7 +55,7 @@ export default function SkillsTab({ st, d, update }) {
 
       <div className="card dark">
         <h2 className="sec">Skill Picks: {st.skillPicksUnspent}</h2>
-        <p className="small" style={{ color: '#bdb8cc' }}>You get a Skill Pick at every odd level. The GM can also award Skill Levels when you use a Crawler Skill well: use + on the skill.</p>
+        <p className="small" style={{ color: '#bdb8cc' }}>You get a Skill Pick at 1st level and every 5th level. The GM can also award Skill Levels when you use a Crawler Skill well: use + on the skill.</p>
         <div className="row wrap">
           <button className="btn primary sm" disabled={st.skillPicksUnspent < 1} onClick={() => setAdding(true)}>Learn a skill</button>
           <button className="btn sm" disabled={st.skillPicksUnspent < 1} onClick={() => setMode('montage')}>Training Montage</button>

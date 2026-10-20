@@ -102,7 +102,7 @@ function LevelUp({ st, d, update, onClose }) {
       s.levels.push({ n, cls: classed ? cls : 'Crawler', hd: die, hp, ...(prestige ? { prestige } : {}) });
       if ((s.xp || 0) >= XP_PER_LEVEL) s.xp -= XP_PER_LEVEL;
       s.statPointsUnspent += 1;
-      if (n % 2 === 1) s.skillPicksUnspent += 1;
+      if (n % 5 === 0) s.skillPicksUnspent += 1;
       if (needsSub && sub) s.subclasses = { ...s.subclasses, [cls]: sub };
       if (newChoices.length) s.classChoices = { ...(s.classChoices || {}), [cls]: { ...((s.classChoices || {})[cls] || {}), ...picks } };
       return topUp(d, s);
@@ -113,7 +113,7 @@ function LevelUp({ st, d, update, onClose }) {
   return (
     <Modal title={`Level ${n}`} onClose={onClose}>
       <ul className="small">
-        <li>+1 Stat Point{n % 2 === 1 ? ', +1 Skill Pick' : ''}.</li>
+        <li>+1 Stat Point{n % 5 === 0 ? ', +1 Skill Pick' : ''}.</li>
         {!classed && n === 3 && <li>Survivor feature: Inclination (choose it in Features).</li>}
         {!classed && n === 5 && <li>Survivor feature: Hardened (choose it in Features).</li>}
         {[2, 4, 7, 8].includes(n) && !classed && <li>New survivor feature (see Features).</li>}
@@ -152,13 +152,14 @@ function ClassSelect({ st, d, update, onClose }) {
   const have = [...new Set([...st.skills, ...(st.bgSkills || []), ...(st.extraSkill ? [st.extraSkill] : [])])];
   const spChoices = speciesChoices(speciesId, subraceId);
   const spSkills = Object.entries(spPicks).filter(([k]) => k.startsWith('skills:')).flatMap(([, v]) => v || []);
-  const clsChoices = cls ? classChoicesFor(cls, N).filter((c) => c.kind !== 'auto') : [];
+  const CL = Math.min(N, 20); // no class goes above 20th level; the rest are prestige levels
+  const clsChoices = cls ? classChoicesFor(cls, CL).filter((c) => c.kind !== 'auto') : [];
   const ok = speciesId && (!sp?.subraces?.length || subraceId) && spChoices.every((c) => speciesChoiceDone(c, spPicks[c.id]))
     && cls && (N < 3 || sub) && clsChoices.every((c) => choiceDone(c, picks[c.id]));
 
   const confirm = () => {
     update((s) => {
-      s.levels = s.levels.map((e) => (e.cls === 'Crawler' ? { ...e, asClass: cls } : e));
+      s.levels = s.levels.map((e, i) => (e.cls === 'Crawler' ? { ...e, asClass: cls, ...(i >= 20 ? { prestige: i - 19 } : {}) } : e));
       s.classChosen = true;
       s.subclasses = { ...s.subclasses, ...(sub ? { [cls]: sub } : {}) };
       s.speciesId = speciesId; s.subraceId = subraceId; s.speciesName = sp?.name + (subraceId ? ` (${(sp.subraces || []).find((x) => x.id === subraceId)?.name || ''})` : '');
@@ -188,11 +189,11 @@ function ClassSelect({ st, d, update, onClose }) {
       <span className="lab">Class (any Player's Handbook class)</span>
       <div className="chips">{CLASSES.map((c) => <Pick key={c} on={cls === c} onClick={() => { setCls(c); setSub(''); setPicks({}); }}>{c}</Pick>)}</div>
       {cls && <>
-        <p className="small">You become a level {N} {cls}, with every {cls} feature up to level {N}. Your {N} crawler levels keep their d8 Hit Dice; from now on you gain {HIT_DIE[cls]}s.</p>
+        <p className="small">You become a level {CL} {cls}, with every {cls} feature up to level {CL}{N > 20 ? `, plus ${N - 20} prestige level${N > 21 ? 's' : ''} (add the prestige features in Features)` : ''}. Your {N} crawler levels keep their d8 Hit Dice; from now on you gain {HIT_DIE[cls]}s.</p>
         {N >= 3 && <><span className="lab">Subclass</span>
           <select className="f" value={sub} onChange={(e) => setSub(e.target.value)} style={{ marginBottom: 10 }}>
             <option value="">Choose a subclass…</option><SubOptions cls={cls} /></select></>}
-        <ClassChoiceFields cls={cls} level={N} value={picks} onChange={setPicks} have={[...have, ...spSkills]} />
+        <ClassChoiceFields cls={cls} level={CL} value={picks} onChange={setPicks} have={[...have, ...spSkills]} />
         <p className="small muted">Saving throws switch to the {cls}'s.</p>
       </>}
       <button className="btn primary block" disabled={!ok} onClick={confirm}>Confirm selection</button>

@@ -55,7 +55,13 @@ def block(c):
     pp = 10 + m(sc["WIS"]) + (pb * (2 if "Perception*" in c.get("skills", []) else 1) if any(s.startswith("Perception") for s in c.get("skills", [])) else 0)
     out.append(f"| **Senses** | {c['senses']}; Passive Perception {pp} |")
     out.append(f"| **Languages** | {c['langs']} |")
-    out.append(f"| **CR** | {c['cr']} (XP {XP[c['cr']]:,}{', or ' + format(XP[c['cr']] + XP[c['cr']] // 5, ',') + ' in lair' if c.get('lair') else ''}; PB +{pb}) |")
+    out.append(f"| **CR** | {c['cr']} (encounter XP {XP[c['cr']]:,}{', or ' + format(XP[c['cr']] + XP[c['cr']] // 5, ',') + ' in lair' if c.get('lair') else ''}; PB +{pb}) |")
+    # Crawl fields (see bestiary/building-mobs.md): every god, avatar and minor deity is Deity tier.
+    major = c in GODS
+    out += ["", "| | |", "|---|---|", "| **Mob Tier** | Deity (1,000 XP) |", "| **Level** | ??? (the System won't say) |",
+            "| **Loot** | " + ("No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`)" if major else "No loot table: see its Minor Deity trait") + " |",
+            "| **Found** | " + ("In person only at its temple, a smite, a Great Deed or a ratings event" if major else "Anywhere a god's business takes it; often near its god's shrines") + " |",
+            "", f"> **Inspect:** *\"{c['name']}. Deity. " + ("The System recommends worship. The System recommends running. The System recommends both.\"*" if major else "Minor, as gods go. Still a god.\"*")]
     for title, key in (("Traits", "traits"), ("Actions", "actions"), ("Bonus Actions", "bonus"), ("Reactions", "reactions"), ("Legendary Actions", "legendary")):
         if c.get(key):
             out += ["", f"#### {title}", ""]

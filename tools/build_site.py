@@ -70,6 +70,7 @@ GM = [
     ("quest-builder", "quests/quest-builder.md", "Quests", "rules"),
     ("divine-quests", "quests/divine-quests.md", "Quests", "rules"),
     ("floor-1-quests", "quests/floor-1-quests.md", "Floor 1", "rules"),
+    ("building-mobs", "bestiary/building-mobs.md", "Bestiary", "rules"),
 ]
 PLAYER_PDFS = [
     ("The-Crawler.pdf", "The Crawler", "Class, Crawler Skills, class selection, magic, mana, leveling, prestige, the crawl, patches"),
@@ -97,6 +98,7 @@ if os.environ.get("WD_CODEX"):
     PLAYER_PDFS += [(f"Codex-{c}.pdf", f"{c} Codex", f"The whole {c.lower()}: World Dungeon rules, class features, subclasses and spells")
                     for c in ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]]
 GM_PDFS = [
+    ("Bestiary.pdf", "Bestiary", "Building mobs, the CR guide past 30, NPC crawler styles, and every stat block"),
     ("Gods-Stat-Blocks.pdf", "Gods and Minor Deities", "Avatar stat blocks for the eight gods, and eleven minor deities"),
     ("Quest-Builder.pdf", "Quest Builder", "Build quests: tables, rewards, fallout, questlines, divine quests, Floor 1 quests"),
     ("Floor-1.pdf", "Floor 1", "Neighbourhoods, encounters, boss rooms, stat blocks"),
@@ -187,7 +189,9 @@ def nav_html(active, is_gm):
         for slug, src, group, _ in GM:
             gm_groups.setdefault(group, []).append((slug, src))
         parts.append('<h4>GM only</h4><a href="index.html"' + (' class="active"' if active == "gm-home" else "") + ">GM home</a>"
-                     + '<a href="dungeon-builder.html"' + (' class="active"' if active == "dungeon-builder" else "") + ">Dungeon Builder</a>")
+                     + '<a href="dungeon-builder.html"' + (' class="active"' if active == "dungeon-builder" else "") + ">Dungeon Builder</a>"
+                     + '<a href="bestiary.html"' + (' class="active"' if active == "bestiary" else "") + ">Bestiary</a>"
+                     + '<a href="mob-builder.html"' + (' class="active"' if active == "mob-builder" else "") + ">Mob Builder</a>")
         for group, items in gm_groups.items():
             parts.append(f"<h4>GM · {group}</h4>")
             for slug, src in items:
@@ -330,6 +334,8 @@ def downloads_page(pdfs, is_gm):
 
 def gm_home():
     cards = [
+        ("bestiary.html", "Bestiary", "Every stat block in the setting: search, filter, roll attacks and damage, print cards."),
+        ("mob-builder.html", "Mob Builder", "Build mobs and NPC crawlers: 5e stat block, Crawl fields, CR guide, fighting-style presets. Downloads a .md for the Bestiary."),
         ("dungeon-builder.html", "Dungeon Builder", "Turn your physical tiles and props into a floor map: neighbourhoods, boss rooms, safe rooms, stairwells. Prints on A4 or at scale."),
         ("floor-1-neighbourhoods.html", "Floor 1", "Neighbourhoods, encounter tables, boss rooms with hints, stat blocks."),
         ("box-tables.html", "Loot box tables", "d100 tables for all 19 box types. Click Roll."),
@@ -351,6 +357,32 @@ def dungeon_builder_page():
 <p class="hint">Tell it which tiles and props you own, name your neighbourhoods, and it lays out a floor you can build on the table: each neighbourhood with a boss room, plus safe rooms and stairwells. Print it on one A4 page, or at scale across as many sheets as it needs.</p>
 <div id="wd-builder"></div>"""
     return page("Dungeon Builder", body, "dungeon-builder", is_gm=True, scripts=("../assets/dungeon.js",), styles=("../assets/dungeon.css",))
+
+
+def bestiary_page():
+    body = """<header class="chapter-head"><div class="kicker">GM tool</div><h1>Bestiary</h1></header>
+<p class="hint">Every stat block in the World Dungeon: Floor 1, NPC crawlers made in the <a href="mob-builder.html">Mob Builder</a>, and the gods. Click a mob to open it. Click any <b>dice</b> or <b>attack bonus</b> to roll it (Shift-click for advantage, Alt-click for disadvantage). Tick mobs and print them as cards. How it all works: <a href="building-mobs.html">Building Mobs</a>.</p>
+<div id="wd-bestiary"></div>"""
+    return page("Bestiary", body, "bestiary", is_gm=True, scripts=("bestiary-data.js", "../assets/bestiary.js"), styles=("../assets/bestiary.css",))
+
+
+def mob_builder_page():
+    body = """<header class="chapter-head"><div class="kicker">GM tool</div><h1>Mob Builder</h1></header>
+<p class="hint">Build a mob or an NPC crawler. Fill in the stat block on the left; the preview, the CR check and the markdown update as you type, and your draft is kept in this browser. When it's done, <b>Download .md</b> and put the file in the <code>bestiary</code> folder (see <a href="building-mobs.html#saving-a-stat-block">Saving a Stat Block</a>).</p>
+<div id="wd-mob-builder"></div>"""
+    return page("Mob Builder", body, "mob-builder", is_gm=True, scripts=("bestiary-data.js", "../assets/bestiary.js", "../assets/mob-builder.js"), styles=("../assets/bestiary.css",))
+
+
+def bestiary_data():
+    """window.BESTIARY for the Bestiary and the Mob Builder (GM area only)."""
+    import bestiary
+    mobs = bestiary.load_all()
+    for d in mobs:
+        body, _ = postprocess(bp.convert(d["md"], "", "floor"), True)
+        d["html"] = re.sub(r'</?article[^>]*>', "", body)
+        src = d.pop("source")
+        d["src"] = {"title": src["title"], "url": f"{src['page']}.html#{src['anchor']}" if src["page"] != "bestiary" else "", "file": src["file"]}
+    return mobs
 
 
 def create_page():
@@ -380,7 +412,7 @@ def main():
     if not NO_GM:
         (SITE / "gm" / "downloads").mkdir(parents=True)
     (SITE / "downloads").mkdir()
-    for f in ("style.css", "app.js", "create.js", "dungeon.js", "dungeon.css"):
+    for f in ("style.css", "app.js", "create.js", "dungeon.js", "dungeon.css", "bestiary.js", "bestiary.css", "mob-builder.js"):
         shutil.copy(ASSETS / f, SITE / "assets" / f)
     for f, *_ in PLAYER_PDFS:
         if (ROOT / "pdf" / f).exists():
@@ -402,6 +434,9 @@ def main():
     if not NO_GM:
         (SITE / "gm" / "index.html").write_text(gm_home())
         (SITE / "gm" / "dungeon-builder.html").write_text(dungeon_builder_page())
+        (SITE / "gm" / "bestiary.html").write_text(bestiary_page())
+        (SITE / "gm" / "mob-builder.html").write_text(mob_builder_page())
+        (SITE / "gm" / "bestiary-data.js").write_text("window.BESTIARY=" + json.dumps(bestiary_data()) + ";")
 
     (SITE / "assets" / "search.js").write_text("window.SEARCH_INDEX=" + json.dumps(player_index) + ";")
     if not NO_GM:

@@ -91,12 +91,33 @@ A baby Bad Llama: fluffy, furious, and full of hot pebbles.
 | **Resistances** | Fire |
 | **Senses** | Passive Perception 10 |
 | **Languages** | None |
-| **CR** | 1/8 (XP 25; PB +2) |
+| **CR** | 1/8 (encounter XP 25; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Trash (5 XP) |
+| **Level** | 1 |
+| **Loot** | Monstrosity, Tier 1 |
+| **Found** | Floor 1 · The Llama Pens (packs of 2–6; Mama Drama's Herd Call) |
+
+> **Inspect:** *"Bad Llama Cria. Level 1. Aww. It's so small. It's going to spit lava in your eye."*
 
 #### Actions
 
 - **Kick.** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 4 (1d4 + 2) Bludgeoning damage.
 - **Hot Pebble Spit.** *Ranged Attack Roll:* +4, range 30/60 ft. *Hit:* 4 (1d4 + 2) Fire damage.
+
+#### Tactics
+
+Swarms the nearest crawler and spits from range when it can't reach. Cria flee when Mama Drama falls.
+
+#### Audience
+
+Petting one mid-fight (DC 13 Animal Handling) earns a laugh: +1 Audience, once per floor.
+
+#### Voice
+
+*Mwehhh!* (a noise like a kettle full of hate)
 
 ### Stat Block: Bad Llama
 **Large Monstrosity · Unaligned · CR 1/2**
@@ -120,7 +141,16 @@ A llama, but bad. It spits lava, and it holds grudges.
 | **Resistances** | Fire |
 | **Senses** | Passive Perception 10 |
 | **Languages** | None |
-| **CR** | 1/2 (XP 100; PB +2) |
+| **CR** | 1/2 (encounter XP 100; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Standard (10 XP) |
+| **Level** | 1 |
+| **Loot** | Monstrosity, Tier 1 |
+| **Found** | Floor 1 · The Llama Pens, the Big Barn |
+
+> **Inspect:** *"Bad Llama. Level 1. A llama, but bad. Holds grudges. Has a long memory and a longer neck."*
 
 #### Traits
 
@@ -134,6 +164,14 @@ A llama, but bad. It spits lava, and it holds grudges.
 #### Drops
 
 Poor Llama Skin (Monster Part, T1), 1d2 Uncooked Llama Steaks, and on a 1 on a d6, a Baggie of Suspicious Crystals (troll prize: eat it and you are poisoned for 1 hour, but your speed increases by 10 feet).
+
+#### Tactics
+
+Kicks whoever hit it last. Opens with Lava Spit to leave puddles between it and the crawlers, then fights from behind them.
+
+#### Voice
+
+*A long, judgmental stare, then lava.*
 
 ### Stat Block: Mama Drama, Queen of the Herd
 **Large Monstrosity · Unaligned · CR 2 · Boss**
@@ -157,7 +195,16 @@ The matriarch of the Llama Pens. Her fleece glitters; her temper does not.
 | **Immunities** | Fire |
 | **Senses** | Passive Perception 11 |
 | **Languages** | None (but she understands insults) |
-| **CR** | 2 (XP 450; PB +2) |
+| **CR** | 2 (encounter XP 450; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 2 |
+| **Loot** | Monstrosity, Tier 1 (as a boss) |
+| **Found** | Floor 1 · The Llama Pens, boss of the Big Barn |
+
+> **Inspect:** *"Mama Drama, Queen of the Herd. Level 2 Neighbourhood Boss. She is not angry. She is disappointed. Also angry."*
 
 #### Traits
 
@@ -173,6 +220,22 @@ The matriarch of the Llama Pens. Her fleece glitters; her temper does not.
 - **Lava Spit.** *Ranged Attack Roll:* +3, range 60/120 ft. *Hit:* 7 (2d6) Fire damage.
 - **Lava Breath (Recharge 5–6).** *Dexterity Saving Throw:* DC 12, each creature in a 15-foot Cone. *Failure:* 10 (3d6) Fire damage. *Success:* Half damage.
 - **Lava Burst.** (Only after Dramatic Faint.) *Dexterity Saving Throw:* DC 12, each creature within 10 feet. *Failure:* 7 (2d6) Fire damage. *Success:* Half damage.
+
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **Mama Drama's Golden Fleece** · Achievement: ***Neighborhood Watch*** (Major), plus ***Dinner Is Served*** (Notable): win without her ever healing in the trough. Mechanics and hints: see *Boss Room: The Big Barn*.
+
+#### Tactics
+
+Stays near the lava trough. Uses Lava Breath on clumps of crawlers, and fakes her death the first time she is hit hard. Calls the herd when bloodied.
+
+#### Audience
+
+Ringing the dinner bell to stop Herd Call, or catching her faking (DC 15 Medicine), plays well: +1 Audience.
+
+#### Voice
+
+*"MWEHHHHHHHH."* (subtitled by the System: "How dare you.")
 
 ---
 
@@ -253,7 +316,16 @@ The animatronic mascot of the Birthday Party Wing. It has been singing the same 
 | **Immunities** | Poison; Charmed, Exhaustion, Poisoned |
 | **Senses** | Darkvision 60 ft.; Passive Perception 10 |
 | **Languages** | Common (birthday phrases only) |
-| **CR** | 3 (XP 700; PB +2) |
+| **CR** | 3 (encounter XP 700; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 3 |
+| **Loot** | Construct, Tier 1 (as a boss) |
+| **Found** | Floor 1 · The Birthday Party Wing, boss of the Showtime Stage |
+
+> **Inspect:** *"Chuckles the Cheese Mouse. Level 3 Neighbourhood Boss. Your #1 Party Pal! Warranty void since 1987."*
 
 #### Traits
 
@@ -268,6 +340,22 @@ The animatronic mascot of the Birthday Party Wing. It has been singing the same 
 - **Slam.** *Melee Attack Roll:* +6, reach 5 ft. *Hit:* 9 (1d10 + 4) Bludgeoning damage.
 - **Pizza Sauce Cannon (Recharge 5–6).** *Dexterity Saving Throw:* DC 13, each creature in a 30-foot-long, 5-foot-wide Line. *Failure:* 9 (2d8) Fire damage. *Success:* Half damage. The Line becomes difficult terrain for 1 minute.
 - **Party Popper (1/Day).** *Constitution Saving Throw:* DC 13, each creature in a 20-foot Emanation. *Failure:* The Blinded condition until the end of its next turn.
+
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **Chuckles' Golden Ticket Dispenser** · Achievement: ***Neighborhood Watch*** (Major), plus ***Lights Out*** (Notable): kill the breaker before he finishes his first song. Mechanics and hints: see *Boss Room: The Showtime Stage*.
+
+#### Tactics
+
+Stays on the stage in the lights and sings every turn. Fires the Pizza Sauce Cannon down the ball-pit moat. If the lights go out he heads for the control booth to switch them back on.
+
+#### Audience
+
+Shouting "It's my birthday!" and taking the cake is a crowd favourite: +1 Audience the first time.
+
+#### Voice
+
+*"Happy birthday to YOU! Happy birthday to YOU! Happy birthday dear CRAWLER..."*
 
 ---
 
@@ -301,7 +389,7 @@ Rooms overgrown with glowing fungus, and corridors pulsing with bass. The myconi
 
 ### Boss Room: The Main Stage
 
-**Boss · DJ Spore-Lord · myconid sovereign (MM p. 223) and court · Level 2–3**
+**Boss · DJ Spore-Lord · CR 3 · Level 2–3**
 
 A huge cavern. The **DJ booth** sits on top of a giant mushroom (a 15-foot platform), above a springy fungus **dance floor**. Four **speaker stacks** (shrieker fungi) stand at the corners. **Disco balls** (2 gas spore fungi) drift overhead. Chill-out alcoves line the edges.
 
@@ -326,13 +414,67 @@ A huge cavern. The **DJ booth** sits on top of a giant mushroom (a 15-foot platf
 Boss Box (Gold), Boss Trophy: **the Spore-Lord's Golden Headphones**. Bonus achievement: ***Drop the Beat*** (Notable): win the dance-off. Every crawler who wins it also gets a **VIP wristband** for Club Stairwell.
 
 ### Stat Block: DJ Spore-Lord
-**Boss template · myconid sovereign · MM p. 223**
+**Large Plant · Chaotic Neutral · CR 3 · Boss**
 
-- **Hit points:** add 20.
-- **Court:** 4 myconid sprouts and 2 myconid adults fight with him.
-- **The Beat (lair).** On initiative count 20, each creature on the dance floor makes a DC 12 Constitution saving throw, taking 7 (2d6) Thunder damage on a failure, half on a success. A creature that danced this round (a bonus action and a DC 12 Charisma (Performance) check) is unaffected and has +1 AC until its next turn. Each destroyed speaker stack lowers the damage by one die.
-- **Speaker Stacks.** While any stack stands, the sovereign's spore effects have double their normal range. Each stack: AC 5, 13 hit points.
-- **Dance-Off.** If a crawler wins three Charisma (Performance) contests in a row (DC 13, 14, 15), he concedes.
+A towering myconid in giant golden headphones, spinning records on a mushroom-cap turntable. The whole Rave moves to his beat.
+
+| | |
+|---|---|
+| **AC** | 13 (natural armor) |
+| **HP** | 65 (10d10 + 10) |
+| **Speed** | 30 ft. |
+| **Initiative** | +0 (10) |
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| **Score** | 12 | 10 | 12 | 13 | 15 | 14 |
+| **Mod / Save** | +1 / +1 | +0 / +0 | +1 / +1 | +1 / +1 | +2 / +2 | +2 / +2 |
+
+| | |
+|---|---|
+| **Skills** | Performance +6 |
+| **Senses** | Darkvision 120 ft.; Passive Perception 12 |
+| **Languages** | Telepathy 240 ft. (understands Common) |
+| **CR** | 3 (encounter XP 700; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 2 |
+| **Loot** | Ooze and Plant, Tier 1 (as a boss) |
+| **Found** | Floor 1 · The Mushroom Rave, boss of the Main Stage (with 4 sprouts and 2 adults) |
+
+> **Inspect:** *"DJ Spore-Lord. Level 2 Neighbourhood Boss. Three-time winner of Best Set in the Underdark. Zero-time winner of anything above ground."*
+
+#### Traits
+
+- **Daylight Hangover.** While in sunlight, the DJ has disadvantage on D20 Tests. He dies if he spends more than 1 hour in sunlight.
+- **The Beat (Lair).** On initiative count 20, the bass drops. Each creature on the dance floor makes a DC 12 Constitution saving throw. *Failure:* 7 (2d6) Thunder damage. *Success:* Half damage. A creature that danced this round (a bonus action and a DC 12 Charisma (Performance) check) is unaffected and has +1 AC until its next turn. Each destroyed speaker stack lowers the damage by one die.
+- **Speaker Stacks.** While any speaker stack stands, the reach of the DJ's spores is doubled. Each stack has AC 5 and 13 hit points.
+- **Dance-Off.** A creature that wins three Charisma (Performance) contests against the DJ in a row (DC 13, then 14, then 15), one per round, makes him concede the fight.
+
+#### Actions
+
+- **Multiattack.** The DJ makes one Bass Slam attack and uses Chill-Out Spores.
+- **Bass Slam.** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 6 (2d4 + 1) Bludgeoning damage plus 5 (2d4) Poison damage.
+- **Chill-Out Spores.** *Constitution Saving Throw:* DC 12, one creature the DJ can see within 10 feet. *Failure:* The Stunned condition. The target repeats the save at the end of each of its turns, ending the effect on a success.
+- **Hype Spores (Recharge 5–6).** Each myconid of the DJ's choice in a 30-foot Emanation has advantage on attack rolls until the end of its next turn, and can move up to its speed as a reaction.
+
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **the Spore-Lord's Golden Headphones** · Achievement: ***Neighborhood Watch*** (Major), plus ***Drop the Beat*** (Notable): win the dance-off (each winner also gets a **VIP wristband** for Club Stairwell). Mechanics and hints: see *Boss Room: The Main Stage*.
+
+#### Tactics
+
+Stays up in the DJ booth and lets his court fight. Stuns the strongest crawler who climbs up, and pops Hype Spores when the court is in reach. He would rather win a dance-off than a fight, and accepts every challenge.
+
+#### Audience
+
+Winning the dance-off: +2 Audience. Destroying all four speaker stacks: +1 Audience.
+
+#### Voice
+
+*(telepathically, with reverb)* "Is everybody having a GOOD TIME?"
 
 ---
 
@@ -410,7 +552,16 @@ A knee-high cleaning robot with spinning brushes. It has decided you are litter.
 | **Immunities** | Poison, Psychic; Charmed, Exhaustion, Frightened, Poisoned |
 | **Senses** | Darkvision 60 ft.; Passive Perception 10 |
 | **Languages** | Understands Common but can't speak (beeps) |
-| **CR** | 1/4 (XP 50; PB +2) |
+| **CR** | 1/4 (encounter XP 50; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Trash (5 XP) |
+| **Level** | 2 |
+| **Loot** | Construct, Tier 1 |
+| **Found** | Floor 1 · The Maintenance Tunnels (patrols of 3–6) |
+
+> **Inspect:** *"Sweeper Bot. Level 2. Cleaning in progress. You have been identified as debris."*
 
 #### Traits
 
@@ -420,6 +571,14 @@ A knee-high cleaning robot with spinning brushes. It has decided you are litter.
 
 - **Bristle Brush.** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 5 (1d6 + 2) Bludgeoning damage.
 - **Dust Cloud (1/Day).** *Constitution Saving Throw:* DC 11, each creature in a 10-foot Emanation. *Failure:* The Blinded condition until the end of its next turn.
+
+#### Tactics
+
+Patrols in lines and surrounds a single target. Avoids water at all costs, so a spilled bucket stops a patrol cold.
+
+#### Voice
+
+*Beep. Beep. Debris detected. Beep.*
 
 ### Stat Block: Mop Drone
 **Medium Construct · Unaligned · CR 1/2**
@@ -443,7 +602,16 @@ A rolling mop bucket with two long mop arms. It leaves everything wet.
 | **Immunities** | Poison, Psychic; Charmed, Exhaustion, Frightened, Poisoned |
 | **Senses** | Darkvision 60 ft.; Passive Perception 10 |
 | **Languages** | Understands Common but can't speak |
-| **CR** | 1/2 (XP 100; PB +2) |
+| **CR** | 1/2 (encounter XP 100; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Standard (10 XP) |
+| **Level** | 2 |
+| **Loot** | Construct, Tier 1 |
+| **Found** | Floor 1 · The Maintenance Tunnels |
+
+> **Inspect:** *"Mop Drone. Level 2. Caution: wet floor. The floor is wet because of this thing."*
 
 #### Traits
 
@@ -453,6 +621,14 @@ A rolling mop bucket with two long mop arms. It leaves everything wet.
 
 - **Mop Slap.** *Melee Attack Roll:* +4, reach 10 ft. *Hit:* 7 (1d10 + 2) Bludgeoning damage, and the target must succeed on a DC 12 Dexterity saving throw or have the Prone condition.
 - **Bucket Splash (Recharge 5–6).** *Dexterity Saving Throw:* DC 12, each creature in a 15-foot Cone. *Failure:* The Prone condition. The Cone becomes a wet surface for 1 minute.
+
+#### Tactics
+
+Rolls ahead of the Sweeper Bots and soaks the ground, knocking crawlers prone so the bots can swarm them. Hates the Sweeper Bots' Dry Use Only rule as much as you do.
+
+#### Voice
+
+*Slosh. Squeak. Slosh.*
 
 ### Stat Block: Mega-Sweeper 9000
 **Large Construct · Unaligned · CR 3 · Boss**
@@ -476,7 +652,16 @@ An industrial floor cleaner the size of a truck, with a trash-compactor mouth an
 | **Immunities** | Poison, Psychic; Charmed, Exhaustion, Frightened, Poisoned |
 | **Senses** | Darkvision 60 ft.; Passive Perception 10 |
 | **Languages** | None |
-| **CR** | 3 (XP 700; PB +2) |
+| **CR** | 3 (encounter XP 700; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 3 |
+| **Loot** | Construct, Tier 1 (as a boss) |
+| **Found** | Floor 1 · The Maintenance Tunnels, boss of the Recycling Center |
+
+> **Inspect:** *"Mega-Sweeper 9000. Level 3 Neighbourhood Boss. It is over nine thousand. It is also a vacuum cleaner."*
 
 #### Traits
 
@@ -490,6 +675,22 @@ An industrial floor cleaner the size of a truck, with a trash-compactor mouth an
 - **Brush Arm.** *Melee Attack Roll:* +6, reach 10 ft. *Hit:* 11 (2d6 + 4) Bludgeoning damage.
 - **Compactor Maw.** *Melee Attack Roll:* +6, reach 5 ft. *Hit:* 8 (1d8 + 4) Bludgeoning damage, and the target has the Grappled condition (escape DC 14). Until the grapple ends, the target takes 4 (1d8) Bludgeoning damage at the start of each of its turns.
 - **Vacuum Pull (Recharge 5–6).** *Strength Saving Throw:* DC 12, each creature in a 30-foot Cone. *Failure:* The target is pulled up to 15 feet toward Mega-Sweeper (or into the recycler pit, if it is in the way).
+
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **Mega-Sweeper's Golden Dustbag** · Achievement: ***Neighborhood Watch*** (Major), plus ***Spring Cleaning*** (Notable): defeat it without anyone falling into the pit. Mechanics and hints: see *Boss Room: The Recycling Center*.
+
+#### Tactics
+
+Rides the conveyor belts to close distance, vacuums crawlers toward the recycler pit, and runs for its dock when bloodied. Jam the dock and it panics.
+
+#### Audience
+
+Killing it with a mop (see the *Dare: Mop Boy* System Quest) is legendary television: +2 Audience.
+
+#### Voice
+
+*"WELCOME TO MEGA-SWEEPER 9000. PLEASE REMAIN STILL WHILE YOU ARE CLEANED."*
 
 ---
 
@@ -568,7 +769,16 @@ A goblin with a satchel full of homemade bombs and no sense of self-preservation
 | **Skills** | Stealth +6 |
 | **Senses** | Darkvision 60 ft.; Passive Perception 9 |
 | **Languages** | Common, Goblin |
-| **CR** | 1/2 (XP 100; PB +2) |
+| **CR** | 1/2 (encounter XP 100; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Standard (10 XP) |
+| **Level** | 2 |
+| **Loot** | Humanoid, Tier 1 (a goblin is Fey, but loot it as a Humanoid) |
+| **Found** | Floor 1 · The Gobtown Warrens (Trash in a horde of 6 or more) |
+
+> **Inspect:** *"Goblin Bombardier. Level 2. Has a satchel of bombs. Has no eyebrows. These facts are related."*
 
 #### Traits
 
@@ -582,6 +792,18 @@ A goblin with a satchel full of homemade bombs and no sense of self-preservation
 #### Bonus Actions
 
 - **Nimble Escape.** The bombardier takes the Disengage or Hide action.
+
+#### Tactics
+
+Throws bombs from range, then uses Nimble Escape to hide behind crates. Doesn't care if friends are in the blast. Keep it at arm's length: if it drops close to you, it might pop.
+
+#### Audience
+
+Making one's satchel go off among its own friends: +1 Audience.
+
+#### Voice
+
+*"FIRE IN THE HOLE! What hole? ANY HOLE!"*
 
 ### Stat Block: Chief Kaboomba
 **Small Fey (Goblinoid) · Chaotic Evil · CR 3 · Boss**
@@ -606,7 +828,16 @@ The self-crowned king of the Gobtown Warrens, Grand Marshal of the Fireworks Fes
 | **Immunities** | Fire (while wearing his apron) |
 | **Senses** | Darkvision 60 ft.; Passive Perception 10 |
 | **Languages** | Common, Goblin |
-| **CR** | 3 (XP 700; PB +2) |
+| **CR** | 3 (encounter XP 700; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 3 |
+| **Loot** | Humanoid, Tier 1 (as a boss) |
+| **Found** | Floor 1 · The Gobtown Warrens, boss of the Grand Finale Hall (with a goblin hexer, Elite) |
+
+> **Inspect:** *"Chief Kaboomba. Level 3 Neighbourhood Boss. Grand Marshal of the Fireworks Festival. The Festival is today. You are the fireworks."*
 
 #### Traits
 
@@ -629,6 +860,22 @@ The self-crowned king of the Gobtown Warrens, Grand Marshal of the Fireworks Fes
 #### Reactions
 
 - **Duck and Cover.** *Trigger:* Kaboomba is hit by an attack roll he can see. *Response:* He dives behind a crate and adds 3 to his AC against that attack, possibly making it miss.
+
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **Kaboomba's Lucky Detonator** · Achievement: ***Neighborhood Watch*** (Major), plus ***Not With a Bang*** (Notable): cut all three fuse junctions. Mechanics and hints: see *Boss Room: The Grand Finale Hall*.
+
+#### Tactics
+
+Lights the master fuse at once, then keeps the crawlers busy so they can't cut the junctions. Hides behind crates, throws Molotovs at anyone near a junction, and relies on his apron when the hall burns.
+
+#### Audience
+
+Stealing his fireproof apron right before the Grand Finale: +2 Audience.
+
+#### Voice
+
+*"Ladies and gentlegobs! The moment you've all been waiting for! Cover your ears! Actually, don't bother!"*
 
 ---
 
@@ -662,7 +909,7 @@ Crypt rooms and ossuary corridors, with tour signs and velvet ropes. A **ride tr
 
 ### Boss Room: The Grand Mausoleum Exhibit
 
-**Boss · The Tour Guide · mummy (MM p. 219) · Level 3**
+**Boss · The Tour Guide · CR 3 · Level 3**
 
 A domed crypt with a great **sarcophagus** in the middle. Four numbered **tour stops** (marked plaques) form a loop around the room, with a **brazier** between each pair. Display cases line the walls. The **ride track** ends at the double doors.
 
@@ -686,12 +933,65 @@ A domed crypt with a great **sarcophagus** in the middle. Four numbered **tour s
 Boss Box (Gold), Boss Trophy: **the Tour Guide's Golden Lanyard**. Bonus achievement: ***Off the Clock*** (Notable): take the lanyard.
 
 ### Stat Block: The Tour Guide
-**Boss template · mummy · MM p. 219**
+**Medium Undead · Lawful Evil · CR 3 · Boss**
 
-- **Hit points:** add 20. It wears a visor and a lanyard, and narrates constantly.
-- **Tour Script.** At the start of each of its turns, it moves to the next of the four tour stops. A creature that ends its turn next to the current stop, and did not attack this round, cannot be targeted by the Guide until the start of the Guide's next turn.
-- **On the Clock.** While it wears its lanyard, it regains 10 hit points at the start of each of its turns. A Dexterity (Sleight of Hand) check contested by its Dexterity, or an attack against AC 15, takes the lanyard.
-- **Fire.** The mummy's Vulnerability to Fire makes the room's braziers its biggest threat.
+A mummy in a visor and a staff lanyard, walking the same loop it has walked for a thousand years. It narrates constantly. *Built on the Mummy from the System Reference Document 5.2.*
+
+| | |
+|---|---|
+| **AC** | 11 |
+| **HP** | 78 (12d8 + 24) |
+| **Speed** | 20 ft. |
+| **Initiative** | −1 (9) |
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| **Score** | 16 | 8 | 15 | 6 | 12 | 12 |
+| **Mod / Save** | +3 / +3 | −1 / −1 | +2 / +2 | −2 / −2 | +1 / +3 | +1 / +1 |
+
+| | |
+|---|---|
+| **Vulnerabilities** | Fire |
+| **Immunities** | Necrotic, Poison; Charmed, Exhaustion, Frightened, Paralyzed, Poisoned |
+| **Senses** | Darkvision 60 ft.; Passive Perception 11 |
+| **Languages** | Common plus two other languages |
+| **CR** | 3 (encounter XP 700; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 3 |
+| **Loot** | Undead, Tier 1 (as a boss) |
+| **Found** | Floor 1 · Catacomb Tours™, boss of the Grand Mausoleum Exhibit |
+
+> **Inspect:** *"The Tour Guide. Level 3 Neighbourhood Boss. Employee of the Millennium, every millennium. Please stay with your guide."*
+
+#### Traits
+
+- **Tour Script.** At the start of each of its turns, the Guide moves to the next of the four tour stops. A creature that ends its turn next to the current stop, and did not attack this round, can't be targeted by the Guide until the start of the Guide's next turn.
+- **On the Clock.** While it wears its lanyard, the Guide regains 10 hit points at the start of each of its turns. A Dexterity (Sleight of Hand) check contested by its Dexterity, or an attack against AC 15, takes the lanyard.
+
+#### Actions
+
+- **Multiattack.** The Guide makes two Rotting Fist attacks and uses Dreadful Glare.
+- **Rotting Fist.** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 8 (1d10 + 3) Bludgeoning damage plus 10 (3d6) Necrotic damage. If the target is a creature, it is cursed. While cursed, the target can't regain hit points, its hit point maximum doesn't return to normal when it finishes a long rest, and its hit point maximum decreases by 10 (3d6) every 24 hours. A creature reduced to 0 hit points by this attack dies and turns to dust.
+- **Dreadful Glare.** *Wisdom Saving Throw:* DC 11, one creature the Guide can see within 60 feet. *Failure:* The Frightened condition until the end of the Guide's next turn. *Success:* The target is immune to this Guide's Dreadful Glare for 24 hours.
+
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **the Tour Guide's Golden Lanyard** · Achievement: ***Neighborhood Watch*** (Major), plus ***Off the Clock*** (Notable): take the lanyard. Mechanics and hints: see *Boss Room: The Grand Mausoleum Exhibit*.
+
+#### Tactics
+
+Walks the tour loop no matter what, punishing anyone who leaves the path. Glares at the crawler who looks strongest, and fists whoever is nearest a brazier. It never stops talking.
+
+#### Audience
+
+Taking the lanyard mid-sentence, or finishing the tour politely before killing it: +1 Audience.
+
+#### Voice
+
+*"And on your left, the remains of the last group that wandered off. Please stay with your guide."*
 
 ---
 
@@ -770,7 +1070,16 @@ A huge, hunched creature wearing its collection as armor: hubcaps, toasters, a s
 | **Skills** | Perception +3 |
 | **Senses** | Darkvision 60 ft.; Passive Perception 13 |
 | **Languages** | Understands Common but can't speak (it only says "MINE") |
-| **CR** | 4 (XP 1,100; PB +2) |
+| **CR** | 4 (encounter XP 1,100; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Boss (100 XP) |
+| **Level** | 4 |
+| **Loot** | Monstrosity, Tier 1 (as a boss), plus every piece of junk armor it drops |
+| **Found** | Floor 1 · The Hoarder's Garage Sale, boss of the Clearance Warehouse |
+
+> **Inspect:** *"The Hoarder. Level 4 Neighbourhood Boss. It has a lot of stuff. It wants your stuff. Your stuff is now its stuff."*
 
 #### Traits
 
@@ -786,6 +1095,22 @@ A huge, hunched creature wearing its collection as armor: hubcaps, toasters, a s
 - **Junk Throw.** *Ranged Attack Roll:* +7, range 60/180 ft. *Hit:* 12 (2d6 + 5) Bludgeoning damage.
 - **Topple Tower (Recharge 5–6).** The Hoarder slams a junk tower within 10 feet of it, and it falls in a 10-foot-wide, 30-foot-long Line. *Dexterity Saving Throw:* DC 14, each creature in the Line. *Failure:* 17 (5d6) Bludgeoning damage and the Prone condition. *Success:* Half damage.
 
+#### Boss
+
+Boss Box (Gold) · Boss Trophy: **the Hoarder's Crown of Bottle Caps** · Achievement: ***Neighborhood Watch*** (Major), plus ***Clearance Sale*** (Notable): knock off 10 pieces of its junk armor in one fight. Mechanics and hints: see *Boss Room: The Clearance Warehouse*.
+
+#### Tactics
+
+Snatches the shiniest weapon first. Topples junk towers onto groups. Easy to distract: a gold coin or a magic item thrown across the room pulls it away (Collector's Greed).
+
+#### Audience
+
+Baiting it with a worthless item dressed up as treasure: +1 Audience.
+
+#### Voice
+
+*"Mine. Mine. Mine. That's mine. Is that a— MINE."*
+
 ---
 
 ---
@@ -796,14 +1121,14 @@ A huge, hunched creature wearing its collection as armor: hubcaps, toasters, a s
 
 A nightclub built around the main stairwell. A **velvet rope** crosses the entrance, then there is a **dance floor**, a **bar** along one wall, and a raised **VIP booth**. The door to the main stairwell is behind the booth.
 
-**Boss · The Bouncer · troll (MM p. 310) · Level 4**
+**Boss · The Bouncer · CR 5 · Level 4**
 
 #### Mechanics
 
 - **Regeneration.** The Bouncer regenerates as a troll does. Fire or acid damage stops it, as normal.
 - **"You're out."** At the end of each round, the Bouncer grabs the crawler who dealt him the most damage that round and throws them out past the velvet rope: 30 feet, landing prone. Getting back in costs that crawler their movement on their next turn.
 - **The guest list.** A crawler with a **VIP wristband** (from DJ Spore-Lord) or a Fake VIP Pass can walk past the Bouncer to the stairwell without a fight. Anyone they bring with them must pass a DC 15 Charisma (Persuasion or Deception) check. Skipping the fight means **no floor boss box**.
-- **Loathsome Limbs.** As the troll's trait: big slashing hits sever limbs, which become troll limbs (MM p. 310) and keep brawling on the dance floor.
+- **Loathsome Limbs.** As the troll's trait: big slashing hits sever limbs, which become Troll Limbs (stat block below) and keep brawling on the dance floor.
 
 #### Hints on the Way In
 
@@ -817,9 +1142,121 @@ A nightclub built around the main stairwell. A **velvet rope** crosses the entra
 Floor boss Boss Box (Gold), the main stairwell, and the Bouncer's Boss Trophy: **the Velvet Rope**. Achievement: ***Floor Boss Down*** (Major).
 
 ### Stat Block: The Bouncer
-**Boss template · troll · MM p. 310**
+**Large Giant · Chaotic Evil · CR 5 · Floor Boss**
 
-- **Hit points:** add 20. It wears a tight black T-shirt that says SECURITY.
-- **"You're Out."** At the end of each round, the Bouncer grabs the creature that dealt it the most damage that round and throws it 30 feet out past the velvet rope. The creature lands with the Prone condition, and spends all its movement on its next turn getting back in.
-- **Loathsome Limbs** and **Regeneration** work as in the stat block (fire or acid stops regeneration for a turn).
-- **The Guest List.** The Bouncer does not attack a creature with a VIP wristband or a Fake VIP Pass that walks calmly to the stairwell. A companion of that creature can come too with a DC 15 Charisma (Persuasion or Deception) check.
+A troll in a tight black T-shirt that says SECURITY. It has a clipboard. You are not on it. *Built on the Troll from the System Reference Document 5.2.*
+
+| | |
+|---|---|
+| **AC** | 15 (natural armor) |
+| **HP** | 115 (11d10 + 55) |
+| **Speed** | 30 ft. |
+| **Initiative** | +1 (11) |
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| **Score** | 18 | 13 | 20 | 7 | 9 | 7 |
+| **Mod / Save** | +4 / +4 | +1 / +1 | +5 / +5 | −2 / −2 | −1 / −1 | −2 / −2 |
+
+| | |
+|---|---|
+| **Skills** | Perception +5 |
+| **Senses** | Darkvision 60 ft.; Passive Perception 15 |
+| **Languages** | Giant, and enough Common to say "no" |
+| **CR** | 5 (encounter XP 1,800; PB +3) |
+
+| | |
+|---|---|
+| **Mob Tier** | Floor Boss (200 XP) |
+| **Level** | 4 |
+| **Loot** | Giant, Tier 2 (as a boss) |
+| **Found** | Floor 1 · Club Stairwell, the floor boss |
+
+> **Inspect:** *"The Bouncer. Level 4 Floor Boss. You're not on the list. Nobody is on the list. The list is a drawing of a sad face."*
+
+#### Traits
+
+- **Loathsome Limbs (4/Day).** If the Bouncer ends any turn bloodied and took 15 or more Slashing damage during that turn, one of its limbs is severed, falls into its space, and becomes a Troll Limb (below). The limb acts immediately after the Bouncer's turn. The Bouncer has 1 Exhaustion level for each missing limb, and grows replacements the next time it regains hit points.
+- **Regeneration.** The Bouncer regains 15 hit points at the start of each of its turns. If it takes Acid or Fire damage, this trait doesn't work on its next turn. It dies only if it starts its turn with 0 hit points and doesn't regenerate.
+- **"You're Out."** At the end of each round, the Bouncer grabs the creature that dealt it the most damage that round and throws it 30 feet out past the velvet rope. The creature lands with the Prone condition and spends all its movement on its next turn getting back in.
+- **The Guest List.** The Bouncer doesn't attack a creature with a VIP wristband or a Fake VIP Pass that walks calmly to the stairwell. A companion of that creature can come too with a DC 15 Charisma (Persuasion or Deception) check. Skipping the fight means no floor boss box.
+
+#### Actions
+
+- **Multiattack.** The Bouncer makes three Rend attacks.
+- **Rend.** *Melee Attack Roll:* +7, reach 10 ft. *Hit:* 11 (2d6 + 4) Slashing damage.
+
+#### Bonus Actions
+
+- **Charge.** The Bouncer moves up to half its speed straight toward an enemy it can see.
+
+#### Boss
+
+Floor boss Boss Box (Gold), the main stairwell · Boss Trophy: **the Velvet Rope** · Achievement: ***Floor Boss Down*** (Major). Mechanics and hints: see *Club Stairwell: The Floor Boss*.
+
+#### Tactics
+
+Guards the stairwell door and throws out whoever hurts it most. Charges anyone who goes for the bar's Flaming Shots. It never leaves the club.
+
+#### Audience
+
+Talking past it with a fake pass, or setting it alight with a Flaming Shot: +2 Audience.
+
+#### Voice
+
+*"Not tonight."*
+
+### Stat Block: Troll Limb
+**Small Giant · Chaotic Evil · CR 1/2**
+
+A severed troll arm or leg that keeps fighting on its own. *Built on the Troll Limb from the System Reference Document 5.2.*
+
+| | |
+|---|---|
+| **AC** | 13 |
+| **HP** | 14 (4d6) |
+| **Speed** | 20 ft. |
+| **Initiative** | +1 (11) |
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| **Score** | 18 | 12 | 10 | 1 | 9 | 1 |
+| **Mod / Save** | +4 / +4 | +1 / +1 | +0 / +0 | −5 / −5 | −1 / −1 | −5 / −5 |
+
+| | |
+|---|---|
+| **Senses** | Darkvision 60 ft.; Passive Perception 9 |
+| **Languages** | None |
+| **CR** | 1/2 (encounter XP 100; PB +2) |
+
+| | |
+|---|---|
+| **Mob Tier** | Trash (5 XP) |
+| **Level** | 4 |
+| **Loot** | Giant, Tier 1 |
+| **Found** | Floor 1 · Club Stairwell (severed from the Bouncer) |
+
+> **Inspect:** *"Troll Limb. Level 4. Part of the Bouncer. Currently freelancing."*
+
+#### Traits
+
+- **Regeneration.** The limb regains 5 hit points at the start of each of its turns. If it takes Acid or Fire damage, this trait doesn't work on its next turn. It dies only if it starts its turn with 0 hit points and doesn't regenerate.
+- **Troll Spawn.** If the limb isn't destroyed within 24 hours, roll a d12. On a 12, it grows into a whole troll. Otherwise it withers away.
+
+#### Actions
+
+- **Rend.** *Melee Attack Roll:* +6, reach 5 ft. *Hit:* 9 (2d4 + 4) Slashing damage.
+
+#### Tactics
+
+Grabs at ankles and trips crawlers on the dance floor. Burn it or it comes back.
+
+#### Voice
+
+*Squelch.*
+
+---
+
+## Legal
+
+The Tour Guide, the Bouncer and the Troll Limb include material from the System Reference Document 5.2 ("SRD 5.2") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode.

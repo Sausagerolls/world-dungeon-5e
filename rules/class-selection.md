@@ -65,7 +65,7 @@ Let **N** be the crawler's character level. Expect N to be about 7–9 (see `lev
 
 ## After Class Selection
 
-- **One level at a time.** Each new character level is one level in one class: your class, or a new one through multiclassing. It gives that class's hit die, and also advances Crawler Core (1 Stat Point every level, a Skill Pick at every odd level).
+- **One level at a time.** Each new character level is one level in one class: your class, or a new one through multiclassing. It gives that class's hit die, and also advances Crawler Core (1 Stat Point every level, a Skill Pick every 5th level).
 - **Multiclassing** uses the normal 5e rules, based on class levels only, with any Player's Handbook class. Crawler is not a class for multiclass purposes, and Crawler Core features always use total character level. Caster levels from different classes add together for class mana.
 - No class goes above 20th level. After 20th, levels in that class become **prestige levels** (see `prestige-levels`), or you can multiclass.
 
@@ -73,4 +73,5 @@ Let **N** be the crawler's character level. Expect N to be about 7–9 (see `lev
 
 - Hold the selection in the first safe room on Floor 3, so players have time to choose. It is a good roleplay scene: the System pitches each class like a game show host. Read the pitches from the table above.
 - If a player is unsure, point them at the class that fits their Inclination and Crawler Skills.
-- Characters arrive at Floor 3 already level 7–9, so they gain a lot of class features at once. Give the table a little time to read them.
+- Characters arrive at Floor 3 at about level 23, so they gain a whole class at once. Give the table time to read it, or do the selection between sessions.
+- **More than 20 levels.** No class goes above 20th level, so a crawler with more than 20 levels puts 20 into their chosen class. The rest become prestige levels in that class (see `prestige-levels`) or levels in a second class (multiclassing prerequisites apply). Each prestige level and second-class level gives its own features, as if gained one at a time.

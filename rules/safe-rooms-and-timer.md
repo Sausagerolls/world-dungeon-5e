@@ -135,7 +135,7 @@ Each floor has a few **stairwells** down to the next floor. They are hidden, gua
 
 You can take the stairs whenever you find them. But leaving early has costs.
 
-**You miss the grind.** Every floor turn you leave behind is a fight, a box or a level you did not earn. The next floor is built for crawlers who are 3–4 levels stronger than when they arrived on this one. Arrive under-leveled, and the floor below will punish you.
+**You miss the grind.** Every floor turn you leave behind is a fight, a box or a level you did not earn. The next floor is built for crawlers who are about 11 levels stronger than when they arrived on this one. Arrive under-leveled, and the floor below will punish you.
 
 **You miss the bosses.** Neighborhood and floor bosses give Boss Boxes and big achievements. They do not follow you down.
 
@@ -179,6 +179,6 @@ When the party wants to grind mobs for levels and loot, they can spend a **block
 
 ## Designer Notes
 
-- **Open questions for playtest:** Are the floor timers too long or too short for 3–4 levels per floor? Deeper floors have much longer timers, so they need enough content (neighborhoods, bosses, quests) to fill them. Is the Ambush Check too punishing at 40% for normal areas?
+- **Open questions for playtest:** Are the floor timers too long or too short for about 11 levels per floor? Deeper floors have much longer timers, so they need enough content (neighborhoods, bosses, quests) to fill them. Is the Ambush Check too punishing at 40% for normal areas?
 - **Tracking.** The Crawler Character Sheet (Floor Timer page) and the GM Floor Tracker put all of this on paper.
 - **Floors 18 and beyond.** The final floor needs its own design.

@@ -49,7 +49,16 @@ A walking hill of rot: a mother-shape of soft fungus and old bones, crowned with
 | **Immunities** | Necrotic, Poison; Charmed, Frightened, Poisoned |
 | **Senses** | Blindsight 120 ft., Tremorsense 120 ft.; Passive Perception 34 |
 | **Languages** | All, telepathy 1 mile |
-| **CR** | 26 (XP 90,000, or 108,000 in lair; PB +8) |
+| **CR** | 26 (encounter XP 90,000, or 108,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Mother Moldra, the Rot Queen. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -102,7 +111,16 @@ A golden giant made of fire, posing. Always posing. His hair is a bonfire and hi
 | **Immunities** | Fire, Radiant; Blinded, Exhaustion |
 | **Senses** | Truesight 120 ft.; Passive Perception 22 |
 | **Languages** | All, telepathy 1 mile |
-| **CR** | 27 (XP 105,000, or 126,000 in lair; PB +8) |
+| **CR** | 27 (encounter XP 105,000, or 126,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Embrix the Unquenched. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -152,7 +170,16 @@ A smiling saint in a suit of gold leaf, trailing a halo of floating price tags. 
 | **Immunities** | Charmed, Frightened |
 | **Senses** | Truesight 120 ft.; Passive Perception 24 |
 | **Languages** | All, telepathy 1 mile |
-| **CR** | 25 (XP 75,000, or 90,000 in lair; PB +8) |
+| **CR** | 25 (encounter XP 75,000, or 90,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Saint Payola, Patron of Sponsors. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -202,7 +229,16 @@ A storm with antlers and a hunter's spear, its voice a rolling thunderclap. A li
 | **Immunities** | Lightning, Thunder; Deafened, Frightened |
 | **Senses** | Truesight 120 ft.; Passive Perception 32 |
 | **Languages** | All, telepathy 1 mile |
-| **CR** | 27 (XP 105,000, or 126,000 in lair; PB +8) |
+| **CR** | 27 (encounter XP 105,000, or 126,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Thrumm, the Thunder That Remembers. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -251,7 +287,16 @@ A tall figure of folded darkness with one closed eye. The room goes quiet when s
 | **Immunities** | Necrotic, Psychic; Charmed, Frightened, Unconscious |
 | **Senses** | Truesight 120 ft.; Passive Perception 36 |
 | **Languages** | All (only whispers), telepathy 1 mile |
-| **CR** | 26 (XP 90,000, or 108,000 in lair; PB +8) |
+| **CR** | 26 (encounter XP 90,000, or 108,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Nyx-Ra, the Quiet Dark. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -301,7 +346,16 @@ A brass titan with a door where its face should be, and a key the size of a brid
 | **Immunities** | Poison, Psychic; Charmed, Frightened, Paralyzed, Petrified, Poisoned, Prone |
 | **Senses** | Truesight 120 ft.; Passive Perception 25 |
 | **Languages** | All, telepathy 1 mile |
-| **CR** | 27 (XP 105,000, or 126,000 in lair; PB +8) |
+| **CR** | 27 (encounter XP 105,000, or 126,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"The Brass Warden. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -355,7 +409,16 @@ Something huge in a polka-dot suit, with too many arms and a smile that keeps ch
 | **Immunities** | Psychic; Charmed, Frightened, Grappled, Restrained |
 | **Senses** | Truesight 120 ft.; Passive Perception 13 |
 | **Languages** | All, honking, telepathy 1 mile |
-| **CR** | 25 (XP 75,000, or 90,000 in lair; PB +8) |
+| **CR** | 25 (encounter XP 75,000, or 90,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Wobblegob, the Laughing God. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -409,7 +472,16 @@ A broad, warm grandmother made of hearth-glow and flour, with an apron of woven 
 | **Immunities** | Cold, Radiant; Charmed, Frightened |
 | **Senses** | Truesight 120 ft.; Passive Perception 28 |
 | **Languages** | All, telepathy 1 mile |
-| **CR** | 25 (XP 75,000, or 90,000 in lair; PB +8) |
+| **CR** | 25 (encounter XP 75,000, or 90,000 in lair; PB +8) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: slaying a god earns a Celestial-tier achievement (see *Slaying a God* in `gods`) |
+| **Found** | In person only at its temple, a smite, a Great Deed or a ratings event |
+
+> **Inspect:** *"Hearthmother Tuul. Deity. The System recommends worship. The System recommends running. The System recommends both."*
 
 #### Traits
 
@@ -463,7 +535,16 @@ Moldra's eldest son: a sulky young god in a cloak of puffballs, who badly wants 
 | **Immunities** | Necrotic, Poison; Poisoned |
 | **Senses** | Tremorsense 60 ft.; Passive Perception 20 |
 | **Languages** | Common, Sylvan, telepathy 120 ft. |
-| **CR** | 16 (XP 15,000; PB +5) |
+| **CR** | 16 (encounter XP 15,000; PB +5) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Prince Fen of the Spores. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -503,7 +584,16 @@ Embrix's hunting dog, a good boy made of coals. He goes ahead of his master to l
 | **Immunities** | Fire; Exhaustion |
 | **Senses** | Darkvision 120 ft.; Passive Perception 23 |
 | **Languages** | Understands Common and Celestial, can't speak |
-| **CR** | 14 (XP 11,500; PB +5) |
+| **CR** | 14 (encounter XP 11,500; PB +5) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Cinder, Herald-Hound of Embrix. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -544,7 +634,16 @@ Saint Payola's collector: a polite figure in a grey suit, with a clipboard and n
 | **Immunities** | Charmed |
 | **Senses** | Truesight 60 ft.; Passive Perception 19 |
 | **Languages** | All |
-| **CR** | 15 (XP 13,000; PB +5) |
+| **CR** | 15 (encounter XP 13,000; PB +5) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"The Repo Man. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -585,7 +684,16 @@ Thrumm's daughter: a lean young huntress who repeats the last word anyone says t
 | **Immunities** | Thunder; Deafened |
 | **Senses** | Blindsight 60 ft.; Passive Perception 23 |
 | **Languages** | Common, Celestial |
-| **CR** | 13 (XP 10,000; PB +5) |
+| **CR** | 13 (encounter XP 10,000; PB +5) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Little Thrumm, the Echo. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -622,7 +730,16 @@ A child-sized figure in a nightgown who walks with its eyes closed. Nyx-Ra sends
 | **Immunities** | Necrotic, Psychic; Charmed, Exhaustion, Frightened, Unconscious |
 | **Senses** | Truesight 60 ft.; Passive Perception 29 |
 | **Languages** | Understands all, speaks only in whispers |
-| **CR** | 17 (XP 18,000; PB +6) |
+| **CR** | 17 (encounter XP 18,000; PB +6) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Hush, the Sleepwalker. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -659,7 +776,16 @@ The Brass Warden's ninth bailiff, a riveted brass officer with a lantern for a h
 | **Immunities** | Poison, Psychic; Charmed, Frightened, Poisoned |
 | **Senses** | Truesight 60 ft.; Passive Perception 19 |
 | **Languages** | Understands all, speaks only to read charges |
-| **CR** | 18 (XP 20,000; PB +6) |
+| **CR** | 18 (encounter XP 20,000; PB +6) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Bailiff Nine. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -699,7 +825,16 @@ Wobblegob's smallest, least funny joke, sent out to practice. It wears a tiny cl
 | **Immunities** | Psychic; Charmed |
 | **Senses** | Darkvision 60 ft.; Passive Perception 11 |
 | **Languages** | Common, honking |
-| **CR** | 12 (XP 8,400; PB +4) |
+| **CR** | 12 (encounter XP 8,400; PB +4) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Gigglesnort, the Least Joke. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -736,7 +871,16 @@ Tuul's kitchen spirit: a tiny old woman made of flour, who appears in safe rooms
 | **Immunities** | Cold, Radiant |
 | **Senses** | Truesight 30 ft.; Passive Perception 20 |
 | **Languages** | All |
-| **CR** | 11 (XP 7,200; PB +4) |
+| **CR** | 11 (encounter XP 7,200; PB +4) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Grandma Crumb. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -776,7 +920,16 @@ An independent demigod of lost things: a single grey sock with a halo. It knows 
 | **Immunities** | Charmed |
 | **Senses** | Truesight 60 ft.; Passive Perception 23 |
 | **Languages** | All |
-| **CR** | 9 (XP 5,000; PB +4) |
+| **CR** | 9 (encounter XP 5,000; PB +4) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Saint Lostsock. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -812,7 +965,16 @@ A god whose religion died out a thousand seasons ago, now a cracked statue that 
 | **Immunities** | Psychic; Charmed, Frightened |
 | **Senses** | Truesight 120 ft.; Passive Perception 21 |
 | **Languages** | All, in a language nobody speaks any more |
-| **CR** | 20 (XP 25,000; PB +6) |
+| **CR** | 20 (encounter XP 25,000; PB +6) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"Vorkath, the God Nobody Remembers. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 
@@ -850,7 +1012,16 @@ Every god uses the same intern. Nobody remembers hiring them. They carry message
 | **Immunities** | Exhaustion |
 | **Senses** | Truesight 30 ft.; Passive Perception 16 |
 | **Languages** | All |
-| **CR** | 10 (XP 5,900; PB +4) |
+| **CR** | 10 (encounter XP 5,900; PB +4) |
+
+| | |
+|---|---|
+| **Mob Tier** | Deity (1,000 XP) |
+| **Level** | ??? (the System won't say) |
+| **Loot** | No loot table: see its Minor Deity trait |
+| **Found** | Anywhere a god's business takes it; often near its god's shrines |
+
+> **Inspect:** *"The Unpaid Intern of the Gods. Deity. Minor, as gods go. Still a god."*
 
 #### Traits
 

@@ -36,7 +36,7 @@ export const sign = (n) => (n >= 0 ? '+' : '') + n;
 // Proficiency bonus by character level (normal to 20, then every 8 levels).
 export function profBonus(level) {
   if (level <= 20) return 2 + Math.floor((Math.max(1, level) - 1) / 4);
-  return 7 + Math.floor((level - 21) / 8);
+  return 6 + Math.ceil((level - 20) / 10);
 }
 
 // ---------- mana (rules/mana.md) ----------
@@ -127,7 +127,7 @@ export const CORE_FEATURES = [
   { name: 'The Interface', text: 'Status bars, Inspect (bonus action, 60 ft: name, level, a rude description), and System notifications. No map: you draw your own.' },
   { name: 'Crawler Inventory', text: '20 + level slots. Store or retrieve one item as your free interaction; more costs a bonus action. Spills out when you die.' },
   { name: 'Stat Points', text: '+1 to any ability every level. No cap.' },
-  { name: 'Skill Picks', text: 'At every odd level: Learn a Crawler Skill, Train one (+1 level, max 15), Training Montage (2 Stat Points) or Drill (a proficiency).' },
+  { name: 'Skill Picks', text: 'At 1st level and every 5th level: Learn a Crawler Skill, Train one (+1 level, max 15), Training Montage (2 Stat Points) or Drill (a proficiency).' },
   { name: 'Learning by Doing', text: 'Armor never gives penalties. Weapons you are not proficient with add half your proficiency bonus.' },
   { name: 'Tome Learning', text: 'Learn spells from tomes and cast them with mana. Starts with Heal Self.' },
 ];

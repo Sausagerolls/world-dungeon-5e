@@ -97,7 +97,7 @@
   }
 
   function stepPick() {
-    var h = "<h2>Your first Skill Pick</h2><p class='hint'>You get a Skill Pick at every odd level. Spend your first one now.</p>" +
+    var h = "<h2>Your first Skill Pick</h2><p class='hint'>You get a Skill Pick at 1st level and every 5th level. Spend your first one now.</p>" +
       chips(["Learn a Crawler Skill", "Training Montage", "Drill"], function (v) {
         return { learn: "Learn a Crawler Skill", montage: "Training Montage", drill: "Drill" }[S.pickType] === v; }, "ptype");
     if (S.pickType === "learn") {

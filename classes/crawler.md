@@ -44,7 +44,7 @@ The Crawler has **two layers**, and you keep both for good. Think of the Crawler
 You customize your crawler in three ways:
 
 1. **Stat Points** — +1 to an ability score every level.
-2. **Skill Picks** — learn or level up a Crawler Skill at every odd level.
+2. **Skill Picks** — learn or level up a Crawler Skill at 1st level and every 5th level.
 3. **GM awards** — Crawler Skills also level up when the GM decides you have earned it.
 
 ---
@@ -106,17 +106,17 @@ Every level gives you **one Hit Die** and the hit points that go with it. Which 
 |-------|----|-------------|-------------|--------------------|
 | 1st | +2 | 1 | 1 | Scrappy, Will to Live |
 | 2nd | +2 | 2 | 1 | Run Away! |
-| 3rd | +2 | 3 | 2 | Inclination |
-| 4th | +2 | 4 | 2 | Hard to Kill |
-| 5th | +3 | 5 | 3 | Hardened |
-| 6th | +3 | 6 | 3 | Inclination improvement |
-| 7th | +3 | 7 | 4 | Danger Sense |
-| 8th | +3 | 8 | 4 | Will to Live improvement |
-| 9th | +4 | 9 | 5 | Inclination improvement |
-| 10th+ | see `leveling` | +1 per level | +1 at each odd level | — |
+| 3rd | +2 | 3 | 1 | Inclination |
+| 4th | +2 | 4 | 1 | Hard to Kill |
+| 5th | +3 | 5 | 2 | Hardened |
+| 6th | +3 | 6 | 2 | Inclination improvement |
+| 7th | +3 | 7 | 2 | Danger Sense |
+| 8th | +3 | 8 | 2 | Will to Live improvement |
+| 9th | +4 | 9 | 2 | Inclination improvement |
+| 10th+ | see `leveling` | +1 per level | +1 at every 5th level | — |
 
 - **Stat Points** and **Skill Picks** are totals, and use character level. They continue after Floor 3 with no level cap.
-- **Survivor features** are gained at character levels 1–9, whether or not you have a class yet. Crawlers usually reach Floor 3 at level 7–9.
+- **Survivor features** are gained at character levels 1–9, whether or not you have a class yet. Crawlers usually reach Floor 3 at about level 23.
 
 ---
 
@@ -159,9 +159,9 @@ At each level you gain **1 Stat Point**. Spend it to increase one ability score 
 - Race bonuses, class Ability Score Improvements, Stat Potions and every other boost stack freely.
 
 ### Skill Picks
-**Core · 1st level and every odd level**
+**Core · 1st level and every 5th level**
 
-You gain a **Skill Pick** at every odd character level (1, 3, 5, 7, and so on). Spend it on one of these:
+You gain a **Skill Pick** at 1st level and at every 5th character level (5, 10, 15, and so on). Spend it on one of these:
 
 | Option | Effect |
 |--------|--------|
@@ -317,7 +317,7 @@ You have advantage on Dexterity saving throws against effects you can see, such 
 ## Designer Notes
 
 **Power budget**
-- Crawlers gain 3–4 levels per floor, with no level cap (see `leveling`).
+- Crawlers gain about 11 levels per floor, with no level cap (see `leveling`).
 - **Crawlers are meant to feel like they are on a power trip.** There is no cap on ability scores, survivor features stack with class features, and Stat Points arrive every level. The dungeon answers with tougher monsters: scale encounters up as the party grows, not the other way round.
 - By level 20, a crawler has about 14 more ability points than a standard 5e character, plus 10 Skill Picks.
 - Survivor features stay after class selection, so a classed crawler is stronger than a normal character of the same level. Build encounters as if the party were **one level higher** from Floor 3 onward. Adjust after playtest.

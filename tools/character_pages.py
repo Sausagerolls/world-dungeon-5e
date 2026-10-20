@@ -221,7 +221,7 @@ def features_page():
         ("Interface", "Status bars, Inspect (bonus action, 60 ft), notifications. No map."),
         ("Inventory", "20 + level slots. Store/retrieve: free interaction, then bonus action."),
         ("Stat Point", "+1 every level. No cap on ability scores."),
-        ("Skill Pick", "Every odd level: Learn, Train, Training Montage or Drill."),
+        ("Skill Pick", "1st level and every 5th level: Learn, Train, Training Montage or Drill."),
         ("Learning by Doing", "No armor penalties. Unproficient weapons: half PB."),
     ]
     core_html = "".join(f'<div><span><b>{n}.</b> {t}</span></div>' for n, t in core)
@@ -370,7 +370,7 @@ def levels_page():
     def log_rows(start):
         rows = []
         for lv in range(start, start + 32):
-            pick = "<span class='sq' style='width:3mm;height:3mm'></span>" if lv % 2 else "<span style='color:#cfc9bb'>—</span>"
+            pick = "<span class='sq' style='width:3mm;height:3mm'></span>" if lv == 1 or lv % 5 == 0 else "<span style='color:#cfc9bb'>—</span>"
             rows.append(f"<tr><td class='n'>{lv}</td><td></td><td></td><td></td>"
                         f"<td class='c'><span class='sq' style='width:3mm;height:3mm'></span></td><td class='c'>{pick}</td></tr>")
         return "".join(rows)
@@ -397,7 +397,7 @@ def levels_page():
     {log_table(1)}
     {log_table(33)}
   </div>
-  <div class="legendline">Each level: one class level, its hit die, its HP (roll or fixed + Con), 1 Stat Point. Odd levels also give a Skill Pick. At 100 XP gain a level and keep the rest. Write prestige levels as, e.g., Fighter P3. Past level 64: use a second sheet.</div>
+  <div class="legendline">Each level: one class level, its hit die, its HP (roll or fixed + Con), 1 Stat Point. Level 1 and every 5th level also give a Skill Pick. At 100 XP gain a level and keep the rest. Write prestige levels as, e.g., Fighter P3. Past level 64: print more Levels pages and number the rows on.</div>
   {foot("Levels")}
 </section>"""
 

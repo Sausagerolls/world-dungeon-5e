@@ -45,7 +45,7 @@ BOOKS = [
             ("rules/patches.md", "rules", "The System patches the game mid-crawl: hotfixes, patch notes, its promises, and Bug Bounties."),
         ],
         "how": ("Every crawler builds up three things as they level: <strong>Stat Points</strong> (+1 to an ability every level), "
-                "<strong>Skill Picks</strong> (learn or train a Crawler Skill at every odd level), and <strong>Crawler Skills</strong> "
+                "<strong>Skill Picks</strong> (learn or train a Crawler Skill at 1st level and every 5th level), and <strong>Crawler Skills</strong> "
                 "(which the GM also levels up when you use them well). On Floor 3 they bolt a real class on top."),
     },
     {
@@ -270,6 +270,7 @@ XREF = {
     "quest-builder": "Quest Builder",
     "divine-quests": "Divine Quests",
     "floor-1-quests": "Floor 1 Quests",
+    "building-mobs": "Building Mobs",
     "spell-lists": "Spell Lists",
     "spells-replacements": "Granted Spells and Replacements",
     "spells-a-z": "Spells A to Z",
@@ -407,7 +408,7 @@ def convert(md, kicker, css):
                 block.append(lines[i].strip()[1:].strip())
                 i += 1
             text = " ".join(block)
-            kind = "system" if text.startswith('*"') else "note"
+            kind = "system" if text.startswith('*"') or text.startswith("**Inspect") else "note"
             out.append(f'<blockquote class="{kind}">{inline(text)}</blockquote>')
             continue
         if s.startswith("|"):
@@ -609,12 +610,20 @@ blockquote.note{background:#f8efd9; border-left:3px solid var(--gold); padding:2
 
 
 HUDS = {
+    "bestiary": """
+  <div class="hud">
+    <div class="note">INSPECT · LEVEL 3 NEIGHBOURHOOD BOSS</div>
+    <div class="big">Chief Kaboomba</div>
+    <div class="row"><span class="lbl">HP</span><span class="bar hp"><i style="width:100%"></i></span><span class="val">71 / 71</span></div>
+    <div class="line">Grand Marshal of the Fireworks Festival. The Festival is today. You are the fireworks.</div>
+    <div class="stats"><span>MOB TIER <b>BOSS</b></span><span>XP <b>100</b></span><span>THREAT <b>EXPLOSIVE</b></span></div>
+  </div>""",
     "floor1": """
   <div class="hud">
     <div class="note">FLOOR 1 · TIMER 48:00:00</div>
     <div class="big">Welcome, Crawler!</div>
     <div class="line">Seven neighbourhoods. Seven bosses. One very large bouncer. The stairs are that way.</div>
-    <div class="stats"><span>LEVELS <b>1 → 4</b></span><span>SAFE ROOMS <b>5</b></span><span>STAIRWELLS <b>4</b></span><span>LLAMAS <b>BAD</b></span></div>
+    <div class="stats"><span>LEVELS <b>1 → 12</b></span><span>SAFE ROOMS <b>5</b></span><span>STAIRWELLS <b>4</b></span><span>LLAMAS <b>BAD</b></span></div>
   </div>""",
     "pets": """
   <div class="hud">
@@ -774,9 +783,31 @@ def build(book):
     print(f"Wrote {out_pdf}")
 
 
+def bestiary_book():
+    """Bestiary.pdf: the Building Mobs guide, then every stat block (see bestiary.py)."""
+    import bestiary
+    return {
+        "out": "Bestiary.pdf",
+        "title": "Bestiary",
+        "footer": "BESTIARY  ·  WORLD DUNGEON",
+        "version_from": "bestiary/building-mobs.md",
+        "kicker": "WORLD DUNGEON · GM HANDBOOK",
+        "cover_title": "The<br><span>Bestiary</span>",
+        "sub": "How to build mobs and NPC crawlers, the CR guide past CR 30, and every stat block in the World Dungeon.",
+        "hud": "bestiary",
+        "chapters": [
+            ("bestiary/building-mobs.md", "rules", "The stat block, the Crawl fields, Mob Tiers, the CR guide, NPC crawlers and their fighting styles."),
+            ("bestiary/all.md", "floor", "Every stat block: Floor 1, NPC crawlers, gods and minor deities."),
+        ],
+        "texts": {"bestiary/all.md": bestiary.bestiary_book_text(bestiary.load_all())},
+        "how": ("Every stat block is a 5e (2024) stat block plus the <strong>Crawl fields</strong>: Mob Tier and XP, level, "
+                "loot, where it is found, and its <strong>Inspect</strong> text. Bosses add their box, trophy and achievements."),
+    }
+
+
 def main():
     OUT_DIR.mkdir(exist_ok=True)
-    for book in BOOKS:
+    for book in BOOKS + [bestiary_book()]:
         build(book)
     import build_spellbooks  # one printable spellbook per class
     build_spellbooks.main()

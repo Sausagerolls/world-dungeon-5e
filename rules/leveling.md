@@ -2,14 +2,14 @@
 type: rule
 id: leveling
 name: Leveling and Levels Beyond 20
-version: 0.3
+version: 0.4
 status: draft
 related: [crawler, class-selection, crawler-skills, enemy-loot, safe-rooms-and-timer, quest-builder]
 ---
 
 # Leveling and Levels Beyond 20
 
-In the World Dungeon, crawlers gain **3–4 levels per floor**, and character level has **no cap**. A crawler who survives all 18 floors ends at about level 60–70.
+In the World Dungeon, crawlers gain **about 11 levels per floor**, and character level has **no cap**. A crawler who survives all 18 floors ends at about level 200. Every level is a full level: a class level, a Stat Point and a Hit Die.
 
 ## Experience Points
 
@@ -24,6 +24,7 @@ Crawlers level up by killing things. Every mob you defeat is worth **experience 
 | **3. Elite** | Elite and named mobs, mini-bosses, a boss's lieutenant, hostile crawlers. | 25 |
 | **4. Boss** | A neighbourhood boss, or any boss that drops a Boss Box. | 100 |
 | **5. Floor Boss** | The boss guarding the floor's main stairwell. | 200 |
+| **Deity** | A god, a god's avatar or a herald (see `god-stat-blocks`). Rare, and huge. | 1,000 |
 
 - **Tier is the mob's role, not its CR.** A goblin is Trash in a horde of thirty and Standard in a fight with three. The GM decides, and the System shows it when you Inspect the mob. The values don't change with the floor, so 100 XP is always one level.
 - **Everyone in the fight gets it.** Each crawler who took part in the fight gets the full XP for every mob defeated in it, whoever landed the blow. Crawlers who were down but alive still get it. Dead crawlers don't.
@@ -41,30 +42,21 @@ Crawlers level up by killing things. Every mob you defeat is worth **experience 
 
 ## Floor Pacing
 
-A typical floor is about 15 ordinary fights (300–500 XP), a few elites (100–150 XP), three or four neighbourhood bosses (300–400 XP) and the floor boss (200 XP): about **10–12 levels per floor**. Parties that clear every neighbourhood leave further ahead. Cautious parties fall behind, and the dungeon punishes that.
+A typical floor is about 15 ordinary fights (300–500 XP), a few elites (100–150 XP), three or four neighbourhood bosses (300–400 XP) and the floor boss (200 XP): about **1,100 XP, or 11 levels per floor**. Parties that clear every neighbourhood leave further ahead. Cautious parties fall behind, and the dungeon punishes that.
 
-*Draft note: the XP values were raised in v0.3. The table below, the floors, and the proficiency and class rules still assume 3–4 levels per floor, and need rebalancing to match.*
+| Floor | Levels on that floor | | Floor | Levels on that floor |
+|-------|----------------------|-|-------|----------------------|
+| 1 | 1 → 12 | | 10 | 100 → 111 |
+| 2 | 12 → 23 | | 11 | 111 → 122 |
+| 3 | 23 → 34 (class selection on arrival) | | 12 | 122 → 133 |
+| 4 | 34 → 45 | | 13 | 133 → 144 |
+| 5 | 45 → 56 | | 14 | 144 → 155 |
+| 6 | 56 → 67 | | 15 | 155 → 166 |
+| 7 | 67 → 78 | | 16 | 166 → 177 |
+| 8 | 78 → 89 | | 17 | 177 → 188 |
+| 9 | 89 → 100 | | 18 | 188 → 199+ |
 
-| Floor | Levels on that floor |
-|-------|----------------------|
-| 1 | 1 → 4 |
-| 2 | 4 → 8 |
-| 3 | 8 → 11 (class selection on arrival) |
-| 4 | 11 → 15 |
-| 5 | 15 → 18 |
-| 6 | 18 → 22 |
-| 7 | 22 → 25 |
-| 8 | 25 → 29 |
-| 9 | 29 → 32 |
-| 10 | 32 → 36 |
-| 11 | 36 → 39 |
-| 12 | 39 → 43 |
-| 13 | 43 → 46 |
-| 14 | 46 → 50 |
-| 15 | 50 → 53 |
-| 16 | 53 → 57 |
-| 17 | 57 → 60 |
-| 18 | 60 → 64+ |
+**Floor 1 is the exception.** Its neighbourhoods were built for levels 1–4, so it gets easier as the party levels up. That's on purpose: the tutorial floor is where crawlers learn they are getting strong. From Floor 2, floors are built for the table above.
 
 **Farming.** There is no cap on XP from trash mobs. The floor timer is the cap: every fight costs a floor turn, and the stairs don't wait.
 
@@ -72,30 +64,32 @@ A typical floor is about 15 ordinary fights (300–500 XP), a few elites (100–
 
 ## Proficiency Bonus
 
-Proficiency bonus follows the normal 5e table to 20th level. After that, it rises more slowly to protect bounded accuracy:
+Proficiency bonus follows the normal 5e table to 20th level (+6 at 17–20). After that, it rises by **+1 every 10 levels**, to protect bounded accuracy:
 
-| Character Level | Proficiency Bonus |
-|-----------------|-------------------|
-| 17–20 | +6 |
-| 21–28 | +7 |
-| 29–36 | +8 |
-| 37–44 | +9 |
-| 45–52 | +10 |
-| 53–60 | +11 |
-| 61–68 | +12 |
-| 69+ | +13 |
+| Character Level | Proficiency Bonus | | Character Level | Proficiency Bonus |
+|-----------------|-------------------|-|-----------------|-------------------|
+| 17–20 | +6 | | 111–120 | +16 |
+| 21–30 | +7 | | 121–130 | +17 |
+| 31–40 | +8 | | 131–140 | +18 |
+| 41–50 | +9 | | 141–150 | +19 |
+| 51–60 | +10 | | 151–160 | +20 |
+| 61–70 | +11 | | 161–170 | +21 |
+| 71–80 | +12 | | 171–180 | +22 |
+| 81–90 | +13 | | 181–190 | +23 |
+| 91–100 | +14 | | 191–200 | +24 |
+| 101–110 | +15 | | 201+ | +1 per 10 levels |
 
 ## What Every Level Gives
 
 Every character level, at any height, gives:
 
-- **Crawler Core:** 1 Stat Point, and a Skill Pick at every odd level.
+- **Crawler Core:** 1 Stat Point. A Skill Pick at 1st level and every 5th level (5, 10, 15 and so on).
 - **One class level** (after Floor 3), in a class of your choice.
 - **One Hit Die and hit points.** Before Floor 3 this is a d8. After that, it is the hit die of the class you took the level in (see *Hit Points and Hit Dice* in `crawler`).
 
 ## Leveling Your Classes
 
-On Floor 3 you gain your first class at your current level, all at once (see `class-selection`). After that, **every new character level is one level in one class**:
+On Floor 3 you gain your first class at your current level, all at once (see `class-selection`). Crawlers arrive at about level 23, so the first 20 go into your class and the rest become prestige levels in it or levels in a second class. After that, **every new character level is one level in one class**:
 
 - Level up a class you already have, or take 1st level in a new class (normal 5e multiclassing rules and prerequisites).
 - You gain that class level's features, and its Ability Score Improvement or feat if it has one.
@@ -104,6 +98,6 @@ On Floor 3 you gain your first class at your current level, all at once (see `cl
 
 ## GM Notes
 
-- **Monster scaling.** Standard 5e monsters run out at about CR 30, which suits crawlers around level 25–30. From Floor 7, the GM scales monsters up.
-- **Ability scores.** There is no cap. By level 60 a crawler has 60 or more Stat Points, so main scores of 40+ are normal. This is intended: crawlers should feel like they are on a power trip. Answer it with bigger monsters.
-- **Skill Picks.** By level 60, a crawler has about 30 Skill Picks, plus GM-awarded Skill Levels. Crawler Skills cap at Skill Level 15 (20 with Limit Breaker), and Training Montage absorbs extra picks. More Crawler Skills are planned for high-level play (see `crawler-skills`).
+- **Monster scaling.** Standard 5e monsters run out at about CR 30, which suits crawlers around level 25–30. From Floor 3, the GM scales monsters up. The CR guide in `building-mobs` (and the Mob Builder) continues past CR 30.
+- **Ability scores.** There is no cap. By level 200 a crawler has 200 or more Stat Points, so main scores of 60–100 are normal. This is intended: crawlers should feel like they are on a power trip. Answer it with bigger monsters.
+- **Skill Picks.** By level 200, a crawler has about 41 Skill Picks, plus GM-awarded Skill Levels. Crawler Skills cap at Skill Level 15 (20 with Limit Breaker), and Training Montage absorbs extra picks. More Crawler Skills are planned for high-level play (see `crawler-skills`).

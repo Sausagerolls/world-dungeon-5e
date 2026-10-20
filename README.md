@@ -48,7 +48,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `rules/safe-rooms-and-timer.md` | Floor turns, resting, Ambush Checks, safe rooms, floor timer, stairwells | Draft 0.1 |
 | `rules/patches.md` | Patch Notes: the System AI patches the game mid-crawl (the GM's fix-it tool), its promises, Bug Bounty | Draft 0.1 |
 | `rules/prestige-levels.md` | Prestige levels (21+ in one class): scaling, boons, 5 features per class | Draft 0.1 |
-| `rules/leveling.md` | XP by Mob Tier (100 XP per level), floor pacing (3–4 levels per floor), proficiency bonus, levels beyond 20 | Draft 0.2 |
+| `rules/leveling.md` | XP by Mob Tier (100 XP per level), floor pacing (about 11 levels per floor), proficiency bonus, levels beyond 20 | Draft 0.4 |
 | `rules/loot-boxes.md` | Earning and opening boxes, rarity (Bronze to Celestial), box types, Player Killer mark | Draft 0.1 |
 | `rules/achievements.md` | Achievement tiers, the Audience Meter, 54 example achievements | Draft 0.1 |
 | `loot/box-tables.md` | d100 tables for all 19 box types | Draft 0.1 |
@@ -67,7 +67,9 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `quests/floor-1-quests.md` | GM: quests for every Floor 1 neighbourhood, System Quests, a dare, a four-link questline | Draft 0.1 |
 | `rules/pets.md` | Pets: getting one, commands, growth, upgrades, tricks, evolutions, egg hatch tables, taming | Draft 0.1 |
 | `floors/floor-1/overview.md` | Floor 1 at a glance, running encounters, bosses, rewards | Draft 0.1 |
-| `floors/floor-1/neighbourhoods.md` | 7 neighbourhoods + Club Stairwell: encounter tables, boss rooms, mechanics, hints, stat blocks | Draft 0.1 |
+| `floors/floor-1/neighbourhoods.md` | 7 neighbourhoods + Club Stairwell: encounter tables, boss rooms, mechanics, hints, stat blocks with Crawl fields | Draft 0.1 |
+| `bestiary/building-mobs.md` | GM: the stat block and its Crawl fields, Mob Tiers, the CR guide (extended past CR 30), NPC crawlers and 12 fighting styles | Draft 0.1 |
+| `bestiary/**/*.md` | Stat blocks made with the Mob Builder (NPC crawlers in `bestiary/crawlers/`), collected with Floor 1 and the gods into the GM Bestiary by `tools/bestiary.py` | Draft 0.1 |
 | `rules/crafting.md` | Crafting rules: tools, materials, field and workbench crafting, magic item costs | Draft 0.1 |
 | `items/crafting-recipes.md` | Recipes for explosives, firearms, dungeon items, 5e magic items, spell scrolls | Draft 0.1 |
 | `rules/safe-room-shops.md` | Shop types, stock by floor, prices, materials, recipes, services | Draft 0.1 |
@@ -75,7 +77,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 
 ## PDF Handbook
 
-`pdf/The-Crawler.pdf`, `pdf/Spells.pdf`, the printable class spellbooks `pdf/Spellbook-<Class>.pdf` (one per caster class, built by `tools/build_spellbooks.py`), the private Class Codex PDFs `pdf/Codex-<Class>.pdf` (Tabletop Forge server only, see DEPLOY.md), `pdf/Loot-and-Achievements.pdf`, `pdf/Crafting-and-Shops.pdf`, `pdf/Pets.pdf`, `pdf/Gods.pdf`, `pdf/Gods-Stat-Blocks.pdf`, `pdf/Quests.pdf`, `pdf/Quest-Builder.pdf`, `pdf/Floor-1.pdf`, `pdf/Enemy-Loot.pdf`, `pdf/Explosives.pdf`, `pdf/Firearms.pdf` and `pdf/Dungeon-Items.pdf` are built from the markdown files. After editing any of them, rebuild it with:
+`pdf/The-Crawler.pdf`, `pdf/Spells.pdf`, the printable class spellbooks `pdf/Spellbook-<Class>.pdf` (one per caster class, built by `tools/build_spellbooks.py`), the private Class Codex PDFs `pdf/Codex-<Class>.pdf` (Tabletop Forge server only, see DEPLOY.md), `pdf/Loot-and-Achievements.pdf`, `pdf/Crafting-and-Shops.pdf`, `pdf/Pets.pdf`, `pdf/Gods.pdf`, `pdf/Gods-Stat-Blocks.pdf`, `pdf/Quests.pdf`, `pdf/Quest-Builder.pdf`, `pdf/Floor-1.pdf`, `pdf/Bestiary.pdf`, `pdf/Enemy-Loot.pdf`, `pdf/Explosives.pdf`, `pdf/Firearms.pdf` and `pdf/Dungeon-Items.pdf` are built from the markdown files. After editing any of them, rebuild it with:
 
 ```
 python3 tools/build_pdf.py
@@ -110,7 +112,7 @@ Inside a file, individual entries (Crawler Skills, features, items) use a level-
 - [x] Tome magic and mana
 - [x] Leveling: XP by Mob Tier, pacing and levels beyond 20
 - [ ] More Crawler Skills (target 40+ for high-level play)
-- [ ] Monster scaling for Floor 7+
+- [x] Monster scaling past CR 30 (CR guide in Building Mobs)
 - [x] Races available on Floor 3
 - [x] Classes: any core Player's Handbook class at Floor 3
 - [x] Loot boxes (tiers, tables)
@@ -122,5 +124,5 @@ Inside a file, individual entries (Crawler Skills, features, items) use a level-
 - [ ] Floor guides for Floors 2–3
 - [x] Safe rooms, stairwells and the floor timer
 - [x] Printable floor timer track (player and GM)
-- [ ] Bestiary (mobs, neighborhood bosses, floor bosses)
+- [x] Bestiary, Mob Builder and NPC crawler builder (GM site)
 - [x] Crafting rules, recipes and safe room shops
