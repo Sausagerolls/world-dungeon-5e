@@ -152,6 +152,12 @@ Other crawlers are the most dangerous things in the dungeon: they have loot boxe
 - **Mob Tier** is usually **Elite** (25 XP). A party leader or a famous crawler can be a **Boss**.
 - **Killing one** gives a Murder Box, and their inventory spills out (see `loot-boxes` and `enemy-loot`).
 
+### Meeting Them Again
+
+NPC crawlers level up too. When the party meets a crawler again on a later floor, open them in the Mob Builder (**Clone from the Bestiary**), set the **future floor**, and click **Level up for a future floor**. They gain about 11 levels per floor (or as many as you choose), with stats, gear, fame and boxes for the new floor. They keep their name, race, pet, element, party, roleplay, tactics, and anything you added by hand, and their **History** notes where the party last met them.
+
+The new version downloads as its own file, with *(Floor N)* in its name, so both versions stay in the Bestiary. A crawler who had no race yet picks one on Floor 3, like everyone else.
+
 ### Fighting Styles
 
 The Mob Builder has a preset for each style. Pick one, set the level and floor, and it fills in the stat block, gear and tactics, ready to edit.

@@ -68,8 +68,8 @@
     traits: [], actions: [], bonus: [], reactions: [], legendary: [], legendaryCount: 3, extra: [],
     tier: 'Standard', level: '1', lootType: 'Monstrosity', lootTier: '1', lootNote: '', found: '', inspect: '',
     drops: '', boxRarity: 'Gold', boxType: 'Boss', trophy: '', achievement: '', bossNotes: '', tactics: '', audience: '', voice: '',
-    floor: 1,
-    crawler: { style: 'bruiser', level: 5, race: '', cls: '', party: '', god: '', titles: '', followers: '', standing: '', sponsor: '', pk: false, skillsText: '', gearText: '', boxes: '', weaponRanks: '', attitude: 'Hostile', personality: '', want: '', trades: '', pet: [] },
+    floor: 1, variant: '', futureFloor: '', futureLevels: '',
+    crawler: { style: 'bruiser', level: 5, history: '', race: '', cls: '', party: '', god: '', titles: '', followers: '', standing: '', sponsor: '', pk: false, skillsText: '', gearText: '', boxes: '', weaponRanks: '', attitude: 'Hostile', personality: '', want: '', trades: '', pet: [] },
   });
   const KEY = 'wd-mob-builder-draft';
   let st = blank();
@@ -194,7 +194,7 @@
   }
   function toMarkdown() {
     const D = derived();
-    const name = st.name || 'Unnamed Mob';
+    const name = (st.name || 'Unnamed Mob') + (st.variant ? ` (${st.variant})` : '');
     const out = [`### Stat Block: ${name}`, `**${metaLine()}**`, ''];
     if (st.flavour) out.push(st.flavour, '');
     out.push('| | |', '|---|---|', `| **AC** | ${st.ac}${st.acNote ? ` (${st.acNote})` : ''} |`, `| **HP** | ${hpText(D)} |`, `| **Speed** | ${st.speed || '30 ft.'} |`, `| **Initiative** | ${sg(D.init)} (${10 + D.init}) |`, '');
@@ -238,16 +238,18 @@
       sec('Crawler', kv([['Race and class', [c.race, c.cls].filter(Boolean).join(' ')], ['Level', `${c.level} (floor ${st.floor})`], ['Party', c.party], ['God', c.god], ['Titles on Inspect', c.titles], ['Crawler Skills', c.skillsText]]));
       sec('Fame', kv([['Followers', c.followers], ['Audience', c.standing], ['Sponsor', c.sponsor], ['Player Killer', c.pk ? 'Yes: the Player Killer mark shows on Inspect (see `loot-boxes`)' : '']]));
       sec('Gear', kv([['Weapons and ranks', c.weaponRanks], ['Notable items', c.gearText], ['Unopened boxes', c.boxes], ['When killed', 'Their inventory spills out, and the killer gets a Murder Box (see `loot-boxes`).']]));
-      sec('Roleplay', kv([['Attitude', c.attitude], ['Personality', c.personality], ['Wants', c.want], ['Will trade', c.trades]]));
+      sec('Roleplay', kv([['Attitude', c.attitude], ['Personality', c.personality], ['Wants', c.want], ['Will trade', c.trades], ['History', c.history]]));
     }
     prose('Tactics', st.tactics);
     prose('Audience', st.audience);
     prose('Voice', st.voice);
     return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
   }
+  const fileSlug = () => slug(st.name) + (st.variant ? '-' + slug(st.variant) : '');
   function fileText() {
-    const id = slug(st.name);
-    return ['---', `type: ${st.mode === 'crawler' ? 'npc-crawler' : 'mob'}`, `id: ${id}`, `name: ${st.name || 'Unnamed Mob'}`, `floor: ${st.floor || 0}`, 'version: 0.1', 'status: draft', '---', '', `# ${st.name || 'Unnamed Mob'}`, '', toMarkdown(), ''].join('\n');
+    const id = fileSlug();
+    const title = (st.name || 'Unnamed Mob') + (st.variant ? ` (${st.variant})` : '');
+    return ['---', `type: ${st.mode === 'crawler' ? 'npc-crawler' : 'mob'}`, `id: ${id}`, `name: ${title.replace(/"/g, "'")}`, `floor: ${st.floor || 0}`, 'version: 0.1', 'status: draft', '---', '', `# ${title}`, '', toMarkdown(), ''].join('\n');
   }
   const folder = () => (st.mode === 'crawler' ? 'bestiary/crawlers/' : `bestiary/floor-${st.floor || 1}/`);
 
@@ -397,10 +399,19 @@
   const pick = (arr, seed) => arr[Math.abs(seed) % arr.length];
   const hashStr = (s) => { let h = 0; for (let i = 0; i < s.length; i += 1) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); };
 
+  // Every entry a preset writes is marked, so a levelled-up version can tell the GM's own additions apart.
   function generateCrawler(styleId, L, floor, keep) {
+    const out = buildCrawler(styleId, L, floor, keep);
+    ['traits', 'actions', 'bonus', 'reactions'].forEach((k) => { out[k] = out[k].map((e) => Object.assign(e, { preset: true })); });
+    out.crawler.pet = out.crawler.pet.map((e) => Object.assign(e, { preset: true }));
+    return out;
+  }
+  function buildCrawler(styleId, L, floor, keep) {
     const S = STYLES[styleId];
     const b = bandOf(floor);
-    const seed = hashStr((keep.name || '') + styleId + L);
+    // Seeded by name and style only, so a levelled-up version keeps its race, element and pet.
+    const seed = hashStr((keep.name || '') + styleId);
+    const race = floor < 3 ? 'Human' : (keep.raceChosen && keep.race ? keep.race : pick(RACES, seed >> 4));
     const name = keep.name || `${pick(FIRST, seed)} "${pick(HANDLE, seed >> 3)}" ${pick(LAST, seed >> 6)}`;
     const short = /"/.test(name) ? name.split(' ')[0] : /^The /.test(name) ? name : name.split(/[ ,]/)[0];
     // Ability scores: 15, 14, 13, 12, 10, 8 by the style's order, then L Stat Points, weighted to the main abilities.
@@ -441,17 +452,17 @@
     const saves = [S.order[0], S.order[1]].filter((a, i, arr) => arr.indexOf(a) === i);
     const tierDefault = keep.tier || 'Elite';
     return {
-      mode: 'crawler', name, size: 'Medium', type: 'Humanoid', tags: floor < 3 ? 'Human' : (keep.race || pick(RACES, seed >> 4)), alignment: keep.alignment && keep.alignment !== 'Unaligned' ? keep.alignment : 'Chaotic Neutral', role: '',
+      mode: 'crawler', name, size: 'Medium', type: 'Humanoid', tags: race, alignment: keep.alignment && keep.alignment !== 'Unaligned' ? keep.alignment : 'Chaotic Neutral', role: '',
       flavour: `A level ${L} crawler and ${S.label.toLowerCase()}${floor < 3 ? ', still in whatever they were wearing when the world ended' : ''}.`,
       ac: S.ac(b, M), acNote: S.acNote(b), hpCount: L, hpDie: String(S.die), hpOverride: '', speed: styleId === 'brawler' ? `${30 + 5 * Math.min(6, Math.floor(L / 4))} ft.` : '30 ft.', initOverride: '',
       scores, saves, skills: skillList.map((s) => ({ name: s, exp: L >= 9 })), vuln: '', resist: '', immune: '', condImmune: '', senses: '', languages: 'Common',
       crAuto: true, cr: '1', dprOverride: '',
       traits: S.traits ? S.traits(c) : [], actions, bonus: S.bonus ? S.bonus(c) : [], reactions: S.reactions ? S.reactions(c) : [], legendary: [], legendaryCount: 3, extra: [],
       tier: tierDefault, level: String(L), lootType: 'Humanoid', lootTier: String(Math.min(4, 1 + Math.floor(L / 25))), lootNote: 'and their whole inventory (see Gear)', found: keep.found || `Floor ${floor}`,
-      inspect: `${name}. Level ${L} ${floor < 3 ? 'Human' : (keep.race || pick(RACES, seed >> 4))} ${floor < 3 ? 'Crawler' : S.cls.split(' ')[0]}. ${followers.toLocaleString('en')} followers. ${pick(['Currently trending.', 'Sponsored.', 'The System has flagged them as "entertaining".', 'Has killed other crawlers. Probably.', 'Fan favourite.'], seed >> 5)}`,
-      drops: '', boxRarity: 'Gold', boxType: 'Boss', trophy: '', achievement: '', bossNotes: '', tactics: S.tactics, audience: 'Beating them in front of their own fans: +1 Audience. Sparing them on camera can be worth more.', voice: S.voice,
-      floor,
-      crawler: { style: styleId, level: L, race: floor < 3 ? 'Human' : (keep.race || pick(RACES, seed >> 4)), cls, party: keep.party || '', god: floor < 3 ? '' : (keep.god || ''), titles: keep.titles || '', followers: followers.toLocaleString('en'), standing: ['Unknown', 'Rising', 'Popular', 'Famous', 'A household name'][b], sponsor: floor < 3 ? '' : (keep.sponsor || 'None yet'), pk: !!keep.pk,
+      inspect: `${name}. Level ${L} ${race} ${floor < 3 ? 'Crawler' : S.cls.split(' ')[0]}. ${followers.toLocaleString('en')} followers. ${pick(['Currently trending.', 'Sponsored.', 'The System has flagged them as "entertaining".', 'Has killed other crawlers. Probably.', 'Fan favourite.'], seed >> 5)}`,
+      drops: keep.drops || '', boxRarity: 'Gold', boxType: 'Boss', trophy: '', achievement: '', bossNotes: '', tactics: keep.tactics || S.tactics, audience: keep.audience || 'Beating them in front of their own fans: +1 Audience. Sparing them on camera can be worth more.', voice: keep.voice || S.voice,
+      floor, variant: keep.variant || '', futureFloor: '', futureLevels: '',
+      crawler: { style: styleId, level: L, race, history: keep.history || '', cls, party: keep.party || '', god: floor < 3 ? '' : (keep.god || ''), titles: keep.titles || '', followers: followers.toLocaleString('en'), standing: ['Unknown', 'Rising', 'Popular', 'Famous', 'A household name'][b], sponsor: floor < 3 ? '' : (keep.sponsor || 'None yet'), pk: !!keep.pk,
         skillsText, gearText: S.gear(b), boxes: BOXES[b], weaponRanks: S.weapon ? `${S.weapon(b)[0].replace(/^named /, short + "'s ")} (rank ${rank.label})` : 'Spells (rank ' + rank.label + ')', attitude: keep.attitude || 'Hostile', personality: keep.personality || '', want: keep.want || '', trades: keep.trades || '',
         pet: S.petFn ? S.petFn(c) : [] },
     };
@@ -460,7 +471,9 @@
   // ------------------------------------------------------------ clone from the Bestiary
   function fromBestiary(m) {
     const f = m.fields, s = blank();
-    s.name = f.name;
+    const vm = f.name.match(/^(.*) \((Floor \d+)\)$/);
+    s.name = vm ? vm[1] : f.name;
+    s.variant = vm ? vm[2] : '';
     const meta = f.meta.split('·').map((x) => x.trim());
     const st0 = (meta[0] || '').match(/^(\w+)\s+([^(]+?)(?:\s*\((.+)\))?$/);
     if (st0) { s.size = st0[1]; s.type = st0[2].trim(); s.tags = st0[3] || ''; }
@@ -517,13 +530,23 @@
         if (sec.title === 'Crawler') { const rc = (g['Race and class'] || '').split(' '); c.race = rc[0] || ''; c.cls = rc.slice(1).join(' '); c.level = num(g.Level) || c.level; c.party = g.Party || ''; c.god = g.God || ''; c.titles = g['Titles on Inspect'] || ''; c.skillsText = g['Crawler Skills'] || ''; }
         if (sec.title === 'Fame') { c.followers = g.Followers || ''; c.standing = g.Audience || ''; c.sponsor = g.Sponsor || ''; c.pk = !!g['Player Killer']; }
         if (sec.title === 'Gear') { c.weaponRanks = g['Weapons and ranks'] || ''; c.gearText = g['Notable items'] || ''; c.boxes = g['Unopened boxes'] || ''; }
-        if (sec.title === 'Roleplay') { c.attitude = g.Attitude || ''; c.personality = g.Personality || ''; c.want = g.Wants || ''; c.trades = g['Will trade'] || ''; }
+        if (sec.title === 'Roleplay') { c.attitude = g.Attitude || ''; c.personality = g.Personality || ''; c.want = g.Wants || ''; c.trades = g['Will trade'] || ''; c.history = g.History || ''; }
       } else s.extra.push({ title: sec.title, entries, text: sec.text });
     });
     if (s.legendary.length) {
       const sec = f.sections.find((x) => x.title === 'Legendary Actions');
       const mm = sec && sec.text.match(/take (\d+) legendary/);
       if (mm) s.legendaryCount = Number(mm[1]);
+    }
+    if (s.mode === 'crawler') {
+      // Builder-made crawlers say their style in the description ("A level 9 crawler and demolitionist").
+      const fl = (f.flavour || '').toLowerCase();
+      const hit = Object.entries(STYLES).find(([, v]) => fl.includes('crawler and ' + v.label.toLowerCase()));
+      if (hit) s.crawler.style = hit[0];
+      s.crawler.level = num(s.level) || s.crawler.level;
+      // Assume the clone's entries came from its preset, so a level-up replaces rather than duplicates them.
+      ['traits', 'actions', 'bonus', 'reactions'].forEach((k) => { s[k].forEach((e) => { e.preset = true; }); });
+      s.crawler.pet.forEach((e) => { e.preset = true; });
     }
     if (s.bossNotes) { s.boxRarity = (s.bossNotes.match(/Boss Box \((\w+)/) || [])[1] || 'Gold'; s.boxType = 'Boss'; }
     return s;
@@ -594,7 +617,10 @@
     ${crawler ? `<fieldset><legend>Fighting style preset</legend>
       <div class="wmb-grid">${F('Style', 'crawler.style', { options: Object.entries(STYLES).map(([k, s]) => [k, s.label]) })}${F('Crawler level', 'crawler.level', { num: true })}${F('Floor', 'floor', { num: true })}${F('Mob Tier', 'tier', { options: TIERS })}</div>
       <p class="wmb-hint">Fills the whole stat block, gear and tactics for this style, level and floor. Name, race, party and the Roleplay fields are kept. Everything stays editable afterwards.</p>
-      <div class="wmb-top"><button type="button" class="wdb-btn primary" data-act="generate">Generate from preset</button><button type="button" class="wdb-btn" data-act="rename">Random name</button></div></fieldset>` : ''}
+      <div class="wmb-top"><button type="button" class="wdb-btn primary" data-act="generate">Generate from preset</button><button type="button" class="wdb-btn" data-act="rename">Random name</button></div>
+      <div class="wmb-grid" style="margin-top:8px">${F('Future floor', 'futureFloor', { num: true, ph: String(n0(st.floor, 1) + 1) })}${F('Levels gained (blank = 11 per floor)', 'futureLevels', { num: true })}</div>
+      <p class="wmb-hint">Meeting them again later? <b>Level up for a future floor</b> makes their next version: same name, race, pet, element, party, roleplay and tactics, plus anything you added by hand, with stats, gear, fame and boxes for the new floor. Download it as its own file (it gets <i>(Floor N)</i> in its name), so the original stays in the Bestiary too.</p>
+      <div class="wmb-top"><button type="button" class="wdb-btn primary" data-act="levelup">Level up for a future floor</button>${st.variant ? `<span class="wmb-hint">This is the ${esc(st.variant)} version. ${esc(st.crawler.history || '')}</span>` : ''}</div></fieldset>` : ''}
     <form class="wmb-form" onsubmit="return false">
     <fieldset><legend>Identity</legend><div class="wmb-grid">
       ${F('Name', 'name', { ph: crawler ? 'Brenda "Big Shovel" Okafor' : 'Bad Llama' })}${F('Size', 'size', { options: SIZES })}${F('Creature type', 'type', { options: TYPES })}${F('Tags', 'tags', { ph: crawler ? 'Human' : 'Goblinoid' })}
@@ -671,7 +697,7 @@
     const pv = root.querySelector('.wdb-preview');
     pv.innerHTML = renderBlock(md);
     enhanceRolls(pv);
-    root.querySelector('.wmb-where').textContent = `Save as ${folder()}${slug(st.name)}.md`;
+    root.querySelector('.wmb-where').textContent = `Save as ${folder()}${fileSlug()}.md`;
     saveDraft();
   }
 
@@ -727,11 +753,32 @@
       if (!pendingNew) { pendingNew = true; drawForm(); return; }
       pendingNew = false; const mode = st.mode; st = blank(); st.mode = mode; if (mode === 'crawler') st.tier = 'Elite'; drawForm(); refresh();
     }
+    if (a === 'levelup') {
+      const c = st.crawler;
+      const from = Math.max(1, n0(st.floor, 1));
+      const to = Math.max(from + 1, n0(st.futureFloor, from + 1));
+      const L0 = Math.max(1, n0(c.level, 1));
+      const L = L0 + Math.max(1, n0(st.futureLevels, 11 * (to - from)));
+      const keep = { name: st.name, race: c.race, raceChosen: from >= 3, party: c.party, god: c.god, titles: c.titles, sponsor: c.sponsor, pk: c.pk,
+        attitude: c.attitude, personality: c.personality, want: c.want, trades: c.trades, tier: st.tier, alignment: st.alignment,
+        tactics: st.tactics, voice: st.voice, audience: st.audience, drops: st.drops, variant: `Floor ${to}`,
+        history: [c.history, `Floor ${from}: level ${L0}`].filter(Boolean).join('; ') };
+      const old = st;
+      st = generateCrawler(c.style, L, to, keep);
+      // Carry over anything the GM added by hand (entries the preset didn't write).
+      ['traits', 'actions', 'bonus', 'reactions', 'legendary'].forEach((k) => {
+        const names = new Set(st[k].map((e) => e.name));
+        st[k].push(...(old[k] || []).filter((e) => !e.preset && !names.has(e.name)));
+      });
+      st.extra = old.extra || [];
+      drawForm(); refresh();
+      return;
+    }
     if (a === 'generate' || a === 'rename') {
       const c = st.crawler;
       // Keep the identity and roleplay fields; tier and alignment only if this was already a crawler.
       const was = st.mode === 'crawler' && st.crawler.cls;
-      const keep = { name: st.name, race: c.race, party: c.party, god: c.god, titles: c.titles, sponsor: c.sponsor, pk: c.pk, attitude: c.attitude, personality: c.personality, want: c.want, trades: c.trades, tier: was ? st.tier : '', alignment: was ? st.alignment : '', found: st.found && !/^Floor \d+$/.test(st.found) ? st.found : '' };
+      const keep = { name: st.name, race: c.race, raceChosen: st.floor >= 3, history: c.history, party: c.party, god: c.god, titles: c.titles, sponsor: c.sponsor, pk: c.pk, attitude: c.attitude, personality: c.personality, want: c.want, trades: c.trades, tier: was ? st.tier : '', alignment: was ? st.alignment : '', found: st.found && !/^Floor \d+$/.test(st.found) ? st.found : '' };
       if (a === 'rename') {
         const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
         const old = st.name, nu = `${r(FIRST)} "${r(HANDLE)}" ${r(LAST)}`;
@@ -746,7 +793,7 @@
       const blob = new Blob([fileText()], { type: 'text/markdown' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = url; link.download = slug(st.name) + '.md';
+      link.href = url; link.download = fileSlug() + '.md';
       document.body.appendChild(link); link.click(); link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
