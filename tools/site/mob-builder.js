@@ -609,6 +609,7 @@
     const clones = (window.BESTIARY || []).slice().sort((a, b) => a.name.localeCompare(b.name));
     return `
     <div class="wmb-mode"><button type="button" data-mode="mob" class="${crawler ? '' : 'on'}">Mob</button><button type="button" data-mode="crawler" class="${crawler ? 'on' : ''}">NPC Crawler</button></div>
+    ${crawler ? '' : '<p class="wmb-hint">Building another crawler, or levelling one up for a later floor? Switch to <b>NPC Crawler</b>.</p>'}
     <div class="wmb-top">
       ${crawler ? '' : `<select data-act="template"><option value="">Start from a template…</option>${Object.entries(TEMPLATES).map(([k, t]) => `<option value="${k}">${esc(t.label)}</option>`).join('')}</select>`}
       <select data-act="clone"><option value="">Clone from the Bestiary…</option>${clones.map((m) => `<option value="${esc(m.id)}">${esc(m.name)} (${esc(m.tier || '?')}, CR ${esc(m.cr)})</option>`).join('')}</select>

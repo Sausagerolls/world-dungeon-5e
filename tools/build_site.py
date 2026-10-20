@@ -107,6 +107,9 @@ GM_PDFS = [
     ("GM-Floor-Tracker.pdf", "GM Floor Tracker", "One page per floor: timer, party, bosses"),
 ]
 
+# Added to every asset URL so browsers fetch new scripts and styles after each build.
+BUILD_ID = str(int(__import__("time").time()))
+
 TITLE_TO_ID = {name: key for key, name in bp.XREF.items()}
 
 
@@ -212,7 +215,7 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False, 
     banner = ('<div class="gm-banner">GM ONLY · Players, look away. Spoilers, loot tables and boss secrets ahead.</div>'
               if is_gm else "")
     search_src = "search-gm.js" if is_gm else f"{up}assets/search.js"
-    extra = "".join(f'<script src="{s}"></script>' for s in scripts)
+    extra = "".join(f'<script src="{s}?v={BUILD_ID}"></script>' for s in scripts)
     robots = '<meta name="robots" content="noindex,nofollow">' if (noindex or is_gm) else ""
     return f"""<!doctype html>
 <html lang="en">
@@ -221,7 +224,7 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False, 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {robots}
 <title>{html.escape(title)} · World Dungeon</title>
-<link rel="stylesheet" href="{up}assets/style.css">{"".join(f'<link rel="stylesheet" href="{x}">' for x in styles)}
+<link rel="stylesheet" href="{up}assets/style.css?v={BUILD_ID}">{"".join(f'<link rel="stylesheet" href="{x}?v={BUILD_ID}">' for x in styles)}
 </head>
 <body class="{'gm' if is_gm else 'player'}" data-base="{up}">
 <header class="topbar">
@@ -235,9 +238,9 @@ def page(title, body, active, is_gm=False, toc=None, scripts=(), noindex=False, 
 <main>{banner}{body}</main>
 {toc_html}
 </div>
-<script src="{search_src}"></script>
+<script src="{search_src}?v={BUILD_ID}"></script>
 {extra}
-<script src="{up}assets/app.js"></script>
+<script src="{up}assets/app.js?v={BUILD_ID}"></script>
 </body>
 </html>
 """
