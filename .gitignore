@@ -10,3 +10,4 @@ app/.env.local
 app/src/generated/
 .claude/settings.local.json
 tools/deploy_ttf.sh
+tools/.route-sum

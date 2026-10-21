@@ -193,10 +193,12 @@ Presets choose gear that fits the floor the crawler is on, from the Explosives, 
 
 ## Saving a Stat Block
 
-The Mob Builder makes a markdown file. To add it to the Bestiary:
+Click **Save to Bestiary** in the Mob Builder. The stat block is saved on the Tabletop Forge server and shows in the Bestiary straight away, marked *saved*. Saving again updates it. From the Bestiary you can **Edit** a saved mob in the builder, or **Delete** it.
 
-1. Click **Download .md** in the builder.
-2. Put the file in the `bestiary` folder of the World Dungeon files, in a folder for its floor (`bestiary/floor-2/` and so on, or `bestiary/crawlers/` for NPC crawlers).
-3. Rebuild the site (`python3 tools/build_site.py`) and the PDFs.
+A levelled-up version of an NPC crawler (see *Meeting Them Again*) saves as its own entry, so both versions stay.
+
+**In the PDF and the files.** Saved mobs live on the server. To put them in `Bestiary.pdf` and the World Dungeon files, run `python3 tools/pull_saved_mobs.py <server address>`: it writes each one into the `bestiary` folder (`bestiary/crawlers/` for NPC crawlers, `bestiary/floor-N/` for mobs). Then rebuild the PDFs.
+
+**Without the server.** On a copy of the site with no Tabletop Forge server, use **Download .md** and put the file in the `bestiary` folder yourself, then rebuild the site.
 
 The Bestiary also shows every stat block in the Floor 1 guide and the gods' stat blocks. Those stay in their own files: edit them there.

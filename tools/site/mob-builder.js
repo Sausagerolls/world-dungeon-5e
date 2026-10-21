@@ -12,7 +12,8 @@
   'use strict';
   const root = document.getElementById('wd-mob-builder');
   if (!root || !window.WDB) return;
-  const { esc, renderBlock, enhanceRolls } = window.WDB;
+  const { esc, renderBlock, enhanceRolls, api, loadSaved } = window.WDB;
+  let SAVED = []; // mobs saved on the server (see bestiary.js)
 
   // ------------------------------------------------------------ rules data
   const AB = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -551,6 +552,8 @@
     if (s.bossNotes) { s.boxRarity = (s.bossNotes.match(/Boss Box \((\w+)/) || [])[1] || 'Gold'; s.boxType = 'Boss'; }
     return s;
   }
+  // A saved mob copies its exact builder state; a built-in one is parsed from its markdown.
+  const copyOf = (m) => (m.state ? Object.assign(blank(), JSON.parse(JSON.stringify(m.state)), { serverId: null }) : fromBestiary(m));
   const num = (t) => { const mm = String(t || '').match(/\d+/); return mm ? Number(mm[0]) : 0; };
 
   // ------------------------------------------------------------ form
@@ -606,7 +609,7 @@
   function formHtml() {
     const D = derived();
     const crawler = st.mode === 'crawler';
-    const clones = (window.BESTIARY || []).slice().sort((a, b) => a.name.localeCompare(b.name));
+    const clones = (window.BESTIARY || []).concat(SAVED).sort((a, b) => a.name.localeCompare(b.name));
     return `
     <div class="wmb-mode"><button type="button" data-mode="mob" class="${crawler ? '' : 'on'}">Mob</button><button type="button" data-mode="crawler" class="${crawler ? 'on' : ''}">NPC Crawler</button></div>
     ${crawler ? '' : '<p class="wmb-hint">Building another crawler, or levelling one up for a later floor? Switch to <b>NPC Crawler</b>.</p>'}
@@ -662,7 +665,8 @@
   let pendingNew = false;
   root.innerHTML = `<div class="wmb"><div class="wmb-left"></div><div class="wmb-side">
     <div class="wmb-check"></div>
-    <div class="wmb-top"><button type="button" class="wdb-btn primary" data-act="download">Download .md</button><button type="button" class="wdb-btn" data-act="copy">Copy markdown</button><span class="wmb-hint wmb-where"></span></div>
+    <div class="wmb-top"><button type="button" class="wdb-btn primary" data-act="save">Save to Bestiary</button><button type="button" class="wdb-btn" data-act="download">Download .md</button><button type="button" class="wdb-btn" data-act="copy">Copy markdown</button></div>
+    <div class="wmb-hint wmb-saved"></div><div class="wmb-hint wmb-where"></div>
     <div class="wdb-preview"></div>
     <details><summary class="wmb-hint">Markdown</summary><textarea class="wmb-md" readonly></textarea></details></div></div>`;
   const left = root.querySelector('.wmb-left');
@@ -725,12 +729,13 @@
     if (t.dataset.act === 'template' && t.value) {
       const tp = TEMPLATES[t.value];
       st = Object.assign(blank(), JSON.parse(JSON.stringify(tp.s)));
+      st.serverId = null;
       st.crAuto = true;
       drawForm(); refresh();
     }
     if (t.dataset.act === 'clone' && t.value) {
-      const m = (window.BESTIARY || []).find((x) => x.id === t.value);
-      if (m) { st = fromBestiary(m); drawForm(); refresh(); }
+      const m = (window.BESTIARY || []).concat(SAVED).find((x) => x.id === t.value);
+      if (m) { st = copyOf(m); drawForm(); refresh(); }
     }
     if (t.dataset.p === 'hpDie' || t.dataset.p === 'crAuto') refresh();
   });
@@ -743,6 +748,7 @@
     }
     const a = t.dataset.act, key = t.dataset.key, i = Number(t.dataset.i);
     if (a !== 'new') pendingNew = false;
+    if (a === 'new' && pendingNew) st.serverId = null;
     if (a === 'add') { get(key).push({ name: '', text: '' }); drawForm(); refresh(); }
     if (a === 'addatk') { get(key).push(atk('Slam', 'melee', 'best', '1d8', 'Bludgeoning')); drawForm(); refresh(); }
     if (a === 'addsave') { get(key).push(save('Breath', 'DEX', 'CON', '3d6', 'Fire', 'each creature in a 15-foot Cone')); drawForm(); refresh(); }
@@ -772,7 +778,9 @@
         st[k].push(...(old[k] || []).filter((e) => !e.preset && !names.has(e.name)));
       });
       st.extra = old.extra || [];
+      st.serverId = null; // a new version: saving adds it next to the old one
       drawForm(); refresh();
+      root.querySelector('.wmb-saved').textContent = `New ${st.variant} version. Save to Bestiary adds it as its own entry; the earlier version stays.`;
       return;
     }
     if (a === 'generate' || a === 'rename') {
@@ -787,8 +795,20 @@
         if (old && st.inspect) st.inspect = st.inspect.split(old).join(nu);
         drawForm(); refresh(); return;
       }
+      const sid = st.serverId;
       st = generateCrawler(c.style, Math.max(1, n0(c.level, 1)), Math.max(1, n0(st.floor, 1)), keep);
+      st.serverId = sid; // same crawler, rebuilt: saving updates it
       drawForm(); refresh();
+    }
+    if (a === 'save') {
+      const el = root.querySelector('.wmb-saved');
+      const name = (st.name || 'Unnamed mob') + (st.variant ? ` (${st.variant})` : '');
+      const body = { name, data: { md: toMarkdown(), text: fileText(), state: st, file: folder() + fileSlug() + '.md' } };
+      el.textContent = 'Saving…';
+      (st.serverId ? api(`/mobs/${st.serverId}`, { method: 'PUT', body }) : api('/mobs', { method: 'POST', body }))
+        .then((row) => { st.serverId = row.id; saveDraft(); el.innerHTML = `Saved to the Bestiary. <a href="bestiary.html#saved-${row.id}">Open it</a> · Saving again updates this entry.`; },
+          (e) => { el.textContent = `Not saved: ${e.message}. Use Download .md instead.`; });
+      return;
     }
     if (a === 'download') {
       const blob = new Blob([fileText()], { type: 'text/markdown' });
@@ -804,14 +824,22 @@
     }
   });
 
-  // Open with #clone=<id> (from the Bestiary's "Clone in the Mob Builder").
-  const hm = (location.hash || '').match(/clone=([^&]+)/);
-  if (hm) {
-    const m = (window.BESTIARY || []).find((x) => x.id === decodeURIComponent(hm[1]));
-    if (m) st = fromBestiary(m);
-    history.replaceState(null, '', location.pathname);
-  }
+  // Open with #clone=<id> or #edit=<saved id> (from the Bestiary).
   drawForm();
   refresh();
+  loadSaved().then((saved) => {
+    SAVED = saved || [];
+    const hm = (location.hash || '').match(/(clone|edit)=([^&]+)/);
+    if (hm) {
+      const id = decodeURIComponent(hm[2]);
+      const m = hm[1] === 'edit' ? SAVED.find((x) => String(x.serverId) === id) : (window.BESTIARY || []).concat(SAVED).find((x) => x.id === id);
+      if (m) { st = hm[1] === 'edit' ? Object.assign(blank(), JSON.parse(JSON.stringify(m.state)), { serverId: m.serverId }) : copyOf(m); }
+      history.replaceState(null, '', location.pathname);
+    }
+    drawForm();
+    refresh();
+    if (saved === null) root.querySelector('.wmb-saved').textContent = "Can't reach the Tabletop Forge server, so Save to Bestiary won't work here. Download .md still does.";
+    else if (st.serverId) root.querySelector('.wmb-saved').innerHTML = `Editing a saved mob. Saving updates it. <a href="bestiary.html#saved-${st.serverId}">Open it in the Bestiary</a>`;
+  });
   window.WDMB = { generateCrawler, toMarkdown: () => toMarkdown(), state: () => st, STYLES, fromBestiary, crCheck: () => crCheck(derived()) };
 })();

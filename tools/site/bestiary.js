@@ -175,12 +175,48 @@
     toast(`<b>${esc(labelFor(el) || el.dataset.dice)}</b> ${esc(el.dataset.dice)}: ${r.detail} = <big>${r.total}</big>`);
   });
 
-  window.WDB = { esc, inline, renderBlock, enhanceRolls, rollExpr, TIERS };
+  // ------------------------------------------------------------ the server
+  // Mobs saved from the Mob Builder live on the Tabletop Forge server (/api/world-dungeon/mobs),
+  // like the Dungeon Builder's maps. A copy of the site without a server just shows the built-in ones.
+  const API_BASE = (() => { try { return localStorage.getItem('wd_api') || ''; } catch (e) { return ''; } })();
+  async function api(path, opts = {}) {
+    const res = await fetch(`${API_BASE}/api/world-dungeon${path}`, {
+      method: opts.method || 'GET',
+      headers: opts.body ? { 'Content-Type': 'application/json' } : undefined,
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+    if (!res.ok) throw new Error(`${res.status} ${(await res.text()).slice(0, 120)}`);
+    return res.json();
+  }
+  const XP = { Trash: 5, Standard: 10, Elite: 25, Boss: 100, 'Floor Boss': 200, Deity: 1000 };
+  function fromServer(row) {
+    const d = row.data || {}, st = d.state || {};
+    const crN = String(st.cr || '0').includes('/') ? Number(String(st.cr).split('/')[0]) / Number(String(st.cr).split('/')[1]) : Number(st.cr || 0);
+    const name = (st.name || row.name || 'Unnamed mob') + (st.variant ? ` (${st.variant})` : '');
+    return {
+      id: 'saved-' + row.id, serverId: row.id, saved: true, name, kind: st.mode === 'crawler' ? 'crawler' : 'mob',
+      tier: st.tier || '', xp: XP[st.tier] || 0, level: String(st.level || ''), levelNum: /\d/.test(String(st.level || '')) ? Number(String(st.level).match(/\d+/)[0]) : null,
+      cr: String(st.cr || '0'), crNum: crN, size: st.size || '', type: st.type || '', role: st.role || '', floor: Number(st.floor) || 0,
+      area: '', found: st.found || '', md: d.md || '', html: renderBlock(d.md || ''), state: st, updated: row.updated_at,
+      src: { title: 'Saved from the Mob Builder', url: '', file: d.file || '' },
+    };
+  }
+  async function loadSaved() {
+    try { return (await api('/mobs')).map(fromServer); } catch (e) { return null; }
+  }
+
+  window.WDB = { esc, inline, renderBlock, enhanceRolls, rollExpr, TIERS, api, loadSaved };
 
   // ------------------------------------------------------------ the Bestiary page
   const root = document.getElementById('wd-bestiary');
   if (!root) return;
-  const ALL = (window.BESTIARY || []).slice();
+  root.innerHTML = '<p class="hint">Loading…</p>';
+  loadSaved().then((saved) => initBestiary(saved));
+  function initBestiary(saved) {
+  // A mob saved on the server replaces the same file pulled into the repo (tools/pull_saved_mobs.py), so it isn't listed twice.
+  const savedFiles = new Set((saved || []).map((m) => m.src.file).filter(Boolean));
+  const ALL = (window.BESTIARY || []).filter((m) => !savedFiles.has(m.src.file)).concat(saved || []);
+  const offline = saved === null;
   const groupOf = (m) => (m.kind === 'deity' ? 'Gods and minor deities' : m.kind === 'crawler' ? 'NPC crawlers' : m.floor ? 'Floor ' + m.floor : 'Other mobs');
   const groups = [...new Set(ALL.map(groupOf))].sort((a, b) => (a.startsWith('Floor') && b.startsWith('Floor') ? a.localeCompare(b, undefined, { numeric: true }) : a.startsWith('Floor') ? -1 : b.startsWith('Floor') ? 1 : a.localeCompare(b)));
   const types = [...new Set(ALL.map((m) => m.type).filter(Boolean))].sort();
@@ -189,6 +225,7 @@
   try { ui = Object.assign(ui, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { /* storage unavailable */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ui)); } catch (e) { /* storage unavailable */ } };
   const opened = new Set();
+  let pendingDelete = null;
   const hashId = decodeURIComponent((location.hash || '').slice(1));
   if (hashId) opened.add(hashId);
 
@@ -209,6 +246,7 @@
       <button type="button" class="wdb-btn" data-act="pick">Tick all shown</button>
       <button type="button" class="wdb-btn" data-act="unpick">Untick all</button>
       <button type="button" class="wdb-btn primary" data-act="print">Print ticked</button></div>
+    ${offline ? '<p class="wmb-hint">Mobs saved in the Mob Builder are kept on the Tabletop Forge server, which this copy of the site can\'t reach, so only the built-in stat blocks are shown.</p>' : ''}
     <div class="wdb-list"></div>`;
   const list = root.querySelector('.wdb-list');
   const crNum = (v) => { if (v === '' || v == null) return null; const s = String(v); if (s.includes('/')) { const [a, b] = s.split('/'); return Number(a) / Number(b); } return Number(s); };
@@ -247,10 +285,10 @@
       <div class="wdb-head">
         <input type="checkbox" class="wdb-pick" aria-label="Tick for printing"${picked ? ' checked' : ''}>
         <button type="button" class="wdb-name">${esc(m.name)}</button>
-        <span class="chip tier-${esc((m.tier || 'none').replace(/\s/g, '-').toLowerCase())}">${esc(m.tier || '—')}${m.xp ? ' · ' + m.xp.toLocaleString() + ' XP' : ''}</span>
+        <span class="chip tier-${esc((m.tier || 'none').replace(/\s/g, '-').toLowerCase())}">${esc(m.tier || '—')}${m.xp ? ' · ' + m.xp.toLocaleString() + ' XP' : ''}</span>${m.saved ? '<span class="chip">saved</span>' : ''}
         <span class="wdb-sub">CR ${esc(m.cr)}${lvl ? ' · ' + lvl : ''} · ${esc(m.size)} ${esc(m.type)}${m.area ? ' · ' + esc(m.area) : ''}</span>
       </div>
-      ${on ? `<div class="wdb-body">${m.html}<div class="wdb-links">${m.src.url ? `<a href="${esc(m.src.url)}">Open in ${esc(m.src.title)}</a>` : `<span>File: <code>${esc(m.src.file)}</code></span>`}<a href="mob-builder.html#clone=${encodeURIComponent(m.id)}">Clone in the Mob Builder</a><button type="button" class="wdb-btn" data-act="hp">Roll HP</button><button type="button" class="wdb-btn" data-act="copy">Copy markdown</button></div></div>` : ''}
+      ${on ? `<div class="wdb-body">${m.html}<div class="wdb-links">${m.saved ? `<a href="mob-builder.html#edit=${m.serverId}">Edit in the Mob Builder</a><button type="button" class="wdb-btn" data-act="delete">${pendingDelete === m.id ? 'Click again to delete' : 'Delete'}</button>` : m.src.url ? `<a href="${esc(m.src.url)}">Open in ${esc(m.src.title)}</a>` : `<span>File: <code>${esc(m.src.file)}</code></span>`}<a href="mob-builder.html#clone=${encodeURIComponent(m.id)}">${m.saved ? 'Copy' : 'Clone'} in the Mob Builder</a><button type="button" class="wdb-btn" data-act="hp">Roll HP</button><button type="button" class="wdb-btn" data-act="copy">Copy markdown</button></div></div>` : ''}
     </div>`;
   }
 
@@ -288,12 +326,20 @@
     }
     const act = ev.target.dataset && ev.target.dataset.act;
     if (!act) return;
+    if (act !== 'delete') pendingDelete = null;
+    if (act === 'delete' && m) {
+      if (pendingDelete !== m.id) { pendingDelete = m.id; draw(); return; }
+      api(`/mobs/${m.serverId}`, { method: 'DELETE' }).then(() => {
+        ALL.splice(ALL.indexOf(m), 1); ui.picked = ui.picked.filter((x) => x !== m.id); pendingDelete = null; save(); draw(); toast(`Deleted ${esc(m.name)}.`);
+      }, (e) => toast('Not deleted: ' + esc(e.message)));
+      return;
+    }
     if (act === 'expand') shown().forEach((x) => opened.add(x.id));
     if (act === 'collapse') opened.clear();
     if (act === 'pick') ui.picked = [...new Set([...ui.picked, ...shown().map((x) => x.id)])];
     if (act === 'unpick') ui.picked = [];
     if (act === 'hp' && m) {
-      const hp = (m.fields.kv.HP || '').match(/\(([^)]+)\)/);
+      const hp = ((m.fields ? m.fields.kv.HP : (m.md.match(/\*\*HP\*\* \| ([^|]+)/) || [])[1]) || '').match(/\(([^)]+)\)/);
       if (hp) { const x = rollExpr(hp[1]); toast(`<b>${esc(m.name)} HP</b> ${esc(hp[1])}: ${x.detail} = <big>${x.total}</big>`); }
       return;
     }
@@ -320,4 +366,5 @@
 
   draw();
   if (hashId) { const el = document.getElementById(hashId); if (el) el.scrollIntoView({ block: 'start' }); }
+  }
 })();

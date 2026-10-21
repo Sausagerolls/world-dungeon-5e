@@ -69,7 +69,7 @@ A homebrew D&D 5e setting inspired by the World Dungeon from *Dungeon Crawler Ca
 | `floors/floor-1/overview.md` | Floor 1 at a glance, running encounters, bosses, rewards | Draft 0.1 |
 | `floors/floor-1/neighbourhoods.md` | 7 neighbourhoods + Club Stairwell: encounter tables, boss rooms, mechanics, hints, stat blocks with Crawl fields | Draft 0.1 |
 | `bestiary/building-mobs.md` | GM: the stat block and its Crawl fields, Mob Tiers, the CR guide (extended past CR 30), NPC crawlers and 12 fighting styles | Draft 0.1 |
-| `bestiary/**/*.md` | Stat blocks made with the Mob Builder (NPC crawlers in `bestiary/crawlers/`), collected with Floor 1 and the gods into the GM Bestiary by `tools/bestiary.py` | Draft 0.1 |
+| `bestiary/**/*.md` | Stat blocks made with the Mob Builder (NPC crawlers in `bestiary/crawlers/`), collected with Floor 1 and the gods into the GM Bestiary by `tools/bestiary.py`. Mobs saved from the builder live on the Tabletop Forge server; `tools/pull_saved_mobs.py` copies them here | Draft 0.1 |
 | `rules/crafting.md` | Crafting rules: tools, materials, field and workbench crafting, magic item costs | Draft 0.1 |
 | `items/crafting-recipes.md` | Recipes for explosives, firearms, dungeon items, 5e magic items, spell scrolls | Draft 0.1 |
 | `rules/safe-room-shops.md` | Shop types, stock by floor, prices, materials, recipes, services | Draft 0.1 |
