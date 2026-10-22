@@ -2,7 +2,7 @@
 type: rule
 id: pets
 name: Pets
-version: 0.1
+version: 0.2
 status: draft
 related: [crawler-skills, dungeon-items, box-tables, achievements]
 ---
@@ -110,17 +110,32 @@ Choose one each time. You can take an upgrade more than once unless it says othe
 
 ### Tricks
 
-| Trick | Effect |
-|-------|--------|
-| **Fetch** | When commanded, it picks up an item within 30 feet and brings it to you. |
-| **Guard** | When a creature within 5 feet of the pet attacks you, the pet can use its reaction to give the attack disadvantage. |
-| **Sniff Out** | Advantage on checks to find traps, secret doors and hidden creatures. It can track by scent. |
-| **Pack Mule** | It carries up to 10 inventory slots of items for you. Those items spill out if it drops to 0 hit points. |
-| **Alarm** | It wakes you when danger comes. Your party cannot be surprised during a rest, and Ambush Checks get −2. |
-| **Play Dead** | As an action, it pretends to be dead. Enemies ignore it until it moves or acts. |
-| **Grab** | Its attacks can grapple (escape DC 8 + its Strength modifier + your PB). |
-| **Shiny!** | After each fight, it finds 1d6 gp the crawlers missed. |
-| **Cute** | Once per session, it does something adorable: +1 Audience point. |
+A **trick** is something you have trained your pet to do on top of fighting: fetch things, keep watch, sniff out traps, play dead. Tricks are the pet's skills outside its stat block.
+
+**Learning a trick.** A pet learns a trick when you choose the **Trick** upgrade (above), at character level 4, 8, 12 and so on. Pick any trick from the table. A pet can know each trick only once, and keeps its tricks for good, through evolutions too. Write them on your Pet page.
+
+**Using a trick.** The **Use** column says how each trick works:
+
+| Use | What it means |
+|-----|---------------|
+| **Command** | Use your **bonus action** to command the pet, as for any other command. Doing the trick is the pet's action for that turn, and it can move as part of it. With a *Leash of Command*, commanding takes no action. |
+| **Reaction** | The pet uses its reaction when the trigger happens. You don't need to command it, but it must not be incapacitated. It can do this once per round. |
+| **Always on** | Works on its own whenever the pet is with you (within 30 feet), awake, and not incapacitated or in a Pet Carrier. |
+| **Limited** | Works on its own, but only as often as the trick says. |
+
+| Trick | Use | Effect |
+|-------|-----|--------|
+| **Fetch** | Command | The pet moves up to its speed, picks up one unattended object within 30 feet that it can carry, and brings it back to you. It can fetch an item from a creature only if the creature is unconscious or dead. |
+| **Guard** | Reaction | When a creature within 5 feet of the pet makes an attack roll against you, the pet gives that attack disadvantage. You must also be within 5 feet of the pet. |
+| **Sniff Out** | Always on | You have advantage on Wisdom (Perception) and Intelligence (Investigation) checks to find traps, secret doors and hidden creatures, and on Wisdom (Survival) checks to track. The pet can follow a scent up to a day old. |
+| **Pack Mule** | Always on | The pet carries up to **10 inventory slots** of items for you, on top of your own. Taking an item from it, or giving it one, is your free object interaction while you are within 5 feet. Everything it carries spills out where it falls if it drops to 0 hit points. |
+| **Alarm** | Always on | While you rest, the pet keeps watch and wakes you when danger comes. Your party can't be surprised during a short or long rest, and Ambush Checks made while you rest get −2. |
+| **Play Dead** | Command | The pet drops and lies still. Until it moves, acts, or takes damage, enemies ignore it and won't attack it. A creature that looks closely sees through it with a Wisdom (Insight) check (DC 8 + your PB + the pet's Charisma modifier). |
+| **Grab** | Always on | When the pet hits a creature no more than one size larger than itself with a melee attack, it can also grapple it (escape DC 8 + its Strength modifier + your PB). It can grapple one creature at a time. |
+| **Shiny!** | Limited | After each fight, if the party loots the bodies, the pet finds coins the crawlers missed: **1d6 gp × the floor number**. |
+| **Cute** | Limited | Once per session, when the pet does something adorable on camera, the audience melts: **+1 Audience point**. You describe it; the GM decides if it lands. |
+
+**Teaching tricks in play.** The GM can also award a trick for training it on screen: practising Fetch in every safe room for a whole floor, say. A trick learned this way doesn't use up an upgrade.
 
 ---
 

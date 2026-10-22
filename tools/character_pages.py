@@ -345,7 +345,7 @@ def pet_page():
         <thead><tr><th>Pet attacks and actions</th><th>Atk / DC</th><th>Damage</th><th>Notes</th></tr></thead>
         <tbody>{attacks}</tbody>
       </table>
-      <div class="panel" style="margin-top:2.4mm"><h3>Upgrades and tricks (one at each level)</h3>
+      <div class="panel" style="margin-top:2.4mm"><h3>Upgrades and tricks (one at levels 4, 8, 12 …)</h3>
         <table class="atk"><colgroup><col style="width:24%"><col></colgroup><tbody>{upg}</tbody></table></div>
       <div class="panel"><h3>Evolutions</h3><table class="atk"><tbody>{evo}</tbody></table></div>
     </div>
